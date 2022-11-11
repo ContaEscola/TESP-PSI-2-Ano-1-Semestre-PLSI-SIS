@@ -310,7 +310,7 @@ body {
 }
 
 .hero {
-  background-image: url("/assets/hero-bg-mobile.png");
+  background-image: url("assets/hero-bg-mobile.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right bottom;
@@ -322,7 +322,7 @@ body {
 
 @media (min-width: 40em) {
   .hero {
-    background-image: url("/assets/hero-bg-pc.png");
+    background-image: url("assets/hero-bg-pc.png");
     background-position: center;
   }
 }
@@ -336,10 +336,10 @@ body {
 }
 
 .card-landing-page[data-type="restaurant"] {
-  background-image: url("/assets/restaurant-card-bg.png");
+  background-image: url("assets/restaurant-card-bg.png");
 }
 .card-landing-page[data-type="store"] {
-  background-image: url("/assets/store-card-bg.png");
+  background-image: url("assets/store-card-bg.png");
 }
 .card__content {
   height: 100%;
@@ -464,7 +464,7 @@ body {
 }
 
 .container {
-  --max-width: 95rem;
+  --max-width: 82rem;
   --padding-each-side: 1.5rem;
   width: min(100% - (2 * var(--padding-each-side)), var(--max-width));
   margin-inline: auto;
