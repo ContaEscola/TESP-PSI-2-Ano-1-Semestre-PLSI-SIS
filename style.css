@@ -147,7 +147,7 @@ body {
   grid-auto-flow: row;
 }
 
-input:where([type="text"], [type="password"]):focus-visible {
+input:where([type="text"], [type="password"], [type="email"]):focus-visible {
   outline: 0.2em solid var(--clr-primary-accent-400);
   outline-offset: 0.1em;
 }
@@ -480,6 +480,10 @@ a:where(:hover, :focus) {
   font-style: italic;
 
   color: var(--clr-error);
+}
+
+.input__error:empty {
+  display: none;
 }
 
 .form__submit-button {
