@@ -9,19 +9,31 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
 /**
- * User model
+ * This is the model class for table "user".
  *
- * @property integer $id
+ * @property int $id
  * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $verification_token
- * @property string $email
  * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
+ * @property string $password_hash
+ * @property string|null $password_reset_token
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $gender
+ * @property string $country
+ * @property string $city
+ * @property string $birthdate
+ * @property string $email
+ * @property string $phone
+ * @property string $phone_country_code
+ * @property int $status
+ * @property int $created_at
+ * @property int $updated_at
+ * @property string|null $verification_token
+ *
+ * @property Admin $admin
+ * @property Client $client
+ * @property Employee $employee
+ * @property Manager $manager
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -35,7 +47,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'user';
     }
 
     /**
@@ -54,9 +66,88 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            [['username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country', 'city', 'birthdate', 'email', 'phone', 'phone_country_code', 'created_at', 'updated_at'], 'required'],
+            [['gender'], 'string'],
+            [['birthdate'], 'safe'],
+            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['username'], 'string', 'max' => 30],
+            [['auth_key'], 'string', 'max' => 32],
+            [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
+            [['first_name', 'last_name', 'country'], 'string', 'max' => 50],
+            [['city'], 'string', 'max' => 75],
+            [['email'], 'string', 'max' => 200],
+            [['phone'], 'string', 'max' => 15],
+            [['phone_country_code'], 'string', 'max' => 5],
+            [['username'], 'unique'],
+            [['password_reset_token'], 'unique'],
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'first_name' => 'First Name',
+            'last_name' => 'Last Name',
+            'gender' => 'Gender',
+            'country' => 'Country',
+            'city' => 'City',
+            'birthdate' => 'Birthdate',
+            'email' => 'Email',
+            'phone' => 'Phone',
+            'phone_country_code' => 'Phone Country Code',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'verification_token' => 'Verification Token',
+        ];
+    }
+
+    /**
+     * Gets query for [[Admin]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdmin()
+    {
+        return $this->hasOne(Admin::class, ['admin_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Client]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getClient()
+    {
+        return $this->hasOne(Client::class, ['client_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Employee]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEmployee()
+    {
+        return $this->hasOne(Employee::class, ['employee_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Manager]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getManager()
+    {
+        return $this->hasOne(Manager::class, ['manager_id' => 'id']);
     }
 
     /**
