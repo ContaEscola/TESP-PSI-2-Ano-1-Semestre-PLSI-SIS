@@ -49,7 +49,7 @@ class Admin extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getAdmin()
+    public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'admin_id']);
     }

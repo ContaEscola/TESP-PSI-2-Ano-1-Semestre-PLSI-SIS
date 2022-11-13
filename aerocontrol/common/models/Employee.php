@@ -76,7 +76,7 @@ class Employee extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getEmployee()
+    public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'employee_id']);
     }

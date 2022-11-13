@@ -53,7 +53,7 @@ class Manager extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getManager()
+    public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'manager_id']);
     }
