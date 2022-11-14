@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="dropdown.js" defer></script>
 </head>
 
 
@@ -47,11 +48,26 @@
                                     class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
                             <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
                                     class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
-                            <li class="primary-navigation__item"><a href="#" class="button"
-                                    data-type="primary-outline">Sign
-                                    Up</a>
                             </li>
-                            <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
+                            <li class="primary-navigation__item">
+                                <div class="dropdown">
+                                    <button class="dropdown-button button" data-type="primary-outline"
+                                        aria-expanded="false" data-dropdown>Pedro
+                                        Norberto
+                                        <span aria-hidden="true" class="dropdown__toggle-icon">
+                                            <svg width="7" height="11" viewBox="0 0 7 11" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M4.99159 0.327539L0.344652 4.71456C-0.114863 5.14837 -0.114863 5.85163 0.344652 6.28543L4.99159 10.6724C5.73275 11.3721 7.00002 10.8766 7.00002 9.88701L7.00002 1.11298C7.00002 0.123374 5.73275 -0.372165 4.99159 0.327539V0.327539Z"
+                                                    fill="var(--clr-dropdown-toggle-icon)" />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <ul role="list" class="dropdown-menu">
+                                        <li class="dropdown-menu__item">ola</li>
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                     </nav>
                 </div>

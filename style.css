@@ -285,6 +285,7 @@ a:where(:hover, :focus) {
 
   display: inline-flex;
   justify-content: center;
+  align-items: center;
   padding: 0.625em 0.9375em;
 
   outline: var(--outline-size) var(--outline-style) var(--outline-color);
@@ -308,12 +309,16 @@ a:where(:hover, :focus) {
 }
 
 .button[data-type="primary-outline"] {
-  --outline-size: 0.125em;
+  --outline-size: 0.14em;
+  --clr-dropdown-toggle-icon: var(--clr-primary-accent-400);
+
   color: var(--clr-primary-accent-400);
   background-color: var(--clr-white);
 }
 
 .button[data-type="primary-outline"]:where(:hover, :focus-visible) {
+  --clr-dropdown-toggle-icon: var(--clr-white);
+
   color: var(--clr-white);
   background-color: var(--clr-primary-accent-400);
 }
@@ -328,7 +333,7 @@ a:where(:hover, :focus) {
 }
 
 .button[data-type="secondary-outline"] {
-  --outline-size: 0.125em;
+  --outline-size: 0.14em;
   --outline-color: var(--clr-secondary-accent-400);
 
   color: var(--clr-secondary-accent-400);
@@ -346,9 +351,57 @@ a:where(:hover, :focus) {
   }
 }
 
+/* dropdown */
+
+.dropdown {
+  position: relative;
+  isolation: isolate;
+}
+
+.dropdown-button {
+  gap: 1rem;
+}
+
+.dropdown-button[aria-expanded="true"] {
+  --clr-dropdown-toggle-icon: var(--clr-white);
+
+  color: var(--clr-white);
+  background-color: var(--clr-primary-accent-400);
+}
+
+.dropdown__toggle-icon {
+  transition: color 250ms ease-in-out, transform 50ms ease-in-out;
+}
+
+.dropdown-button[aria-expanded="true"] .dropdown__toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.dropdown-menu {
+  display: none;
+
+  --gap-between: 0.5rem;
+  position: absolute;
+  top: calc(100% + var(--gap-between));
+  right: 0;
+  min-width: 100%;
+
+  background-color: var(--clr-neutral-400);
+  outline: 0.14em solid var(--clr-primary-accent-400);
+  border-radius: 0.313rem;
+}
+
+.dropdown-menu[data-visible] {
+  display: block;
+}
+
+.dropdown-menu__item {
+  padding: 0.625rem 0.938rem;
+}
+
 /* only main and nav on first page */
 .only-nav-main-visible-first-page {
-  min-height: 100vh;
+  min-height: max(100vh, 40rem);
   display: grid;
   grid-template-rows: auto 1fr;
 }
