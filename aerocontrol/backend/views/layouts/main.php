@@ -34,19 +34,19 @@ AppAsset::register($this);
 <body class="body-grid">
 <?php $this->beginBody() ?>
 
-<header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
+<!--<header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
     <div class="container">
         <div class="nav-wrapper">
             <a href="#">
                 <picture>
-                    <source srcset="<?= Url::to('@web/assets/logo-pc.svg' )?>" media="(min-width: 40em)">
-                    <img src="<?= Url::to('@web/assets/logo-mobile.svg' )?>" alt="Logo">
+                    <source srcset="<?/*= Url::to('@web/assets/logo-pc.svg' )*/?>" media="(min-width: 40em)">
+                    <img src="<?/*= Url::to('@web/assets/logo-mobile.svg' )*/?>" alt="Logo">
                 </picture>
             </a>
             <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
                     aria-expanded="false">
-                <img class="open-icon" src="<?= Url::to('@web/assets/hamburger-icon.svg' )?>" alt="" aria-hidden="true">
-                <img class="close-icon" src="<?= Url::to('@web/assets/close-icon.svg' )?>" alt="" aria-hidden="true">
+                <img class="open-icon" src="<?/*= Url::to('@web/assets/hamburger-icon.svg' )*/?>" alt="" aria-hidden="true">
+                <img class="close-icon" src="<?/*= Url::to('@web/assets/close-icon.svg' )*/?>" alt="" aria-hidden="true">
                 <span class="visually-hidden">Menu</span>
             </button>
             <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
@@ -67,12 +67,12 @@ AppAsset::register($this);
             </nav>
         </div>
     </div>
-</header>
+</header>-->
 
 
         <?= $content ?>
 
-<footer>
+<!--<footer>
     <div class="[ footer-wrapper ] [ container text-align-center ]">
         <nav aria-label="Footer">
             <ul role="list" class="footer-list">
@@ -88,7 +88,7 @@ AppAsset::register($this);
         <p class="fs-100 fw-light letter-spacing-2 ">@ 2022 AeroControl. Todos os direitos
             reservados.</p>
     </div>
-</footer>
+</footer>-->
 
 <?php $this->endBody() ?>
 </body>
