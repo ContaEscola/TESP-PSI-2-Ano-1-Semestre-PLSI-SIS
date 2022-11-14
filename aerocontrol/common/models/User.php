@@ -47,7 +47,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return 'user';
+        return '{{%user}}';
     }
 
     /**
@@ -67,28 +67,37 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self ::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country', 'city', 'birthdate', 'email', 'phone', 'phone_country_code', 'created_at', 'updated_at'], 'required'],
-            [['gender'], 'string'],
-            [['gender'],'in','range'=>[
+            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+
+            [[
+                'username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country',
+                'city', 'birthdate', 'email', 'phone', 'phone_country_code', 'created_at', 'updated_at'
+            ], 'required'],
+
+            [[
+                'username', 'auth_key', 'password_hash', 'password_reset_token', 'verification_token',
+                'first_name', 'last_name', 'country', 'city', 'email', 'phone', 'phone_country_code', 'gender'
+            ], 'trim'],
+
+            ['gender', 'in', 'range' => [
                 'Masculino',
                 'Feminino',
                 'Outro'
-            ]],
-            [['birthdate'], 'date'],
+            ], 'strict' => true],
+
+            ['birthdate', 'date'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username'], 'string', 'max' => 30],
-            [['auth_key'], 'string', 'max' => 32],
+            ['username', 'string', 'max' => 30],
+            ['auth_key', 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
             [['first_name', 'last_name', 'country'], 'string', 'max' => 50],
-            [['city'], 'string', 'max' => 75],
-            [['email'], 'string', 'max' => 200],
-            [['phone'], 'string', 'max' => 15],
-            [['phone_country_code'], 'string', 'max' => 5],
-            [['username','auth_key','password_hash','password_reset_token','verification_token',
-                'first_name','last_name','country', 'city','email','phone','phone_country_code', 'gender'], 'trim'],
-            [['username'], 'unique'],
-            [['password_reset_token'], 'unique'],
+            ['city', 'string', 'max' => 75],
+            ['email', 'string', 'max' => 200],
+            ['phone', 'string', 'max' => 15],
+            ['phone_country_code', 'string', 'max' => 5],
+
+            ['username', 'unique'],
+            ['password_reset_token', 'unique'],
         ];
     }
 
@@ -210,7 +219,8 @@ class User extends ActiveRecord implements IdentityInterface
      * @param string $token verify email token
      * @return static|null
      */
-    public static function findByVerificationToken($token) {
+    public static function findByVerificationToken($token)
+    {
         return static::findOne([
             'verification_token' => $token,
             'status' => self::STATUS_INACTIVE

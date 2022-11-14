@@ -21,7 +21,7 @@ class Passenger extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'passenger';
+        return '{{%passenger}}';
     }
 
     /**
@@ -31,16 +31,17 @@ class Passenger extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'gender', 'flight_ticket_id'], 'required'],
-            [['gender'], 'string'],
-            [['gender'],'in','range'=>[
+            [['name', 'gender'], 'trim'],
+
+            ['gender', 'in', 'range' => [
                 'Masculino',
                 'Feminino',
                 'Outro'
-            ]],
-            [['flight_ticket_id'], 'integer'],
-            [['name'], 'string', 'max' => 50],
-            [['name', 'gender'],'trim'],
-            [['flight_ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => FlightTicket::class, 'targetAttribute' => ['flight_ticket_id' => 'flight_ticket_id']],
+            ], 'strict' => true],
+
+            ['flight_ticket_id', 'integer'],
+            ['name', 'string', 'max' => 50],
+            ['flight_ticket_id', 'exist', 'skipOnError' => true, 'targetClass' => FlightTicket::class, 'targetAttribute' => ['flight_ticket_id' => 'flight_ticket_id']],
         ];
     }
 

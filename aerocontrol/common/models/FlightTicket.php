@@ -27,7 +27,7 @@ class FlightTicket extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'flight_ticket';
+        return '{{%flight_ticket}}';
     }
 
     /**
@@ -37,13 +37,13 @@ class FlightTicket extends \yii\db\ActiveRecord
     {
         return [
             [['price', 'purchase_date', 'checkin', 'client_id', 'flight_id', 'payment_method_id'], 'required'],
-            [['price'], 'number'],
-            [['purchase_date'], 'datetime'],
+            ['price', 'number'],
+            ['purchase_date', 'datetime'],
             [['client_id', 'flight_id', 'payment_method_id'], 'integer'],
-            [['checkin'], 'boolean'],
-            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
-            [['flight_id'], 'exist', 'skipOnError' => true, 'targetClass' => Flight::class, 'targetAttribute' => ['flight_id' => 'id']],
-            [['payment_method_id'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentMethod::class, 'targetAttribute' => ['payment_method_id' => 'id']],
+            ['checkin', 'boolean'],
+            ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
+            ['flight_id', 'exist', 'skipOnError' => true, 'targetClass' => Flight::class, 'targetAttribute' => ['flight_id' => 'id']],
+            ['payment_method_id', 'exist', 'skipOnError' => true, 'targetClass' => PaymentMethod::class, 'targetAttribute' => ['payment_method_id' => 'id']],
         ];
     }
 

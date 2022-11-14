@@ -28,7 +28,7 @@ class Employee extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'employee';
+        return '{{%employee}}';
     }
 
     /**
@@ -39,8 +39,9 @@ class Employee extends \yii\db\ActiveRecord
         return [
             [['employee_id', 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
             [['employee_id', 'function_id'], 'integer'],
-            [['qualifications'], 'string'],
-            [['qualifications'], 'in','range'=> [
+            [['tin', 'num_emp', 'ssn', 'zip_code', 'street', 'iban', 'qualifications'], 'trim'],
+
+            ['qualifications', 'in', 'range' => [
                 'Até ao 9º ano de escolaridade',
                 'Secundário',
                 'Curso técnico superior profissional',
@@ -50,18 +51,18 @@ class Employee extends \yii\db\ActiveRecord
                 'Licenciatura 1º Ciclo - Pós-Bolonha',
                 'Mestrado',
                 'Doutoramento'
-            ]],
+            ], 'strict' => true],
+
             [['tin', 'num_emp', 'ssn', 'zip_code'], 'string', 'max' => 20],
-            [['street'], 'string', 'max' => 100],
-            [['iban'], 'string', 'max' => 25,'min'=>25],
-            [['tin','num_emp','ssn','zip_code','street','iban', 'qualifications'],'trim'],
-            [['num_emp'], 'unique'],
-            [['ssn'], 'unique'],
-            [['tin'], 'unique'],
-            [['iban'], 'unique'],
-            [['employee_id'], 'unique'],
-            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['employee_id' => 'id']],
-            [['function_id'], 'exist', 'skipOnError' => true, 'targetClass' => EmployeeFunction::class, 'targetAttribute' => ['function_id' => 'id']],
+            ['street', 'string', 'max' => 100],
+            ['iban', 'string', 'max' => 25, 'min' => 25],
+            ['num_emp', 'unique'],
+            ['ssn', 'unique'],
+            ['tin', 'unique'],
+            ['iban', 'unique'],
+            ['employee_id', 'unique'],
+            ['employee_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['employee_id' => 'id']],
+            ['function_id', 'exist', 'skipOnError' => true, 'targetClass' => EmployeeFunction::class, 'targetAttribute' => ['function_id' => 'id']],
         ];
     }
 

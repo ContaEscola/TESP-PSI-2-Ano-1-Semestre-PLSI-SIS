@@ -22,7 +22,7 @@ class TicketMessage extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_message';
+        return '{{%ticket_message}}';
     }
 
     /**
@@ -33,11 +33,11 @@ class TicketMessage extends \yii\db\ActiveRecord
         return [
             [['message', 'sender_id', 'support_ticket_id'], 'required'],
             [['sender_id', 'support_ticket_id'], 'integer'],
-            [['message'], 'string', 'max' => 255],
-            [['photo'], 'string', 'max' => 75],
-            [['photo','message'], 'trim'],
-            [['photo'], 'unique'],
-            [['support_ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
+            [['photo', 'message'], 'trim'],
+            ['message', 'string', 'max' => 255],
+            ['photo', 'string', 'max' => 75],
+            ['photo', 'unique'],
+            ['support_ticket_id', 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
         ];
     }
 

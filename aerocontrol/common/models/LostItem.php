@@ -21,7 +21,7 @@ class LostItem extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'lost_item';
+        return '{{%lost_item}}';
     }
 
     /**
@@ -31,17 +31,17 @@ class LostItem extends \yii\db\ActiveRecord
     {
         return [
             [['description', 'state', 'image'], 'required'],
-            [['state'], 'string'],
-            [['state'],'in','range'=>[
+            [['description', 'state', 'image'], 'trim'],
+            ['state', 'in', 'range' => [
                 'Entregue',
                 'Por entregar',
                 'Perdido'
-            ]],
-            [['state'],'default','value'=>'Por entregar'],
-            [['description'], 'string', 'max' => 100],
-            [['image'], 'string', 'max' => 75],
-            [['description','state','image'], 'trim'],
-            [['image'], 'unique'],
+            ], 'strict' => true],
+
+            ['state', 'default', 'value' => 'Por entregar'],
+            ['description', 'string', 'max' => 100],
+            ['image', 'string', 'max' => 75],
+            ['image', 'unique'],
         ];
     }
 

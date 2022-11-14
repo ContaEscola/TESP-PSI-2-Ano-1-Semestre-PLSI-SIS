@@ -33,7 +33,7 @@ class Flight extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'flight';
+        return '{{%flight}}';
     }
 
     /**
@@ -45,22 +45,25 @@ class Flight extends \yii\db\ActiveRecord
             [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required'],
             [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'datetime'],
             [['price', 'distance'], 'number'],
-            [['state'], 'string'],
-            [['state'],'in','range'=>[
+            [['terminal', 'state'], 'trim'],
+
+            ['state', 'in', 'range' => [
                 'Previsto',
                 'Chegou',
                 'Partiu',
                 'Cancelado',
                 'Embarque',
                 'Ultima Chamada'
-            ]],
-            [['state'],'default','value'=>'Previsto'],
+            ], 'strict' => true],
+
+            ['state', 'default', 'value' => 'Previsto'],
+
             [['discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'integer'],
-            [['terminal'], 'string', 'max' => 30],
-            [['terminal', 'state'], 'trim'],
-            [['airplane_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airplane::class, 'targetAttribute' => ['airplane_id' => 'id']],
-            [['arrival_airport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['arrival_airport_id' => 'id']],
-            [['origin_airport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['origin_airport_id' => 'id']],
+            ['terminal', 'string', 'max' => 30],
+
+            ['airplane_id', 'exist', 'skipOnError' => true, 'targetClass' => Airplane::class, 'targetAttribute' => ['airplane_id' => 'id']],
+            ['arrival_airport_id', 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['arrival_airport_id' => 'id']],
+            ['origin_airport_id', 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['origin_airport_id' => 'id']],
         ];
     }
 

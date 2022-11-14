@@ -25,7 +25,7 @@ class SupportTicket extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'support_ticket';
+        return '{{%support_ticket}}';
     }
 
     /**
@@ -35,18 +35,18 @@ class SupportTicket extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'state', 'client_id', 'employee_id'], 'required'],
-            [['title', 'state']], 'trim'],
-            [['state'], 'string'],
-            [['state'], 'in','range'=>[
+            [['title', 'state'], 'trim'],
+            ['state', 'string'],
+            [['state'], 'in', 'range' => [
                 'Por Rever',
                 'Concluido',
                 'Em Processo'
             ]],
-            [['state'],'default','value'=>'Por Rever'],
-            [['title'], 'string', 'max' => 20],
+            ['state', 'default', 'value' => 'Por Rever'],
+            ['title', 'string', 'max' => 20],
             [['client_id', 'employee_id'], 'integer'],
-            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
-            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::class, 'targetAttribute' => ['employee_id' => 'employee_id']],
+            ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
+            ['employee_id', 'exist', 'skipOnError' => true, 'targetClass' => Employee::class, 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];
     }
 

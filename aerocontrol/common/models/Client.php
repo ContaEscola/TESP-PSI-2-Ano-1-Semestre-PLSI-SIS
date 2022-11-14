@@ -20,7 +20,7 @@ class Client extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'client';
+        return '{{%client}}';
     }
 
     /**
@@ -29,10 +29,10 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id'], 'required'],
-            [['client_id'], 'integer'],
-            [['client_id'], 'unique'],
-            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['client_id' => 'id']],
+            ['client_id', 'required'],
+            ['client_id', 'integer'],
+            ['client_id', 'unique'],
+            ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['client_id' => 'id']],
         ];
     }
 

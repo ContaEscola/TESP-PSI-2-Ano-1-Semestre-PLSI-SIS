@@ -20,7 +20,7 @@ class TicketItem extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'ticket_item';
+        return '{{%ticket_item}}';
     }
 
     /**
@@ -31,9 +31,9 @@ class TicketItem extends \yii\db\ActiveRecord
         return [
             [['lost_item_id', 'support_ticket_id'], 'required'],
             [['lost_item_id', 'support_ticket_id'], 'integer'],
-            [['lost_item_id'], 'unique'],
-            [['lost_item_id'], 'exist', 'skipOnError' => true, 'targetClass' => LostItem::class, 'targetAttribute' => ['lost_item_id' => 'id']],
-            [['support_ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
+            ['lost_item_id', 'unique'],
+            ['lost_item_id', 'exist', 'skipOnError' => true, 'targetClass' => LostItem::class, 'targetAttribute' => ['lost_item_id' => 'id']],
+            ['support_ticket_id', 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
         ];
     }
 

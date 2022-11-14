@@ -23,7 +23,7 @@ class Airport extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'airport';
+        return '{{%airport}}';
     }
 
     /**
@@ -33,11 +33,11 @@ class Airport extends \yii\db\ActiveRecord
     {
         return [
             [['country', 'city', 'name', 'website'], 'required'],
+            [['country', 'website', 'city', 'name'], 'trim'],
             [['country', 'website'], 'string', 'max' => 50],
             [['city', 'name'], 'string', 'max' => 75],
-            [['country', 'website','city','name'], 'trim'],
-            [['name'], 'unique'],
-            [['website'], 'unique'],
+            ['name', 'unique'],
+            ['website', 'unique'],
         ];
     }
 

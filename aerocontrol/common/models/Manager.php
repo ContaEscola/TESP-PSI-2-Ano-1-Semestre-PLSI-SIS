@@ -20,7 +20,7 @@ class Manager extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'manager';
+        return '{{%manager}}';
     }
 
     /**
@@ -31,9 +31,9 @@ class Manager extends \yii\db\ActiveRecord
         return [
             [['manager_id', 'restaurant_id'], 'required'],
             [['manager_id', 'restaurant_id'], 'integer'],
-            [['manager_id'], 'unique'],
-            [['manager_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['manager_id' => 'id']],
-            [['restaurant_id'], 'exist', 'skipOnError' => true, 'targetClass' => Restaurant::class, 'targetAttribute' => ['restaurant_id' => 'id']],
+            ['manager_id', 'unique'],
+            ['manager_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['manager_id' => 'id']],
+            ['restaurant_id', 'exist', 'skipOnError' => true, 'targetClass' => Restaurant::class, 'targetAttribute' => ['restaurant_id' => 'id']],
         ];
     }
 

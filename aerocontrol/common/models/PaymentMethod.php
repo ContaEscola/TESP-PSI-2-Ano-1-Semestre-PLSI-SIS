@@ -21,7 +21,7 @@ class PaymentMethod extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'payment_method';
+        return '{{%payment_method}}';
     }
 
     /**
@@ -31,11 +31,11 @@ class PaymentMethod extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'state', 'icon'], 'required'],
-            [['state'], 'boolean'],
-            [['name', 'icon'], 'string', 'max' => 50],
+            ['state', 'boolean'],
             [['name', 'icon'], 'trim'],
-            [['name'], 'unique'],
-            [['icon'], 'unique'],
+            [['name', 'icon'], 'string', 'max' => 50],
+            ['name', 'unique'],
+            ['icon', 'unique'],
         ];
     }
 

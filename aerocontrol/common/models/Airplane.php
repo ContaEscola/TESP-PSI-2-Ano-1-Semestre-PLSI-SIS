@@ -23,7 +23,7 @@ class Airplane extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'airplane';
+        return '{{%airplane}}';
     }
 
     /**
@@ -34,10 +34,10 @@ class Airplane extends \yii\db\ActiveRecord
         return [
             [['name', 'capacity', 'state', 'company_id'], 'required'],
             [['capacity', 'company_id'], 'integer'],
-            [['state'], 'boolean'],
-            [['name'], 'string', 'max' => 75],
-            [['name'], 'trim'],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::class, 'targetAttribute' => ['company_id' => 'id']],
+            ['state', 'boolean'],
+            ['name', 'trim'],
+            ['name', 'string', 'max' => 75],
+            ['company_id', 'exist', 'skipOnError' => true, 'targetClass' => Company::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
 

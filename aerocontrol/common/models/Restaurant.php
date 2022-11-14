@@ -26,7 +26,7 @@ class Restaurant extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'restaurant';
+        return '{{%restaurant}}';
     }
 
     /**
@@ -35,15 +35,15 @@ class Restaurant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['description', 'phone'], 'required'],
+            [['name', 'description', 'phone'], 'required'],
             [['open_time', 'close_time'], 'datetime'],
-            [['name'], 'string', 'max' => 75],
-            [['description'], 'string', 'max' => 255],
-            [['phone'], 'string', 'max' => 20],
+            [['name', 'description', 'phone', 'logo', 'website'], 'trim'],
+            ['name', 'string', 'max' => 75],
+            ['description', 'string', 'max' => 255],
+            ['phone', 'string', 'max' => 20],
             [['logo', 'website'], 'string', 'max' => 50],
-            [['name','description','phone','logo','website'],'trim'],
-            [['name'], 'unique'],
-            [['logo'], 'unique'],
+            ['name', 'unique'],
+            ['logo', 'unique'],
         ];
     }
 

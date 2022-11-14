@@ -18,7 +18,7 @@ class Admin extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'admin';
+        return '{{%admin}}';
     }
 
     /**
@@ -27,10 +27,10 @@ class Admin extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['admin_id'], 'required'],
-            [['admin_id'], 'integer'],
-            [['admin_id'], 'unique'],
-            [['admin_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['admin_id' => 'id']],
+            ['admin_id', 'required'],
+            ['admin_id', 'integer'],
+            ['admin_id', 'unique'],
+            ['admin_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['admin_id' => 'id']],
         ];
     }
 

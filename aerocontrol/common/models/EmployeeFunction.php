@@ -19,7 +19,7 @@ class EmployeeFunction extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'employee_function';
+        return '{{%employee_function}}';
     }
 
     /**
@@ -28,10 +28,10 @@ class EmployeeFunction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 50],
-            [['name'], 'trim'],
-            [['name'], 'unique'],
+            ['name', 'required'],
+            ['name', 'trim'],
+            ['name', 'string', 'max' => 50],
+            ['name', 'unique'],
         ];
     }
 
