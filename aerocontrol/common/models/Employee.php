@@ -54,7 +54,7 @@ class Employee extends \yii\db\ActiveRecord
             [['tin', 'num_emp', 'ssn', 'zip_code'], 'string', 'max' => 20],
             [['street'], 'string', 'max' => 100],
             [['iban'], 'string', 'max' => 25,'min'=>25],
-            [['tin','num_emp','ssn','zip_code','street','iban'],'trim'],
+            [['tin','num_emp','ssn','zip_code','street','iban', 'qualifications'],'trim'],
             [['num_emp'], 'unique'],
             [['ssn'], 'unique'],
             [['tin'], 'unique'],
