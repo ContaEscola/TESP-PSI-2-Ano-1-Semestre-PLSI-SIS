@@ -53,13 +53,13 @@ class FlightTicket extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'flight_ticket_id' => 'ID do bilhete de voo',
+            'flight_ticket_id' => 'ID do Bilhete de Voo',
             'price' => 'Preço',
             'purchase_date' => 'Data de compra',
             'checkin' => 'Checkin',
-            'client_id' => 'ID do cliente',
-            'flight_id' => 'ID do voo',
-            'payment_method_id' => 'ID do método de pagamento',
+            'client_id' => 'ID do Cliente',
+            'flight_id' => 'ID do Voo',
+            'payment_method_id' => 'ID do Método de Pagamento',
         ];
     }
 
