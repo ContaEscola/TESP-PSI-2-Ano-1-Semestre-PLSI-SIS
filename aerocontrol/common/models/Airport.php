@@ -35,6 +35,7 @@ class Airport extends \yii\db\ActiveRecord
             [['country', 'city', 'name', 'website'], 'required'],
             [['country', 'website'], 'string', 'max' => 50],
             [['city', 'name'], 'string', 'max' => 75],
+            [['country', 'website','city','name'], 'trim'],
             [['name'], 'unique'],
             [['website'], 'unique'],
         ];
@@ -47,30 +48,10 @@ class Airport extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'country' => 'Country',
-            'city' => 'City',
-            'name' => 'Name',
+            'country' => 'País',
+            'city' => 'Cidade',
+            'name' => 'Nome',
             'website' => 'Website',
         ];
-    }
-
-    /**
-     * Gets query for [[Flights]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFlights()
-    {
-        return $this->hasMany(Flight::class, ['arrival_airport_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Flights0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getFlights0()
-    {
-        return $this->hasMany(Flight::class, ['origin_airport_id' => 'id']);
     }
 }

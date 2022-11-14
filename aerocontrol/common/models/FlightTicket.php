@@ -38,8 +38,9 @@ class FlightTicket extends \yii\db\ActiveRecord
         return [
             [['price', 'purchase_date', 'checkin', 'client_id', 'flight_id', 'payment_method_id'], 'required'],
             [['price'], 'number'],
-            [['purchase_date'], 'safe'],
-            [['checkin', 'client_id', 'flight_id', 'payment_method_id'], 'integer'],
+            [['purchase_date'], 'datetime'],
+            [['client_id', 'flight_id', 'payment_method_id'], 'integer'],
+            [['checkin'], 'boolean'],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
             [['flight_id'], 'exist', 'skipOnError' => true, 'targetClass' => Flight::class, 'targetAttribute' => ['flight_id' => 'id']],
             [['payment_method_id'], 'exist', 'skipOnError' => true, 'targetClass' => PaymentMethod::class, 'targetAttribute' => ['payment_method_id' => 'id']],
@@ -52,13 +53,13 @@ class FlightTicket extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'flight_ticket_id' => 'Flight Ticket ID',
-            'price' => 'Price',
-            'purchase_date' => 'Purchase Date',
+            'flight_ticket_id' => 'ID do bilhete de voo',
+            'price' => 'Preço',
+            'purchase_date' => 'Data de compra',
             'checkin' => 'Checkin',
-            'client_id' => 'Client ID',
-            'flight_id' => 'Flight ID',
-            'payment_method_id' => 'Payment Method ID',
+            'client_id' => 'ID do cliente',
+            'flight_id' => 'ID do voo',
+            'payment_method_id' => 'ID do método de pagamento',
         ];
     }
 

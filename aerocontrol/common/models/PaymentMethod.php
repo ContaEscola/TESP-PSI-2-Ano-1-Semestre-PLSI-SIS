@@ -31,8 +31,9 @@ class PaymentMethod extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'state', 'icon'], 'required'],
-            [['state'], 'integer'],
+            [['state'], 'boolean'],
             [['name', 'icon'], 'string', 'max' => 50],
+            [['name', 'icon'], 'trim'],
             [['name'], 'unique'],
             [['icon'], 'unique'],
         ];
@@ -45,9 +46,9 @@ class PaymentMethod extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'state' => 'State',
-            'icon' => 'Icon',
+            'name' => 'Nome',
+            'state' => 'Estado',
+            'icon' => 'Icone',
         ];
     }
 

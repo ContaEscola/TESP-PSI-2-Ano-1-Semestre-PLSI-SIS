@@ -36,11 +36,12 @@ class Restaurant extends \yii\db\ActiveRecord
     {
         return [
             [['description', 'phone'], 'required'],
-            [['open_time', 'close_time'], 'safe'],
+            [['open_time', 'close_time'], 'datetime'],
             [['name'], 'string', 'max' => 75],
             [['description'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 20],
             [['logo', 'website'], 'string', 'max' => 50],
+            [['name','description','phone','logo','website'],'trim'],
             [['name'], 'unique'],
             [['logo'], 'unique'],
         ];
@@ -53,11 +54,11 @@ class Restaurant extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'phone' => 'Phone',
-            'open_time' => 'Open Time',
-            'close_time' => 'Close Time',
+            'name' => 'Nome',
+            'description' => 'Descrição',
+            'phone' => 'Telemóvel',
+            'open_time' => 'Horário de abertura',
+            'close_time' => 'Horário de fecho',
             'logo' => 'Logo',
             'website' => 'Website',
         ];

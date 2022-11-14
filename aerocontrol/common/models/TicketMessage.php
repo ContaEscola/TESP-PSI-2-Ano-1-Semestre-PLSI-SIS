@@ -35,6 +35,7 @@ class TicketMessage extends \yii\db\ActiveRecord
             [['sender_id', 'support_ticket_id'], 'integer'],
             [['message'], 'string', 'max' => 255],
             [['photo'], 'string', 'max' => 75],
+            [['photo','message'], 'trim'],
             [['photo'], 'unique'],
             [['support_ticket_id'], 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
         ];
@@ -47,10 +48,10 @@ class TicketMessage extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'message' => 'Message',
-            'photo' => 'Photo',
-            'sender_id' => 'Sender ID',
-            'support_ticket_id' => 'Support Ticket ID',
+            'message' => 'Mensagem',
+            'photo' => 'Imagem',
+            'sender_id' => 'ID do Emissor',
+            'support_ticket_id' => 'ID do suporte ticket',
         ];
     }
 

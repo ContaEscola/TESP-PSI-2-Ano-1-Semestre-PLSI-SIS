@@ -40,9 +40,21 @@ class Employee extends \yii\db\ActiveRecord
             [['employee_id', 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
             [['employee_id', 'function_id'], 'integer'],
             [['qualifications'], 'string'],
+            [['qualifications'], 'in','range'=> [
+                'Até ao 9º ano de escolaridade',
+                'Secundário',
+                'Curso técnico superior profissional',
+                'Diploma de Especialização Tecnológica',
+                'Ensino superior - bacharelato ou equivalente',
+                'Licenciatura Pré-Bolonha',
+                'Licenciatura 1º Ciclo - Pós-Bolonha',
+                'Mestrado',
+                'Doutoramento'
+            ]],
             [['tin', 'num_emp', 'ssn', 'zip_code'], 'string', 'max' => 20],
             [['street'], 'string', 'max' => 100],
-            [['iban'], 'string', 'max' => 25],
+            [['iban'], 'string', 'max' => 25,'min'=>25],
+            [['tin','num_emp','ssn','zip_code','street','iban'],'trim'],
             [['num_emp'], 'unique'],
             [['ssn'], 'unique'],
             [['tin'], 'unique'],
@@ -59,15 +71,15 @@ class Employee extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'employee_id' => 'Employee ID',
-            'tin' => 'Tin',
-            'num_emp' => 'Num Emp',
-            'ssn' => 'Ssn',
-            'street' => 'Street',
-            'zip_code' => 'Zip Code',
+            'employee_id' => 'ID',
+            'tin' => 'Nº Contribuinte',
+            'num_emp' => 'Nº Empregrado',
+            'ssn' => 'Nº Segurança Social',
+            'street' => 'Rua',
+            'zip_code' => 'Código Postal',
             'iban' => 'Iban',
-            'qualifications' => 'Qualifications',
-            'function_id' => 'Function ID',
+            'qualifications' => 'Qualificações',
+            'function_id' => 'ID da Função',
         ];
     }
 

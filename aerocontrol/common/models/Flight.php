@@ -43,11 +43,21 @@ class Flight extends \yii\db\ActiveRecord
     {
         return [
             [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required'],
-            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'safe'],
+            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'datetime'],
             [['price', 'distance'], 'number'],
             [['state'], 'string'],
+            [['state'],'in','range'=>[
+                'Previsto',
+                'Chegou',
+                'Partiu',
+                'Cancelado',
+                'Embarque',
+                'Ultima Chamada'
+            ]],
+            [['state'],'default','value'=>'Previsto'],
             [['discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'integer'],
             [['terminal'], 'string', 'max' => 30],
+            [['terminal'], 'trim'],
             [['airplane_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airplane::class, 'targetAttribute' => ['airplane_id' => 'id']],
             [['arrival_airport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['arrival_airport_id' => 'id']],
             [['origin_airport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['origin_airport_id' => 'id']],
@@ -62,17 +72,17 @@ class Flight extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'terminal' => 'Terminal',
-            'estimated_departure_date' => 'Estimated Departure Date',
-            'estimated_arrival_date' => 'Estimated Arrival Date',
-            'departure_date' => 'Departure Date',
-            'arrival_date' => 'Arrival Date',
-            'price' => 'Price',
-            'distance' => 'Distance',
-            'state' => 'State',
-            'discount_percentage' => 'Discount Percentage',
-            'origin_airport_id' => 'Origin Airport ID',
-            'arrival_airport_id' => 'Arrival Airport ID',
-            'airplane_id' => 'Airplane ID',
+            'estimated_departure_date' => 'Data de partida estimada',
+            'estimated_arrival_date' => 'Data de chegada estimada',
+            'departure_date' => 'Data de partida',
+            'arrival_date' => 'Data de chegada',
+            'price' => 'Preço',
+            'distance' => 'Distância',
+            'state' => 'Estado',
+            'discount_percentage' => 'Desconto(%)',
+            'origin_airport_id' => 'ID do aeroporto de origem',
+            'arrival_airport_id' => 'ID do aeroporto de chegada',
+            'airplane_id' => 'ID do aeroporto',
         ];
     }
 

@@ -35,6 +35,7 @@ class RestaurantItem extends \yii\db\ActiveRecord
             [['state', 'restaurant_id'], 'integer'],
             [['item'], 'string', 'max' => 100],
             [['image'], 'string', 'max' => 50],
+            [['image','item'], 'trim'],
             [['restaurant_id'], 'exist', 'skipOnError' => true, 'targetClass' => Restaurant::class, 'targetAttribute' => ['restaurant_id' => 'id']],
         ];
     }
@@ -47,9 +48,9 @@ class RestaurantItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'item' => 'Item',
-            'image' => 'Image',
-            'state' => 'State',
-            'restaurant_id' => 'Restaurant ID',
+            'image' => 'Imagem',
+            'state' => 'Estado',
+            'restaurant_id' => 'ID do restaurante',
         ];
     }
 

@@ -33,8 +33,10 @@ class Airplane extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'capacity', 'state', 'company_id'], 'required'],
-            [['capacity', 'state', 'company_id'], 'integer'],
+            [['capacity', 'company_id'], 'integer'],
+            [['state'], 'boolean'],
             [['name'], 'string', 'max' => 75],
+            [['name'], 'trim'],
             [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Company::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
@@ -46,10 +48,10 @@ class Airplane extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'capacity' => 'Capacity',
-            'state' => 'State',
-            'company_id' => 'Company ID',
+            'name' => 'Nome',
+            'capacity' => 'Capacidade',
+            'state' => 'Estado',
+            'company_id' => 'ID da Companhia',
         ];
     }
 

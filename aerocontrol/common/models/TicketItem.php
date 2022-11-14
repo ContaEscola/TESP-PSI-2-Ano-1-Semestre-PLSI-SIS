@@ -43,8 +43,8 @@ class TicketItem extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'lost_item_id' => 'Lost Item ID',
-            'support_ticket_id' => 'Support Ticket ID',
+            'lost_item_id' => 'ID do item',
+            'support_ticket_id' => 'ID do ticket de suporte',
         ];
     }
 

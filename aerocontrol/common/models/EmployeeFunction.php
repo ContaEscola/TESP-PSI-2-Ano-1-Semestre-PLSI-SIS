@@ -30,6 +30,7 @@ class EmployeeFunction extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 50],
+            [['name'], 'trim'],
             [['name'], 'unique'],
         ];
     }
@@ -41,7 +42,7 @@ class EmployeeFunction extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Nome',
         ];
     }
 
