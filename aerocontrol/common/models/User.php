@@ -98,7 +98,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => 'ID do User',
             'username' => 'Username',
             'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash',
@@ -110,7 +110,7 @@ class User extends ActiveRecord implements IdentityInterface
             'city' => 'Cidade',
             'birthdate' => 'Data de Nascimento',
             'email' => 'Email',
-            'phone' => 'Núm. Telemóvel',
+            'phone' => 'Nº Telemóvel',
             'phone_country_code' => 'Indicativo do país',
             'status' => 'Estado',
             'created_at' => 'Created At',
