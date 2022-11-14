@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `flight` (
   `arrival_date` DATETIME NULL,
   `price` DOUBLE NOT NULL,
   `distance` FLOAT NOT NULL,
-  `state` ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL,
+  `state` ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL DEFAULT 'Previsto',
   `discount_percentage` TINYINT(4) NOT NULL,
   `origin_airport_id` INT UNSIGNED NOT NULL,
   `arrival_airport_id` INT UNSIGNED NOT NULL,
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `passenger` (
 CREATE TABLE IF NOT EXISTS `lost_item` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `description` VARCHAR(100) NOT NULL,
-  `state` ENUM('Entregue','Por Entregar','Perdido') NOT NULL,
+  `state` ENUM('Entregue','Por entregar','Perdido') NOT NULL DEFAULT 'Por entregar',
   `image` VARCHAR(75) NOT NULL,
   CONSTRAINT `pk_lost_item_id` PRIMARY KEY(`id`),
   CONSTRAINT `uk_image` UNIQUE KEY(`image`)
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
 CREATE TABLE IF NOT EXISTS `support_ticket` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `title` VARCHAR(20) NOT NULL,
-  `state` ENUM('Por Rever','Concluido','Em Processo') NOT NULL,
+  `state` ENUM('Por Rever','Concluido','Em Processo') NOT NULL DEFAULT 'Por Rever',
   `client_id` INT(11) UNSIGNED NOT NULL,
   `employee_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
