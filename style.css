@@ -281,6 +281,13 @@ a:where(:hover, :focus) {
   --outline-style: solid;
   --outline-color: var(--clr-primary-accent-400);
 
+  --clr-text: var(--clr-white);
+  --clr-bg: var(--clr-primary-accent-400);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-primary-accent-900);
+
+  --clr-dropdown-toggle-icon: var(--clr-white);
+
   text-decoration: none;
 
   display: inline-flex;
@@ -296,8 +303,8 @@ a:where(:hover, :focus) {
   font-weight: 500;
   letter-spacing: 0.0625em;
 
-  color: var(--custom-color, var(--clr-white));
-  background-color: var(--custom-bg-color, var(--clr-primary-accent-400));
+  color: var(--clr-text);
+  background-color: var(--clr-bg);
 
   cursor: pointer;
 
@@ -305,44 +312,56 @@ a:where(:hover, :focus) {
 }
 
 .button:where(:hover, :focus-visible) {
-  background-color: var(--custom-hover-bg-color, var(--clr-primary-accent-900));
+  --clr-text: var(--clr-text-on-event);
+  --clr-bg: var(--clr-bg-on-event);
 }
 
 .button[data-type="primary-outline"] {
   --outline-size: 0.14em;
-  --clr-dropdown-toggle-icon: var(--clr-primary-accent-400);
 
-  color: var(--clr-primary-accent-400);
-  background-color: var(--clr-white);
+  --clr-text: var(--clr-primary-accent-400);
+  --clr-bg: var(--clr-white);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-primary-accent-400);
+
+  --clr-dropdown-toggle-icon: var(--clr-primary-accent-400);
 }
 
 .button[data-type="primary-outline"]:where(:hover, :focus-visible) {
-  --clr-dropdown-toggle-icon: var(--clr-white);
+  --clr-text: var(--clr-text-on-event);
+  --clr-bg: var(--clr-bg-on-event);
 
-  color: var(--clr-white);
-  background-color: var(--clr-primary-accent-400);
+  --clr-dropdown-toggle-icon: var(--clr-white);
 }
 
 .button[data-type="secondary"] {
-  color: var(--clr-white);
-  background-color: var(--clr-secondary-accent-400);
+  --clr-text: var(--clr-white);
+  --clr-bg: var(--clr-secondary-accent-400);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-secondary-accent-900);
 }
 
 .button[data-type="secondary"]:where(:hover, :focus-visible) {
-  background-color: var(--clr-secondary-accent-900);
+  --clr-bg: var(--clr-bg-on-event);
 }
 
 .button[data-type="secondary-outline"] {
   --outline-size: 0.14em;
   --outline-color: var(--clr-secondary-accent-400);
 
-  color: var(--clr-secondary-accent-400);
-  background-color: var(--clr-white);
+  --clr-text: var(--clr-secondary-accent-400);
+  --clr-bg: var(--clr-white);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-secondary-accent-400);
+
+  --clr-dropdown-toggle-icon: var(--clr-secondary-accent-400);
 }
 
 .button[data-type="secondary-outline"]:where(:hover, :focus-visible) {
-  color: var(--clr-white);
-  background-color: var(--clr-secondary-accent-400);
+  --clr-text: var(--clr-text-on-event);
+  --clr-bg: var(--clr-bg-on-event);
+
+  --clr-dropdown-toggle-icon: var(--clr-white);
 }
 
 @media (min-width: 40em) {
@@ -365,8 +384,8 @@ a:where(:hover, :focus) {
 .dropdown-button[aria-expanded="true"] {
   --clr-dropdown-toggle-icon: var(--clr-white);
 
-  color: var(--clr-white);
-  background-color: var(--clr-primary-accent-400);
+  color: var(--clr-text-on-event);
+  background-color: var(--clr-bg-on-event);
 }
 
 .dropdown__toggle-icon {
@@ -387,7 +406,7 @@ a:where(:hover, :focus) {
   min-width: 100%;
 
   background-color: var(--clr-neutral-400);
-  outline: 0.14em solid var(--clr-primary-accent-400);
+  outline: 0.12em solid var(--clr-primary-accent-400);
   border-radius: 0.313rem;
 }
 
