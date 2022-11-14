@@ -6,35 +6,28 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = $name;
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
-<div class="error-page">
-    <div class="error-content" style="margin-left: auto;">
-        <h3><i class="fas fa-exclamation-triangle text-danger"></i> <?= Html::encode($name) ?></h3>
-
-        <p>
-            <?= nl2br(Html::encode($message)) ?>
-        </p>
-
-        <p>
-            The above error occurred while the Web server was processing your request.
-            Please contact us if you think this is a server error. Thank you.
-            Meanwhile, you may <?= Html::a('return to dashboard', Yii::$app->homeUrl); ?>
-            or try using the search form.
-        </p>
-
-        <form class="search-form" style="margin-right: 190px;">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Search">
-
-                <div class="input-group-append">
-                    <button type="submit" name="submit" class="btn btn-danger"><i class="fas fa-search"></i>
-                    </button>
-                </div>
+<main>
+    <div class="container padding-block-700 height-100">
+        <div class="[ error-grid ] [ even-columns place-content-center text-align-center-sm height-100 ]">
+            <picture>
+                <source srcset="<?= Url::to('@web/images/error-icon-pc.svg' )?>" media="(min-width: 40em)">
+                <img src="<?= Url::to('@web/images/error-icon-mobile.svg' )?>" alt="representação de erro">
+            </picture>
+            <div>
+                <h1 class="fs-600 fw-bold"><?= Html::encode($this->title) ?></h1>
+                <p class="margin-top-100"> <?= nl2br(Html::encode($message)) ?></p>
+                <p>
+                    O erro acima ocorreu enquanto o servidor Web estava processando a sua informação.
+                </p>
+                <p>
+                    Entre em contacto conosco se achar que é um erro de servidor. Obrigado.
+                </p>
             </div>
-        </form>
+        </div>
     </div>
-</div>
-
+</main>

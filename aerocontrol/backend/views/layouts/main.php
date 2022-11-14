@@ -4,6 +4,12 @@
 /* @var $content string */
 
 use yii\helpers\Html;
+use backend\assets\AppAsset;
+use common\widgets\Alert;
+use yii\bootstrap5\Breadcrumbs;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
@@ -22,10 +28,18 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to('@web/images/logo-url-icon.png' )?>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"rel="stylesheet">
+    <link rel="stylesheet" href="<?=Url::to('@web/assets/css.css')?>">
+
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="body-grid">
 <?php $this->beginBody() ?>
 
 <div class="wrapper">
