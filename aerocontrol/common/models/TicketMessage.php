@@ -51,7 +51,7 @@ class TicketMessage extends \yii\db\ActiveRecord
             'message' => 'Mensagem',
             'photo' => 'Imagem',
             'sender_id' => 'ID do Emissor',
-            'support_ticket_id' => 'ID do suporte ticket',
+            'support_ticket_id' => 'ID do Ticket de Suporte',
         ];
     }
 
