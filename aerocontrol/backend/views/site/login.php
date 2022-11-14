@@ -7,7 +7,7 @@ use yii\helpers\Html;
             <h1 class="fs-600 fw-bold text-align-center">Login</h1>
 
         <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
-
+        <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
         <?= $form->field($model,'username', [
             'options' => ['class' => 'form-group has-feedback'],
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
@@ -15,7 +15,7 @@ use yii\helpers\Html;
         ])
             ->label(false)
             ->textInput(['placeholder' => $model->getAttributeLabel('username')]) ?>
-
+        <label for="password" class="[ input__label ] [ margin-bottom-50 ]">Password:</label>
         <?= $form->field($model, 'password', [
             'options' => ['class' => 'form-group has-feedback'],
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
@@ -25,7 +25,7 @@ use yii\helpers\Html;
             ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
         <div>
             <?= $form->field($model, 'rememberMe')->checkbox([
-                'template' => '<div class="icheck-primary">{input}{label}</div>',
+                'template' => '<div class="d-flex gap-1 align-items-center">{input}{label}</div>',
                 'labelOptions' => [
                     'class' => ''
                 ],
