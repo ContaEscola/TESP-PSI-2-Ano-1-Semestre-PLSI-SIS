@@ -57,7 +57,7 @@ class Flight extends \yii\db\ActiveRecord
             [['state'],'default','value'=>'Previsto'],
             [['discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'integer'],
             [['terminal'], 'string', 'max' => 30],
-            [['terminal'], 'trim'],
+            [['terminal', 'state'], 'trim'],
             [['airplane_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airplane::class, 'targetAttribute' => ['airplane_id' => 'id']],
             [['arrival_airport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['arrival_airport_id' => 'id']],
             [['origin_airport_id'], 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['origin_airport_id' => 'id']],
@@ -80,9 +80,9 @@ class Flight extends \yii\db\ActiveRecord
             'distance' => 'Distância',
             'state' => 'Estado',
             'discount_percentage' => 'Desconto(%)',
-            'origin_airport_id' => 'ID do aeroporto de origem',
-            'arrival_airport_id' => 'ID do aeroporto de chegada',
-            'airplane_id' => 'ID do aeroporto',
+            'origin_airport_id' => 'ID do Aeroporto de Origem',
+            'arrival_airport_id' => 'ID do Aeroporto de Chegada',
+            'airplane_id' => 'ID do Aeroporto',
         ];
     }
 
