@@ -1,53 +1,112 @@
 <?php
 
-/** @var yii\web\View $this */
+use yii\helpers\Url;
 
-$this->title = 'My Yii Application';
+$this->title = 'Starter Page';
+$this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
-<div class="site-index">
-
-    <div class="jumbotron text-center bg-transparent">
-        <h1 class="display-4">Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Voos',
+                'icon' => 'fas fa-plane-departure',
+                'linkUrl'=>Url::to(["/flight/index"])
+            ]) ?>
         </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Aeroportos',
+                'icon' => 'fas fa-plane-arrival',
+                'linkUrl'=>Url::to(["/airport/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Aviões',
+                'icon' => 'fas fa-plane',
+                'linkUrl'=>Url::to(["/airplane/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Companhias',
+                'icon' => 'fas fa-building',
+                'linkUrl'=>Url::to(["/company/index"])
+            ]) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Trabalhadores',
+                'icon' => 'fas fa-user',
+                'linkUrl'=>Url::to(["/employee/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Clientes',
+                'icon' => 'fas fa-user',
+                'linkUrl'=>Url::to(["/client/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Perdidos e achados',
+                'icon' => 'fas fa-suitcase-rolling',
+                'linkUrl'=>Url::to(["/lostitem/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Suporte ao cliente',
+                'icon' => 'fas fa-envelope',
+                'linkUrl'=>Url::to(["/supportticket/index"])
+            ]) ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Métodos de pagamento',
 
+                'icon' => 'fas fa-solid fa-credit-card',
+                'linkUrl'=>Url::to(["/paymentmethod/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Restaurante',
+                'icon' => 'fas fa-utensils',
+                'linkUrl'=>Url::to(["/restaurant/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Lojas',
+                'icon' => 'fas fa-shopping-cart',
+                'linkUrl'=>Url::to(["/store/index"])
+            ]) ?>
+        </div>
+        <div class="col">
+            <?= \hail812\adminlte\widgets\SmallBox::widget([
+                'title' => '150',
+                'text' => 'Server Log',
+                'icon' => 'fas fa-info',
+                'linkUrl'=>Url::to([""])
+            ]) ?>
+        </div>
     </div>
 </div>
