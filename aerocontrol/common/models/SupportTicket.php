@@ -35,6 +35,7 @@ class SupportTicket extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'state', 'client_id', 'employee_id'], 'required'],
+            [['title', 'state']], 'trim'],
             [['state'], 'string'],
             [['state'], 'in','range'=>[
                 'Por Rever',
@@ -42,9 +43,8 @@ class SupportTicket extends \yii\db\ActiveRecord
                 'Em Processo'
             ]],
             [['state'],'default','value'=>'Por Rever'],
-            [['client_id', 'employee_id'], 'integer'],
             [['title'], 'string', 'max' => 20],
-            [['title'], 'trim'],
+            [['client_id', 'employee_id'], 'integer'],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
             [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::class, 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];
@@ -59,8 +59,8 @@ class SupportTicket extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Título',
             'state' => 'Estado',
-            'client_id' => 'ID do cliente',
-            'employee_id' => 'ID do funcionário',
+            'client_id' => 'ID do Cliente',
+            'employee_id' => 'ID do Funcionário',
         ];
     }
 
