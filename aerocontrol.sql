@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 --
 CREATE TABLE IF NOT EXISTS `restaurant` (
   `id` INT UNSIGNED AUTO_INCREMENT,
-  `name` VARCHAR(75) NULL,
+  `name` VARCHAR(75) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   `phone` VARCHAR(20) NOT NULL,
   `open_time` TIME NULL,
