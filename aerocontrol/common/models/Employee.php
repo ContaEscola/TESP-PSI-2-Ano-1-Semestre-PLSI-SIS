@@ -71,9 +71,9 @@ class Employee extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'employee_id' => 'ID',
+            'employee_id' => 'ID do Empregado',
             'tin' => 'Nº Contribuinte',
-            'num_emp' => 'Nº Empregrado',
+            'num_emp' => 'Nº Empregado',
             'ssn' => 'Nº Segurança Social',
             'street' => 'Rua',
             'zip_code' => 'Código Postal',
