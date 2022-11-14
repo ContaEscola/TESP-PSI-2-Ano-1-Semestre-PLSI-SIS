@@ -43,8 +43,8 @@ class Manager extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'manager_id' => 'ID do gerente',
-            'restaurant_id' => 'ID do restaurante',
+            'manager_id' => 'ID do Gerente',
+            'restaurant_id' => 'ID do Restaurante',
         ];
     }
 
