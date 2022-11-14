@@ -32,7 +32,8 @@ class RestaurantItem extends \yii\db\ActiveRecord
     {
         return [
             [['item', 'image', 'state', 'restaurant_id'], 'required'],
-            [['state', 'restaurant_id'], 'integer'],
+            [['restaurant_id'], 'integer'],
+            [['state'], 'boolean'],
             [['item'], 'string', 'max' => 100],
             [['image'], 'string', 'max' => 50],
             [['image','item'], 'trim'],
@@ -50,7 +51,7 @@ class RestaurantItem extends \yii\db\ActiveRecord
             'item' => 'Item',
             'image' => 'Imagem',
             'state' => 'Estado',
-            'restaurant_id' => 'ID do restaurante',
+            'restaurant_id' => 'ID do Restaurante',
         ];
     }
 
