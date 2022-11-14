@@ -39,69 +39,72 @@ use hail812\adminlte\widgets\Menu;
         <nav class="mt-2">
             <?php
             //ADMIN
-            /* echo \hail812\adminlte\widgets\Menu::widget([
+             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Debug', 'icon' => 'bug', 'url' => ['/debug'], 'target' => '_blank'],
                     [
                         'label' => 'Aeroporto',
+                        'icon'=>'fas fa-solid fa-plane',
                         'items' => [
-                            ['label' => 'Voos', 'iconStyle' => 'far'],
-                            ['label' => 'Aeroportos', 'iconStyle' => 'far'],
-                            ['label' => 'Aviões', 'iconStyle' => 'far'],
-                            ['label' => 'Companhias', 'iconStyle' => 'far']
+                            ['label' => 'Voos','url' => ['/flight/index'], 'iconStyle' => 'far','icon'],
+                            ['label' => 'Aeroportos','url' => ['/airport/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Aviões', 'url' => ['/airplane/index'],'iconStyle' => 'far'],
+                            ['label' => 'Companhias','url' => ['/company/index'], 'iconStyle' => 'far']
                         ]
                     ],
                     [
                         'label' => 'Utilizadores',
+                        'icon'=>'fas fa-solid fa-user',
                         'items' => [
-                            ['label' => 'Trabalhadores', 'iconStyle' => 'far'],
-                            ['label' => 'Clientes', 'iconStyle' => 'far']
+                            ['label' => 'Trabalhadores','url' => ['/employee/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Clientes','url' => ['/client/index'], 'iconStyle' => 'far']
                         ]
                     ],
                     [
+                        'icon'=>'fas fa-solid fa-suitcase-rolling',
                         'label' => 'Perdidos e Achados',
                         'items' => [
-                            ['label' => 'Itens', 'iconStyle' => 'far'],
-                            ['label' => 'Suporte ao cliente', 'iconStyle' => 'far']
+                            ['label' => 'Itens','url' => ['/lostitem/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Suporte ao cliente','url' => ['/supportticket/index'], 'iconStyle' => 'far']
                         ]
                     ],
-                    ['label' => 'Métodos de Pagamento', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'Restaurantes', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'Lojas', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'Server Log', 'url' => ['/debug'], 'target' => '_blank'],
+                    ['label' => 'Métodos de Pagamento','icon'=>'fas fa-solid fa-credit-card', 'url' => ['/paymentmethod/index'], 'target' => '_blank'],
+                    ['label' => 'Restaurantes', 'url' => ['/restaurant/index'],'icon'=>'fas fa-solid fa-utensils', 'target' => '_blank'],
+                    ['label' => 'Lojas', 'url' => ['/store/index'],'icon'=>'fas fa-solid fa-shopping-cart', 'target' => '_blank'],
+                    ['label' => 'Server Log', 'url' => ['/serverlog'],'icon'=>'fas fa-solid fa-info', 'target' => '_blank'],
                 ],
-            ]);*/
+            ]);
             //MANAGER
             /*echo Menu::widget([
                 'items' => [
 
-                    ['label' => 'Restaurantes', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'Ementa', 'url' => ['/debug'], 'target' => '_blank'],
+                    ['label' => 'Restaurantes', 'url' => ['/restaurant/view'],'icon'=>'fas fa-house-user', 'target' => '_blank'],
+                    ['label' => 'Ementa', 'url' => ['/restaurantitem/index'],'icon'=>'fas fa-solid fa-utensils', 'target' => '_blank'],
                 ],
             ]);*/
             // EMPLOYEE
-            echo Menu::widget([
+            /*echo Menu::widget([
                 'items' => [
                     [
                         'label' => 'Aeroporto',
+                        'icon'=>'fas fa-solid fa-plane',
                         'items' => [
-                            ['label' => 'Voos', 'iconStyle' => 'far'],
-                            ['label' => 'Aeroportos', 'iconStyle' => 'far'],
-                            ['label' => 'Aviões', 'iconStyle' => 'far'],
+                            ['label' => 'Voos','url' => ['/flight/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Aeroportos','url' => ['/airport/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Aviões','url' => ['/airplane/index'], 'iconStyle' => 'far'],
                         ]
                     ],
                     [
                         'label' => 'Perdidos e Achados',
+                        'icon'=>'fas fa-solid fa-suitcase-rolling',
                         'items' => [
-                            ['label' => 'Itens', 'iconStyle' => 'far'],
-                            ['label' => 'Suporte ao cliente', 'iconStyle' => 'far']
+                            ['label' => 'Itens','url' => ['/lostitem/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Suporte ao cliente','url' => ['/supportticket/index'], 'iconStyle' => 'far']
                         ]
                     ],
-                    ['label' => 'Clientes', 'url' => ['/debug'], 'target' => '_blank'],
-                    ['label' => 'Métodos de Pagamento', 'url' => ['/debug'], 'target' => '_blank'],
+                    ['label' => 'Clientes', 'url' => ['/client/index'],'icon'=>'fas fa-solid fa-user', 'target' => '_blank'],
+                    ['label' => 'Métodos de Pagamento', 'url' => ['/paymentmethod/index'],'icon'=>'fas fa-solid fa-credit-card', 'target' => '_blank'],
                 ],
-            ]); ?>
+            ]);*/ ?>
         </nav>
         <!-- /.sidebar-menu -->
     </div>
