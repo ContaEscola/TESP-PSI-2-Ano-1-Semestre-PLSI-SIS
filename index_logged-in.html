@@ -50,21 +50,35 @@
                                     class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
                             </li>
                             <li class="primary-navigation__item">
-                                <div class="dropdown">
+                                <div class="dropdown " data-type="navbar">
                                     <button class="dropdown-button button" data-type="primary-outline"
                                         aria-expanded="false" data-dropdown>Pedro
                                         Norberto
-                                        <span aria-hidden="true" class="dropdown__toggle-icon">
-                                            <svg width="7" height="11" viewBox="0 0 7 11" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M4.99159 0.327539L0.344652 4.71456C-0.114863 5.14837 -0.114863 5.85163 0.344652 6.28543L4.99159 10.6724C5.73275 11.3721 7.00002 10.8766 7.00002 9.88701L7.00002 1.11298C7.00002 0.123374 5.73275 -0.372165 4.99159 0.327539V0.327539Z"
-                                                    fill="var(--clr-dropdown-toggle-icon)" />
+                                        <span aria-hidden="true">
+                                            <svg class="icon dropdown__toggle-icon">
+                                                <use xlink:href="assets/caret.svg#caret"></use>
                                             </svg>
                                         </span>
                                     </button>
                                     <ul role="list" class="dropdown-menu">
-                                        <li class="dropdown-menu__item">ola</li>
+                                        <li class="dropdown-menu__item"><a
+                                                class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#">Ver
+                                                conta
+                                                <span aria-hidden="true">
+                                                    <svg class="icon dropdown-link__icon">
+                                                        <use xlink:href="assets/perfil-icon.svg#perfil-icon"></use>
+                                                    </svg>
+                                                </span>
+                                            </a></li>
+                                        <li class="dropdown-menu__item"><a
+                                                class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"
+                                                data-type="logout">Logout
+                                                <span aria-hidden="true">
+                                                    <svg class="icon dropdown-link__icon">
+                                                        <use xlink:href="assets/logout-icon.svg#logout-icon"></use>
+                                                    </svg>
+                                                </span>
+                                            </a></li>
                                     </ul>
                                 </div>
                             </li>
