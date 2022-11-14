@@ -56,7 +56,7 @@ class Restaurant extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Nome',
             'description' => 'Descrição',
-            'phone' => 'Telemóvel',
+            'phone' => 'Nº Telemóvel',
             'open_time' => 'Horário de abertura',
             'close_time' => 'Horário de fecho',
             'logo' => 'Logo',
