@@ -356,7 +356,7 @@ a:where(:hover, :focus) {
 /* hero*/
 
 .hero {
-  background-image: url("../assets/hero-bg-mobile.png");
+  background-image: url("../images/hero-bg-mobile.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right bottom;
@@ -368,7 +368,7 @@ a:where(:hover, :focus) {
 
 @media (min-width: 40em) {
   .hero {
-    background-image: url("../assets/hero-bg-pc.png");
+    background-image: url("../images/hero-bg-pc.png");
     background-position: center;
   }
 }
@@ -382,10 +382,10 @@ a:where(:hover, :focus) {
 }
 
 .card-landing-page[data-type="restaurant"] {
-  background-image: url("../assets/restaurant-card-bg.png");
+  background-image: url("../images/restaurant-card-bg.png");
 }
 .card-landing-page[data-type="store"] {
-  background-image: url("../assets/store-card-bg.png");
+  background-image: url("../images/store-card-bg.png");
 }
 .card__content {
   height: 100%;

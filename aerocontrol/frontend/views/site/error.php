@@ -15,8 +15,8 @@ $this->title = $name;
         <div class="container padding-block-700 height-100">
             <div class="[ error-grid ] [ even-columns place-content-center text-align-center-sm height-100 ]">
                 <picture>
-                    <source srcset="<?= Url::to('@web/assets/error-icon-pc.svg' )?>" media="(min-width: 40em)">
-                    <img src="<?= Url::to('@web/assets/error-icon-mobile.svg' )?>" alt="representação de erro">
+                    <source srcset="<?= Url::to('@web/images/error-icon-pc.svg' )?>" media="(min-width: 40em)">
+                    <img src="<?= Url::to('@web/images/error-icon-mobile.svg' )?>" alt="representação de erro">
                 </picture>
                 <div>
                     <h1 class="fs-600 fw-bold"><?= Html::encode($this->title) ?></h1>
