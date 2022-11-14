@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -21,7 +22,7 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
 
 
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo-url-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to('@web/assets/logo-url-icon.png' )?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"rel="stylesheet">
@@ -39,14 +40,14 @@ AppAsset::register($this);
             <div class="nav-wrapper">
                 <a href="#">
                     <picture>
-                        <source srcset="assets/logo-pc.svg" media="(min-width: 40em)">
-                        <img src="assets/logo-mobile.svg" alt="Logo">
+                        <source srcset="<?= Url::to('@web/assets/logo-pc.svg' )?>" media="(min-width: 40em)">
+                        <img src="<?= Url::to('@web/assets/logo-mobile.svg' )?>" alt="Logo">
                     </picture>
                 </a>
                 <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
                         aria-expanded="false">
-                    <img class="open-icon" src="assets/hamburger-icon.svg" alt="" aria-hidden="true">
-                    <img class="close-icon" src="assets/close-icon.svg" alt="" aria-hidden="true">
+                    <img class="open-icon" src="<?= Url::to('@web/assets/hamburger-icon.svg' )?>" alt="" aria-hidden="true">
+                    <img class="close-icon" src="<?= Url::to('@web/assets/close-icon.svg' )?>" alt="" aria-hidden="true">
                     <span class="visually-hidden">Menu</span>
                 </button>
                 <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
