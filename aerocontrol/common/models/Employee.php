@@ -37,7 +37,7 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employee_id', 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
+            [[ 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
             [['employee_id', 'function_id'], 'integer'],
             [['tin', 'num_emp', 'ssn', 'zip_code', 'street', 'iban', 'qualifications'], 'trim'],
 
@@ -112,5 +112,12 @@ class Employee extends \yii\db\ActiveRecord
     public function getSupportTickets()
     {
         return $this->hasMany(SupportTicket::class, ['employee_id' => 'employee_id']);
+    }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $employee_id = Yii::$app->request->get("employee_id");
+        User::findOne($employee_id)->delete();
     }
 }

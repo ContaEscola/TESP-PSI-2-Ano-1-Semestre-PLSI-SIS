@@ -34,7 +34,7 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"rel="stylesheet">
-    <link rel="stylesheet" href="<?=Url::to('@web/assets/css.css')?>">
+    <link rel="stylesheet" href="<?=Url::to('@web/css/style.css')?>">
 
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
