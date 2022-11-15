@@ -1,5 +1,5 @@
 const dropdowns = document.querySelectorAll("[data-dropdown]");
-console.log(dropdowns);
+
 dropdowns.forEach((e) => {
     e.addEventListener('click', () => {
         e.getAttribute('aria-expanded') === "true"

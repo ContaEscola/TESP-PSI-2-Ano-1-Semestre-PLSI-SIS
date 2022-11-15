@@ -11,6 +11,7 @@ formInputs.forEach((input) => {
     }
 
     input.addEventListener('keyup', () => {
+        input.classList.remove("invalid");
         input.setAttribute('data-validate', true);
         checkInputValidity(input);
     })
@@ -24,10 +25,20 @@ forms.forEach((form) => {
             e.stopPropagation();
         }
 
+
         let inputs = form.querySelectorAll(".form__input");
+        let firstWrongInputHasFocus = false;
 
         inputs.forEach((input) => {
-            checkInputValidity(input);
+            if (!checkInputValidity(input)) {
+                input.classList.add("invalid");
+
+                if (!firstWrongInputHasFocus) {
+                    input.focus();
+                    firstWrongInputHasFocus = true;
+                }
+
+            }
         })
     })
 })
@@ -37,7 +48,6 @@ function checkInputValidity(input) {
     let inputError = parentFormGroup.querySelector(".input__error");
 
     if (!input.checkValidity()) {
-        input.classList.add("invalid");
 
         let title = input.getAttribute("title");
 
@@ -58,8 +68,11 @@ function checkInputValidity(input) {
             input.parentElement.querySelector(".input__error").innerHTML = title;
         }
 
+        return false;
+
     } else {
-        input.classList.remove("invalid");
         input.parentElement.querySelector(".input__error").innerHTML = "";
+        return true;
     }
 }
+
