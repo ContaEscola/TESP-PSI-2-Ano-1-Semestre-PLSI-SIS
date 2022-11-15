@@ -37,7 +37,7 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employee_id', 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
+            [[ 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
             [['employee_id', 'function_id'], 'integer'],
             [['tin', 'num_emp', 'ssn', 'zip_code', 'street', 'iban', 'qualifications'], 'trim'],
 

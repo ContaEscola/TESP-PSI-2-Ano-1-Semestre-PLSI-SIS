@@ -79,12 +79,14 @@ class EmployeeController extends Controller
             $user->setPassword($user->password_hash);
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
+            $user->status = 10;
 
-            //var_dump($user);
-            if ($user->save()) {
-                $model->employee_id = $user->id;
-                if ($model->save())
-                    return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+            if ($user->validate() && $model->validate()) {
+                if($user->save()) {
+                    $model->employee_id = $user->id;
+                    if ($model->save())
+                        return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -96,7 +98,6 @@ class EmployeeController extends Controller
         foreach ($employee_functions as $function)
             $functions[$function->id] = $function->name;
 
-        if (!$this->request->isPost)
         return $this->render('create', [
             'model' => $model,
             'user' => $user,
