@@ -39,72 +39,76 @@ use hail812\adminlte\widgets\Menu;
         <nav class="mt-2">
             <?php
             //ADMIN
-             echo \hail812\adminlte\widgets\Menu::widget([
-                'items' => [
-                    [
-                        'label' => 'Aeroporto',
-                        'icon'=>'fas fa-solid fa-plane',
-                        'items' => [
-                            ['label' => 'Voos','url' => ['/flight/index'], 'iconStyle' => 'far','icon'],
-                            ['label' => 'Aeroportos','url' => ['/airport/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Aviões', 'url' => ['/airplane/index'],'iconStyle' => 'far'],
-                            ['label' => 'Companhias','url' => ['/company/index'], 'iconStyle' => 'far']
-                        ]
+            if(isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
+                echo \hail812\adminlte\widgets\Menu::widget([
+                    'items' => [
+                        [
+                            'label' => 'Aeroporto',
+                            'icon' => 'fas fa-solid fa-plane',
+                            'items' => [
+                                ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far', 'icon'],
+                                ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Companhias', 'url' => ['/company/index'], 'iconStyle' => 'far']
+                            ]
+                        ],
+                        [
+                            'label' => 'Utilizadores',
+                            'icon' => 'fas fa-solid fa-user',
+                            'items' => [
+                                ['label' => 'Trabalhadores', 'url' => ['/employee/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Clientes', 'url' => ['/client/index'], 'iconStyle' => 'far']
+                            ]
+                        ],
+                        [
+                            'icon' => 'fas fa-solid fa-suitcase-rolling',
+                            'label' => 'Perdidos e Achados',
+                            'items' => [
+                                ['label' => 'Itens', 'url' => ['/lostitem/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                            ]
+                        ],
+                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['/paymentmethod/index'], 'target' => '_blank'],
+                        ['label' => 'Restaurantes', 'url' => ['/restaurant/index'], 'icon' => 'fas fa-solid fa-utensils', 'target' => '_blank'],
+                        ['label' => 'Lojas', 'url' => ['/store/index'], 'icon' => 'fas fa-solid fa-shopping-cart', 'target' => '_blank'],
+                        ['label' => 'Server Log', 'url' => ['/serverlog'], 'icon' => 'fas fa-solid fa-info', 'target' => '_blank'],
                     ],
-                    [
-                        'label' => 'Utilizadores',
-                        'icon'=>'fas fa-solid fa-user',
-                        'items' => [
-                            ['label' => 'Trabalhadores','url' => ['/employee/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Clientes','url' => ['/client/index'], 'iconStyle' => 'far']
-                        ]
-                    ],
-                    [
-                        'icon'=>'fas fa-solid fa-suitcase-rolling',
-                        'label' => 'Perdidos e Achados',
-                        'items' => [
-                            ['label' => 'Itens','url' => ['/lostitem/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Suporte ao cliente','url' => ['/supportticket/index'], 'iconStyle' => 'far']
-                        ]
-                    ],
-                    ['label' => 'Métodos de Pagamento','icon'=>'fas fa-solid fa-credit-card', 'url' => ['/paymentmethod/index'], 'target' => '_blank'],
-                    ['label' => 'Restaurantes', 'url' => ['/restaurant/index'],'icon'=>'fas fa-solid fa-utensils', 'target' => '_blank'],
-                    ['label' => 'Lojas', 'url' => ['/store/index'],'icon'=>'fas fa-solid fa-shopping-cart', 'target' => '_blank'],
-                    ['label' => 'Server Log', 'url' => ['/serverlog'],'icon'=>'fas fa-solid fa-info', 'target' => '_blank'],
-                ],
-            ]);
-            //MANAGER
-            /*echo Menu::widget([
-                'items' => [
+                ]);
+            }
+            if(isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) {
+                echo Menu::widget([
+                    'items' => [
 
-                    ['label' => 'Restaurantes', 'url' => ['/restaurant/view'],'icon'=>'fas fa-house-user', 'target' => '_blank'],
-                    ['label' => 'Ementa', 'url' => ['/restaurantitem/index'],'icon'=>'fas fa-solid fa-utensils', 'target' => '_blank'],
-                ],
-            ]);*/
-            // EMPLOYEE
-            /*echo Menu::widget([
-                'items' => [
-                    [
-                        'label' => 'Aeroporto',
-                        'icon'=>'fas fa-solid fa-plane',
-                        'items' => [
-                            ['label' => 'Voos','url' => ['/flight/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Aeroportos','url' => ['/airport/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Aviões','url' => ['/airplane/index'], 'iconStyle' => 'far'],
-                        ]
+                        ['label' => 'Restaurantes', 'url' => ['/restaurant/view'], 'icon' => 'fas fa-house-user', 'target' => '_blank'],
+                        ['label' => 'Ementa', 'url' => ['/restaurantitem/index'], 'icon' => 'fas fa-solid fa-utensils', 'target' => '_blank'],
                     ],
-                    [
-                        'label' => 'Perdidos e Achados',
-                        'icon'=>'fas fa-solid fa-suitcase-rolling',
-                        'items' => [
-                            ['label' => 'Itens','url' => ['/lostitem/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Suporte ao cliente','url' => ['/supportticket/index'], 'iconStyle' => 'far']
-                        ]
+                ]);
+            }
+            if(isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['employee'])) {
+                echo Menu::widget([
+                    'items' => [
+                        [
+                            'label' => 'Aeroporto',
+                            'icon' => 'fas fa-solid fa-plane',
+                            'items' => [
+                                ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
+                            ]
+                        ],
+                        [
+                            'label' => 'Perdidos e Achados',
+                            'icon' => 'fas fa-solid fa-suitcase-rolling',
+                            'items' => [
+                                ['label' => 'Itens', 'url' => ['/lostitem/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                            ]
+                        ],
+                        ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user', 'target' => '_blank'],
+                        ['label' => 'Métodos de Pagamento', 'url' => ['/paymentmethod/index'], 'icon' => 'fas fa-solid fa-credit-card', 'target' => '_blank'],
                     ],
-                    ['label' => 'Clientes', 'url' => ['/client/index'],'icon'=>'fas fa-solid fa-user', 'target' => '_blank'],
-                    ['label' => 'Métodos de Pagamento', 'url' => ['/paymentmethod/index'],'icon'=>'fas fa-solid fa-credit-card', 'target' => '_blank'],
-                ],
-            ]);*/ ?>
+                ]);
+            }?>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

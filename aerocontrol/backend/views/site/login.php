@@ -37,7 +37,7 @@ use yii\helpers\Html;
         <div style="text-align: center">
             <?= Html::submitButton('Sign In', ['class' => 'btn btn-primary btn-block']) ?>
         </div>
-        <?php \yii\bootstrap4\ActiveForm::end(); ?>
+        <?php ActiveForm::end(); ?>
         </div>
     </div>
 </main>

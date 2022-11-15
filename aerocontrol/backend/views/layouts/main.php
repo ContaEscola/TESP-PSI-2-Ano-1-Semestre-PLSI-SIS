@@ -39,7 +39,7 @@ $this->registerJsFile($publishedRes[1].'/control_sidebar.js', ['depends' => '\ha
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="body-grid">
+<body class="body-grid layout-fixed layout-footer-fixed">
 <?php $this->beginBody() ?>
 
 <div class="wrapper">
