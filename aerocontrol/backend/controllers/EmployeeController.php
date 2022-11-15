@@ -99,12 +99,14 @@ class EmployeeController extends Controller
     public function actionCreate()
     {
         $model = new Employee();
+        $user = new User();
+        $function = new EmployeeFunction();
 
         if ($this->request->isPost) {
             $post = \Yii::$app->request->post();
             $post['Employee']['function_id'] = $post['EmployeeFunction']['id'];
             $model->attributes = $post['Employee'];
-            $user = new User();
+
             $user->attributes = $post['User'];
             $date = date_create($user->birthdate);
             $user->birthdate = date_format($date, "Y-m-d");
@@ -120,12 +122,9 @@ class EmployeeController extends Controller
                         return $this->redirect(['view', 'employee_id' => $model->employee_id]);
                 }
             }
-        } else {
-            $model->loadDefaultValues();
+            $user->password_hash =" ";
         }
 
-        $user = new User();
-        $function = new EmployeeFunction();
         $employee_functions = EmployeeFunction::find()->select(['id', 'name'])->all();
         foreach ($employee_functions as $function)
             $functions[$function->id] = $function->name;
