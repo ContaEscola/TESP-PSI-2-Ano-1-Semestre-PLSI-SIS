@@ -2,9 +2,12 @@
 
 namespace frontend\models;
 
+use common\models\Client;
+use Psy\VarDumper\Dumper;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use yii\helpers\VarDumper;
 
 /**
  * Signup form
@@ -14,6 +17,16 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $first_name;
+    public $last_name;
+    public $gender;
+    public $country;
+    public $city;
+    public $birthdate;
+    public $phone;
+    public $phone_country_code;
+
+
 
 
     /**
@@ -31,10 +44,35 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['first_name', 'trim'],
+            ['first_name', 'required'],
+            ['first_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['last_name', 'trim'],
+            ['last_name', 'required'],
+            ['last_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['gender', 'in', 'range' => [
+                'Masculino',
+                'Feminino',
+                'Outro'
+            ], 'strict' => true],
+
+            ['country', 'trim'],
+            ['country', 'required'],
+            ['country', 'string', 'min' => 2, 'max' => 255],
+
+            ['city', 'string', 'max' => 75],
+
+            ['birthdate', 'date','format'=>'yyyy-MM-dd'],
+
+            ['phone', 'string', 'max' => 15],
+
+            ['phone_country_code', 'string', 'max' => 5],
         ];
     }
 
@@ -48,15 +86,29 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
+        $user->gender = $this->gender;
+        $user->country = $this->country;
+        $user->city = $this->city;
+        $user->birthdate = $this->birthdate;
+        $user->phone = $this->phone;
+        $user->phone_country_code = $this->phone_country_code;
+        $user->password_reset_token = null;
+        $user->save();
 
-        return $user->save() && $this->sendEmail($user);
+        //adicionar client
+        $client=new Client();
+        $client->client_id=$user->id;
+        $client->save();
+        return $this->sendEmail($user);
     }
 
     /**
