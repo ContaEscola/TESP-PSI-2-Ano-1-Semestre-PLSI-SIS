@@ -110,6 +110,9 @@ class SignupForm extends Model
         $client=new Client();
         $client->client_id=$user->id;
         $client->save();
+        $auth = Yii::$app->authManager;
+        $clientRole = $auth->getRole('client');
+        $auth->assign($clientRole, $user->getId());
         return $this->sendEmail($user);
     }
 
