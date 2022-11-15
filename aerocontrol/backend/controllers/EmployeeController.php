@@ -6,6 +6,8 @@ use common\models\Employee;
 use common\models\EmployeeFunction;
 use common\models\EmployeeSearch;
 use common\models\User;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,6 +29,36 @@ class EmployeeController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['viewEmployee'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewEmployee'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createEmployee'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateEmployee'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteEmployee'],
+                        ],
                     ],
                 ],
             ]
@@ -82,7 +114,7 @@ class EmployeeController extends Controller
             $user->status = 10;
 
             if ($user->validate() && $model->validate()) {
-                if($user->save()) {
+                if ($user->save()) {
                     $model->employee_id = $user->id;
                     if ($model->save())
                         return $this->redirect(['view', 'employee_id' => $model->employee_id]);
@@ -101,8 +133,8 @@ class EmployeeController extends Controller
         return $this->render('create', [
             'model' => $model,
             'user' => $user,
-            'function' =>$function,
-            'functions'=>$functions,
+            'function' => $function,
+            'functions' => $functions,
         ]);
     }
 
