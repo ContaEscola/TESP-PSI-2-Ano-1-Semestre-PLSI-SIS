@@ -85,7 +85,7 @@ class User extends ActiveRecord implements IdentityInterface
                 'Outro'
             ], 'strict' => true],
 
-            ['birthdate', 'date'],
+            ['birthdate', 'date','format'=>'yyyy-MM-dd'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             ['username', 'string', 'max' => 30],
             ['auth_key', 'string', 'max' => 32],

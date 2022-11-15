@@ -3,9 +3,11 @@
 namespace frontend\models;
 
 use common\models\Client;
+use Psy\VarDumper\Dumper;
 use Yii;
 use yii\base\Model;
 use common\models\User;
+use yii\helpers\VarDumper;
 
 /**
  * Signup form
@@ -46,6 +48,32 @@ class SignupForm extends Model
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['first_name', 'trim'],
+            ['first_name', 'required'],
+            ['first_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['last_name', 'trim'],
+            ['last_name', 'required'],
+            ['last_name', 'string', 'min' => 2, 'max' => 255],
+
+            ['gender', 'in', 'range' => [
+                'Masculino',
+                'Feminino',
+                'Outro'
+            ], 'strict' => true],
+
+            ['country', 'trim'],
+            ['country', 'required'],
+            ['country', 'string', 'min' => 2, 'max' => 255],
+
+            ['city', 'string', 'max' => 75],
+
+            ['birthdate', 'date','format'=>'yyyy-MM-dd'],
+
+            ['phone', 'string', 'max' => 15],
+
+            ['phone_country_code', 'string', 'max' => 5],
         ];
     }
 
@@ -74,7 +102,9 @@ class SignupForm extends Model
         $user->birthdate = $this->birthdate;
         $user->phone = $this->phone;
         $user->phone_country_code = $this->phone_country_code;
+        $user->password_reset_token = null;
         $user->save();
+
         //adicionar client
         $client=new Client();
         $client->client_id=$user->id;
