@@ -113,4 +113,11 @@ class Employee extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SupportTicket::class, ['employee_id' => 'employee_id']);
     }
+
+    public function afterDelete()
+    {
+        parent::afterDelete();
+        $employee_id = Yii::$app->request->get("employee_id");
+        User::findOne($employee_id)->delete();
+    }
 }

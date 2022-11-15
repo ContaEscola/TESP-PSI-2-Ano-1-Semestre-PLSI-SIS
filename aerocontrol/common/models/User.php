@@ -68,10 +68,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-
+            ['id','safe'],
             [[
                 'username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country',
-                'city', 'birthdate', 'email', 'phone', 'phone_country_code', 'created_at', 'updated_at'
+                'city', 'birthdate', 'email', 'phone', 'phone_country_code'
             ], 'required'],
 
             [[
@@ -85,8 +85,9 @@ class User extends ActiveRecord implements IdentityInterface
                 'Outro'
             ], 'strict' => true],
 
-            ['birthdate', 'date'],
+            ['birthdate', 'date','format'=>'yyyy-MM-dd'],
             [['status', 'created_at', 'updated_at'], 'integer'],
+            ['password_reset_token', 'default','value' => null],
             ['username', 'string', 'max' => 30],
             ['auth_key', 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
@@ -110,7 +111,7 @@ class User extends ActiveRecord implements IdentityInterface
             'id' => 'ID do User',
             'username' => 'Username',
             'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
+            'password_hash' => 'Password',
             'password_reset_token' => 'Password Reset Token',
             'first_name' => 'Primeiro nome',
             'last_name' => 'Último nome',

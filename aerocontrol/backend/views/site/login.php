@@ -1,4 +1,6 @@
 <?php
+
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 ?>
 <main>
@@ -6,7 +8,7 @@ use yii\helpers\Html;
         <div class="container" data-type="small-md">
             <h1 class="fs-600 fw-bold text-align-center">Login</h1>
 
-        <?php $form = \yii\bootstrap4\ActiveForm::begin(['id' => 'login-form']) ?>
+        <?php $form = ActiveForm::begin(['id' => 'login-form']) ?>
         <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
         <?= $form->field($model,'username', [
             'options' => ['class' => 'form-group has-feedback'],

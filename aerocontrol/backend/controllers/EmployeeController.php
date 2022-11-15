@@ -3,7 +3,9 @@
 namespace backend\controllers;
 
 use common\models\Employee;
+use common\models\EmployeeFunction;
 use common\models\EmployeeSearch;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -50,7 +52,7 @@ class EmployeeController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($employee_id)
+    public function actionView(int $employee_id)
     {
         return $this->render('view', [
             'model' => $this->findModel($employee_id),
@@ -67,15 +69,39 @@ class EmployeeController extends Controller
         $model = new Employee();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+            $post = \Yii::$app->request->post();
+            $post['Employee']['function_id'] = $post['EmployeeFunction']['id'];
+            $model->attributes = $post['Employee'];
+            $user = new User();
+            $user->attributes = $post['User'];
+            $date = date_create($user->birthdate);
+            $user->birthdate = date_format($date, "Y-m-d");
+            $user->setPassword($user->password_hash);
+            $user->generateAuthKey();
+            $user->generateEmailVerificationToken();
+
+            //var_dump($user);
+            if ($user->save()) {
+                $model->employee_id = $user->id;
+                if ($model->save())
+                    return $this->redirect(['view', 'employee_id' => $model->employee_id]);
             }
         } else {
             $model->loadDefaultValues();
         }
 
+        $user = new User();
+        $function = new EmployeeFunction();
+        $employee_functions = EmployeeFunction::find()->select(['id', 'name'])->all();
+        foreach ($employee_functions as $function)
+            $functions[$function->id] = $function->name;
+
+        if (!$this->request->isPost)
         return $this->render('create', [
             'model' => $model,
+            'user' => $user,
+            'function' =>$function,
+            'functions'=>$functions,
         ]);
     }
 
@@ -90,12 +116,27 @@ class EmployeeController extends Controller
     {
         $model = $this->findModel($employee_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        if ($this->request->isPost ) {
+            $post = \Yii::$app->request->post();
+            $post['Employee']['function_id'] = $post['EmployeeFunction']['id'];
+            $model->attributes = $post['Employee'];
+            $user = User::findOne($employee_id);
+            $user->attributes = $post['User'];
+            $date = date_create($user->birthdate);
+            $user->birthdate = date_format($date,"Y-m-d");
+            if($user->save() && $model->save())
+                return $this->redirect(['view', 'employee_id' => $model->employee_id]);
         }
 
+        $employee_functions = EmployeeFunction::find()->select(['id', 'name'])->all();
+
+        foreach ($employee_functions as $function)
+            $functions[$function->id] = $function->name;
+
+        if (!$this->request->isPost )
         return $this->render('update', [
             'model' => $model,
+            'functions'=>$functions,
         ]);
     }
 
@@ -106,10 +147,9 @@ class EmployeeController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($employee_id)
+    public function actionDelete(int $employee_id)
     {
         $this->findModel($employee_id)->delete();
-
         return $this->redirect(['index']);
     }
 
