@@ -34,7 +34,8 @@ AppAsset::register($this);
 </head>
 
 <body>
-    <?php $this->beginBody() ?>
+    <?php $this->beginBody();
+     echo Alert::widget();?>
 
     <div class="only-nav-main-visible-first-page">
         <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">

@@ -407,6 +407,7 @@ a:where(:hover, :focus) {
   top: calc(100% + var(--gap-between));
   right: 0;
   min-width: 100%;
+  width: max-content;
 
   background-color: var(--clr-neutral-400);
   outline: 0.12em solid var(--clr-primary-accent-400);
