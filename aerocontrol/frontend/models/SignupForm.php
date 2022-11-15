@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Client;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -14,6 +15,16 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $first_name;
+    public $last_name;
+    public $gender;
+    public $country;
+    public $city;
+    public $birthdate;
+    public $phone;
+    public $phone_country_code;
+
+
 
 
     /**
@@ -48,15 +59,27 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-
-        return $user->save() && $this->sendEmail($user);
+        $user->first_name = $this->first_name;
+        $user->last_name = $this->last_name;
+        $user->gender = $this->gender;
+        $user->country = $this->country;
+        $user->city = $this->city;
+        $user->birthdate = $this->birthdate;
+        $user->phone = $this->phone;
+        $user->phone_country_code = $this->phone_country_code;
+        $user->save();
+        //adicionar client
+        $client=new Client();
+        $client->client_id=$user->id;
+        $client->save();
+        return $this->sendEmail($user);
     }
 
     /**
