@@ -32,7 +32,8 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body class="body-grid">
-<?php $this->beginBody() ?>
+<?php $this->beginBody();
+    echo Alert::widget(); ?>
     <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
         <div class="container">
             <div class="nav-wrapper">
