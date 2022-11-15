@@ -62,19 +62,20 @@
         <div class="padding-block-700 height-100 d-grid align-items-center">
             <div class="container" data-type="very-small-md">
                 <h1 class="fs-600 fw-bold text-align-center">Login</h1>
-                <form action="#" method="POST" class="margin-top-600 flow" data-flow-space="large">
+                <form action="#" method="POST" class="[ form ] [ margin-top-600 flow ]" data-flow-space="large"
+                    novalidate>
                     <div class="flow">
                         <div class="form__group">
                             <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
                             <input class="form__input" type="text" name="{TOCHANGE}" id="username"
-                                pattern="[a-zA-Z\d\ ]{30}" required>
-                            <p class="[ input__error ] [ margin-top-100 ]"></p>
+                                pattern="[a-zA-Z\d\ ]{30}" title="O formato é inválido!" required>
+                            <p class="[ input__error ] [ margin-top-50 ]"></p>
                         </div>
                         <div class="form__group">
                             <label for="password" class="[ input__label ] [ margin-bottom-50 ]">Password:</label>
                             <input class="form__input" type="password" name="{TOCHANGE}" id="password"
                                 pattern="[\w-]{1,}" required>
-                            <p class="[ input__error ] [ margin-top-100 ]"></p>
+                            <p class="[ input__error ] [ margin-top-50 ]"></p>
                         </div>
                         <div class="d-flex gap-1 align-items-center">
                             <input type="checkbox" name="{TOCHANGE}" id="save_session">
