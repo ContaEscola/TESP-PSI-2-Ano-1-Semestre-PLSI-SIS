@@ -4,6 +4,7 @@
 --
 --
 
+use aerocontrol;
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `first_name`, `last_name`, `gender`, `country`, `city`, `birthdate`, `email`, `phone`, `phone_country_code`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
 (1, 'Rafael', '3LCUGMKxZPpzr34KJQqnRHerxvb9H-GD', '$2y$13$siIFsVQTb.Xw.SCmxCkkeOpP/jUmewhYu8kYaxdeH5XPFHyK1FCe6', NULL, 'Rafael', 'Bento', 'Masculino', 'Portugal', 'Lisboa', '2002-08-07', 'rafael@email.pt', '912345678', '+351', 10, 1667385991, 1667392931, 'iBlapCIFv2HLg6_itfyyr-xsERf_b287_1667385991'),
@@ -18,7 +19,7 @@ INSERT INTO `admin`(admin_id) VALUES(1);
 
 INSERT INTO `employee_function`(id,name) VALUES
 (1,"Limpeza"),
-(2,"Empregado de Balcã");
+(2,"Empregado de Balcão");
 
 
 INSERT INTO `employee` (`employee_id`, `tin`, `num_emp`, `ssn`, `street`, `zip_code`, `iban`, `qualifications`, `function_id`) VALUES

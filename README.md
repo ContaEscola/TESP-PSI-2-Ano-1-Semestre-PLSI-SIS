@@ -10,8 +10,16 @@ Grupo B
 2. Executar o script SQL "registos.sql"
 3. Abrir o terminal e executar o "composer install" na base do projeto;
 4. Executar o comando "php init" e selecionar a opção 1, no terminal.
-5. Executar o comando ".\yii migrate --migrationPath=@yii/rbac/migrations" no terminal.
-6. Executar o comando ".\yii migrate --migrationPath=@yii/rbac/migrations" no terminal
+5. Abrir o ficheiro common/config/main-local.php e alterar o dsn, substituir:
+
+>'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
+ 
+ por:
+ 
+>'dsn' => 'mysql:host=localhost;dbname=aerocontrol',
+
+6. Executar o comando ".\yii migrate --migrationPath=@yii/rbac/migrations" no terminal.
+7. Executar o comando ".\yii migrate" no terminal
 
 ## Credenciais
 
