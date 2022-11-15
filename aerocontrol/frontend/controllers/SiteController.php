@@ -21,6 +21,9 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+    public $landingPage_layout = 'landing-page.php';
+
+
     /**
      * {@inheritdoc}
      */
@@ -75,6 +78,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = $this->landingPage_layout;
         return $this->render('index');
     }
 
