@@ -40,7 +40,7 @@ AppAsset::register($this);
         <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="#">
+                    <a href="<?= Url::to(['site/index'])?>">
                         <picture>
                             <source srcset="<?= Url::to('@web/images/logo-pc.svg') ?>" media="(min-width: 40em)">
                             <img src="<?= Url::to('@web/images/logo-mobile.svg') ?>" alt="Logo">
@@ -53,14 +53,14 @@ AppAsset::register($this);
                     </button>
                     <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
                         <ul role="list" class="navigation-list">
-                            <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
-                            <li class="primary-navigation__item"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
-                            <li class="primary-navigation__item"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
-                            <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
-                            <li class="primary-navigation__item"><a href="#" class="button" data-type="primary-outline">Sign
+                            <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="<?= Url::to(['site/index'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
+                            <li class="primary-navigation__item"><a href="<?= Url::to(['site/voos'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
+                            <li class="primary-navigation__item"><a href="<?= Url::to(['site/restaurantes'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
+                            <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="<?= Url::to(['site/lojas'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
+                            <li class="primary-navigation__item"><a href="<?= Url::to(['site/signup'])?>" class="button" data-type="primary-outline">Sign
                                     Up</a>
                             </li>
-                            <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
+                            <li class="primary-navigation__item"><a href="<?= Url::to(['site/login'])?>" class="button">Login</a></li>
                         </ul>
                     </nav>
                 </div>
