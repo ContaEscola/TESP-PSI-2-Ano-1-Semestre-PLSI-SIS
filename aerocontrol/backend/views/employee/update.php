@@ -11,11 +11,9 @@ $this->params['breadcrumbs'][] = ['label' => $model->employee_id, 'url' => ['vie
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="employee-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
+    <?= $this->render('_formupdate', [
         'model' => $model,
+        'functions' =>$functions,
     ]) ?>
 
 </div>
