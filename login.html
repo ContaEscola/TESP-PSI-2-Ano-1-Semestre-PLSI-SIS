@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="form.js" defer></script>
 </head>
 
 
@@ -65,12 +66,14 @@
                     <div class="flow">
                         <div class="form__group">
                             <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
-                            <input class="form__input" type="text" name="{TOCHANGE}" id="username" required>
+                            <input class="form__input" type="text" name="{TOCHANGE}" id="username"
+                                pattern="[a-zA-Z\d\ ]{30}" required>
                             <p class="[ input__error ] [ margin-top-100 ]"></p>
                         </div>
                         <div class="form__group">
                             <label for="password" class="[ input__label ] [ margin-bottom-50 ]">Password:</label>
-                            <input class="form__input" type="password" name="{TOCHANGE}" id="password" required>
+                            <input class="form__input" type="password" name="{TOCHANGE}" id="password"
+                                pattern="[\w-]{1,}" required>
                             <p class="[ input__error ] [ margin-top-100 ]"></p>
                         </div>
                         <div class="d-flex gap-1 align-items-center">

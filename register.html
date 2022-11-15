@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="form.js" defer></script>
 </head>
 
 
@@ -89,19 +90,23 @@
                                 <div class="form__group">
                                     <label for="first-name" class="[ input__label ] [ margin-bottom-50 ]">Primeiro
                                         Nome:</label>
-                                    <input class="form__input" type="text" name="{TOCHANGE}" id="first-name" required>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="first-name"
+                                        pattern="[a-zA-Z\ ]+" required>
                                     <p class="[ input__error ] [ margin-top-100 ]"></p>
                                 </div>
                                 <div class="form__group">
                                     <label for="last-name" class="[ input__label ] [ margin-bottom-50 ]">Último
                                         nome:</label>
-                                    <input class="form__input" type="text" name="{TOCHANGE}" id="last-name" required>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="last-name"
+                                        pattern="[a-zA-Z\ ]+" required>
                                     <p class="[ input__error ] [ margin-top-100 ]"></p>
                                 </div>
                                 <div class="form__group">
                                     <label for="gender" class="[ input__label ] [ margin-bottom-50 ]">Género:</label>
                                     <select class="[ form__input ] [ height-100 ]" name="genders" id="gender" required>
-                                        <!-- Get from database -->
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                        <option value="Outro">Outro</option>
                                     </select>
                                     <p class="[ input__error ] [ margin-top-100 ]"></p>
                                 </div>
@@ -110,18 +115,20 @@
                                 <div class="form__group">
                                     <label for="birthdate" class="[ input__label ] [ margin-bottom-50 ]">Data de
                                         Nascimento:</label>
-                                    <input class="form__input" type="date" name="{TOCHANGE}" id="birthdate" required>
+                                    <input class="form__input" type="date" name="{TOCHANGE}" id="birthdate"
+                                        pattern="[\d]{2}\/[\d]{2}\/[\d]{4}" required>
                                     <p class="[ input__error ] [ margin-top-100 ]"></p>
                                 </div>
                                 <div class="form__group">
                                     <label for="country" class="[ input__label ] [ margin-bottom-50 ]">País:</label>
                                     <input class="form__input min-width-initial " type="text" name="{TOCHANGE}"
-                                        id="country" required>
+                                        id="country" pattern="[a-zA-Z\ ]+" required>
                                     <p class="[ input__error ] [ margin-top-100 ]"></p>
                                 </div>
                                 <div class="form__group">
                                     <label for="city" class="[ input__label ] [ margin-bottom-50 ]">Cidade:</label>
-                                    <input class="form__input" type="text" name="{TOCHANGE}" id="city" required>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="city"
+                                        pattern="[a-zA-Z\ ]+" required>
                                     <p class="[ input__error ] [ margin-top-100 ]"></p>
                                 </div>
                             </div>
@@ -140,10 +147,10 @@
                                 <label for="phone-number" class="[ input__label ] [ margin-bottom-50 ]">Contacto
                                     telefónico:</label>
                                 <div class="d-flex width-100">
-                                    <input class="[ form__input ] [ flex-1 ]" type="text" name="{TOCHANGE}" required
-                                        placeholder="Indicativo">
+                                    <input class="[ form__input ] [ flex-1 ]" type="text" name="{TOCHANGE}"
+                                        pattern="^[+][\d]{1,5}" required placeholder="Indicativo">
                                     <input class=" [ form__input ] [ flex-2 ]" type="text" name="{TOCHANGE}"
-                                        id="phone-number" required placeholder="Número telefone">
+                                        id="phone-number" pattern="[\d]{1,15}" required placeholder="Número telefone">
                                 </div>
                                 <p class="[ input__error ] [ margin-top-100 ]"></p>
                             </div>

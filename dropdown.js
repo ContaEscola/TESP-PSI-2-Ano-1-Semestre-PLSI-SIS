@@ -10,7 +10,7 @@ dropdowns.forEach((e) => {
 
         // Get Dropdown-Menu
         const dropdownMenu = e.parentElement.querySelector('.dropdown-menu');
-        console.log(dropdownMenu);
+
         dropdownMenu.toggleAttribute("data-visible");
     })
 })
