@@ -6,7 +6,7 @@ $this->title = 'My Yii Application';
 ?>
 
 <main>
-    <section class="even-columns text-white">
+    <section class="even-columns text-white gap-0">
         <div class="card-landing-page" data-type="restaurant">
             <div class="[ card__content ]  [ text-align-center flow ]" data-flow-space="medium">
                 <div class="flow" data-flow-space="small">
