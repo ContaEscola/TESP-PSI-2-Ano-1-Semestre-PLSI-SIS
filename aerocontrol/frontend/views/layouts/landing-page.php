@@ -85,7 +85,7 @@ AppAsset::register($this);
                                             <?=\Yii::$app->user->identity->first_name." ".Yii::$app->user->identity->last_name ?>
                                             <span aria-hidden="true">
                                                 <svg class="icon dropdown__toggle-icon">
-                                                    <use xlink:href="assets/caret.svg#caret"></use>
+                                                    <use xlink:href="<?= Url::to("@web/images/caret.svg#caret")?>"></use>
                                                 </svg>
                                             </span>
                                         </button>
@@ -94,18 +94,17 @@ AppAsset::register($this);
                                                 <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
                                                     <span aria-hidden="true">
                                                         <svg class="icon dropdown-link__icon">
-                                                            <use xlink:href="assets/perfil-icon.svg#perfil-icon"></use>
+                                                            <use xlink:href="<?= Url::to("@web/images/perfil-icon.svg#perfil-icon")?>"></use>
                                                         </svg>
                                                     </span>
                                                 </a></li>
                                             <li class="dropdown-menu__item">
-                                                <?= Html::a('Logout', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
-                                                    <span aria-hidden="true">
+                                                <?= Html::a('Logout'. '<span aria-hidden="true">
                                                         <svg class="icon dropdown-link__icon">
-                                                            <use xlink:href="assets/logout-icon.svg#logout-icon"></use>
+                                                            <use xlink:href="'.Url::to('@web/images/logout-icon.svg#logout-icon').'"></use>
                                                         </svg>
-                                                    </span>
-                                                </a></li>
+                                                    </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
