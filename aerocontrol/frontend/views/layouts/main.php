@@ -68,6 +68,7 @@ AppAsset::register($this);
                             <a href="<?= Url::to('@web/site/signup' )?>" class="button" data-type="primary-outline">Sign Up</a>
                         </li>
                         <li class="primary-navigation__item"><a href="<?= Url::to('@web/site/login' )?>" class="button">Login</a></li>
+                        <?= Html::a('<i class="fas fa-sign-out-alt">logout</i>', ['/site/logout'], ['data-method' => 'post', 'class' => 'nav-link']) ?>
                     </ul>
                 </nav>
             </div>
