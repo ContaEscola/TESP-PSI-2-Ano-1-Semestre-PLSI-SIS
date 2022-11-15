@@ -71,7 +71,7 @@ class User extends ActiveRecord implements IdentityInterface
 
             [[
                 'username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country',
-                'city', 'birthdate', 'email', 'phone', 'phone_country_code', 'created_at', 'updated_at'
+                'city', 'birthdate', 'email', 'phone', 'phone_country_code'
             ], 'required'],
 
             [[
