@@ -1,0 +1,97 @@
+<?php
+
+use yii\helpers\Html;
+use yii\widgets\DetailView;
+
+/** @var yii\web\View $this */
+/** @var common\models\Employee $model */
+
+$this->title = $model->user->first_name." ". $model->user->last_name;
+$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+\yii\web\YiiAsset::register($this);
+?>
+<div class="employee-view">
+    <p>
+        <?= Html::a('Update', ['update', 'employee_id' => $model->employee_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'employee_id' => $model->employee_id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            [
+                'label' => 'num_emp',
+                'value' => $model->num_emp,
+            ],
+            [
+                'label' => 'Username',
+                'value' => $model->user->username,
+            ],
+            [
+                'label' => 'Nome',
+                'value' => $model->user->first_name." ".$model->user->last_name,
+            ],
+            [
+                'label' => 'Email',
+                'value' => $model->user->email,
+            ],
+            [
+                'label' => 'Telefone',
+                'value' => $model->user->phone_country_code." ".$model->user->phone,
+            ],
+            [
+                'label' => 'Género',
+                'value' => $model->user->gender,
+            ],
+            [
+                'label' => 'Nº Contribuinte',
+                'value' => $model->tin,
+            ],
+            [
+                'label' => 'Nº Segurança Social',
+                'value' => $model->ssn,
+            ],
+            [
+                'label' => 'IBan',
+                'value' => $model->iban,
+            ],
+            [
+                'label' => 'Qualificações',
+                'value' => $model->qualifications,
+            ],
+            [
+                'label' => 'Função',
+                'value' => $model->function->name,
+            ],
+            [
+                'label' => 'País',
+                'value' => $model->user->country,
+            ],
+            [
+                'label' => 'Cidade',
+                'value' => $model->user->city,
+            ],
+            [
+                'label' => 'Rua',
+                'value' => $model->street,
+            ],
+            [
+                'label' => 'Código Postal',
+                'value' => $model->zip_code,
+            ],
+            [
+                'label' => 'Data de Nascimento',
+                'value' => $model->user->birthdate,
+            ],
+
+        ],
+    ]) ?>
+
+</div>
