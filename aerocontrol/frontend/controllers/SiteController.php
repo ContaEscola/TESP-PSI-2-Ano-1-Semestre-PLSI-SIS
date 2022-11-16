@@ -21,7 +21,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
-    public $landingPage_layout = 'landing-page.php';
+    public $landingPage_layout = 'landingPage.php';
 
 
     /**
@@ -79,6 +79,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = $this->landingPage_layout;
+        Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
         return $this->render('index');
     }
 
