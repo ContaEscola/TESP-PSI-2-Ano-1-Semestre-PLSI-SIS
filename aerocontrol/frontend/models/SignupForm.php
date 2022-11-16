@@ -68,6 +68,7 @@ class SignupForm extends Model
 
             ['city', 'string', 'max' => 75],
 
+            ['birthdate','required'],
             ['birthdate', 'date','format'=>'yyyy-MM-dd'],
 
             ['phone', 'string', 'max' => 15],
@@ -102,12 +103,16 @@ class SignupForm extends Model
         $user->phone = $this->phone;
         $user->phone_country_code = $this->phone_country_code;
         $user->password_reset_token = null;
+        $user->status = 10;
         $user->save();
 
         //adicionar client
         $client=new Client();
         $client->client_id=$user->id;
         $client->save();
+        $auth = Yii::$app->authManager;
+        $clientRole = $auth->getRole('client');
+        $auth->assign($clientRole, $user->getId());
         return $this->sendEmail($user);
     }
 

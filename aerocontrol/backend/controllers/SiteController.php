@@ -2,10 +2,13 @@
 
 namespace backend\controllers;
 
+use common\models\Client;
 use common\models\LoginForm;
+use common\models\User;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -79,6 +82,18 @@ class SiteController extends Controller
         $this->layout = 'blank';
 
         $model = new LoginForm();
+        if(Yii::$app->request->post()){
+            $username = Yii::$app->request->post()['LoginForm']['username'];
+            $userid = User::find()->select(['id'])->where(['username'=>$username])->one();
+            if ($userid!= null)
+            {
+                $client = Client::findOne($userid);
+                if($client != null) {
+                    Yii::$app->session->setFlash('error', 'Não pode entrar como cliente!');
+                    return $this->goHome();
+                }
+            }
+        }
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }

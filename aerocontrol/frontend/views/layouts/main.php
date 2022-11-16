@@ -31,7 +31,8 @@ AppAsset::register($this);
 </head>
 
 <body class="body-grid">
-    <?php $this->beginBody() ?>
+<?php $this->beginBody();
+    echo Alert::widget(); ?>
     <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
         <div class="container">
             <div class="nav-wrapper">
@@ -67,47 +68,45 @@ AppAsset::register($this);
                             <li class="primary-navigation__item"><a href="<?= Url::to(['site/login']) ?>" class="button">Login</a></li>
                         </ul>
                     </nav>
-                <?php else : ?>
-                    <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
-                        <ul role="list" class="navigation-list">
-                            <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
-                            <li class="primary-navigation__item"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
-                            <li class="primary-navigation__item"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
-                            <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
-                            <li class="primary-navigation__item d-flex justify-content-center">
-                                <div class="dropdown " data-type="navbar">
-                                    <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false" data-dropdown>
-                                        <?= \Yii::$app->user->identity->first_name . " " . Yii::$app->user->identity->last_name ?>
-                                        <span aria-hidden="true">
-                                            <svg class="icon dropdown__toggle-icon">
-                                                <use xlink:href="<?= Url::to('@web/images/caret.svg#caret') ?>"></use>
-                                            </svg>
-                                        </span>
-                                    </button>
-                                    <ul role="list" class="dropdown-menu">
-                                        <li class="dropdown-menu__item">
-                                            <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
-                                                <span aria-hidden="true">
-                                                    <svg class="icon dropdown-link__icon">
-                                                        <use xlink:href="<?= Url::to('@web/images/perfil-icon.svg#perfil-icon') ?>"></use>
-                                                    </svg>
-                                                </span>
-                                            </a>
-                                        </li>
-                                        <li class="dropdown-menu__item">
-                                            <?= Html::a('Logout' . '<span aria-hidden="true">
+                <?php else: ?>
+                        <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                            <ul role="list" class="navigation-list">
+                                <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active">
+                                    <a href="<?= Url::to(['site/index'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a>
+                                </li>
+                                <li class="primary-navigation__item">
+                                    <a href="<?= Url::to(['site/voos'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
+                                </li>
+                                <li class="primary-navigation__item">
+                                    <a href="<?= Url::to(['site/restaurantes'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a>
+                                </li>
+                                <li class="[ primary-navigation__item ] [ push-to-left ]">
+                                    <a href="<?= Url::to(['site/lojas'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a>
+                                </li>
+                                <li class="primary-navigation__item d-flex justify-content-center">
+                                    <div class="dropdown " data-type="navbar">
+                                        <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false" data-dropdown>
+                                            <?=\Yii::$app->user->identity->first_name." ".Yii::$app->user->identity->last_name ?>
+                                            <span aria-hidden="true">
+                                                <svg class="icon dropdown__toggle-icon">
+                                                    <use xlink:href="<?=Url::to('@web/images/caret.svg#caret')?>"></use>
+                                                </svg>
+                                            </span>
+                                        </button>
+                                        <ul role="list" class="dropdown-menu">
+                                            <li class="dropdown-menu__item">
+                                                <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
+                                                    <span aria-hidden="true">
                                                         <svg class="icon dropdown-link__icon">
                                                             <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
                                                         </svg>
                                                     </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
-
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
                 <?php endif; ?>
             </div>
         </div>
@@ -124,8 +123,7 @@ AppAsset::register($this);
             <nav aria-label="Footer">
                 <ul role="list" class="footer-list">
                     <li class="footer-list__item"><a href="#" class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Termos e Condições</a></li>
-                    <li class="footer-list__item"><a href="#" class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a>
-                    </li>
+                    <li class="footer-list__item"><a href="#" class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a></li>
                     <li class="footer-list__item"><a href="#" class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Contactar Suporte</a></li>
                 </ul>
             </nav>

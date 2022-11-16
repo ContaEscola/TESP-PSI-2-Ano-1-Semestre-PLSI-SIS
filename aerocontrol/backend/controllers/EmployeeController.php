@@ -6,6 +6,7 @@ use common\models\Employee;
 use common\models\EmployeeFunction;
 use common\models\EmployeeSearch;
 use common\models\User;
+use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -118,8 +119,12 @@ class EmployeeController extends Controller
             if ($user->validate() && $model->validate()) {
                 if ($user->save()) {
                     $model->employee_id = $user->id;
-                    if ($model->save())
+                    if ($model->save()){
+                        $auth = Yii::$app->authManager;
+                        $employeeRole = $auth->getRole('employee');
+                        $auth->assign($employeeRole, $user->getId());
                         return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+                    }
                 }
             }
             $user->password_hash =" ";
