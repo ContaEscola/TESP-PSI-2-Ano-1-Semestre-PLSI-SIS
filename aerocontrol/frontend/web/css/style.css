@@ -257,7 +257,7 @@ a:where(:hover, :focus) {
 
 @media (min-width: 40em) {
   .primary-navigation__item:not([data-type="active"]):hover
-  .primary-navigation__link {
+    .primary-navigation__link {
     color: var(--clr-black-200);
   }
 }
@@ -605,8 +605,8 @@ a:where(:hover, :focus) {
   --icon-url: url("../images/input-invalid.svg");
 
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
@@ -615,8 +615,8 @@ a:where(:hover, :focus) {
   --icon-url: url("../images/input-invalid.svg");
 
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
@@ -625,8 +625,8 @@ a:where(:hover, :focus) {
   --icon-url: url("../images/input-success.svg");
 
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
@@ -666,20 +666,18 @@ select.form__input {
 /* Alert */
 
 .alert {
-  --max-width: 50rem;
+  --max-width: 50ch;
   --padding-each-side: 1.5rem;
   --clr-alert: var(--clr-white);
   --clr-alert-bg: var(--clr-success);
   --clr-icon: var(--clr-white);
   --clr-alert-close-icon: var(--clr-white);
 
-  opacity: 0%;
   position: fixed;
   z-index: 1000;
-  inset: 5rem 0 auto 0;
+  inset: 9rem 1rem auto auto;
 
   width: min(100% - (2 * var(--padding-each-side)), var(--max-width));
-  margin-inline: auto;
 
   display: grid;
   grid-auto-flow: column;
@@ -690,28 +688,33 @@ select.form__input {
   border-radius: 0.313em;
   background-color: var(--clr-success);
 
-  animation-name: alert-anim;
-  animation: alert-anim 500ms ease-in-out normal forwards;
+  animation: alert-anim 700ms ease-in-out forwards;
 }
 
-.alert.close {
-  animation: alert-anim 500ms ease-in-out reverse forwards;
+.alert[data-close] {
+  animation: alert-anim-reverse 250ms ease-in-out forwards;
 }
 
 @keyframes alert-anim {
   0% {
-    transform: translateY(-50%);
-    opacity: 0%;
+    transform: translateX(100%);
   }
   100% {
-    transform: translateY(0%);
-    opacity: 100%;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes alert-anim-reverse {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
 .alert__message {
   font-size: var(--fs-300);
-
   font-weight: bold;
   letter-spacing: 0.046875em;
   color: var(--clr-alert);
