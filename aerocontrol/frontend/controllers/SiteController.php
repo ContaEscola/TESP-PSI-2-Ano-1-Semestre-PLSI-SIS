@@ -79,7 +79,6 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = $this->landingPage_layout;
-        Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
         return $this->render('index');
     }
 
