@@ -21,7 +21,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
-    public $landingPage_layout = 'landing-page.php';
+    public $landingPage_layout = 'landingPage.php';
 
 
     /**
