@@ -3,12 +3,9 @@
 /** @var \yii\web\View $this */
 /** @var string $content */
 
-use common\widgets\Alert;
+use common\components\CustomAlert;
 use frontend\assets\AppAsset;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 AppAsset::register($this);
@@ -16,113 +13,111 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
 
 
-    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to('@web/images/logo-url-icon.png' )?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?= Url::to('@web/images/logo-url-icon.png') ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body class="body-grid">
-<?php $this->beginBody();
-    echo Alert::widget(); ?>
+    <?php $this->beginBody(); ?>
     <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="<?= Url::to(['site/index'])?>">
+                <a href="<?= Url::to(['site/index']) ?>">
                     <picture>
-                        <source srcset="<?= Url::to('@web/images/logo-pc.svg' )?>" media="(min-width: 40em)">
-                        <img src="<?= Url::to('@web/images/logo-mobile.svg' )?>" alt="Logo">
+                        <source srcset="<?= Url::to('@web/images/logo-pc.svg') ?>" media="(min-width: 40em)">
+                        <img src="<?= Url::to('@web/images/logo-mobile.svg') ?>" alt="Logo">
                     </picture>
                 </a>
                 <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation" aria-expanded="false">
-                    <img class="open-icon" src="<?= Url::to('@web/images/hamburger-icon.svg' )?>" alt="" aria-hidden="true">
-                    <img class="close-icon" src="<?= Url::to('@web/images/close-icon.svg' )?>" alt="" aria-hidden="true">
+                    <img class="open-icon" src="<?= Url::to('@web/images/hamburger-icon.svg') ?>" alt="" aria-hidden="true">
+                    <img class="close-icon" src="<?= Url::to('@web/images/close-icon.svg') ?>" alt="" aria-hidden="true">
                     <span class="visually-hidden">Menu</span>
                 </button>
-                <?php if(Yii::$app->user->isGuest):?>
+                <?php if (Yii::$app->user->isGuest) : ?>
                     <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
                         <ul role="list" class="navigation-list">
                             <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active">
-                                <a href="<?= Url::to(['site/index'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a>
+                                <a href="<?= Url::to(['site/index']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a>
                             </li>
                             <li class="primary-navigation__item">
-                                <a href="<?= Url::to(['site/voos'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
+                                <a href="<?= Url::to(['site/voos']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
                             </li>
                             <li class="primary-navigation__item">
-                                <a href="<?= Url::to(['site/restaurantes'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a>
+                                <a href="<?= Url::to(['site/restaurantes']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a>
                             </li>
                             <li class="[ primary-navigation__item ] [ push-to-left ]">
-                                <a href="<?= Url::to(['site/lojas'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a>
+                                <a href="<?= Url::to(['site/lojas']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a>
                             </li>
                             <li class="primary-navigation__item">
-                                <a href="<?= Url::to(['site/signup'])?>" class="button" data-type="primary-outline">Sign Up</a>
+                                <a href="<?= Url::to(['site/signup']) ?>" class="button" data-type="primary-outline">Sign Up</a>
                             </li>
-                            <li class="primary-navigation__item"><a href="<?= Url::to(['site/login'])?>" class="button">Login</a></li>
+                            <li class="primary-navigation__item"><a href="<?= Url::to(['site/login']) ?>" class="button">Login</a></li>
                         </ul>
                     </nav>
-                <?php else: ?>
-                        <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
-                            <ul role="list" class="navigation-list">
-                                <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active">
-                                    <a href="<?= Url::to(['site/index'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a>
-                                </li>
-                                <li class="primary-navigation__item">
-                                    <a href="<?= Url::to(['site/voos'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
-                                </li>
-                                <li class="primary-navigation__item">
-                                    <a href="<?= Url::to(['site/restaurantes'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a>
-                                </li>
-                                <li class="[ primary-navigation__item ] [ push-to-left ]">
-                                    <a href="<?= Url::to(['site/lojas'])?>" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a>
-                                </li>
-                                <li class="primary-navigation__item d-flex justify-content-center">
-                                    <div class="dropdown " data-type="navbar">
-                                        <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false" data-dropdown>
-                                            <?=\Yii::$app->user->identity->first_name." ".Yii::$app->user->identity->last_name ?>
-                                            <span aria-hidden="true">
-                                                <svg class="icon dropdown__toggle-icon">
-                                                    <use xlink:href="<?=Url::to('@web/images/caret.svg#caret')?>"></use>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                        <ul role="list" class="dropdown-menu">
-                                            <li class="dropdown-menu__item">
-                                                <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
-                                                    <span aria-hidden="true">
-                                                        <svg class="icon dropdown-link__icon">
-                                                            <use xlink:href="<?=Url::to('@web/images/perfil-icon.svg#perfil-icon')?>"></use>
-                                                        </svg>
-                                                    </span>
-                                                </a></li>
-                                            <li class="dropdown-menu__item">
-                                                <?= Html::a('Logout'. '<span aria-hidden="true">
-                                                        <svg class="icon dropdown-link__icon">
-                                                            <use xlink:href="'.Url::to('@web/images/logout-icon.svg#logout-icon').'"></use>
-                                                        </svg>
-                                                    </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </nav>
+                <?php else : ?>
+                    <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                        <ul role="list" class="navigation-list">
+                            <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active">
+                                <a href="<?= Url::to(['site/index']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a>
+                            </li>
+                            <li class="primary-navigation__item">
+                                <a href="<?= Url::to(['site/voos']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
+                            </li>
+                            <li class="primary-navigation__item">
+                                <a href="<?= Url::to(['site/restaurantes']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a>
+                            </li>
+                            <li class="[ primary-navigation__item ] [ push-to-left ]">
+                                <a href="<?= Url::to(['site/lojas']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a>
+                            </li>
+                            <li class="primary-navigation__item d-flex justify-content-center">
+                                <div class="dropdown " data-type="navbar">
+                                    <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false" data-dropdown>
+                                        <?= \Yii::$app->user->identity->first_name . " " . Yii::$app->user->identity->last_name ?>
+                                        <span aria-hidden="true">
+                                            <svg class="icon dropdown__toggle-icon">
+                                                <use xlink:href="<?= Url::to('@web/images/caret.svg#caret') ?>"></use>
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <ul role="list" class="dropdown-menu">
+                                        <li class="dropdown-menu__item">
+                                            <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
+                                                <span aria-hidden="true">
+                                                    <svg class="icon dropdown-link__icon">
+                                                        <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
+                                                    </svg>
+                                                </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
                 <?php endif; ?>
             </div>
         </div>
     </header>
 
-    <?= $content ?>
+    <main>
+        <?= CustomAlert::widget() ?>
+        <?= $content ?>
+    </main>
 
-    <footer >
+
+    <footer>
         <div class="[ footer-wrapper ] [ container text-align-center ]">
             <nav aria-label="Footer">
                 <ul role="list" class="footer-list">
@@ -136,7 +131,8 @@ AppAsset::register($this);
         </div>
     </footer>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage();
