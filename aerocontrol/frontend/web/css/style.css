@@ -642,6 +642,85 @@ select.form__input {
   color: var(--clr-error);
 }
 
+/* Alert */
+
+.alert {
+  --max-width: 50ch;
+  --padding-each-side: 1.5rem;
+  --clr-alert: var(--clr-white);
+  --clr-alert-bg: var(--clr-success);
+  --clr-icon: var(--clr-white);
+  --clr-alert-close-icon: var(--clr-white);
+
+  position: fixed;
+  z-index: 1000;
+  inset: 9rem 1rem auto auto;
+
+  width: min(100% - (2 * var(--padding-each-side)), var(--max-width));
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 1em 1em;
+  border-radius: 0.313em;
+  background-color: var(--clr-success);
+
+  animation: alert-anim 700ms ease-in-out forwards;
+}
+
+.alert[data-close] {
+  animation: alert-anim-reverse 250ms ease-in-out forwards;
+}
+
+@keyframes alert-anim {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes alert-anim-reverse {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.alert__message {
+  font-size: var(--fs-300);
+  font-weight: bold;
+  letter-spacing: 0.046875em;
+  color: var(--clr-alert);
+}
+
+.alert-toggle-btn {
+  border: 0;
+  outline: 0;
+  background: none;
+  display: block;
+}
+
+.alert-toggle-btn .alert__icon {
+  min-width: 0.9rem;
+  max-width: 0.9rem;
+}
+
+.alert__icon {
+  min-width: 1.2rem;
+  max-width: 1.2rem;
+}
+
+.alert-toggle-btn:where(:focus-visible, :hover) {
+  cursor: pointer;
+  --clr-alert-close-icon: var(--clr-neutral-400);
+}
+
 /* utility classes */
 
 .visually-hidden {

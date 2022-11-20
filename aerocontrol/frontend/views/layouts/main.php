@@ -3,9 +3,9 @@
 /** @var \yii\web\View $this */
 /** @var string $content */
 
-use common\widgets\Alert;
+use common\components\CustomAlert;
 use frontend\assets\AppAsset;
-use yii\bootstrap5\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 AppAsset::register($this);
@@ -31,8 +31,7 @@ AppAsset::register($this);
 </head>
 
 <body class="body-grid">
-    <?php $this->beginBody();
-    echo Alert::widget(); ?>
+    <?php $this->beginBody(); ?>
     <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
         <div class="container">
             <div class="nav-wrapper">
@@ -121,8 +120,10 @@ AppAsset::register($this);
     </header>
 
     <main>
+        <?= CustomAlert::widget() ?>
         <?= $content ?>
     </main>
+
 
     <footer>
         <div class="[ footer-wrapper ] [ container text-align-center ]">
