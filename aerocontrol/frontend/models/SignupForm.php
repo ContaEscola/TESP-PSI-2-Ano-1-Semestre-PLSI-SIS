@@ -45,6 +45,7 @@ class SignupForm extends Model
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
 
+            ['password', 'trim'],
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
@@ -56,6 +57,7 @@ class SignupForm extends Model
             ['last_name', 'required'],
             ['last_name', 'string', 'min' => 2, 'max' => 255],
 
+            ['gender', 'required'],
             ['gender', 'in', 'range' => [
                 'Masculino',
                 'Feminino',
@@ -66,14 +68,20 @@ class SignupForm extends Model
             ['country', 'required'],
             ['country', 'string', 'min' => 2, 'max' => 255],
 
+            ['city', 'trim'],
+            ['city', 'required'],
             ['city', 'string', 'max' => 75],
 
-            ['birthdate','required'],
-            ['birthdate', 'date','format'=>'yyyy-MM-dd'],
+            ['birthdate', 'required'],
+            ['birthdate', 'date', 'format' => 'yyyy-MM-dd'],
 
-            ['phone', 'string', 'max' => 15],
-
+            ['phone_country_code', 'trim'],
+            ['phone_country_code', 'required'],
             ['phone_country_code', 'string', 'max' => 5],
+
+            ['phone', 'trim'],
+            ['phone', 'required'],
+            ['phone', 'string', 'max' => 15],
         ];
     }
 
@@ -107,8 +115,8 @@ class SignupForm extends Model
         $user->save();
 
         //adicionar client
-        $client=new Client();
-        $client->client_id=$user->id;
+        $client = new Client();
+        $client->client_id = $user->id;
         $client->save();
         $auth = Yii::$app->authManager;
         $clientRole = $auth->getRole('client');

@@ -37,7 +37,7 @@ $this->title = 'Login';
                     ],
                     'options' => ['class' => 'form__group'],
                 ])
-                    ->label("Username", [
+                    ->label("Username:", [
                         'class' => '[ input__label ] [ margin-bottom-50 ]'
                     ])
                     ->textInput([
@@ -54,7 +54,7 @@ $this->title = 'Login';
                         'class' => 'input__error margin-top-50'
                     ],
                 ])
-                    ->label("Password", [
+                    ->label("Password:", [
                         'class' => '[ input__label ] [ margin-bottom-50 ]'
                     ])
                     ->passwordInput(['class' => 'form__input']) ?>
