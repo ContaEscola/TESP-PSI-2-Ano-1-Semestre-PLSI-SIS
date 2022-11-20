@@ -36,28 +36,37 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
+            ['username', 'required', 'message' => "É necessário um username."],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Esta username já está a ser utilizada.'],
+            [
+                'username', 'string',
+                'min' => 2, 'tooShort' => 'A username deve conter pelo menos 2 caracteres.',
+                'max' => 30, 'tooLong' => 'A username não pode exceder os 30 caracteres.'
+            ],
 
             ['email', 'trim'],
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'string', 'max' => 255],
+            ['email', 'required', 'message' => "É necessário o seu email."],
+            ['email', 'email', 'message' => "Email inválido."],
 
             ['password', 'trim'],
-            ['password', 'required'],
-            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            ['password', 'required', 'message' => "É necessário uma password."],
+            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength'], 'tooShort' => "A password deve conter pelo menos " . Yii::$app->params['user.passwordMinLength'] . " caracteres."],
 
             ['first_name', 'trim'],
-            ['first_name', 'required'],
-            ['first_name', 'string', 'min' => 2, 'max' => 255],
+            ['first_name', 'required', 'message' => "É necessário o seu primeiro nome."],
+            [
+                'first_name', 'string',
+                'max' => 50, 'tooLong' => 'O seu primeiro nome não pode exceder os 50 caracteres.'
+            ],
 
             ['last_name', 'trim'],
-            ['last_name', 'required'],
-            ['last_name', 'string', 'min' => 2, 'max' => 255],
+            ['last_name', 'required', 'message' => "É necessário o seu último nome."],
+            [
+                'last_name', 'string',
+                'max' => 50, 'tooLong' => 'O seu último nome não pode exceder os 50 caracteres.'
+            ],
 
-            ['gender', 'required'],
+            ['gender', 'required', 'message' => "É necessário o seu género."],
             ['gender', 'in', 'range' => [
                 'Masculino',
                 'Feminino',
@@ -65,23 +74,34 @@ class SignupForm extends Model
             ], 'strict' => true],
 
             ['country', 'trim'],
-            ['country', 'required'],
-            ['country', 'string', 'min' => 2, 'max' => 255],
+            ['country', 'required', 'message' => "É necessário o país."],
+            [
+                'country', 'string',
+                'min' => 4, 'tooShort' => 'O nome do país deve conter pelo menos 4 caracteres.',
+                'max' => 50, 'tooLong' => 'O nome do país não pode exceder os 50 caracteres.'
+            ],
 
             ['city', 'trim'],
-            ['city', 'required'],
-            ['city', 'string', 'max' => 75],
+            ['city', 'required', 'message' => "É necessário a cidade."],
+            [
+                'city', 'string',
+                'min' => 1, 'tooShort' => 'O nome da cidade deve conter pelo menos 1 caractere.',
+                'max' => 75, 'tooLong' => 'O nome da cidade não pode exceder os 75 caracteres.'
+            ],
 
-            ['birthdate', 'required'],
+            ['birthdate', 'required', 'message' => "É necessário a sua data de nascimento."],
             ['birthdate', 'date', 'format' => 'yyyy-MM-dd'],
 
             ['phone_country_code', 'trim'],
-            ['phone_country_code', 'required'],
-            ['phone_country_code', 'string', 'max' => 5],
+            ['phone_country_code', 'required', 'message' => "É necessário o indicativo do seu nº de telemóvel."],
+            ['phone_country_code', 'match', 'pattern' => '/\+[\d]{1,4}$/', 'message' => "Formato inválido.\nExemplo: +000"],
 
             ['phone', 'trim'],
-            ['phone', 'required'],
-            ['phone', 'string', 'max' => 15],
+            ['phone', 'required', 'message' => "É necessário o seu nº de telemóvel."],
+            [
+                'phone', 'number',
+                'numberPattern' => '/[\d]{4,15}$/', 'message' => "O nº de telemóvel só pode conter números, ter pelo menos 4 números e não pode exceder os 15 números.",
+            ],
         ];
     }
 
@@ -118,9 +138,13 @@ class SignupForm extends Model
         $client = new Client();
         $client->client_id = $user->id;
         $client->save();
+
+
         $auth = Yii::$app->authManager;
         $clientRole = $auth->getRole('client');
         $auth->assign($clientRole, $user->getId());
+
+
         return $this->sendEmail($user);
     }
 

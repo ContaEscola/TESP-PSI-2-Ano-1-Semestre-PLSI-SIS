@@ -211,7 +211,7 @@ $this->title = 'Sign Up';
                                 'options' => ['class' => 'flex-2'],
                             ])
                                 ->Input('tel', [
-                                    'placeholder' => 'número de telefone',
+                                    'placeholder' => 'nº de telemóvel',
                                     'class' => 'form__input'
                                 ]) ?>
 

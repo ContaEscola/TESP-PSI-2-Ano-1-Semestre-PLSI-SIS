@@ -586,6 +586,13 @@ a:where(:hover, :focus) {
   background-size: var(--icon-size);
 }
 
+.form__input:not([type="date"]) {
+  padding-right: calc(
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
+  );
+}
+
 .form__input::placeholder {
   font-size: var(--fs-350);
   font-style: italic;
@@ -604,21 +611,11 @@ a:where(:hover, :focus) {
 .form__input:not([type="date"]).valid {
   --clr-border: var(--clr-success);
   --icon-url: url("../images/input-success.svg");
-
-  padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
-  );
 }
 
 .form__input:not([type="date"]).invalid {
   --clr-border: var(--clr-error);
   --icon-url: url("../images/input-invalid.svg");
-
-  padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
-  );
 }
 
 .form__input[type="date"].valid {

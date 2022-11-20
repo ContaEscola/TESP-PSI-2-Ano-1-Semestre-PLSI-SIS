@@ -65,7 +65,7 @@ $this->title = 'Login';
                     ->checkbox([
                         'template' => '{input}{label}',
                         'uncheck' => null,
-                        'label' => '<label for="save_session" class="fs-200 letter-spacing-2">Guardar sessão</label>'
+                        'label' => '<label for="loginform-rememberme" class="fs-200 letter-spacing-2">Guardar sessão</label>'
                     ]) ?>
             </div>
 
