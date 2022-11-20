@@ -226,9 +226,7 @@ $this->title = 'Sign Up';
                 'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
                 'data-size' => "large-md"
             ]) ?>
-
+            <?php ActiveForm::end(); ?>
         </div>
     </div>
-    </div>
-    <?php ActiveForm::end(); ?>
 </main>
