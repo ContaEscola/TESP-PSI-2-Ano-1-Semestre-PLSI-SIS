@@ -128,7 +128,9 @@ AppAsset::register($this);
         </section>
     </div>
 
-    <?= $content ?>
+    <main>
+        <?= $content ?>
+    </main>
 
     <footer>
         <div class="[ footer-wrapper ] [ container text-align-center ]">

@@ -10,76 +10,74 @@ use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Login';
 ?>
-<main>
-    <div class="padding-block-700 height-100 d-grid align-items-center">
-        <div class="container" data-type="very-small-md">
-            <h1 class="fs-600 fw-bold text-align-center">Login</h1>
+<div class="padding-block-700 height-100 d-grid align-items-center">
+    <div class="container" data-type="very-small-md">
+        <h1 class="fs-600 fw-bold text-align-center">Login</h1>
 
 
-            <?php $form = ActiveForm::begin([
-                'id' => 'login-form',
-                'errorCssClass' => 'invalid',
-                'requiredCssClass' => 'invalid',
-                'successCssClass' => 'valid',
-                'validateOnType' => true,
-                'validationDelay' => 500,
-                'options' => [
-                    'class' => '[ form ] [ margin-top-600 flow ]',
-                    'data-flow-space' => 'large'
-                ]
-            ]) ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'errorCssClass' => 'invalid',
+            'requiredCssClass' => 'invalid',
+            'successCssClass' => 'valid',
+            'validateOnType' => true,
+            'validationDelay' => 500,
+            'options' => [
+                'class' => '[ form ] [ margin-top-600 flow ]',
+                'data-flow-space' => 'large'
+            ]
+        ]) ?>
 
-            <div class="flow">
-                <?= $form->field($model, 'username', [
-                    'errorOptions' => [
-                        'tag' => 'p',
-                        'class' => 'input__error margin-top-50'
-                    ],
-                    'options' => ['class' => 'form__group'],
+        <div class="flow">
+            <?= $form->field($model, 'username', [
+                'errorOptions' => [
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-50'
+                ],
+                'options' => ['class' => 'form__group'],
+            ])
+                ->label("Username:", [
+                    'class' => '[ input__label ] [ margin-bottom-50 ]'
                 ])
-                    ->label("Username:", [
-                        'class' => '[ input__label ] [ margin-bottom-50 ]'
-                    ])
-                    ->textInput([
-                        'class' => 'form__input'
-                    ]) ?>
+                ->textInput([
+                    'class' => 'form__input'
+                ]) ?>
 
 
 
 
-                <?= $form->field($model, 'password', [
-                    'options' => ['class' => 'form__group'],
-                    'errorOptions' => [
-                        'tag' => 'p',
-                        'class' => 'input__error margin-top-50'
-                    ],
+            <?= $form->field($model, 'password', [
+                'options' => ['class' => 'form__group'],
+                'errorOptions' => [
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-50'
+                ],
+            ])
+                ->label("Password:", [
+                    'class' => '[ input__label ] [ margin-bottom-50 ]'
                 ])
-                    ->label("Password:", [
-                        'class' => '[ input__label ] [ margin-bottom-50 ]'
-                    ])
-                    ->passwordInput(['class' => 'form__input']) ?>
+                ->passwordInput(['class' => 'form__input']) ?>
 
-                <?= $form->field($model, 'rememberMe', [
-                    'options' => ['class' => 'd-flex gap-1 align-items-center']
-                ])
-                    ->checkbox([
-                        'template' => '{input}{label}',
-                        'uncheck' => null,
-                        'label' => '<label for="loginform-rememberme" class="fs-200 letter-spacing-2">Guardar sessão</label>'
-                    ]) ?>
-            </div>
-
-            <div class="d-flex gap-1 flex-flow-column-sm justify-content-space-between-md">
-                <a href="#" class="fs-200 letter-spacing-2">Esqueceu da password?</a>
-                <a href="#" class="fs-200 letter-spacing-2">Não tem conta?</a>
-            </div>
-
-            <?= Html::submitButton('Login', [
-                'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
-                'data-size' => 'large-md'
-            ]) ?>
-            <?php ActiveForm::end(); ?>
-
+            <?= $form->field($model, 'rememberMe', [
+                'options' => ['class' => 'd-flex gap-1 align-items-center']
+            ])
+                ->checkbox([
+                    'template' => '{input}{label}',
+                    'uncheck' => null,
+                    'label' => '<label for="loginform-rememberme" class="fs-200 letter-spacing-2">Guardar sessão</label>'
+                ]) ?>
         </div>
+
+        <div class="d-flex gap-1 flex-flow-column-sm justify-content-space-between-md">
+            <a href="#" class="fs-200 letter-spacing-2">Esqueceu da password?</a>
+            <a href="#" class="fs-200 letter-spacing-2">Não tem conta?</a>
+        </div>
+
+        <?= Html::submitButton('Login', [
+            'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
+            'data-size' => 'large-md'
+        ]) ?>
+        <?php ActiveForm::end(); ?>
+
     </div>
-</main>
+</div>
