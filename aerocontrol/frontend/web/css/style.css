@@ -257,7 +257,7 @@ a:where(:hover, :focus) {
 
 @media (min-width: 40em) {
   .primary-navigation__item:not([data-type="active"]):hover
-  .primary-navigation__link {
+    .primary-navigation__link {
     color: var(--clr-black-200);
   }
 }
@@ -407,7 +407,6 @@ a:where(:hover, :focus) {
   top: calc(100% + var(--gap-between));
   right: 0;
   min-width: 100%;
-  width: max-content;
 
   background-color: var(--clr-neutral-400);
   outline: 0.12em solid var(--clr-primary-accent-400);
@@ -570,10 +569,9 @@ a:where(:hover, :focus) {
   --icon-url: none;
   --icon-margin-left-offset: 0.4rem;
   --icon-position-left-offset: 0.5rem;
-  --icon-size: 1rem;
+  --icon-size: 1.2rem;
 
   width: 100%;
-
   border: var(--border-size) var(--border-style) var(--clr-border);
   border-radius: 0.313em;
   padding: 0.2em 0.625em;
@@ -588,12 +586,6 @@ a:where(:hover, :focus) {
   background-size: var(--icon-size);
 }
 
-@media (min-width: 40em) {
-  .form__input {
-    --icon-size: 1.2rem;
-  }
-}
-
 .form__input::placeholder {
   font-size: var(--fs-350);
   font-style: italic;
@@ -601,33 +593,31 @@ a:where(:hover, :focus) {
   color: var(--clr-black-400);
 }
 
-.form__input:not([type="date"])[data-validate]:invalid {
+.form__input:focus {
+  outline: 0;
+  --icon-url: none;
+  --clr-border: var(--clr-primary-accent-400);
+
+  box-shadow: 0 0 1em 0.5em var(--clr-neutral-400);
+}
+
+.form__input:not([type="date"]).invalid {
   --clr-border: var(--clr-error);
   --icon-url: url("../images/input-invalid.svg");
 
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
-.invalid {
-  --clr-border: var(--clr-error);
-  --icon-url: url("../images/input-invalid.svg");
-
-  padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
-  );
-}
-
-.form__input:not([type="date"])[data-validate]:valid {
+.form__input:not([type="date"]).valid {
   --clr-border: var(--clr-success);
   --icon-url: url("../images/input-success.svg");
 
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
@@ -647,97 +637,12 @@ select.form__input {
   font-size: var(--fs-300);
 }
 
-.form__input:focus {
-  outline: 0;
-  box-shadow: 0 0 0.5em 0.01em var(--clr-neutral-800);
-}
-
-.form__input:focus:not(.invalid) {
-  --icon-url: none;
-  --clr-border: var(--clr-primary-accent-400);
-}
 .input__error {
   font-size: var(--fs-200);
   letter-spacing: 0.046875em;
   font-style: italic;
 
   color: var(--clr-error);
-}
-
-/* Alert */
-
-.alert {
-  --max-width: 50rem;
-  --padding-each-side: 1.5rem;
-  --clr-alert: var(--clr-white);
-  --clr-alert-bg: var(--clr-success);
-  --clr-icon: var(--clr-white);
-  --clr-alert-close-icon: var(--clr-white);
-
-  opacity: 0%;
-  position: fixed;
-  z-index: 1000;
-  inset: 5rem 0 auto 0;
-
-  width: min(100% - (2 * var(--padding-each-side)), var(--max-width));
-  margin-inline: auto;
-
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 2rem;
-  padding: 1em 1em;
-  border-radius: 0.313em;
-  background-color: var(--clr-success);
-
-  animation-name: alert-anim;
-  animation: alert-anim 500ms ease-in-out normal forwards;
-}
-
-.alert.close {
-  animation: alert-anim 500ms ease-in-out reverse forwards;
-}
-
-@keyframes alert-anim {
-  0% {
-    transform: translateY(-50%);
-    opacity: 0%;
-  }
-  100% {
-    transform: translateY(0%);
-    opacity: 100%;
-  }
-}
-
-.alert__message {
-  font-size: var(--fs-300);
-
-  font-weight: bold;
-  letter-spacing: 0.046875em;
-  color: var(--clr-alert);
-}
-
-.alert-toggle-btn {
-  border: 0;
-  outline: 0;
-  background: none;
-  display: block;
-}
-
-.alert-toggle-btn .alert__icon {
-  min-width: 0.9rem;
-  max-width: 0.9rem;
-}
-
-.alert__icon {
-  min-width: 1.2rem;
-  max-width: 1.2rem;
-}
-
-.alert-toggle-btn:where(:focus-visible, :hover) {
-  cursor: pointer;
-  --clr-alert-close-icon: var(--clr-neutral-400);
 }
 
 /* utility classes */
