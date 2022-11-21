@@ -5,14 +5,14 @@
 
 use common\components\CustomAlert;
 use frontend\assets\AppAsset;
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>">
 
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
