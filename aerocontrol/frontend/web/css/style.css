@@ -407,7 +407,6 @@ a:where(:hover, :focus) {
   top: calc(100% + var(--gap-between));
   right: 0;
   min-width: 100%;
-  width: max-content;
 
   background-color: var(--clr-neutral-400);
   outline: 0.12em solid var(--clr-primary-accent-400);
@@ -570,10 +569,9 @@ a:where(:hover, :focus) {
   --icon-url: none;
   --icon-margin-left-offset: 0.4rem;
   --icon-position-left-offset: 0.5rem;
-  --icon-size: 1rem;
+  --icon-size: 1.2rem;
 
   width: 100%;
-
   border: var(--border-size) var(--border-style) var(--clr-border);
   border-radius: 0.313em;
   padding: 0.2em 0.625em;
@@ -588,10 +586,11 @@ a:where(:hover, :focus) {
   background-size: var(--icon-size);
 }
 
-@media (min-width: 40em) {
-  .form__input {
-    --icon-size: 1.2rem;
-  }
+.form__input:not([type="date"]) {
+  padding-right: calc(
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
+  );
 }
 
 .form__input::placeholder {
@@ -601,61 +600,40 @@ a:where(:hover, :focus) {
   color: var(--clr-black-400);
 }
 
-.form__input:not([type="date"])[data-validate]:invalid {
-  --clr-border: var(--clr-error);
-  --icon-url: url("../images/input-invalid.svg");
+.form__input:focus {
+  outline: 0;
+  --icon-url: none;
+  --clr-border: var(--clr-primary-accent-400);
 
-  padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
-  );
+  box-shadow: 0 0 1em 0.5em var(--clr-neutral-400);
 }
 
-.invalid {
-  --clr-border: var(--clr-error);
-  --icon-url: url("../images/input-invalid.svg");
-
-  padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
-  );
-}
-
-.form__input:not([type="date"])[data-validate]:valid {
+.form__input:not([type="date"]).valid {
   --clr-border: var(--clr-success);
   --icon-url: url("../images/input-success.svg");
-
-  padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
-  );
 }
 
-.form__input[type="date"][data-validate]:valid {
+.form__input:not([type="date"]).invalid {
+  --clr-border: var(--clr-error);
+  --icon-url: url("../images/input-invalid.svg");
+}
+
+.form__input[type="date"].valid {
   --clr-border: var(--clr-success);
 }
-.form__input[type="date"][data-validate]:invalid {
+.form__input[type="date"].invalid {
   --clr-border: var(--clr-error);
 }
 
 select.form__input {
   --icon-position-left-offset: 1.5rem;
-  padding-block: calc(0.2em + 2.75835px);
+  padding-block: calc(0.2em + 1.75px);
 }
 
 .input__label {
   font-size: var(--fs-300);
 }
 
-.form__input:focus {
-  outline: 0;
-  box-shadow: 0 0 0.5em 0.01em var(--clr-neutral-800);
-}
-
-.form__input:focus:not(.invalid) {
-  --icon-url: none;
-  --clr-border: var(--clr-primary-accent-400);
-}
 .input__error {
   font-size: var(--fs-200);
   letter-spacing: 0.046875em;

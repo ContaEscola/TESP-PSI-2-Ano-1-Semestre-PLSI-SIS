@@ -7,7 +7,7 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Signup';
+$this->title = 'Sign Up';
 ?>
 
 <div class="padding-block-700 height-100 d-grid align-items-center">
@@ -16,105 +16,149 @@ $this->title = 'Signup';
             <h1 class="fs-600 fw-bold text-align-center">Criar conta</h1>
             <p>Crie a sua conta para começar a reservar voos e muito mais.</p>
         </div>
-        <?php $form = ActiveForm::begin(
-            [
-                'id' => 'signup-form',
-                'options' => [
-                    'class' => '[ form ] [ margin-top-600 flow ]',
-                    'data-flow-space' => 'large'
-                ]
+        <?php $form = ActiveForm::begin([
+            'id' => 'signup-form',
+            'errorCssClass' => 'invalid',
+            'requiredCssClass' => 'invalid',
+            'successCssClass' => 'valid',
+            'validateOnType' => true,
+            'validationDelay' => 500,
+            'options' => [
+                'class' => '[ form ] [ margin-top-600 flow ]',
+                'data-flow-space' => 'large'
             ]
-        ) ?>
+        ]) ?>
+
         <div>
             <h2 class="fs-500 fw-semi-bold text-align-center-sm">Dados de acesso</h2>
             <div class="even-columns gap-2-sm gap-1-md margin-top-200">
-                <div class="form__group">
-                    <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
-                    <?= $form->field($model, 'username', [
-                        'options' => ['class' => 'form-group has-feedback'],
-                        'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                        'wrapperOptions' => ['class' => 'input-group mb-3']
+
+                <?= $form->field($model, 'username', [
+                    'errorOptions' => [
+                        'tag' => 'p',
+                        'class' => 'input__error margin-top-50'
+                    ],
+                    'options' => ['class' => 'form__group'],
+                ])
+                    ->label("Username:", [
+                        'class' => '[ input__label ] [ margin-bottom-50 ]'
                     ])
-                        ->label(false)
-                        ->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                </div>
-                <div class="form__group">
-                    <label for="password" class="[ input__label ] [ margin-bottom-50 ]">Password:</label>
-                    <?= $form->field($model, 'password', [
-                        'options' => ['class' => 'form-group has-feedback'],
-                        'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                        'wrapperOptions' => ['class' => 'input-group mb-3']
+                    ->textInput([
+                        'class' => 'form__input'
+                    ]) ?>
+
+
+                <?= $form->field($model, 'password', [
+                    'options' => ['class' => 'form__group'],
+                    'errorOptions' => [
+                        'tag' => 'p',
+                        'class' => 'input__error margin-top-50'
+                    ],
+                ])
+                    ->label("Password:", [
+                        'class' => '[ input__label ] [ margin-bottom-50 ]'
                     ])
-                        ->label(false)
-                        ->passwordInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                </div>
+                    ->passwordInput(['class' => 'form__input']) ?>
+
             </div>
         </div>
 
         <div>
             <h2 class="fs-500 fw-semi-bold text-align-center-sm">Dados pessoais</h2>
             <div class="flow margin-top-200">
-                <div class="even-columns gap-2-sm gap-1-md ">
-                    <div class="form__group">
-                        <label for="first_name" class="[ input__label ] [ margin-bottom-50 ]">Primeiro Nome:</label>
-                        <?= $form->field($model, 'first_name', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                <div class="even-columns gap-2-sm gap-1-md">
+
+                    <?= $form->field($model, 'first_name', [
+                        'errorOptions' => [
+                            'tag' => 'p',
+                            'class' => 'input__error margin-top-50'
+                        ],
+                        'options' => ['class' => 'form__group'],
+                    ])
+                        ->label("Primeiro Nome:", [
+                            'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                            ->label(false)
-                            ->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                    </div>
-                    <div class="form__group">
-                        <label for="last_name" class="[ input__label ] [ margin-bottom-50 ]">Ultimo Nome:</label>
-                        <?= $form->field($model, 'last_name', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                        ->textInput([
+                            'class' => 'form__input'
+                        ]) ?>
+
+
+
+                    <?= $form->field($model, 'last_name', [
+                        'errorOptions' => [
+                            'tag' => 'p',
+                            'class' => 'input__error margin-top-50'
+                        ],
+                        'options' => ['class' => 'form__group'],
+                    ])
+                        ->label("Último nome:", [
+                            'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                            ->label(false)
-                            ->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                    </div>
-                    <div class="form__group">
-                        <label for="gender" class="[ input__label ] [ margin-bottom-50 ]">Género:</label>
-                        <?= $form->field($model, 'gender', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                        ->textInput([
+                            'class' => 'form__input'
+                        ]) ?>
+
+
+                    <?= $form->field($model, 'gender', [
+                        'errorOptions' => [
+                            'tag' => 'p',
+                            'class' => 'input__error margin-top-50'
+                        ],
+                        'options' => ['class' => 'form__group'],
+                    ])
+                        ->label("Género:", [
+                            'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                            ->dropDownList(['Masculino' => 'Masculino', 'Feminino' => 'Feminino', 'Outro' => 'Outro']) ?>
-                    </div>
+                        ->dropDownList([
+                            'Masculino' => 'Masculino', 'Feminino' => 'Feminino', 'Outro' => 'Outro'
+                        ], [
+                            'class' => 'form__input'
+                        ]) ?>
+
                 </div>
                 <div class="d-flex flex-flow-column-sm gap-2">
-                    <div class="form__group">
-                        <label for="birthdate" class="[ input__label ] [ margin-bottom-50 ]">Data de Nascimento:</label>
-                        <?= $form->field($model, 'birthdate', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+
+                    <?= $form->field($model, 'birthdate', [
+                        'errorOptions' => [
+                            'tag' => 'p',
+                            'class' => 'input__error margin-top-50'
+                        ],
+                        'options' => ['class' => 'form__group'],
+                    ])
+                        ->label("Data de Nascimento:", [
+                            'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                            ->Input('date') ?>
-                    </div>
-                    <div class="form__group">
-                        <label for="country" class="[ input__label ] [ margin-bottom-50 ]">País:</label>
-                        <?= $form->field($model, 'country', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                        ->input('date', [
+                            'class' => 'form__input'
+                        ]) ?>
+
+                    <?= $form->field($model, 'country', [
+                        'errorOptions' => [
+                            'tag' => 'p',
+                            'class' => 'input__error margin-top-50'
+                        ],
+                        'options' => ['class' => 'form__group'],
+                    ])
+                        ->label("País:", [
+                            'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                            ->label(false)
-                            ->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                    </div>
-                    <div class="form__group">
-                        <label for="city" class="[ input__label ] [ margin-bottom-50 ]">Cidade:</label>
-                        <?= $form->field($model, 'city', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                        ->textInput([
+                            'class' => 'form__input'
+                        ]) ?>
+
+                    <?= $form->field($model, 'city', [
+                        'errorOptions' => [
+                            'tag' => 'p',
+                            'class' => 'input__error margin-top-50'
+                        ],
+                        'options' => ['class' => 'form__group'],
+                    ])
+                        ->label("Cidade:", [
+                            'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                            ->label(false)
-                            ->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                    </div>
+                        ->textInput([
+                            'class' => 'form__input'
+                        ]) ?>
                 </div>
             </div>
         </div>
@@ -122,42 +166,65 @@ $this->title = 'Signup';
         <div>
             <h2 class="fs-500 fw-semi-bold text-align-center-sm">Contactos</h2>
             <div class="d-flex flex-flow-column-sm margin-top-200">
-                <div class="form__group flex-1">
-                    <label for="email" class="[ input__label ] [ margin-bottom-50 ]">Email:</label>
-                    <?= $form->field($model, 'email', [
-                        'options' => ['class' => 'form-group has-feedback'],
-                        'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                        'wrapperOptions' => ['class' => 'input-group mb-3']
+
+                <?= $form->field($model, 'email', [
+                    'errorOptions' => [
+                        'tag' => 'p',
+                        'class' => 'input__error margin-top-50'
+                    ],
+                    'options' => ['class' => '[ form__group ] [ flex-1 ]'],
+                ])
+                    ->label("Email:", [
+                        'class' => '[ input__label ] [ margin-bottom-50 ]'
                     ])
-                        ->label(false)
-                        ->textInput(['placeholder' => $model->getAttributeLabel('')]) ?>
-                </div>
+                    ->textInput([
+                        'class' => 'form__input'
+                    ]) ?>
+
+
                 <div class="form__group flex-1">
-                    <label for="phone-number" class="[ input__label ] [ margin-bottom-50 ]">Contacto telefónico:</label>
+                    <label class="[ input__label ] [ margin-bottom-50 ]">Contacto telefónico:</label>
                     <div class="d-flex width-100">
+
                         <?= $form->field($model, 'phone_country_code', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                            'errorOptions' => [
+                                'tag' => 'p',
+                                'class' => 'input__error margin-top-50'
+                            ],
+                            'template' => '{input}{error}',
+                            'options' => ['class' => 'flex-1'],
                         ])
-                            ->label(false)
-                            ->textInput(['placeholder' => $model->getAttributeLabel('Indicativo')]) ?>
+                            ->textInput([
+                                'placeholder' => 'indicativo',
+                                'class' => 'form__input'
+                            ]) ?>
+
+
+
                         <?= $form->field($model, 'phone', [
-                            'options' => ['class' => 'form-group has-feedback'],
-                            'template' => '{beginWrapper}{input}{error}{endWrapper}',
-                            'wrapperOptions' => ['class' => 'input-group mb-3']
+                            'errorOptions' => [
+                                'tag' => 'p',
+                                'class' => 'input__error margin-top-50'
+                            ],
+                            'template' => '{input}{error}',
+                            'options' => ['class' => 'flex-2'],
                         ])
-                            ->label(false)
-                            ->Input('number', ['placeholder' => $model->getAttributeLabel('Número telefone')]) ?>
+                            ->Input('tel', [
+                                'placeholder' => 'nº de telemóvel',
+                                'class' => 'form__input'
+                            ]) ?>
+
+
                     </div>
-                    <p class="[ input__error ] [ margin-top-100 ]"></p>
                 </div>
             </div>
         </div>
 
 
-        <?= Html::submitButton('Criar conta', ['class' => 'form__submit-button button fill-sm d-block push-to-center-md']) ?>
-
+        <?= Html::submitButton('Criar conta', [
+            'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
+            'data-size' => "large-md"
+        ]) ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>

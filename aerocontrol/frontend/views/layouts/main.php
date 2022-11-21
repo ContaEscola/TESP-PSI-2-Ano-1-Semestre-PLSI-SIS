@@ -12,7 +12,7 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>">
 
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
@@ -97,9 +97,17 @@ AppAsset::register($this);
                                             <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
                                                 <span aria-hidden="true">
                                                     <svg class="icon dropdown-link__icon">
-                                                        <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
+                                                        <use xlink:href="<?= Url::to('@web/images/perfil-icon.svg#perfil-icon') ?>"></use>
                                                     </svg>
-                                                </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                                </span>
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-menu__item">
+                                            <?= Html::a('Logout' . '<span aria-hidden="true">
+                                                        <svg class="icon dropdown-link__icon">
+                                                            <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
+                                                        </svg>
+                                                    </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                         </li>
                                     </ul>
                                 </div>
