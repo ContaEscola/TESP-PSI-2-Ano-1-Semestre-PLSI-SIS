@@ -35,17 +35,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <th scope="row"><?= $airplane->id?></th>
                 <td><?= $airplane->name?></td>
                 <td><?= $airplane->capacity?></td>
-                <td><?= $airplane->state?></td>
-                <td><?= $airplane->company->id?></td>
+                <td>
+                    <?php
+                        if($airplane->state == '0'){
+                            echo "Inativo";
+                        }else{
+                            echo "Ativo";
+                        }
+                    ?>
+                </td>
+                <td><?= $airplane->company->name?></td>
                 <td>
                     <a class="btn btn-primary" href="<?=Url::to(['airplane/view','id'=>$airplane->id])?>">Visualizar</a>
-                    <?= Html::a('Delete', ['delete', 'id' => $airplane->id], [
-                        'class' => 'btn btn-danger',
-                        'data' => [
-                            'confirm' => 'Are you sure you want to delete this item?',
-                            'method' => 'post',
-                        ],
-                    ]) ?>
                 </td>
             </tr>
         <?php endforeach;?>
