@@ -13,27 +13,30 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="airplane-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
-            'capacity',
-            'state',
-            'company_id',
+            [
+                'label' => 'Nome',
+                'value' => $model->name,
+            ],
+            [
+                'label' => 'Capacidade',
+                'value' => $model->capacity,
+            ],
+            [
+                'label' => 'Estado',
+                'value' => (($model->state == 0) ? "Inativo": "Ativo"),
+            ],
+            [
+                'label' => 'Companhia',
+                'value' => $model->company->name,
+            ],
         ],
     ]) ?>
 
