@@ -5,15 +5,14 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Airplane $model */
 
-$this->title = 'Criar Aviões';
-$this->params['breadcrumbs'][] = ['label' => 'Airplanes', 'url' => ['index']];
+$this->title = 'Criar Avião';
+$this->params['breadcrumbs'][] = ['label' => 'Aviões', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="airplane-create">
 
-    <?= $this->render('_formcreate', [
+    <?= $this->render('_form', [
         'model' => $model,
-        'company' => $company,
         'company_airplanes' => $company_airplanes,
     ]) ?>
 

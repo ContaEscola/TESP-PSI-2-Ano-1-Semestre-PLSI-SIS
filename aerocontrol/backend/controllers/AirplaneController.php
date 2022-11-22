@@ -70,14 +70,7 @@ class AirplaneController extends Controller
      */
     public function actionIndex()
     {
-        /*$searchModel = new AirplaneSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);*/
-        $airplanes = Airplane::find()->orderBy('id')->all();
+        $airplanes = Airplane::find()->all();
         return $this->render('index', [
             'airplanes' => $airplanes,
         ]);
@@ -114,7 +107,7 @@ class AirplaneController extends Controller
         }
 
         $companies = Company::find()->select(['id', 'name'])->all();
-        foreach($companies as $company){
+        foreach ($companies as $company) {
             $company_airplanes[$company->id] = $company->name;
         }
 
@@ -141,7 +134,7 @@ class AirplaneController extends Controller
         }
 
         $companies = Company::find()->select(['id', 'name'])->all();
-        foreach($companies as $company){
+        foreach ($companies as $company) {
             $company_airplanes[$company->id] = $company->name;
         }
 
