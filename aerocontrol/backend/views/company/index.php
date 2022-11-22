@@ -30,8 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <th scope="row"><?= $company->id?></th>
                 <td><?= $company->name?></td>
                 <td>
-                    <a class="btn btn-primary" href="<?=Url::to(['company/view','company_id'=>$company->id])?>">Visualizar</a>
-                    <?= Html::a('Delete', ['delete', 'company_id' => $company->id], [
+                    <a class="btn btn-primary" href="<?=Url::to(['company/view','id'=>$company->id])?>">Visualizar</a>
+                    <?= Html::a('Delete', ['delete', 'id' => $company->id], [
                         'class' => 'btn btn-danger',
                         'data' => [
                             'confirm' => 'Are you sure you want to delete this item?',

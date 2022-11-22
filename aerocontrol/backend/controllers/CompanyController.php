@@ -46,7 +46,7 @@ class CompanyController extends Controller
             'dataProvider' => $dataProvider,
         ]);*/
 
-        $companies = Company::find()->all();
+        $companies = Company::find()->orderBy('id')->all();
         return $this->render('index', [
             'companies' => $companies,
         ]);
