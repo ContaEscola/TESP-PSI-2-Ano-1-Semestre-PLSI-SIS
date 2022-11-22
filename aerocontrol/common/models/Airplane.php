@@ -32,11 +32,17 @@ class Airplane extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'capacity', 'state', 'company_id'], 'required'],
-            [['capacity', 'company_id'], 'integer'],
+            [['name', 'capacity', 'state', 'company_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
+            [['capacity', 'company_id'], 'integer', 'message' => "{attribute} tem que ser um número."],
             ['state', 'boolean'],
+
             ['name', 'trim'],
-            ['name', 'string', 'max' => 75],
+            [
+                'name', 'string',
+                'max' => 75, 'tooLong' => "O nome do avião não pode exceder os 75 caracteres."
+            ],
+            ['name', 'unique', 'targetClass' => '\common\models\Airplane', 'message' => 'Este nome já está a ser utilizado.'],
+
             ['company_id', 'exist', 'skipOnError' => true, 'targetClass' => Company::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
@@ -51,7 +57,7 @@ class Airplane extends \yii\db\ActiveRecord
             'name' => 'Nome',
             'capacity' => 'Capacidade',
             'state' => 'Estado',
-            'company_id' => 'ID da Companhia',
+            'company_id' => 'Companhia',
         ];
     }
 
