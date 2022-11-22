@@ -51,7 +51,7 @@ class Airplane extends \yii\db\ActiveRecord
             'name' => 'Nome',
             'capacity' => 'Capacidade',
             'state' => 'Estado',
-            'company_id' => 'ID da Companhia',
+            'company_id' => 'Companhia',
         ];
     }
 
