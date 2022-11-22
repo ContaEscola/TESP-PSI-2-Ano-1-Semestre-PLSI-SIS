@@ -13,11 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-view">
     <p>
-        <?= Html::a('Update', ['update', 'employee_id' => $model->employee_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'employee_id' => $model->employee_id], [
+        <?= Html::a('Atualizar', ['update', 'employee_id' => $model->employee_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Apagar', ['delete', 'employee_id' => $model->employee_id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem a certeza que quer eliminar o trabalhador?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -90,7 +90,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Data de Nascimento',
                 'value' => $model->user->birthdate,
             ],
-
         ],
     ]) ?>
 

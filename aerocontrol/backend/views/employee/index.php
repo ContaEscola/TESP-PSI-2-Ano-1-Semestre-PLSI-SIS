@@ -18,15 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar novo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-
-    <?php /*= ListView::widget([
-        'dataProvider' => $dataProvider,
-        'itemOptions' => ['class' => 'item'],
-        'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->employee_id), ['view', 'employee_id' => $model->employee_id]);
-        },
-    ]) */?>
-
     <table class="table">
         <tr>
             <th>ID</th>

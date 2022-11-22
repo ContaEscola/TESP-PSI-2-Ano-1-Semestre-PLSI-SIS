@@ -153,7 +153,7 @@ class EmployeeController extends Controller
     {
         $model = $this->findModel($employee_id);
 
-        if ($this->request->isPost ) {
+        if ($this->request->isPost) {
             $post = \Yii::$app->request->post();
             $post['Employee']['function_id'] = $post['EmployeeFunction']['id'];
             $model->attributes = $post['Employee'];
