@@ -34,7 +34,7 @@ INSERT INTO `employee_function`(id,name) VALUES
 (4,"Co-Piloto"),
 (5,"Segurança"),
 (6,"Comissário de bordo"),
-(7,"Carregador de bagagem"),
+(7,"Carregador de bagagem");
 
 
 INSERT INTO `employee` (`employee_id`, `tin`, `num_emp`, `ssn`, `street`, `zip_code`, `iban`, `qualifications`, `function_id`) VALUES
@@ -65,11 +65,11 @@ INSERT INTO `company` (`id`, `name`, `state`) VALUES
 
 
 INSERT INTO `airplane` (`id`, `name`, `capacity`, `state`, `company_id`) VALUES
-(1, 'Hawker Hurricane', 120, 1, 1);
-(2, 'U-2 spy plane', 100, 1, 3);
-(3, 'B-52 Stratofortress ', 135, 1, 2);
-(4, 'F-16 Fighting Falcon', 200, 1, 3);
-(5, 'MiG-21 fighter', 80, 1, 2);
-(6, 'Tupolev Tu-95 bomber', 60, 0, 1);
-(7, 'Bf 109 fighter', 12, 0, 2);
+(1, 'Hawker Hurricane', 120, 1, 1),
+(2, 'U-2 spy plane', 100, 1, 3),
+(3, 'B-52 Stratofortress ', 135, 1, 2),
+(4, 'F-16 Fighting Falcon', 200, 1, 3),
+(5, 'MiG-21 fighter', 80, 1, 2),
+(6, 'Tupolev Tu-95 bomber', 60, 0, 1),
+(7, 'Bf 109 fighter', 12, 0, 2),
 (8, 'P-51 Mustang', 12, 0, 3);
