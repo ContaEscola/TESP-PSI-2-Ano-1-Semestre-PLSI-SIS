@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\AirplaneSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Airplanes';
+$this->title = 'Aviões';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="airplane-index">

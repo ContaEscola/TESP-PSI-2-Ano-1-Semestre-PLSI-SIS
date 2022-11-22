@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="airplane-view">
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
     </p>
 
