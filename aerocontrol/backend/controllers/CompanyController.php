@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Company;
 use common\models\CompanySearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\CompanySearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Companies';
+$this->title = 'Companhias';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="company-index">
@@ -31,13 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td><?= $company->name?></td>
                 <td>
                     <a class="btn btn-primary" href="<?=Url::to(['company/view','id'=>$company->id])?>">Visualizar</a>
-                    <?= Html::a('Delete', ['delete', 'id' => $company->id], [
-                        'class' => 'btn btn-danger',
-                        'data' => [
-                            'confirm' => 'Are you sure you want to delete this item?',
-                            'method' => 'post',
-                        ],
-                    ]) ?>
                 </td>
             </tr>
         <?php endforeach;?>

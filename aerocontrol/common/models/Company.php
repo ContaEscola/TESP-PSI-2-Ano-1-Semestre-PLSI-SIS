@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name
+ * @property int $state
  *
  * @property Airplane[] $airplanes
  */
@@ -28,10 +29,11 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['name', 'required'],
+            ['name', 'required', 'message'=>'{attribute} não pode ser vazio.'],
             ['name', 'trim'],
-            ['name', 'string', 'max' => 50],
-            ['name', 'unique'],
+            ['name', 'string', 'max' => 50, 'message'=>'{attribute} não pode conter mais de 50 caracteres.'],
+            ['name', 'unique','targetClass' => '\common\models\Company', 'message'=> 'Nome da companhia já existe.'],
+            ['state', 'boolean','message'=>'Selecione um dos estados.'],
         ];
     }
 
@@ -43,6 +45,7 @@ class Company extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Nome',
+            'state' => 'Estado',
         ];
     }
 

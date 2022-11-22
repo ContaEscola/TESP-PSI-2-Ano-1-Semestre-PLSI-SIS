@@ -13,21 +13,24 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="company-view">
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
+            [
+                'label' => 'Id',
+                'value' => $model->id,
+            ],
+            [
+                'label' => 'Nome',
+                'value' => $model->name,
+            ],
+            [
+                'label' => 'Estado',
+                'value' => ($model->state == 0) ? "Inativo": "Ativo",
+            ],
         ],
     ]) ?>
 
