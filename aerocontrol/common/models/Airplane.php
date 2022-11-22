@@ -32,8 +32,8 @@ class Airplane extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'capacity', 'state', 'company_id'], 'required'],
-            [['capacity', 'company_id'], 'integer'],
+            [['name', 'capacity', 'state', 'company_id'], 'required', 'message'=>"{attribute} não pode ser vazio."],
+            [['capacity', 'company_id'], 'integer', 'message'=>"{attribute} tem que ser um numero."],
             ['state', 'boolean'],
             ['name', 'trim'],
             ['name', 'string', 'max' => 75],
