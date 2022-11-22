@@ -72,7 +72,7 @@ class User extends ActiveRecord implements IdentityInterface
             [[
                 'username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country',
                 'city', 'birthdate', 'email', 'phone', 'phone_country_code'
-            ], 'required'],
+            ], 'required','message'=>'{attribute} não pode ser vazio.'],
 
             [[
                 'username', 'auth_key', 'password_hash', 'password_reset_token', 'verification_token',
@@ -88,14 +88,14 @@ class User extends ActiveRecord implements IdentityInterface
             ['birthdate', 'date','format'=>'yyyy-MM-dd'],
             [['status', 'created_at', 'updated_at'], 'integer'],
             ['password_reset_token', 'default','value' => null],
-            ['username', 'string', 'max' => 30],
+            ['username', 'string', 'max' => 30, 'message' => 'O nome de utilizador só pode ter até 30 caracteres.'],
             ['auth_key', 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255],
-            [['first_name', 'last_name', 'country'], 'string', 'max' => 50],
-            ['city', 'string', 'max' => 75],
-            ['email', 'string', 'max' => 200],
-            ['phone', 'string', 'max' => 15],
-            ['phone_country_code', 'string', 'max' => 5],
+            [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255, 'message' => 'Excedeu o limite de caractares da password.'],
+            [['first_name', 'last_name', 'country'], 'string', 'max' => 50, 'message' => '{attribute} só pode ter até 50 caracteres.'],
+            ['city', 'string', 'max' => 75, 'message' => '{attribute} só pode ter até 75 caracteres.'],
+            ['email', 'string', 'max' => 200, 'message' => '{attribute} só pode ter até 200 caracteres.'],
+            ['phone', 'string', 'max' => 15, 'message' => '{attribute} só pode ter até 15 caracteres.'],
+            ['phone_country_code', 'string', 'max' => 5, 'message' => '{attribute} só pode ter até 15 caracteres.'],
 
             ['username', 'unique'],
             ['password_reset_token', 'unique'],
