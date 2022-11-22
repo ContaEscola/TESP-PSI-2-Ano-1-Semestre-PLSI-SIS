@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="company-index">
     <p>
-        <?= Html::a('Criar novo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar nova', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <table class="table">
@@ -25,14 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <th>Ações</th>
         </tr>
         <?php
-        foreach ($companies as $company):?>
+        foreach ($companies as $company) : ?>
             <tr>
-                <th scope="row"><?= $company->id?></th>
-                <td><?= $company->name?></td>
+                <th scope="row"><?= $company->id ?></th>
+                <td><?= $company->name ?></td>
                 <td>
-                    <a class="btn btn-primary" href="<?=Url::to(['company/view','id'=>$company->id])?>">Visualizar</a>
+                    <a class="btn btn-primary" href="<?= Url::to(['company/view', 'id' => $company->id]) ?>">Visualizar</a>
                 </td>
             </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </table>
 </div>

@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var common\models\Company $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Companies', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Companhias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Estado',
-                'value' => ($model->state == 0) ? "Inativo": "Ativo",
+                'value' => ($model->state == 0) ? "Inativo" : "Ativo",
             ],
         ],
     ]) ?>

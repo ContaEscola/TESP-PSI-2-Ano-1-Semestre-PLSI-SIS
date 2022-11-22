@@ -69,14 +69,6 @@ class CompanyController extends Controller
      */
     public function actionIndex()
     {
-        /*$searchModel = new CompanySearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);*/
-
         $companies = Company::find()->orderBy('id')->all();
         return $this->render('index', [
             'companies' => $companies,
