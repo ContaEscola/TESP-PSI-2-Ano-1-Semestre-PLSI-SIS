@@ -12,8 +12,9 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="airplane-update">
 
-    <?= $this->render('_form', [
+    <?= $this->render('_formupdate', [
         'model' => $model,
+        'company_airplanes' => $company_airplanes,
     ]) ?>
 
 </div>

@@ -16,9 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'capacity')->textInput() ?>
 
-    <?= $form->field($model, 'state')->textInput() ?>
+    <?= $form->field($model, 'state')->dropDownList([ '0' => 'Inativo','1' => 'Ativo']) ?>
 
-    <?= $form->field($model, 'company_id')->textInput() ?>
+    <?= $form->field($model, 'company_id')->dropDownList($company_airplanes) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
