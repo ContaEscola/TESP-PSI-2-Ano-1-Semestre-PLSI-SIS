@@ -61,7 +61,30 @@ class LoginForm extends Model
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
         }
 
+        $this->resetAttributesOnInvalidLogin();
         return false;
+    }
+
+
+    /**
+     * Checks if user is a client
+     *
+     * @return bool|null
+     */
+    public function isClient()
+    {
+        $user = $this->getUser();
+        if (!$user) return null;
+
+        $client = Client::findOne($user->id);
+        if ($client) return true;
+
+        return false;
+    }
+
+    private function resetAttributesOnInvalidLogin()
+    {
+        $this->password = '';
     }
 
     /**
