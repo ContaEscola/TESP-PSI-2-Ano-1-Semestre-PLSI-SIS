@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /** @var common\models\Airport $model */
 
 $this->title = 'Atualizar Aeroporto: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Airports', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Aeroportos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="airport-update">
 

@@ -34,10 +34,10 @@ class Airport extends \yii\db\ActiveRecord
         return [
             [['country', 'city', 'name', 'website'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['country', 'website', 'city', 'name'], 'trim'],
-            [['country', 'website'], 'string', 'max' => 50],
-            [['city', 'name'], 'string', 'max' => 75],
-            ['name', 'unique'],
-            ['website', 'unique'],
+            [['country', 'website'], 'string', 'max' => 50,'message' => '{attribute} não pode ser superior a 50 caracteres.'],
+            [['city', 'name'], 'string', 'max' => 75,'message' => '{attribute} não pode ser superior a 75 caracteres.'],
+            ['name', 'unique','targetClass' => '\common\models\Airport','message' => 'Já existe um aeroporto com esse nome.'],
+            ['website', 'unique','targetClass' => '\common\models\Airport','message'=> 'Já existe um aeroporto com esse website.'],
         ];
     }
 
