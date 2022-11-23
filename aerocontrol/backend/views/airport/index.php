@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar aeroporto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <<table class="table">
+    <table class="table">
         <tr>
             <th>ID</th>
             <th>Nome</th>
