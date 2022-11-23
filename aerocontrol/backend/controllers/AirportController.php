@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use common\models\Airport;
 use common\models\AirportSearch;
@@ -27,6 +27,28 @@ class AirportController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['viewAirport'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'roles' => ['viewAirport'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['createAirport'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['updateAirport'],
+                    ],
+                ],
             ]
         );
     }
@@ -38,12 +60,9 @@ class AirportController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AirportSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $airports = Airport::find()->all();
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'airports' => $airports,
         ]);
     }
 

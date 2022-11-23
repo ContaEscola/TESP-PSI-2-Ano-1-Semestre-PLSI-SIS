@@ -10,38 +10,37 @@ use yii\grid\GridView;
 /** @var common\models\AirportSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Airports';
+$this->title = 'Aeroportos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="airport-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Airport', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar aeroporto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'country',
-            'city',
-            'name',
-            'website',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Airport $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+    <<table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Pais</th>
+            <th>Cidade</th>
+            <th>Website</th>
+            <th>Ações</th>
+        </tr>
+        <?php
+        foreach ($airports as $airport) : ?>
+            <tr>
+                <th scope="row"><?= $airport->id ?></th>
+                <td><?= $airport->name ?></td>
+                <td><?= $airport->country ?></td>
+                <td><?= $airport->city ?></td>
+                <td><?= $airport->website ?></td>
+                <td>
+                    <a class="btn btn-primary" href="<?= Url::to(['airport/view', 'id' => $airport->id]) ?>">Visualizar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 
 
 </div>
