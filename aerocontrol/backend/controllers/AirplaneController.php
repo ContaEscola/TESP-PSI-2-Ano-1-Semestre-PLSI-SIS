@@ -113,7 +113,6 @@ class AirplaneController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-            'company' => $company,
             'company_airplanes' => $company_airplanes,
         ]);
     }
