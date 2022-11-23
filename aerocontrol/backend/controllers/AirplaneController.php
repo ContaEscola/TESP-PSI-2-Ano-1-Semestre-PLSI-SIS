@@ -52,11 +52,6 @@ class AirplaneController extends Controller
                             'actions' => ['update'],
                             'roles' => ['updateAirplane'],
                         ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['deleteAirplane'],
-                        ],
                     ],
                 ],
             ]
