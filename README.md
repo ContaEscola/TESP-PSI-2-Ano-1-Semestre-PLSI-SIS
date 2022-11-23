@@ -6,8 +6,8 @@ Grupo B
 2211900 - Rafael Bento
 
 ## Instruções 
-1. Executar o script SQL "tabelas.sql" (Em caso de erro, ir às definções do MySQL e alterar o "innodb-default-row-format" para "dynamic").
-2. Executar o script SQL "registos.sql"
+1. Executar o script SQL "aerocontrol/db/tabelas.sql" (Em caso de erro, ir às definções do MySQL e alterar o "innodb-default-row-format" para "dynamic").
+2. Executar o script SQL "aerocontrol/db/registos.sql"
 3. Abrir o terminal e executar o "composer install" na base do projeto;
 4. Executar o comando "php init" e selecionar a opção 1, no terminal.
 5. Abrir o ficheiro common/config/main-local.php e alterar o dsn, substituir:
