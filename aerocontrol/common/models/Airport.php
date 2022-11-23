@@ -32,7 +32,7 @@ class Airport extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['country', 'city', 'name', 'website'], 'required'],
+            [['country', 'city', 'name', 'website'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['country', 'website', 'city', 'name'], 'trim'],
             [['country', 'website'], 'string', 'max' => 50],
             [['city', 'name'], 'string', 'max' => 75],
