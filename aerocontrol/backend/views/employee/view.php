@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Employee $model */
 
-$this->title = $model->user->first_name." ". $model->user->last_name;
-$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
+$this->title = $model->user->first_name . " " . $model->user->last_name;
+$this->params['breadcrumbs'][] = ['label' => 'Trabalhadores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Nome',
-                'value' => $model->user->first_name." ".$model->user->last_name,
+                'value' => $model->user->first_name . " " . $model->user->last_name,
             ],
             [
                 'label' => 'Email',
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Telefone',
-                'value' => $model->user->phone_country_code." ".$model->user->phone,
+                'value' => $model->user->phone_country_code . " " . $model->user->phone,
             ],
             [
                 'label' => 'Género',

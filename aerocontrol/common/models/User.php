@@ -68,11 +68,11 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            ['id','safe'],
+            ['id', 'safe'],
             [[
                 'username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country',
                 'city', 'birthdate', 'email', 'phone', 'phone_country_code'
-            ], 'required','message'=>'{attribute} não pode ser vazio.'],
+            ], 'required', 'message' => '{attribute} não pode ser vazio.'],
 
             [[
                 'username', 'auth_key', 'password_hash', 'password_reset_token', 'verification_token',
@@ -85,9 +85,9 @@ class User extends ActiveRecord implements IdentityInterface
                 'Outro'
             ], 'strict' => true],
 
-            ['birthdate', 'date','format'=>'yyyy-MM-dd'],
+            ['birthdate', 'date', 'format' => 'yyyy-MM-dd'],
             [['status', 'created_at', 'updated_at'], 'integer'],
-            ['password_reset_token', 'default','value' => null],
+            ['password_reset_token', 'default', 'value' => null],
             ['username', 'string', 'max' => 30, 'message' => 'O nome de utilizador só pode ter até 30 caracteres.'],
             ['auth_key', 'string', 'max' => 32],
             [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255, 'message' => 'Excedeu o limite de caractares da password.'],
@@ -97,7 +97,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['phone', 'string', 'max' => 15, 'message' => '{attribute} só pode ter até 15 caracteres.'],
             ['phone_country_code', 'string', 'max' => 5, 'message' => '{attribute} só pode ter até 15 caracteres.'],
 
-            ['username', 'unique'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este username já está a ser utilizado.'],
             ['password_reset_token', 'unique'],
         ];
     }

@@ -10,7 +10,7 @@ use yii\widgets\ListView;
 /** @var common\models\EmployeeSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Employees';
+$this->title = 'Trabalhadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-index">
@@ -31,18 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <th>Ações</th>
         </tr>
         <?php
-        foreach ($employees as $employee):?>
+        foreach ($employees as $employee) : ?>
             <tr>
-                <th scope="row"><?= $employee->user->id?></th>
-                <td><?= $employee->num_emp?></td>
-                <td><?= $employee->user->username?></td>
-                <td><?= $employee->user->first_name." ".$employee->user->last_name?></td>
-                <td><?= $employee->user->email?></td>
-                <td><?= $employee->user->phone?></td>
-                <td><?= $employee->tin?></td>
-                <td><?= $employee->function->name?></td>
+                <th scope="row"><?= $employee->user->id ?></th>
+                <td><?= $employee->num_emp ?></td>
+                <td><?= $employee->user->username ?></td>
+                <td><?= $employee->user->first_name . " " . $employee->user->last_name ?></td>
+                <td><?= $employee->user->email ?></td>
+                <td><?= $employee->user->phone ?></td>
+                <td><?= $employee->tin ?></td>
+                <td><?= $employee->function->name ?></td>
                 <td>
-                    <a class="btn btn-primary" href="<?=Url::to(['employee/view','employee_id'=>$employee->user->id])?>">Visualizar</a>
+                    <a class="btn btn-primary" href="<?= Url::to(['employee/view', 'employee_id' => $employee->user->id]) ?>">Visualizar</a>
                     <?= Html::a('Delete', ['delete', 'employee_id' => $employee->employee_id], [
                         'class' => 'btn btn-danger',
                         'data' => [
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) ?>
                 </td>
             </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </table>
 
 </div>
