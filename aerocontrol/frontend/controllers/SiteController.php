@@ -162,7 +162,7 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $possibleGenders = User::POSSIBLE_GENDERS_FOR_INPUT;
+        $possibleGenders = User::POSSIBLE_GENDERS_FOR_DROPDOWN;
         return $this->render('signup', [
             'model' => $model,
             'possibleGenders' => $possibleGenders

@@ -31,7 +31,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'phone')->input('tel') ?>
 
-    <?= $form->field($model, 'gender')->dropDownList($possibleGenders, [
+    <?= $form->field($model, 'gender')->dropDownList($model->possible_genders_for_dropdown, [
         'class' => 'form-control'
     ]) ?>
 
@@ -41,12 +41,12 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'iban')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'qualifications')->dropDownList($possibleQualifications, [
+    <?= $form->field($model, 'qualifications')->dropDownList($model->possible_employee_qualifications_for_dropdown, [
         'prompt' => '',
         'class' => 'form-control'
     ]) ?>
 
-    <?= $form->field($model, 'function_id')->dropDownList($possibleFunctions, [
+    <?= $form->field($model, 'function_id')->dropDownList($model->possible_employee_functions_for_dropdown, [
         'prompt' => '',
         'class' => 'form-control'
     ]) ?>

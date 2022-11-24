@@ -4,8 +4,6 @@ namespace backend\controllers;
 
 use backend\models\EmployeeForm;
 use common\models\Employee;
-use common\models\EmployeeFunction;
-use common\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -103,18 +101,11 @@ class EmployeeController extends Controller
         if ($this->request->isPost && $model->load(Yii::$app->request->post()) && $model->create()) {
             return $this->redirect(['view', 'employee_id' => $model->employee_id]);
         } else {
-            $model->resetAttributesOnInvalidAction();
+            $model->resetAttributesOnInvalid();
         }
-
-        $possibleGenders = User::POSSIBLE_GENDERS_FOR_INPUT;
-        $possibleQualifications = Employee::POSSIBLE_QUALIFICATIONS_FOR_INPUT;
-        $possibleFunctions = $model->getAllPossibleFunctions();
 
         return $this->render('create', [
             'model' => $model,
-            'possibleGenders' => $possibleGenders,
-            'possibleQualifications' => $possibleQualifications,
-            'possibleFunctions' => $possibleFunctions
         ]);
     }
 
@@ -133,15 +124,8 @@ class EmployeeController extends Controller
             return $this->redirect(['view', 'employee_id' => $model->employee_id]);
         }
 
-        $possibleGenders = User::POSSIBLE_GENDERS_FOR_INPUT;
-        $possibleQualifications = Employee::POSSIBLE_QUALIFICATIONS_FOR_INPUT;
-        $possibleFunctions = $model->getAllPossibleFunctions();
-
         return $this->render('update', [
             'model' => $model,
-            'possibleGenders' => $possibleGenders,
-            'possibleQualifications' => $possibleQualifications,
-            'possibleFunctions' => $possibleFunctions
         ]);
     }
 

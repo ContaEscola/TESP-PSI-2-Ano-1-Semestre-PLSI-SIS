@@ -47,7 +47,7 @@ class User extends ActiveRecord implements IdentityInterface
         'Outro'
     ];
 
-    const POSSIBLE_GENDERS_FOR_INPUT = [
+    const POSSIBLE_GENDERS_FOR_DROPDOWN = [
         'Masculino' => 'Masculino',
         'Feminino' => 'Feminino',
         'Outro' => 'Outro'

@@ -35,7 +35,7 @@ class Employee extends \yii\db\ActiveRecord
         'Doutoramento'
     ];
 
-    const POSSIBLE_QUALIFICATIONS_FOR_INPUT = [
+    const POSSIBLE_QUALIFICATIONS_FOR_DROPDOWN = [
 
         'Até ao 9º ano de escolaridade' => 'Até ao 9º ano de escolaridade',
         'Secundário' => 'Secundário',
