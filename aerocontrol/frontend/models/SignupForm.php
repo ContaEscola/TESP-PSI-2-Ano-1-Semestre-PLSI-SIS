@@ -3,17 +3,16 @@
 namespace frontend\models;
 
 use common\models\Client;
-use Psy\VarDumper\Dumper;
 use Yii;
 use yii\base\Model;
 use common\models\User;
-use yii\helpers\VarDumper;
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
+
     public $username;
     public $email;
     public $password;
@@ -25,7 +24,6 @@ class SignupForm extends Model
     public $birthdate;
     public $phone;
     public $phone_country_code;
-
 
 
 
@@ -67,11 +65,10 @@ class SignupForm extends Model
             ],
 
             ['gender', 'required', 'message' => "É necessário o seu género."],
-            ['gender', 'in', 'range' => [
-                'Masculino',
-                'Feminino',
-                'Outro'
-            ], 'strict' => true],
+            [
+                'gender', 'in', 'range' =>
+                User::POSSIBLE_GENDERS, 'strict' => true
+            ],
 
             ['country', 'trim'],
             ['country', 'required', 'message' => "É necessário o país."],
@@ -89,7 +86,7 @@ class SignupForm extends Model
                 'max' => 75, 'tooLong' => 'O nome da cidade não pode exceder os 75 caracteres.'
             ],
 
-            ['birthdate', 'required', 'message' => "É necessário a sua data de nascimento."],
+            ['birthdate', 'required', 'message' => "É necessária a sua data de nascimento."],
             ['birthdate', 'date', 'format' => 'yyyy-MM-dd'],
 
             ['phone_country_code', 'trim'],
@@ -116,6 +113,7 @@ class SignupForm extends Model
             return null;
         }
 
+        // Criar o user
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
@@ -131,10 +129,10 @@ class SignupForm extends Model
         $user->phone = $this->phone;
         $user->phone_country_code = $this->phone_country_code;
         $user->password_reset_token = null;
-        $user->status = 10;
+        $user->status = User::STATUS_ACTIVE;
         $user->save();
 
-        //adicionar client
+        // Criar o client
         $client = new Client();
         $client->client_id = $user->id;
         $client->save();

@@ -4,6 +4,7 @@
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \frontend\models\SignupForm $model */
 
+use common\models\User;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -109,9 +110,8 @@ $this->title = 'Sign Up';
                         ->label("Género:", [
                             'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                        ->dropDownList([
-                            'Masculino' => 'Masculino', 'Feminino' => 'Feminino', 'Outro' => 'Outro'
-                        ], [
+                        ->dropDownList($possibleGenders, [
+                            'prompt' => '',
                             'class' => 'form__input'
                         ]) ?>
 

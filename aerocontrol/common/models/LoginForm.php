@@ -82,6 +82,9 @@ class LoginForm extends Model
         return false;
     }
 
+    /**
+     * Resets choosen attributes on invalid login
+     */
     private function resetAttributesOnInvalidLogin()
     {
         $this->password = '';

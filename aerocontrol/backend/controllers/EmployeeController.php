@@ -2,13 +2,12 @@
 
 namespace backend\controllers;
 
+use backend\models\EmployeeForm;
 use common\models\Employee;
 use common\models\EmployeeFunction;
-use common\models\EmployeeSearch;
 use common\models\User;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,7 +26,7 @@ class EmployeeController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -99,46 +98,23 @@ class EmployeeController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Employee();
-        $user = new User();
-        $function = new EmployeeFunction();
+        $model = new EmployeeForm();
 
-        if ($this->request->isPost) {
-            $post = \Yii::$app->request->post();
-            $post['Employee']['function_id'] = $post['EmployeeFunction']['id'];
-            $model->attributes = $post['Employee'];
-
-            $user->attributes = $post['User'];
-            $date = date_create($user->birthdate);
-            $user->birthdate = date_format($date, "Y-m-d");
-            $user->setPassword($user->password_hash);
-            $user->generateAuthKey();
-            $user->generateEmailVerificationToken();
-            $user->status = 10;
-
-            if ($user->validate() && $model->validate()) {
-                if ($user->save()) {
-                    $model->employee_id = $user->id;
-                    if ($model->save()){
-                        $auth = Yii::$app->authManager;
-                        $employeeRole = $auth->getRole('employee');
-                        $auth->assign($employeeRole, $user->getId());
-                        return $this->redirect(['view', 'employee_id' => $model->employee_id]);
-                    }
-                }
-            }
-            $user->password_hash =" ";
+        if ($this->request->isPost && $model->load(Yii::$app->request->post()) && $model->create()) {
+            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        } else {
+            $model->resetAttributesOnInvalidAction();
         }
 
-        $employee_functions = EmployeeFunction::find()->select(['id', 'name'])->all();
-        foreach ($employee_functions as $function)
-            $functions[$function->id] = $function->name;
+        $possibleGenders = User::POSSIBLE_GENDERS_FOR_INPUT;
+        $possibleQualifications = Employee::POSSIBLE_QUALIFICATIONS_FOR_INPUT;
+        $possibleFunctions = $model->getAllPossibleFunctions();
 
         return $this->render('create', [
             'model' => $model,
-            'user' => $user,
-            'function' => $function,
-            'functions' => $functions,
+            'possibleGenders' => $possibleGenders,
+            'possibleQualifications' => $possibleQualifications,
+            'possibleFunctions' => $possibleFunctions
         ]);
     }
 
@@ -151,29 +127,21 @@ class EmployeeController extends Controller
      */
     public function actionUpdate($employee_id)
     {
-        $model = $this->findModel($employee_id);
+        $model = new EmployeeForm($employee_id);
 
-        if ($this->request->isPost ) {
-            $post = \Yii::$app->request->post();
-            $post['Employee']['function_id'] = $post['EmployeeFunction']['id'];
-            $model->attributes = $post['Employee'];
-            $user = User::findOne($employee_id);
-            $user->attributes = $post['User'];
-            $date = date_create($user->birthdate);
-            $user->birthdate = date_format($date,"Y-m-d");
-            if($user->save() && $model->save())
-                return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
         }
 
-        $employee_functions = EmployeeFunction::find()->select(['id', 'name'])->all();
+        $possibleGenders = User::POSSIBLE_GENDERS_FOR_INPUT;
+        $possibleQualifications = Employee::POSSIBLE_QUALIFICATIONS_FOR_INPUT;
+        $possibleFunctions = $model->getAllPossibleFunctions();
 
-        foreach ($employee_functions as $function)
-            $functions[$function->id] = $function->name;
-
-        if (!$this->request->isPost )
         return $this->render('update', [
             'model' => $model,
-            'functions'=>$functions,
+            'possibleGenders' => $possibleGenders,
+            'possibleQualifications' => $possibleQualifications,
+            'possibleFunctions' => $possibleFunctions
         ]);
     }
 

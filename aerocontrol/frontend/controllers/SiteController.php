@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -161,8 +162,10 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
+        $possibleGenders = User::POSSIBLE_GENDERS_FOR_INPUT;
         return $this->render('signup', [
             'model' => $model,
+            'possibleGenders' => $possibleGenders
         ]);
     }
 

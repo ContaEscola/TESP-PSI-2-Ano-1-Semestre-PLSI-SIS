@@ -29,11 +29,11 @@ class Company extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['name', 'required', 'message'=>'{attribute} não pode ser vazio.'],
+            ['name', 'required', 'message' => '{attribute} não pode ser vazio.'],
             ['name', 'trim'],
-            ['name', 'string', 'max' => 50, 'message'=>'{attribute} não pode conter mais de 50 caracteres.'],
-            ['name', 'unique','targetClass' => '\common\models\Company', 'message'=> 'Nome da companhia já existe.'],
-            ['state', 'boolean','message'=>'Selecione um dos estados.'],
+            ['name', 'string', 'max' => 50, 'message' => '{attribute} não pode exceder os 50 caracteres.'],
+            ['name', 'unique', 'targetClass' => '\common\models\Company', 'message' => 'Este nome já está a ser utilizado.'],
+            ['state', 'boolean', 'message' => 'Selecione um dos estados.'],
         ];
     }
 
