@@ -246,7 +246,10 @@ class EmployeeForm extends Model
                 }, 'message' => 'Este iban já está a ser utilizado.'
             ],
 
+            ['qualifications', 'required', 'message' => "É necessário a qualificação."],
             ['qualifications', 'in', 'range' => Employee::POSSIBLE_QUALIFICATIONS, 'strict' => true, 'message' => 'Qualificação inválida.'],
+
+            ['function_id', 'required', 'message' => "É necessário a função."],
             ['function_id', 'in', 'range' => $this->possible_employee_functions_for_rule, 'message' => 'Função inválida']
         ];
     }

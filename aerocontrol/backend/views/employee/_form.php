@@ -1,19 +1,19 @@
 <?php
 
-use backend\models\EmployeeForm;
-use common\models\EmployeeFunction;
-use common\models\User;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var common\models\Employee $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var yii\bootstrap5\ActiveForm $form */
 ?>
 
 <div class="employee-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'validateOnType' => true,
+        'validationDelay' => 500,
+    ]); ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
@@ -31,7 +31,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'phone')->input('tel') ?>
 
-    <?= $form->field($model, 'gender')->dropDownList($possibleGenders) ?>
+    <?= $form->field($model, 'gender')->dropDownList($possibleGenders, [
+        'class' => 'form-control'
+    ]) ?>
 
     <?= $form->field($model, 'tin')->textInput(['maxlength' => true]) ?>
 
@@ -39,9 +41,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'iban')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'qualifications')->dropDownList($possibleQualifications, ['prompt' => '']) ?>
+    <?= $form->field($model, 'qualifications')->dropDownList($possibleQualifications, [
+        'prompt' => '',
+        'class' => 'form-control'
+    ]) ?>
 
-    <?= $form->field($model, 'function_id')->dropDownList($possibleFunctions, ['prompt' => '']) ?>
+    <?= $form->field($model, 'function_id')->dropDownList($possibleFunctions, [
+        'prompt' => '',
+        'class' => 'form-control'
+    ]) ?>
 
     <?= $form->field($model, 'country')->textInput() ?>
 
