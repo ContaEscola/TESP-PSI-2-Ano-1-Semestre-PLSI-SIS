@@ -103,6 +103,21 @@ class m221115_155756_init_rbac extends Migration
         $auth->add($viewAirplane);
 
         /*
+            Airport Permissions
+        */
+        $createAirport = $auth->createPermission('createAirport');
+        $createAirport->description= "Criar Aeroporto";
+        $auth->add($createAirport);
+
+        $updateAirport = $auth->createPermission('updateAirport');
+        $updateAirport->description = "Atualizar Aeroporto";
+        $auth->add($updateAirport);
+
+        $viewAirport = $auth->createPermission('viewAirport');
+        $viewAirport->description = "Visualizar Aeroporto";
+        $auth->add($viewAirport);
+
+        /*
             PaymentMethod Permissions
         */
         $createPaymentMethod = $auth->createPermission('createPaymentMethod');
@@ -413,6 +428,9 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee,$createAirplane);
         $auth->addChild($employee,$updateAirplane);
         $auth->addChild($employee,$viewAirplane);
+        $auth->addChild($employee,$createAirport);
+        $auth->addChild($employee,$updateAirport);
+        $auth->addChild($employee,$viewAirport);
         $auth->addChild($employee,$updatePaymentMethod);
         $auth->addChild($employee,$viewPaymentMethod);
         $auth->addChild($employee,$updateClient);

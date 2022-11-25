@@ -37,7 +37,7 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required', 'message' => "É necessário um username."],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Esta username já está a ser utilizada.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este username já está a ser utilizado.'],
             [
                 'username', 'string',
                 'min' => 2, 'tooShort' => 'A username deve conter pelo menos 2 caracteres.',

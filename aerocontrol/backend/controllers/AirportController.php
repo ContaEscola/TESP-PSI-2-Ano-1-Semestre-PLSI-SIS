@@ -2,18 +2,17 @@
 
 namespace backend\controllers;
 
-use common\models\Airplane;
-use common\models\AirplaneSearch;
-use common\models\Company;
+use common\models\Airport;
+use common\models\AirportSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 
 /**
- * AirplaneController implements the CRUD actions for Airplane model.
+ * AirportController implements the CRUD actions for Airport model.
  */
-class AirplaneController extends Controller
+class AirportController extends Controller
 {
     /**
      * @inheritDoc
@@ -24,7 +23,7 @@ class AirplaneController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -35,22 +34,22 @@ class AirplaneController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewAirplane'],
+                            'roles' => ['viewAirport'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewAirplane'],
+                            'roles' => ['viewAirport'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createAirplane'],
+                            'roles' => ['createAirport'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateAirplane'],
+                            'roles' => ['updateAirport'],
                         ],
                     ],
                 ],
@@ -59,20 +58,20 @@ class AirplaneController extends Controller
     }
 
     /**
-     * Lists all Airplane models.
+     * Lists all Airport models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $airplanes = Airplane::find()->all();
+        $airports = Airport::find()->all();
         return $this->render('index', [
-            'airplanes' => $airplanes,
+            'airports' => $airports,
         ]);
     }
 
     /**
-     * Displays a single Airplane model.
+     * Displays a single Airport model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -85,13 +84,13 @@ class AirplaneController extends Controller
     }
 
     /**
-     * Creates a new Airplane model.
+     * Creates a new Airport model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Airplane();
+        $model = new Airport();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -101,20 +100,13 @@ class AirplaneController extends Controller
             $model->loadDefaultValues();
         }
 
-        $companies = Company::find()->select(['id', 'name'])->all();
-        foreach ($companies as $company) {
-            $company_airplanes[$company->id] = $company->name;
-        }
-
         return $this->render('create', [
             'model' => $model,
-            'company' => $company,
-            'company_airplanes' => $company_airplanes,
         ]);
     }
 
     /**
-     * Updates an existing Airplane model.
+     * Updates an existing Airport model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -128,19 +120,13 @@ class AirplaneController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $companies = Company::find()->select(['id', 'name'])->all();
-        foreach ($companies as $company) {
-            $company_airplanes[$company->id] = $company->name;
-        }
-
         return $this->render('update', [
             'model' => $model,
-            'company_airplanes' => $company_airplanes,
         ]);
     }
 
     /**
-     * Deletes an existing Airplane model.
+     * Deletes an existing Airport model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -154,15 +140,15 @@ class AirplaneController extends Controller
     }
 
     /**
-     * Finds the Airplane model based on its primary key value.
+     * Finds the Airport model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Airplane the loaded model
+     * @return Airport the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Airplane::findOne(['id' => $id])) !== null) {
+        if (($model = Airport::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
