@@ -1,38 +1,41 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var common\models\Client $model */
-/** @var yii\widgets\ActiveForm $form */
+/** @var yii\bootstrap5\ActiveForm $form */
 ?>
 
 <div class="client-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'validateOnType' => true,
+        'validationDelay' => 500,
+    ]); ?>
 
-    <?= $form->field($model, 'client_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'username')->textInput() ?>
 
-    <?= $form->field($model->user, 'username')->textInput() ?>
+    <?= $form->field($model, 'first_name')->textInput() ?>
 
-    <?= $form->field($model->user, 'first_name')->textInput() ?>
+    <?= $form->field($model, 'last_name')->textInput() ?>
 
-    <?= $form->field($model->user, 'last_name')->textInput() ?>
+    <?= $form->field($model, 'email')->textInput() ?>
 
-    <?= $form->field($model->user, 'email')->textInput() ?>
+    <?= $form->field($model, 'phone_country_code')->textInput() ?>
 
-    <?= $form->field($model->user, 'phone_country_code')->textInput() ?>
+    <?= $form->field($model, 'phone')->input('number') ?>
 
-    <?= $form->field($model->user, 'phone')->input('number') ?>
+    <?= $form->field($model, 'gender')->dropDownList($model->possible_genders_for_dropdown, [
+        'class' => 'form-control'
+    ]) ?>
 
-    <?= $form->field($model->user, 'gender')->dropDownList([ 'Masculino' => 'Masculino','Feminino' => 'Feminino','Outro' => 'Outro' ]) ?>
+    <?= $form->field($model, 'country')->textInput() ?>
 
-    <?= $form->field($model->user, 'country')->textInput() ?>
+    <?= $form->field($model, 'city')->textInput() ?>
 
-    <?= $form->field($model->user, 'city')->textInput() ?>
-
-    <?= $form->field($model->user, 'birthdate')->input('date') ?>
+    <?= $form->field($model, 'birthdate')->input('date') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

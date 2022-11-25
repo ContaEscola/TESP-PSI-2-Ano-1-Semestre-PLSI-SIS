@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\ClientForm;
 use common\models\Client;
 use common\models\ClientSearch;
 use common\models\User;
@@ -24,7 +25,7 @@ class ClientController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -90,16 +91,11 @@ class ClientController extends Controller
      */
     public function actionUpdate($client_id)
     {
-        $model = $this->findModel($client_id);
+        $validClient = $this->findModel($client_id);
+        $model = new ClientForm($validClient->client_id);
 
-        if ($this->request->isPost) {
-            $post = \Yii::$app->request->post();
-            $user = User::findOne($client_id);
-            $user->attributes = $post['User'];
-            $date = date_create($user->birthdate);
-            $user->birthdate = date_format($date,"Y-m-d");
-            if($user->save() && $model->save())
-                return $this->redirect(['view', 'client_id' => $model->client_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+            return $this->redirect(['view', 'client_id' => $model->client_id]);
         }
 
         return $this->render('update', [
