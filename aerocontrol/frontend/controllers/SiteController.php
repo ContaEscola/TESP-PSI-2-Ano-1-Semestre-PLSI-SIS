@@ -160,12 +160,12 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Registo efetuado! Efetue o Login!');
             return $this->goHome();
+        } else {
+            $model->resetAttributesOnInvalid();
         }
 
-        $possibleGenders = User::POSSIBLE_GENDERS_FOR_DROPDOWN;
         return $this->render('signup', [
             'model' => $model,
-            'possibleGenders' => $possibleGenders
         ]);
     }
 

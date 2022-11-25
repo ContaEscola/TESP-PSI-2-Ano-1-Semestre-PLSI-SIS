@@ -49,7 +49,7 @@ $this->title = 'Sign Up';
                     ]) ?>
 
 
-                <?= $form->field($model, 'password', [
+                <?= $form->field($model, 'password_hash', [
                     'options' => ['class' => 'form__group'],
                     'errorOptions' => [
                         'tag' => 'p',
@@ -110,7 +110,7 @@ $this->title = 'Sign Up';
                         ->label("Género:", [
                             'class' => '[ input__label ] [ margin-bottom-50 ]'
                         ])
-                        ->dropDownList($possibleGenders, [
+                        ->dropDownList($model->possible_genders_for_dropdown, [
                             'prompt' => '',
                             'class' => 'form__input'
                         ]) ?>

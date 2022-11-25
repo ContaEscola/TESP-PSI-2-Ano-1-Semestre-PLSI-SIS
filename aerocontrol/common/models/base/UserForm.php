@@ -25,6 +25,8 @@ class UserForm extends Model
     public $phone;
     public $phone_country_code;
 
+    protected $default_state = User::STATUS_ACTIVE;
+
     protected $_user;
 
     public function __construct($user_id = null, $config = [])
@@ -240,7 +242,7 @@ class UserForm extends Model
             'phone' => $this->phone,
             'phone_country_code' => $this->phone_country_code,
             'password_reset_token' => null,
-            'status' => User::STATUS_ACTIVE
+            'status' => $this->default_state
         ];
     }
 }
