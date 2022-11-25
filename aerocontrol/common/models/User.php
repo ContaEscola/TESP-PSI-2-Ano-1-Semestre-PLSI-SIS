@@ -41,6 +41,19 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    const POSSIBLE_GENDERS = [
+        'Masculino',
+        'Feminino',
+        'Outro'
+    ];
+
+    const POSSIBLE_GENDERS_FOR_DROPDOWN = [
+        'Masculino' => 'Masculino',
+        'Feminino' => 'Feminino',
+        'Outro' => 'Outro'
+    ];
+
+
 
     /**
      * {@inheritdoc}
@@ -68,37 +81,10 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            ['id', 'safe'],
-            [[
-                'username', 'auth_key', 'password_hash', 'first_name', 'last_name', 'gender', 'country',
-                'city', 'birthdate', 'email', 'phone', 'phone_country_code'
-            ], 'required', 'message' => '{attribute} não pode ser vazio.'],
-
-            [[
-                'username', 'auth_key', 'password_hash', 'password_reset_token', 'verification_token',
-                'first_name', 'last_name', 'country', 'city', 'email', 'phone', 'phone_country_code', 'gender'
-            ], 'trim'],
-
-            ['gender', 'in', 'range' => [
-                'Masculino',
-                'Feminino',
-                'Outro'
-            ], 'strict' => true],
-
-            ['birthdate', 'date', 'format' => 'yyyy-MM-dd'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            ['password_reset_token', 'default', 'value' => null],
-            ['username', 'string', 'max' => 30, 'message' => 'O nome de utilizador só pode ter até 30 caracteres.'],
-            ['auth_key', 'string', 'max' => 32],
-            [['password_hash', 'password_reset_token', 'verification_token'], 'string', 'max' => 255, 'message' => 'Excedeu o limite de caractares da password.'],
-            [['first_name', 'last_name', 'country'], 'string', 'max' => 50, 'message' => '{attribute} só pode ter até 50 caracteres.'],
-            ['city', 'string', 'max' => 75, 'message' => '{attribute} só pode ter até 75 caracteres.'],
-            ['email', 'string', 'max' => 200, 'message' => '{attribute} só pode ter até 200 caracteres.'],
-            ['phone', 'string', 'max' => 15, 'message' => '{attribute} só pode ter até 15 caracteres.'],
-            ['phone_country_code', 'string', 'max' => 5, 'message' => '{attribute} só pode ter até 15 caracteres.'],
-
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este username já está a ser utilizado.'],
-            ['password_reset_token', 'unique'],
+            [
+                'gender', 'in', 'range' => self::POSSIBLE_GENDERS,
+                'strict' => true
+            ],
         ];
     }
 

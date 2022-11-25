@@ -150,6 +150,7 @@ CREATE TABLE IF NOT EXISTS `airport` (
 CREATE TABLE IF NOT EXISTS `company` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
+  `state` TINYINT(1) NOT NULL,
   CONSTRAINT `pk_company_id` PRIMARY KEY(`id`),
   CONSTRAINT `uk_name` UNIQUE KEY(`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

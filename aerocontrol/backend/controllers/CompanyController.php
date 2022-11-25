@@ -2,18 +2,16 @@
 
 namespace backend\controllers;
 
-use backend\models\EmployeeForm;
-use common\models\Employee;
-use Yii;
+use common\models\Company;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EmployeeController implements the CRUD actions for Employee model.
+ * CompanyController implements the CRUD actions for Company model.
  */
-class EmployeeController extends Controller
+class CompanyController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,27 +33,27 @@ class EmployeeController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewEmployee'],
+                            'roles' => ['viewCompany'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewEmployee'],
+                            'roles' => ['viewCompany'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createEmployee'],
+                            'roles' => ['createCompany'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateEmployee'],
+                            'roles' => ['updateCompany'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteEmployee'],
+                            'roles' => ['deleteCompany'],
                         ],
                     ],
                 ],
@@ -64,44 +62,46 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Lists all Employee models.
+     * Lists all Company models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $employees = Employee::find()->all();
+        $companies = Company::find()->all();
         return $this->render('index', [
-            'employees' => $employees,
+            'companies' => $companies,
         ]);
     }
 
     /**
-     * Displays a single Employee model.
-     * @param int $employee_id Employee ID
+     * Displays a single Company model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView(int $employee_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($employee_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Employee model.
+     * Creates a new Company model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new EmployeeForm();
+        $model = new Company();
 
-        if ($this->request->isPost && $model->load(Yii::$app->request->post()) && $model->create()) {
-            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
-            $model->resetAttributesOnInvalid();
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -110,18 +110,18 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Updates an existing Employee model.
+     * Updates an existing Company model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $employee_id Employee ID
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($employee_id)
+    public function actionUpdate($id)
     {
-        $model = new EmployeeForm($employee_id);
+        $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
-            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -130,28 +130,29 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Deletes an existing Employee model.
+     * Deletes an existing Company model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $employee_id Employee ID
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete(int $employee_id)
+    public function actionDelete($id)
     {
-        $this->findModel($employee_id)->delete();
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Employee model based on its primary key value.
+     * Finds the Company model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $employee_id Employee ID
-     * @return Employee the loaded model
+     * @param int $id ID
+     * @return Company the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($employee_id)
+    protected function findModel($id)
     {
-        if (($model = Employee::findOne(['employee_id' => $employee_id])) !== null) {
+        if (($model = Company::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

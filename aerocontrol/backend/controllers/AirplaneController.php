@@ -2,18 +2,18 @@
 
 namespace backend\controllers;
 
-use backend\models\EmployeeForm;
-use common\models\Employee;
-use Yii;
-use yii\filters\AccessControl;
+use common\models\Airplane;
+use common\models\AirplaneSearch;
+use common\models\Company;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
- * EmployeeController implements the CRUD actions for Employee model.
+ * AirplaneController implements the CRUD actions for Airplane model.
  */
-class EmployeeController extends Controller
+class AirplaneController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,27 +35,22 @@ class EmployeeController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewEmployee'],
+                            'roles' => ['viewAirplane'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewEmployee'],
+                            'roles' => ['viewAirplane'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createEmployee'],
+                            'roles' => ['createAirplane'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateEmployee'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['deleteEmployee'],
+                            'roles' => ['updateAirplane'],
                         ],
                     ],
                 ],
@@ -64,64 +59,67 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Lists all Employee models.
+     * Lists all Airplane models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $employees = Employee::find()->all();
+        $airplanes = Airplane::find()->all();
         return $this->render('index', [
-            'employees' => $employees,
+            'airplanes' => $airplanes,
         ]);
     }
 
     /**
-     * Displays a single Employee model.
-     * @param int $employee_id Employee ID
+     * Displays a single Airplane model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView(int $employee_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($employee_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new Employee model.
+     * Creates a new Airplane model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new EmployeeForm();
+        $model = new Airplane();
 
-        if ($this->request->isPost && $model->load(Yii::$app->request->post()) && $model->create()) {
-            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
-            $model->resetAttributesOnInvalid();
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
             'model' => $model,
+
         ]);
     }
 
     /**
-     * Updates an existing Employee model.
+     * Updates an existing Airplane model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $employee_id Employee ID
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($employee_id)
+    public function actionUpdate($id)
     {
-        $model = new EmployeeForm($employee_id);
+        $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
-            return $this->redirect(['view', 'employee_id' => $model->employee_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -130,28 +128,29 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Deletes an existing Employee model.
+     * Deletes an existing Airplane model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $employee_id Employee ID
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete(int $employee_id)
+    public function actionDelete($id)
     {
-        $this->findModel($employee_id)->delete();
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Employee model based on its primary key value.
+     * Finds the Airplane model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $employee_id Employee ID
-     * @return Employee the loaded model
+     * @param int $id ID
+     * @return Airplane the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($employee_id)
+    protected function findModel($id)
     {
-        if (($model = Employee::findOne(['employee_id' => $employee_id])) !== null) {
+        if (($model = Airplane::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

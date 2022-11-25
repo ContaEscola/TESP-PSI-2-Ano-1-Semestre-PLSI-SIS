@@ -8,12 +8,12 @@ use yii\helpers\Html;
 $this->title = 'Atualizar Trabalhador: ' . $model->user->first_name . " " . $model->user->last_name;
 $this->params['breadcrumbs'][] = ['label' => 'Trabalhadores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->employee_id, 'url' => ['view', 'employee_id' => $model->employee_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Atualizar';
 ?>
 <div class="employee-update">
-    <?= $this->render('_formupdate', [
+
+    <?= $this->render('_form', [
         'model' => $model,
-        'functions' => $functions,
     ]) ?>
 
 </div>

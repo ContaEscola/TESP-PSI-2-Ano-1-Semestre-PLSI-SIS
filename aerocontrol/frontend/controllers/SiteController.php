@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -98,8 +99,6 @@ class SiteController extends Controller
             return $this->goBack();
         }
 
-        $model->password = '';
-
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -159,9 +158,10 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-           // Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
             Yii::$app->session->setFlash('success', 'Registo efetuado! Efetue o Login!');
             return $this->goHome();
+        } else {
+            $model->resetAttributesOnInvalid();
         }
 
         return $this->render('signup', [
