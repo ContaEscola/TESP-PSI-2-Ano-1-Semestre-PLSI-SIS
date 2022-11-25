@@ -23,8 +23,8 @@ use yii\bootstrap5\ActiveForm;
         'class' => 'form-control'
     ]) ?>
 
-    <?= $form->field($model, 'company_id')->dropDownList($company_airplanes, [
-        'class' => 'form-control'
+    <?= $form->field($model, 'company_id')->dropDownList($model->possible_airplane_companies_for_dropdown, [
+        'class' => 'form-control',
     ]) ?>
 
     <div class="form-group">

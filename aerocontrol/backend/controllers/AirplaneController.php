@@ -106,14 +106,9 @@ class AirplaneController extends Controller
             $model->loadDefaultValues();
         }
 
-        $companies = Company::find()->select(['id', 'name'])->all();
-        foreach ($companies as $company) {
-            $company_airplanes[$company->id] = $company->name;
-        }
-
         return $this->render('create', [
             'model' => $model,
-            'company_airplanes' => $company_airplanes,
+
         ]);
     }
 
@@ -132,14 +127,8 @@ class AirplaneController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        $companies = Company::find()->select(['id', 'name'])->all();
-        foreach ($companies as $company) {
-            $company_airplanes[$company->id] = $company->name;
-        }
-
         return $this->render('update', [
             'model' => $model,
-            'company_airplanes' => $company_airplanes,
         ]);
     }
 

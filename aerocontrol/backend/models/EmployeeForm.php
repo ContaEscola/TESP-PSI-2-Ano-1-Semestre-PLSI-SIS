@@ -272,17 +272,12 @@ class EmployeeForm extends UserForm
     /**
      * Setups the possible employee functions to this form
      *
-     *
      */
     protected function setupPossibleEmployeeFunctions()
     {
-        $possibleEmployeeFunctions = EmployeeFunction::find()->select(['id', 'name'])->orderBy('name')->all();
 
-        // Makes an array of ID´s from all the possible employee functions
-        $this->possible_employee_functions = ArrayHelper::getColumn($possibleEmployeeFunctions, 'id');
-
-        // Maps the array containing the function to an associative array of 'id' => 'name'
-        $this->possible_employee_functions_for_dropdown = ArrayHelper::map($possibleEmployeeFunctions, 'id', 'name');
+        $this->possible_employee_functions = EmployeeFunction::getPossibleEmployeeFunctionsIDs();
+        $this->possible_employee_functions_for_dropdown = EmployeeFunction::getPossibleEmployeeFunctionsForDropdowns();
     }
 
 
