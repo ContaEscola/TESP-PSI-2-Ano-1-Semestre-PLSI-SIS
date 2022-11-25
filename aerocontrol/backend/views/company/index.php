@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <tr>
             <th>ID</th>
             <th>Nome</th>
+            <th>Estado</th>
             <th>Ações</th>
         </tr>
         <?php
@@ -29,6 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <th scope="row"><?= $company->id ?></th>
                 <td><?= $company->name ?></td>
+                <td>
+                    <?php
+                    if($company->state == 0){
+                        echo "Inativo";
+                    } else{
+                        echo "Ativo";
+                    }
+                    ?></td>
                 <td>
                     <a class="btn btn-primary" href="<?= Url::to(['company/view', 'id' => $company->id]) ?>">Visualizar</a>
                 </td>
