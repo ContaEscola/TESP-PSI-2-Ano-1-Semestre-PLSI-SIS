@@ -25,7 +25,7 @@ class UserForm extends Model
     public $phone;
     public $phone_country_code;
 
-    protected $default_state = User::STATUS_ACTIVE;
+    protected $statusOnCreate = User::STATUS_ACTIVE;
 
     protected $_user;
 
@@ -170,6 +170,8 @@ class UserForm extends Model
         $user->setPassword($this->password_hash);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->status = $this->statusOnCreate;
+
         $user->setAttributes($this->getUserDetails(), false);
         if (!$user->save())
             return null;
@@ -242,7 +244,6 @@ class UserForm extends Model
             'phone' => $this->phone,
             'phone_country_code' => $this->phone_country_code,
             'password_reset_token' => null,
-            'status' => $this->default_state
         ];
     }
 }
