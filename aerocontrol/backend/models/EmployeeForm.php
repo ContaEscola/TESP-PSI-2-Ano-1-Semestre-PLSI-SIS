@@ -41,6 +41,7 @@ class EmployeeForm extends UserForm
             $this->setupEmployeeOnForm($employee_id);
         }
 
+        // Se existir um employee_id então dá setup do correspondente User com este form
         parent::__construct($employee_id, $config);
     }
 
