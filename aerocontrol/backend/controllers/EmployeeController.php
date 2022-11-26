@@ -118,7 +118,8 @@ class EmployeeController extends Controller
      */
     public function actionUpdate($employee_id)
     {
-        $model = new EmployeeForm($employee_id);
+        $validEmployee = $this->findModel($employee_id);
+        $model = new EmployeeForm($validEmployee->employee_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
             return $this->redirect(['view', 'employee_id' => $model->employee_id]);

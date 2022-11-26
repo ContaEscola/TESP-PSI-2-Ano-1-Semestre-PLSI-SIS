@@ -14,7 +14,7 @@ use yii\base\ErrorException;
 class SignupForm extends UserForm
 {
     // Para quando tivermos os emails, muda o defaultState;
-    //protected $default_state = User::STATUS_INACTIVE;
+    //protected $statusOnCreate = User::STATUS_INACTIVE;
 
 
 
