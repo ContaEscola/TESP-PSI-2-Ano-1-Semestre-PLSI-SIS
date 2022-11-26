@@ -18,6 +18,20 @@ use Yii;
  */
 class Airplane extends \yii\db\ActiveRecord
 {
+    private $possible_airplane_companies;
+    public $possible_airplane_companies_for_dropdown;
+
+
+    public function __construct($config = [])
+    {
+        // Setups the possible values for airplane company
+        $this->setupPossibleAirplaneCompanies();
+
+
+
+        parent::__construct($config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,6 +57,7 @@ class Airplane extends \yii\db\ActiveRecord
             ],
             ['name', 'unique', 'targetClass' => '\common\models\Airplane', 'message' => 'Este nome já está a ser utilizado.'],
 
+            ['company_id', 'in', 'range' => $this->possible_airplane_companies, 'message' => 'Companhia inválida'],
             ['company_id', 'exist', 'skipOnError' => true, 'targetClass' => Company::class, 'targetAttribute' => ['company_id' => 'id']],
         ];
     }
@@ -59,6 +74,16 @@ class Airplane extends \yii\db\ActiveRecord
             'state' => 'Estado',
             'company_id' => 'Companhia',
         ];
+    }
+
+    /**
+     * Setups the possible airplane companies for this model
+     *
+     */
+    protected function setupPossibleAirplaneCompanies()
+    {
+        $this->possible_airplane_companies = Company::getPossibleCompaniesIDs();
+        $this->possible_airplane_companies_for_dropdown = Company::getPossibleCompaniesForDropdowns();
     }
 
     /**

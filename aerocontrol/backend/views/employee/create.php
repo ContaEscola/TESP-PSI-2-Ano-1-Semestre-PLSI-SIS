@@ -5,17 +5,14 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Employee $model */
 
-$this->title = 'Create Employee';
-$this->params['breadcrumbs'][] = ['label' => 'Employees', 'url' => ['index']];
+$this->title = 'Criar Trabalhador';
+$this->params['breadcrumbs'][] = ['label' => 'Trabalhadores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-create">
 
-    <?= $this->render('_formcreate', [
+    <?= $this->render('_form', [
         'model' => $model,
-        'user'=> $user,
-        'function'=> $function,
-        'functions'=>$functions,
     ]) ?>
 
 </div>
