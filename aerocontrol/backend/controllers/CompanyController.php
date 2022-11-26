@@ -3,7 +3,6 @@
 namespace backend\controllers;
 
 use common\models\Company;
-use common\models\CompanySearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -23,7 +22,7 @@ class CompanyController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -69,7 +68,7 @@ class CompanyController extends Controller
      */
     public function actionIndex()
     {
-        $companies = Company::find()->orderBy('id')->all();
+        $companies = Company::find()->all();
         return $this->render('index', [
             'companies' => $companies,
         ]);

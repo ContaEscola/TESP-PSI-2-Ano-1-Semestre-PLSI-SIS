@@ -23,6 +23,32 @@ use Yii;
  */
 class Employee extends \yii\db\ActiveRecord
 {
+    const POSSIBLE_QUALIFICATIONS = [
+        'Até ao 9º ano de escolaridade',
+        'Secundário',
+        'Curso técnico superior profissional',
+        'Diploma de Especialização Tecnológica',
+        'Ensino superior - bacharelato ou equivalente',
+        'Licenciatura Pré-Bolonha',
+        'Licenciatura 1º Ciclo - Pós-Bolonha',
+        'Mestrado',
+        'Doutoramento'
+    ];
+
+    const POSSIBLE_QUALIFICATIONS_FOR_DROPDOWN = [
+
+        'Até ao 9º ano de escolaridade' => 'Até ao 9º ano de escolaridade',
+        'Secundário' => 'Secundário',
+        'Curso técnico superior profissional' => 'Curso técnico superior profissional',
+        'Diploma de Especialização Tecnológica' => 'Diploma de Especialização Tecnológica',
+        'Ensino superior - bacharelato ou equivalente' => 'Ensino superior - bacharelato ou equivalente',
+        'Licenciatura Pré-Bolonha' => 'Licenciatura Pré-Bolonha',
+        'Licenciatura 1º Ciclo - Pós-Bolonha' => 'Licenciatura 1º Ciclo - Pós-Bolonha',
+        'Mestrado' => 'Mestrado',
+        'Doutoramento' => 'Doutoramento'
+    ];
+
+
     /**
      * {@inheritdoc}
      */
@@ -37,32 +63,7 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'tin', 'num_emp', 'ssn', 'street', 'zip_code', 'iban', 'qualifications', 'function_id'], 'required'],
-            [['employee_id', 'function_id'], 'integer'],
-            [['tin', 'num_emp', 'ssn', 'zip_code', 'street', 'iban', 'qualifications'], 'trim'],
-
-            ['qualifications', 'in', 'range' => [
-                'Até ao 9º ano de escolaridade',
-                'Secundário',
-                'Curso técnico superior profissional',
-                'Diploma de Especialização Tecnológica',
-                'Ensino superior - bacharelato ou equivalente',
-                'Licenciatura Pré-Bolonha',
-                'Licenciatura 1º Ciclo - Pós-Bolonha',
-                'Mestrado',
-                'Doutoramento'
-            ], 'strict' => true],
-
-            [['tin', 'num_emp', 'ssn', 'zip_code'], 'string', 'max' => 20],
-            ['street', 'string', 'max' => 100],
-            ['iban', 'string', 'max' => 25, 'min' => 25],
-            ['num_emp', 'unique'],
-            ['ssn', 'unique'],
-            ['tin', 'unique'],
-            ['iban', 'unique'],
-            ['employee_id', 'unique'],
-            ['employee_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['employee_id' => 'id']],
-            ['function_id', 'exist', 'skipOnError' => true, 'targetClass' => EmployeeFunction::class, 'targetAttribute' => ['function_id' => 'id']],
+            ['qualifications', 'in', 'range' => self::POSSIBLE_QUALIFICATIONS, 'strict' => true],
         ];
     }
 
@@ -76,7 +77,7 @@ class Employee extends \yii\db\ActiveRecord
             'tin' => 'Nº Contribuinte',
             'num_emp' => 'Nº Empregado',
             'ssn' => 'Nº Segurança Social',
-            'street' => 'Rua',
+            'street' => 'Nome da rua',
             'zip_code' => 'Código Postal',
             'iban' => 'Iban',
             'qualifications' => 'Qualificações',
