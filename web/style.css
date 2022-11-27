@@ -172,6 +172,10 @@ a:where(:hover, :focus) {
   color: var(--clr-primary-accent-900);
 }
 
+footer {
+  background-color: var(--clr-neutral-400);
+}
+
 /* primary navigation */
 
 .primary-header {
@@ -571,6 +575,12 @@ a:where(:hover, :focus) {
   --icon-position-left-offset: 0.5rem;
   --icon-size: 1rem;
 
+  --box-shadow-x-offset: 0;
+  --box-shadow-y-offset: 0;
+  --box-shadow-blur: 0;
+  --box-shadow-spread: 0;
+  --box-shadow-color: none;
+
   width: 100%;
 
   border: var(--border-size) var(--border-style) var(--clr-border);
@@ -585,13 +595,9 @@ a:where(:hover, :focus) {
   background-repeat: no-repeat;
   background-position: calc(100% - var(--icon-position-left-offset)) center;
   background-size: var(--icon-size);
-}
 
-.form__input:not([type="date"]) {
-  padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
-  );
+  box-shadow: var(--box-shadow-x-offset) var(--box-shadow-y-offset)
+    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
 }
 
 .form__input::placeholder {
@@ -602,23 +608,42 @@ a:where(:hover, :focus) {
 }
 
 .form__input:focus {
-  outline: 0;
   --icon-url: none;
   --clr-border: var(--clr-primary-accent-400);
-  box-shadow: 0 0 0.5em 0.01em var(--clr-neutral-800);
+  --box-shadow-blur: 0.5em;
+  --box-shadow-size: 0.01em;
+  --box-shadow-color: var(--clr-neutral-800);
+  outline: 0;
 }
 
-.form__input:focus:not(.invalid) {
+.form__input.valid:focus {
+  --box-shadow-blur: 0.3em;
+  --box-shadow-size: 0.1em;
+  --box-shadow-color: var(--clr-success);
+}
+
+.form__input.invalid:focus {
+  --box-shadow-blur: 0.3em;
+  --box-shadow-size: 0.1em;
+  --box-shadow-color: var(--clr-error);
 }
 
 .form__input:not([type="date"]).valid {
   --clr-border: var(--clr-success);
   --icon-url: url("../images/input-success.svg");
+  padding-right: calc(
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
+  );
 }
 
 .form__input:not([type="date"]).invalid {
   --clr-border: var(--clr-error);
   --icon-url: url("../images/input-invalid.svg");
+  padding-right: calc(
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
+  );
 }
 
 .form__input[type="date"].valid {
@@ -634,7 +659,7 @@ select.form__input {
 }
 
 .input__label {
-  font-size: var(--fs-300);
+  font-size: var(--fs-350);
 }
 
 .input__error {
@@ -724,6 +749,145 @@ select.form__input {
   --clr-alert-close-icon: var(--clr-neutral-400);
 }
 
+/* Flight search form */
+
+.flight-search-form {
+  margin-top: 2.1875rem;
+  padding: 1.25em;
+}
+
+@media (min-width: 40em) {
+  .flight-search-form {
+    margin-top: 2.8125rem;
+    padding: 2em;
+  }
+}
+
+/* radio button pill */
+
+.radio-button-pill {
+  border-radius: 100vmax;
+  width: max-content;
+  cursor: pointer;
+}
+
+.radio-button-pill input {
+  position: absolute;
+  left: -1000vmax;
+}
+
+.radio-button-pill[data-active="true"][data-type="primary-outline"] {
+  --clr-text: var(--clr-white);
+  --clr-bg: var(--clr-primary-accent-400);
+}
+
+.radio-button-pill[data-active="true"][data-type="secondary-outline"] {
+  --clr-text: var(--clr-white);
+  --clr-bg: var(--clr-secondary-accent-400);
+}
+
+/* divider */
+
+.divider {
+  height: 0.125rem;
+  background-color: var(--clr-neutral-900);
+  border-radius: 0.313rem;
+}
+
+/* flight result */
+
+.flight-result__wrapper {
+  padding: 0.938em 0.625em;
+  display: grid;
+  row-gap: 0.625rem;
+
+  grid-template-columns: 1fr max-content;
+
+  grid-template-areas:
+    "company details"
+    "hours   details"
+    "hours   book";
+}
+
+@media (min-width: 40em) {
+  .flight-result__wrapper {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "company  hours  details"
+      ".        .      book";
+  }
+}
+
+.flight-result__company {
+  grid-area: company;
+}
+
+.flight-result__hours {
+  grid-area: hours;
+  padding-left: 0.625em;
+  display: grid;
+  gap: 0.625rem;
+}
+
+.flight-result__trip {
+  display: grid;
+  column-gap: 0.625rem;
+
+  grid-template-columns: minmax(5ch, 1fr) min-content minmax(5ch, 1fr);
+  grid-template-areas:
+    "departure-time icon arrival-time"
+    "departure-city .    arrival-city";
+}
+
+.flight-result__departure-time {
+  grid-area: departure-time;
+}
+.flight-result__departure-city {
+  grid-area: departure-city;
+  overflow-wrap: break-word;
+}
+
+.flight-result__trip-icon {
+  --clr-icon: var(--clr-black-400);
+  grid-area: icon;
+  width: 0.938rem;
+}
+
+.flight-result__arrival-time {
+  grid-area: arrival-time;
+}
+
+.flight-result__arrival-city {
+  grid-area: arrival-city;
+
+  overflow-wrap: break-word;
+}
+
+.flight-result__trip:not(:first-child)
+  :where(.flight-result__departure-time, .flight-result__arrival-time, .flight-result__departure-city, .flight-result__arrival-city) {
+  font-size: var(--fs-200);
+}
+
+.flight-result__details {
+  grid-area: details;
+}
+
+.flight-result__book {
+  grid-area: book;
+  width: max-content;
+}
+
+.flights-not-found-grid {
+  --gap-size: 1.25rem;
+}
+
+@media (min-width: 40em) {
+  .flights-not-found-grid {
+    grid-template-columns: max-content 1fr;
+    --gap-size: 5rem;
+  }
+}
+
 /* utility classes */
 
 .visually-hidden {
@@ -791,6 +955,10 @@ select.form__input {
   color: var(--clr-primary-accent-400);
 }
 
+.bg-neutral-800 {
+  background-color: var(--clr-neutral-800);
+}
+
 .bg-neutral-400 {
   background-color: var(--clr-neutral-400);
 }
@@ -805,6 +973,9 @@ select.form__input {
 
 .text-align-center {
   text-align: center;
+}
+.text-align-right {
+  text-align: right;
 }
 
 @media (max-width: 39.999em) {
@@ -826,7 +997,7 @@ select.form__input {
   }
 
   .container[data-type="very-small-md"] {
-    --max-width: 30rem;
+    --max-width: 40rem;
   }
 }
 
@@ -889,6 +1060,10 @@ select.form__input {
   flex-shrink: 0;
 }
 
+.flex-flow-row {
+  flex-flow: row;
+}
+
 @media (max-width: 39.999em) {
   .flex-flow-column-sm {
     flex-flow: column;
@@ -896,7 +1071,7 @@ select.form__input {
 }
 
 .gap-2 {
-  --gap-size: var(--size-200);
+  gap: var(--size-200);
 }
 .gap-0 {
   --gap-size: 0;
@@ -922,6 +1097,10 @@ select.form__input {
   align-items: center;
 }
 
+.align-self-center {
+  align-self: center;
+}
+
 @media (min-width: 40em) {
   .align-self-end-md {
     align-self: end;
@@ -936,9 +1115,33 @@ select.form__input {
   justify-content: center;
 }
 
+.justify-self-center {
+  justify-self: center;
+}
+
+.justify-self-end {
+  justify-self: end;
+}
+
+@media (min-width: 40em) {
+  .justify-self-center-md {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 39.999em) {
+  .justify-content-space-between-sm {
+    justify-content: space-between;
+  }
+}
+
 @media (min-width: 40em) {
   .justify-content-space-between-md {
     justify-content: space-between;
+  }
+
+  .justify-self-end-md {
+    justify-self: end;
   }
 }
 
@@ -956,7 +1159,15 @@ select.form__input {
 }
 
 .flow[data-flow-space="small"] > :where(:not(:first-child)) {
+  --flow-space: var(--size-200);
+}
+
+.flow[data-flow-space="very-small"] > :where(:not(:first-child)) {
   --flow-space: var(--size-100);
+}
+
+.flow[data-flow-space="extra-small"] > :where(:not(:first-child)) {
+  --flow-space: var(--size-50);
 }
 
 .padding-block-700 {
@@ -1022,6 +1233,12 @@ select.form__input {
   width: 100%;
 }
 
+@media (max-width: 39.999em) {
+  .width-100-sm {
+    width: 100%;
+  }
+}
+
 .width-70 {
   width: 70%;
 }
@@ -1038,4 +1255,12 @@ select.form__input {
 
 .icon {
   aspect-ratio: 1 / 1;
+}
+
+.box-shadow-1 {
+  box-shadow: 0 0 0.3em 0.1em var(--clr-neutral-800);
+}
+
+.border-radius-1 {
+  border-radius: 0.3125rem;
 }
