@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href=" assets/logo-url-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Register Page</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script>
+</head>
+
+
+<body class="body-grid">
+
+    <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#">
+                    <picture>
+                        <source srcset="../images/logo-pc.svg" media="(min-width: 40em)">
+                        <img src="../images/logo-mobile.svg" alt="Logo">
+                    </picture>
+                </a>
+                <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
+                    aria-expanded="false">
+                    <img class="open-icon" src="../images/hamburger-icon.svg" alt="" aria-hidden="true">
+                    <img class="close-icon" src="../images/close-icon.svg" alt="" aria-hidden="true">
+                    <span class="visually-hidden">Menu</span>
+                </button>
+                <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                    <ul role="list" class="navigation-list">
+                        <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
+                        <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
+                        <li class="primary-navigation__item"><a href="#" class="button" data-type="primary-outline">Sign
+                                Up</a>
+                        </li>
+                        <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="padding-block-700 height-100 d-grid align-items-center">
+            <div class="container" data-type="small-md">
+                <h1 class="fs-600 fw-bold text-align-center">Editar dados da conta</h1>
+
+                <form action="#" method="POST" novalidate class="[ form ] [ margin-top-600 flow ]"
+                    data-flow-space="large">
+
+                    <div>
+                        <h2 class="fs-500 fw-semi-bold text-align-center-sm">Dados de acesso</h2>
+                        <div class="even-columns gap-2-sm gap-1-md margin-top-200">
+                            <div class="form__group">
+                                <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
+                                <input class="form__input" type="text" name="{TOCHANGE}" id="username" required>
+                                <p class="[ input__error ] [ margin-top-50 ]"></p>
+                            </div>
+                            <div class="form__group">
+                                <label for="password" class="[ input__label ] [ margin-bottom-50 ]">Password:</label>
+                                <input class="form__input" type="password" name="{TOCHANGE}" id="password" required>
+                                <p class="[ input__error ] [ margin-top-50 ]"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="fs-500 fw-semi-bold text-align-center-sm">Dados pessoais</h2>
+                        <div class="flow margin-top-200">
+                            <div class="even-columns gap-2-sm gap-1-md ">
+                                <div class="form__group">
+                                    <label for="first-name" class="[ input__label ] [ margin-bottom-50 ]">Primeiro
+                                        Nome:</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="first-name"
+                                        pattern="[a-zA-Z\ ]+" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="last-name" class="[ input__label ] [ margin-bottom-50 ]">Último
+                                        nome:</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="last-name"
+                                        pattern="[a-zA-Z\ ]+" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="gender" class="[ input__label ] [ margin-bottom-50 ]">Género:</label>
+                                    <select class="form__input" name="genders" id="gender" required>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-flow-column-sm gap-2">
+                                <div class="form__group">
+                                    <label for="birthdate" class="[ input__label ] [ margin-bottom-50 ]">Data de
+                                        Nascimento:</label>
+                                    <input class="form__input" type="date" name="{TOCHANGE}" id="birthdate"
+                                        pattern="[\d]{2}\/[\d]{2}\/[\d]{4}" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="country" class="[ input__label ] [ margin-bottom-50 ]">País:</label>
+                                    <input class="form__input min-width-initial " type="text" name="{TOCHANGE}"
+                                        id="country" pattern="[a-zA-Z\ ]+" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="city" class="[ input__label ] [ margin-bottom-50 ]">Cidade:</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="city"
+                                        pattern="[a-zA-Z\ ]+" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="fs-500 fw-semi-bold text-align-center-sm">Contactos</h2>
+                        <div class="d-flex flex-flow-column-sm margin-top-200">
+                            <div class="form__group flex-1">
+                                <label for="email" class="[ input__label ] [ margin-bottom-50 ]">Email:</label>
+                                <input class="form__input" type="email" name="{TOCHANGE}" id="email"
+                                    title="O formato é inválido!" required>
+                                <p class="[ input__error ] [ margin-top-50 ]"></p>
+                            </div>
+                            <div class="form__group flex-1">
+                                <label for="phone-number" class="[ input__label ] [ margin-bottom-50 ]">Contacto
+                                    telefónico:</label>
+                                <div class="d-flex width-100">
+                                    <input class="[ form__input ] [ flex-1 ]" type="text" name="{TOCHANGE}"
+                                        pattern="^[+][\d]{1,5}" placeholder="Indicativo" required>
+                                    <input class=" [ form__input ] [ flex-2 ]" type="text" name="{TOCHANGE}"
+                                        id="phone-number" pattern="[\d]{1,15}" placeholder="Número telefone" required>
+                                </div>
+                                <p class="[ input__error ] [ margin-top-50 ]"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="form__submit-button button fill-sm d-block push-to-right-md"
+                        data-size="large-md">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="[ footer-wrapper ] [ container text-align-center ]">
+            <nav aria-label="Footer">
+                <ul role="list" class="footer-list">
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Termos e Condições</a></li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a>
+                    </li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Contactar Suporte</a></li>
+                </ul>
+            </nav>
+            <p class="fs-100 fw-light letter-spacing-2 ">@ 2022 AeroControl. Todos os direitos
+                reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

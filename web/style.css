@@ -1211,18 +1211,21 @@ select.form__input {
   margin-bottom: var(--size-50);
 }
 
-@media (min-width: 40em) {
-  .push-to-center-md {
-    margin-inline: auto;
-  }
-}
-
 .push-to-right {
   margin-left: auto;
 }
 
 .push-to-left {
   margin-right: auto;
+}
+
+@media (min-width: 40em) {
+  .push-to-center-md {
+    margin-inline: auto;
+  }
+  .push-to-right-md {
+    margin-left: auto;
+  }
 }
 
 .height-100 {
