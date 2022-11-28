@@ -888,6 +888,12 @@ select.form__input {
   }
 }
 
+/* flight ticket */
+
+.flight-ticket__item {
+  outline: 0.063rem solid var(--clr-neutral-900);
+}
+
 /* utility classes */
 
 .visually-hidden {

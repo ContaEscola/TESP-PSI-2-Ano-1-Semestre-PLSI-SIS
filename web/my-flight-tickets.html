@@ -11,11 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <title>Error Page</title>
+    <title>My Flight Tickets Page</title>
 
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="dropdown.js" defer></script>
 </head>
 
 
@@ -46,33 +47,66 @@
                                 class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
                         <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
                                 class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
-                        <li class="primary-navigation__item"><a href="#" class="button" data-type="primary-outline">Sign
-                                Up</a>
+                        <li class="primary-navigation__item d-flex justify-content-center">
+                            <div class="dropdown " data-type="navbar">
+                                <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false"
+                                    data-dropdown>Pedro
+                                    Norberto
+                                    <span aria-hidden="true">
+                                        <svg class="icon dropdown__toggle-icon">
+                                            <use xlink:href="../images/caret.svg#caret"></use>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <ul role="list" class="dropdown-menu">
+                                    <li class="dropdown-menu__item"><a
+                                            class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#">Ver
+                                            conta
+                                            <span aria-hidden="true">
+                                                <svg class="icon dropdown-link__icon">
+                                                    <use xlink:href="../images/perfil-icon.svg#perfil-icon"></use>
+                                                </svg>
+                                            </span>
+                                        </a></li>
+                                    <li class="dropdown-menu__item"><a
+                                            class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"
+                                            data-type="logout">Logout
+                                            <span aria-hidden="true">
+                                                <svg class="icon dropdown-link__icon">
+                                                    <use xlink:href="../images/logout-icon.svg#logout-icon"></use>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
-                        <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-
     <main>
-        <div class="container padding-block-700 height-100">
-            <div class="[ error-grid ] [ even-columns place-content-center text-align-center-sm height-100 ]">
-                <picture>
-                    <source srcset="../images/error-icon-pc.svg" media="(min-width: 40em)">
-                    <img src="../images/error-icon-mobile.svg" alt="representação de erro">
-                </picture>
-                <div>
-                    <h1 class="fs-600 fw-bold">Error 404</h1>
-                    <p class="margin-top-100">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro
-                        debitis
-                        dolores neque aliquid minima unde et voluptate culpa aliquam amet, ad illum hic blanditiis
-                        ut</p>
-                </div>
+        <section class="container padding-block-700" data-type="small-md">
+            <h1 class="fs-600 fw-bold text-align-center">Meus Bilhetes</h1>
+            <div class="margin-top-400">
+
+                <!-- Se ainda não tiver nenhum bilhete -->
+                <!-- <p class="fw-medium text-align-center"> Você ainda não comprou nenhum bilhete!</p> -->
+
+                <ul role="list" class="flow" data-flow-space="medium">
+                    <li class="[ flight-ticket__item ] [ border-radius-1 ]">
+                        <p class="fs-350">Data: <span class="fw-semi-bold">07/11/2022</span></p>
+                        <p class="fs-350">Estado: <span class="fw-semi-bold">Chegou</span></p>
+                        <p class="fs-350">Data: <span class="fw-semi-bold">07/11/2022</span></p>
+                        <p class="fs-350">Data: <span class="fw-semi-bold">07/11/2022</span></p>
+                    </li>
+                    <li>ola</li>
+                </ul>
             </div>
-        </div>
+
+        </section>
     </main>
 
     <footer>
@@ -92,7 +126,6 @@
                 reservados.</p>
         </div>
     </footer>
-
 </body>
 
 </html>
