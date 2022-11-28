@@ -1,9 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use common\models\Flight;
 use common\models\FlightSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,6 +28,31 @@ class FlightController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['viewFlight'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewFlight'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createFlight'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateFlight'],
+                        ],
+                    ],
+                ],
             ]
         );
     }
@@ -38,12 +64,9 @@ class FlightController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new FlightSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $flights = Flight::find()->all();
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'flights' => $flights,
         ]);
     }
 

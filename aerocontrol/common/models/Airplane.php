@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "airplane".
@@ -104,5 +105,29 @@ class Airplane extends \yii\db\ActiveRecord
     public function getFlights()
     {
         return $this->hasMany(Flight::class, ['airplane_id' => 'id']);
+    }
+
+    /**
+     * Get all airplanes IDs
+     * @return array
+     */
+    public static function getPossibleAirplanesIDs()
+    {
+        $possibleAirplanes = self::find()->select(['id'])->all();
+
+        // Makes an array of ID´s from all the possible companies
+        return ArrayHelper::getColumn($possibleAirplanes, 'id');
+    }
+
+    /**
+     * Get all the airplanes for dropdowns
+     * @return array
+     */
+    public static function getPossibleAirplanesForDropdowns()
+    {
+        $possibleAirplanes = self::find()->select(['id', 'name'])->all();
+
+        // Maps the array containing the companies to an associative array of 'id' => 'name'
+        return ArrayHelper::map($possibleAirplanes, 'id', 'name');
     }
 }

@@ -28,6 +28,24 @@ use Yii;
  */
 class Flight extends \yii\db\ActiveRecord
 {
+    private $possible_flight_airports;
+    public $possible_flight_airports_for_dropdown;
+    private $possible_flight_airplanes;
+    public $possible_flight_airplanes_for_dropdown;
+
+
+    public function __construct($config = [])
+    {
+        // Setups the possible values for flight airport
+        $this->setupPossibleFlightAirports();
+
+        // Setups the possible values for flight airplane
+        $this->setupPossibleFlightAirplanes();
+
+
+        parent::__construct($config);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -42,8 +60,8 @@ class Flight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required'],
-            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'datetime'],
+            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
+            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'datetime', 'message' => "{attribute} tem formato inválido.", 'format' => 'yyyy/dd/mm HH:mm'],
             [['price', 'distance'], 'number'],
             [['terminal', 'state'], 'trim'],
 
@@ -87,6 +105,26 @@ class Flight extends \yii\db\ActiveRecord
             'arrival_airport_id' => 'ID do Aeroporto de Chegada',
             'airplane_id' => 'ID do Aeroporto',
         ];
+    }
+
+    /**
+     * Setups the possible flight airport for this model
+     *
+     */
+    protected function setupPossibleFlightAirports()
+    {
+        $this->possible_flight_airports = Airport::getPossibleAirportsIDs();
+        $this->possible_flight_airports_for_dropdown = Airport::getPossibleAirportsForDropdowns();
+    }
+
+    /**
+     * Setups the possible flight airplane for this model
+     *
+     */
+    protected function setupPossibleFlightAirplanes()
+    {
+        $this->possible_flight_airplanes = Airplane::getPossibleAirplanesIDs();
+        $this->possible_flight_airplanes_for_dropdown = Airplane::getPossibleAirplanesForDropdowns();
     }
 
     /**

@@ -10,46 +10,54 @@ use yii\grid\GridView;
 /** @var common\models\FlightSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Flights';
+$this->title = 'Voos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="flight-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Flight', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Voo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'terminal',
-            'estimated_departure_date',
-            'estimated_arrival_date',
-            'departure_date',
-            //'arrival_date',
-            //'price',
-            //'distance',
-            //'state',
-            //'discount_percentage',
-            //'origin_airport_id',
-            //'arrival_airport_id',
-            //'airplane_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Flight $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Aeroporto de Origem</th>
+            <th>Terminal</th>
+            <th>Aeroporto de Chegada</th>
+            <th>Data de partida estimada</th>
+            <th>Data de chegada estimada</th>
+            <th>Data de partida</th>
+            <th>Data de chegada</th>
+            <th>Preço</th>
+            <th>Distancia</th>
+            <th>Estado</th>
+            <th>Desconto</th>
+            <th>Avião</th>
+            <th>Ações</th>
+        </tr>
+        <?php
+        foreach ($flights as $flight) : ?>
+            <tr>
+                <th scope="row"><?= $flight->id ?></th>
+                <td><?= $flight->originAirport->name ?></td>
+                <td><?= $flight->terminal ?></td>
+                <td><?= $flight->arrivalAirport->name ?></td>
+                <td><?= $flight->estimated_departure_date ?></td>
+                <td><?= $flight->estimated_arrival_date ?></td>
+                <td><?= $flight->departure_date ?></td>
+                <td><?= $flight->arrival_date ?></td>
+                <td><?= $flight->price ?></td>
+                <td><?= $flight->distance ?></td>
+                <td><?= $flight->state ?></td>
+                <td><?= $flight->discount_percentage."%" ?></td>
+                <td><?= $flight->airplane->name ?></td>
+                <td>
+                    <a class="btn btn-primary" href="<?= Url::to(['flight/view', 'id' => $flight->id]) ?>">Visualizar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 
 
 </div>
