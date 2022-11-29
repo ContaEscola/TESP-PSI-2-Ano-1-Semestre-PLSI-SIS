@@ -18,37 +18,39 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar avião', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Capacidade</th>
-            <th>Estado</th>
-            <th>Companhia</th>
-            <th>Ações</th>
-        </tr>
-        <?php
-        foreach ($airplanes as $airplane) : ?>
-            <tr>
-                <th scope="row"><?= $airplane->id ?></th>
-                <td><?= $airplane->name ?></td>
-                <td><?= $airplane->capacity ?></td>
-                <td>
-                    <?php
-                    if ($airplane->state == '0') {
-                        echo "Inativo";
-                    } else {
-                        echo "Ativo";
-                    }
-                    ?>
-                </td>
-                <td><?= $airplane->company->name ?></td>
-                <td>
-                    <a class="btn btn-primary" href="<?= Url::to(['airplane/view', 'id' => $airplane->id]) ?>">Visualizar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
+    <?= GridView::widget([
+        'summary' => '',
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            'id',
+            [
+                'label' => 'Nome',
+                'value' => 'name'
+            ],
+            [
+                'label' => 'Capacidade',
+                'value' => 'capacity'
+            ],
+            [
+                'label' => 'Estado',
+                'value' => function($model){
+                    return $model->state == 0 ? "Inativo" : "Ativo";
+                }
+            ],
+            [
+                'label' => 'Companhia',
+                'value' => function($model){
+                    return $model->company->name;
+                },
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Airplane $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],
+        ],
+    ]);
+    ?>
 
 </div>

@@ -65,9 +65,12 @@ class AirplaneController extends Controller
      */
     public function actionIndex()
     {
-        $airplanes = Airplane::find()->all();
+        $searchModel = new AirplaneSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('index', [
-            'airplanes' => $airplanes,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
