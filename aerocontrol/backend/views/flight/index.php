@@ -19,45 +19,56 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar Voo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Aeroporto de Origem</th>
-            <th>Terminal</th>
-            <th>Aeroporto de Chegada</th>
-            <th>Data de partida estimada</th>
-            <th>Data de chegada estimada</th>
-            <th>Data de partida</th>
-            <th>Data de chegada</th>
-            <th>Preço</th>
-            <th>Distancia</th>
-            <th>Estado</th>
-            <th>Desconto</th>
-            <th>Avião</th>
-            <th>Ações</th>
-        </tr>
-        <?php
-        foreach ($flights as $flight) : ?>
-            <tr>
-                <th scope="row"><?= $flight->id ?></th>
-                <td><?= $flight->originAirport->name ?></td>
-                <td><?= $flight->terminal ?></td>
-                <td><?= $flight->arrivalAirport->name ?></td>
-                <td><?= $flight->estimated_departure_date ?></td>
-                <td><?= $flight->estimated_arrival_date ?></td>
-                <td><?= $flight->departure_date ?></td>
-                <td><?= $flight->arrival_date ?></td>
-                <td><?= $flight->price ?></td>
-                <td><?= $flight->distance ?></td>
-                <td><?= $flight->state ?></td>
-                <td><?= $flight->discount_percentage."%" ?></td>
-                <td><?= $flight->airplane->name ?></td>
-                <td>
-                    <a class="btn btn-primary" href="<?= Url::to(['flight/view', 'id' => $flight->id]) ?>">Visualizar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            'id',
+            [
+                'label' => 'Origem',
+                'value' => function($model){
+                    return $model->originAirport->name . " - " . $model->departure_date;
+                },
+            ],
+            [
+                'label' => 'Destino',
+                'value' => function($model){
+                    return $model->arrivalAirport->name;
+                },
+            ],
+            [
+                'label' => 'Terminal',
+                'value' => 'terminal'
+            ],
+            [
+                'label' => 'Hora de Partida',
+                'value' => function($model){
+                    return Yii::$app->formatter->asDatetime($model->departure_date,'dd-MM-yyyy HH:mm');
+                },
+            ],
+            [
+                'label' => 'Hora de Chegada',
+                'value' => function($model){
+                    return Yii::$app->formatter->asDatetime($model->arrival_date,'dd-MM-yyyy HH:mm');
+                },
+            ],
+            [
+                'label' => 'Avião',
+                'value' => function($model){
+                    return $model->airplane->name;
+                },
+            ],
+            [
+                'label' => 'Estado',
+                'value' => 'state'
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Flight $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],
+        ],
+    ]);
+    ?>
 
 </div>
