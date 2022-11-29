@@ -804,61 +804,63 @@ select.form__input {
   grid-template-columns: 1fr max-content;
 
   grid-template-areas:
-    "company details"
-    "hours   details"
-    "hours   book";
+    "flight-company details"
+    "flight-hours   details"
+    "flight-hours   book";
 }
 
 @media (min-width: 40em) {
   .flight-result__wrapper {
     grid-template-columns: auto 1fr auto;
     grid-template-areas:
-      "company  hours  details"
+      "flight-company  flight-hours  details"
       ".        .      book";
   }
 }
 
-.flight-result__company {
-  grid-area: company;
-}
-
 .flight-result__hours {
-  grid-area: hours;
   padding-left: 0.625em;
   display: grid;
   gap: 0.625rem;
 }
 
-.flight-result__trip {
+.flight-trip {
   display: grid;
   column-gap: 0.625rem;
 
   grid-template-columns: minmax(5ch, 1fr) min-content minmax(5ch, 1fr);
   grid-template-areas:
-    "departure-time icon arrival-time"
-    "departure-city .    arrival-city";
+    "flight-departure-time flight-trip-icon flight-arrival-time"
+    "flight-departure-city .                flight-arrival-city";
 }
 
-.flight-result__departure-time {
-  grid-area: departure-time;
-}
-.flight-result__departure-city {
-  grid-area: departure-city;
-  overflow-wrap: break-word;
+.flight-company {
+  grid-area: flight-company;
 }
 
-.flight-result__trip-icon {
+.flight-hours {
+  grid-area: flight-hours;
+}
+.flight-trip__icon {
+  grid-area: flight-trip-icon;
   --clr-icon: var(--clr-black-400);
-  grid-area: icon;
   width: 0.938rem;
 }
 
-.flight-result__arrival-time {
-  grid-area: arrival-time;
+.flight-trip__departure-time {
+  grid-area: flight-departure-time;
+}
+.flight-trip__departure-city {
+  grid-area: flight-departure-city;
+  overflow-wrap: break-word;
 }
 
-.flight-result__arrival-city {
-  grid-area: arrival-city;
+.flight-trip__arrival-time {
+  grid-area: flight-arrival-time;
+}
+
+.flight-trip__arrival-city {
+  grid-area: flight-arrival-city;
 
   overflow-wrap: break-word;
 }
@@ -892,6 +894,67 @@ select.form__input {
 
 .flight-ticket__item {
   outline: 0.063rem solid var(--clr-neutral-900);
+  padding: 0.625em;
+  display: grid;
+  column-gap: var(--size-200);
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "flight-date flight-hours"
+    "flight-state flight-hours"
+    "btn-see-more-details btn-see-more-details";
+}
+
+@media (min-width: 40em) {
+  .flight-ticket__item {
+    grid-template-columns: minmax(max-content, 20rem) 1fr min-content max-content;
+    column-gap: 0.625em;
+    grid-template-areas:
+      "flight-date          flight-hours        flight-state        btn-see-more-details"
+      "flight-more-details  flight-more-details flight-more-details flight-more-details";
+  }
+}
+
+@media (min-width: 60em) {
+  .flight-ticket__item {
+    outline: 2rem solid dodgerblue;
+  }
+}
+
+.flight-date {
+  grid-area: flight-date;
+}
+
+.flight-state {
+  grid-area: flight-state;
+}
+
+.flight-ticket__see-more-details {
+  grid-area: btn-see-more-details;
+}
+
+.flight-ticket__more-details {
+  /* display: none; */
+  margin-top: 1.5625rem;
+  grid-area: flight-more-details;
+  display: grid;
+  column-gap: 0.625em;
+  grid-template-columns: minmax(max-content, 20rem) 1fr min-content max-content;
+}
+
+.flight-distance {
+  grid-area: flight-distance;
+}
+
+.flight-terminal {
+  grid-area: flight-terminal;
+}
+
+.flight-price {
+  grid-area: flight-price;
+}
+
+.flight-passengers {
+  grid-area: flight-passengers;
 }
 
 /* utility classes */
@@ -957,8 +1020,16 @@ select.form__input {
   color: var(--clr-white);
 }
 
+.text-black-200 {
+  color: var(--clr-black-200);
+}
+
 .text-primary-accent-400 {
   color: var(--clr-primary-accent-400);
+}
+
+.bg-primary {
+  background-color: var(--clr-primary);
 }
 
 .bg-neutral-800 {
@@ -1133,11 +1204,19 @@ select.form__input {
   .justify-self-center-md {
     justify-self: center;
   }
+
+  .justify-self-start-md {
+    justify-self: self-start;
+  }
 }
 
 @media (max-width: 39.999em) {
   .justify-content-space-between-sm {
     justify-content: space-between;
+  }
+
+  .justify-self-end-sm {
+    justify-self: end;
   }
 }
 
@@ -1203,6 +1282,10 @@ select.form__input {
   .margin-top-200-sm {
     margin-top: var(--size-200);
   }
+
+  .margin-top-50-sm {
+    margin-top: var(--size-50);
+  }
 }
 
 .margin-top-100 {
@@ -1236,6 +1319,10 @@ select.form__input {
 
 .height-100 {
   height: 100%;
+}
+
+.height-min-content {
+  height: min-content;
 }
 
 .width-100 {

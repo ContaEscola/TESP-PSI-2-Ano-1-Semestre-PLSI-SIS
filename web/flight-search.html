@@ -141,18 +141,18 @@
                 <!-- Se houver voos -->
                 <ul role="list" class="margin-top-400 flow" data-flow-space="medium">
                     <li class="[ flight-result__wrapper ] [ bg-neutral-800 border-radius-1 ]">
-                        <p class="[ flight-result__company ] [ fs-300 letter-spacing-2 ]">TAP</p>
-                        <div class="flight-result__hours justify-self-center-md">
-                            <div class="flight-result__trip">
+                        <p class="[ flight-company ] [ fs-300 letter-spacing-2 ]">TAP</p>
+                        <div class="[ flight-hours flight-result__hours ] [ justify-self-center-md ]">
+                            <div class="flight-trip">
 
                                 <p
-                                    class="[ flight-result__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
+                                    class="[ flight-trip__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
                                     21.00</p>
                                 <p
-                                    class="[ flight-result__departure-city ] [ fs-300 fw-light letter-spacing-2 text-align-right ]">
+                                    class="[ flight-trip__departure-city ] [ fs-300 fw-light letter-spacing-2 text-align-right ]">
                                     Lisboasadasdsadasdsadd</p>
 
-                                <div class="[ flight-result__trip-icon ] [ align-self-center ]">
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
                                     <span aria-hidden="true">
                                         <svg class="icon">
                                             <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
@@ -160,24 +160,24 @@
                                     </span>
                                 </div>
 
-                                <p class="[ flight-result__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
+                                <p class="[ flight-trip__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
                                     13.00
                                 </p>
-                                <p class="[ flight-result__arrival-city ] [ fs-300 fw-light letter-spacing-2 ]">
+                                <p class="[ flight-trip__arrival-city ] [ fs-300 fw-light letter-spacing-2 ]">
                                     Portoasdasdasdasd</p>
 
                             </div>
 
-                            <div class="flight-result__trip">
+                            <div class="flight-trip">
 
                                 <p
-                                    class="[ flight-result__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
+                                    class="[ flight-trip__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
                                     21.00</p>
                                 <p
-                                    class="[ flight-result__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
+                                    class="[ flight-trip__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
                                     Lisboaadasdasdasdsad</p>
 
-                                <div class="flight-result__trip-icon align-self-center">
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
                                     <span aria-hidden="true">
                                         <svg class="icon">
                                             <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
@@ -185,24 +185,24 @@
                                     </span>
                                 </div>
 
-                                <p class="[ flight-result__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
+                                <p class="[ flight-trip__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
                                     13.00
                                 </p>
-                                <p class="[ flight-result__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
+                                <p class="[ flight-trip__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
                                     Portoasdasdasdsadadasdsa</p>
 
                             </div>
 
-                            <div class="flight-result__trip">
+                            <div class="flight-trip">
 
                                 <p
-                                    class="[ flight-result__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
+                                    class="[ flight-trip__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
                                     21.00</p>
                                 <p
-                                    class="[ flight-result__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
+                                    class="[ flight-trip__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
                                     Lisboa</p>
 
-                                <div class="flight-result__trip-icon align-self-center">
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
                                     <span aria-hidden="true">
                                         <svg class="icon">
                                             <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
@@ -210,10 +210,10 @@
                                     </span>
                                 </div>
 
-                                <p class="[ flight-result__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
+                                <p class="[ flight-trip__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
                                     13.00
                                 </p>
-                                <p class="[ flight-result__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
+                                <p class="[ flight-trip__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
                                     Porto</p>
 
                             </div>
@@ -224,7 +224,7 @@
                             <p class="fs-300 letter-spacing-2">Lugares disponíveis: <span class="fw-semi-bold">3</span>
                             </p>
                             <div class="flow" data-flow-space="extra-small">
-                                <p class="fs-300 fw-light">10% <s class="italic">100€</s></p>
+                                <p class="fs-300 italic text-black-200"><s>100€</s></p>
                                 <p class="fs-300 fw-bold letter-spacing-2">90€</p>
                             </div>
 
@@ -233,98 +233,6 @@
                             data-type="secondary">Reservar</a>
                     </li>
 
-                    <li class="[ flight-result__wrapper ] [ bg-neutral-800 border-radius-1 ]">
-                        <p class="[ flight-result__company ] [ fs-300 letter-spacing-2 ]">TAP</p>
-                        <div class="flight-result__hours justify-self-center-md">
-                            <div class="flight-result__trip">
-
-                                <p
-                                    class="[ flight-result__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
-                                    21.00</p>
-                                <p
-                                    class="[ flight-result__departure-city ] [ fs-300 fw-light letter-spacing-2 text-align-right ]">
-                                    Lisboasadasdsadasdsadd</p>
-
-                                <div class="[ flight-result__trip-icon ] [ align-self-center ]">
-                                    <span aria-hidden="true">
-                                        <svg class="icon">
-                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <p class="[ flight-result__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
-                                    13.00
-                                </p>
-                                <p class="[ flight-result__arrival-city ] [ fs-300 fw-light letter-spacing-2 ]">
-                                    Portoasdasdasdasd</p>
-
-                            </div>
-
-                            <div class="flight-result__trip">
-
-                                <p
-                                    class="[ flight-result__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
-                                    21.00</p>
-                                <p
-                                    class="[ flight-result__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
-                                    Lisboaadasdasdasdsad</p>
-
-                                <div class="flight-result__trip-icon align-self-center">
-                                    <span aria-hidden="true">
-                                        <svg class="icon">
-                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <p class="[ flight-result__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
-                                    13.00
-                                </p>
-                                <p class="[ flight-result__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
-                                    Portoasdasdasdsadadasdsa</p>
-
-                            </div>
-
-                            <div class="flight-result__trip">
-
-                                <p
-                                    class="[ flight-result__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
-                                    21.00</p>
-                                <p
-                                    class="[ flight-result__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
-                                    Lisboa</p>
-
-                                <div class="flight-result__trip-icon align-self-center">
-                                    <span aria-hidden="true">
-                                        <svg class="icon">
-                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
-                                        </svg>
-                                    </span>
-                                </div>
-
-                                <p class="[ flight-result__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
-                                    13.00
-                                </p>
-                                <p class="[ flight-result__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
-                                    Porto</p>
-
-                            </div>
-
-                        </div>
-
-                        <div class="[ flight-result__details ] [ flow text-align-right ]" data-flow-space="very-small">
-                            <p class="fs-300 letter-spacing-2">Lugares disponíveis: <span class="fw-semi-bold">3</span>
-                            </p>
-                            <div class="flow" data-flow-space="extra-small">
-                                <p class="fs-300 fw-light">10% <s class="italic">100€</s></p>
-                                <p class="fs-300 fw-bold letter-spacing-2">90€</p>
-                            </div>
-
-                        </div>
-                        <a href="#" class="[ flight-result__book button ] [ justify-self-end ]"
-                            data-type="secondary">Reservar</a>
-                    </li>
                 </ul>
 
                 <!-- Se não houver experimentar outras datas -->

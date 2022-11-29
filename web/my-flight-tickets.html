@@ -96,13 +96,60 @@
                 <!-- <p class="fw-medium text-align-center"> Você ainda não comprou nenhum bilhete!</p> -->
 
                 <ul role="list" class="flow" data-flow-space="medium">
-                    <li class="[ flight-ticket__item ] [ border-radius-1 ]">
-                        <p class="fs-350">Data: <span class="fw-semi-bold">07/11/2022</span></p>
-                        <p class="fs-350">Estado: <span class="fw-semi-bold">Chegou</span></p>
-                        <p class="fs-350">Data: <span class="fw-semi-bold">07/11/2022</span></p>
-                        <p class="fs-350">Data: <span class="fw-semi-bold">07/11/2022</span></p>
+                    <li class="[ flight-ticket__item ] [ bg-primary border-radius-1 ]">
+                        <p class="[ flight-date ] [ fs-350 ]">Data: <span class="fw-semi-bold">07/11/2022</span></p>
+                        <p class="[ flight-state ] [ fs-350 margin-top-50-sm ]">Estado: <span
+                                class="fw-semi-bold">Chegou</span></p>
+
+                        <div class="[ flight-hours ] [ justify-self-end-sm justify-self-start-md ]">
+                            <div class="flight-trip">
+
+                                <p
+                                    class="[ flight-trip__departure-time ] [ fs-350 fw-medium letter-spacing-2 text-align-right ]">
+                                    21.00</p>
+                                <p
+                                    class="[ flight-trip__departure-city ] [ fs-350 fw-light letter-spacing-2 text-align-right ]">
+                                    Lisboa</p>
+
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
+                                    <span aria-hidden="true">
+                                        <svg class="icon">
+                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <p class="[ flight-trip__arrival-time ] [ fs-350 fw-medium letter-spacing-2 ]">
+                                    13.00
+                                </p>
+                                <p class="[ flight-trip__arrival-city ] [ fs-350 fw-light letter-spacing-2 ]">
+                                    Porto</p>
+
+                            </div>
+                        </div>
+
+                        <button
+                            class="[ flight-ticket__see-more-details button ] [ margin-top-200-sm height-min-content ]">Ver
+                            mais
+                            detalhes</button>
+
+                        <div class="flight-ticket__more-details width-100">
+                            <p class="[ flight-date ] [ fs-350 ]">Data de Compra: <span
+                                    class="fw-semi-bold">07/11/2022</span></p>
+                            <p class="[ flight-distance ] [ fs-350 ]">Distância: 600.00km</p>
+                            <p class="[ flight-company ] [ fs-350 ]">TAP</p>
+                            <p class="[ flight-terminal ] [ fs-350 ]">Terminal: <span class="fw-semi-bold">T1</span></p>
+
+                            <div class="[ flight-price ] [ fs-350 ]">
+                                <p><s class="text-black-200">100€</s></p>
+                                <p class="fw-semi-bold">200€</p>
+                            </div>
+
+                            <div class="flight-passengers">
+
+                            </div>
+                        </div>
                     </li>
-                    <li>ola</li>
                 </ul>
             </div>
 
