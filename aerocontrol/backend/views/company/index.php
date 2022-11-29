@@ -18,30 +18,30 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar nova', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Estado</th>
-            <th>Ações</th>
-        </tr>
-        <?php
-        foreach ($companies as $company) : ?>
-            <tr>
-                <th scope="row"><?= $company->id ?></th>
-                <td><?= $company->name ?></td>
-                <td>
-                    <?php
-                    if($company->state == 0){
-                        echo "Inativo";
-                    } else{
-                        echo "Ativo";
-                    }
-                    ?></td>
-                <td>
-                    <a class="btn btn-primary" href="<?= Url::to(['company/view', 'id' => $company->id]) ?>">Visualizar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <?= GridView::widget([
+        'summary' => '',
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            'id',
+            [
+                'label' => 'Nome',
+                'value' => 'name'
+            ],
+            [
+                'label' => 'Estado',
+                'value' => function($model){
+                    return $model->state == 0 ? "Inativo" : "Ativo";
+                }
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Company $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],
+        ],
+    ]);
+    ?>
+
+
 </div>
