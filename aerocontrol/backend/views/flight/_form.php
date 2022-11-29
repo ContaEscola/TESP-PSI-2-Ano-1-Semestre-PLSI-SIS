@@ -17,9 +17,9 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'terminal')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'estimated_departure_date')->input('datetime-local') ?>
+    <?= $form->field($model, 'estimated_departure_date')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model, 'estimated_arrival_date')->input('datetime-local') ?>
+    <?= $form->field($model, 'estimated_arrival_date')->hiddenInput()->label(false) ?>
 
     <?= $form->field($model, 'departure_date')->input('datetime-local') ?>
 

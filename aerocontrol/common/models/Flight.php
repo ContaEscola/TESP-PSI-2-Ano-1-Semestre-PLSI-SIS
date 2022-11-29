@@ -28,10 +28,8 @@ use Yii;
  */
 class Flight extends \yii\db\ActiveRecord
 {
-    private $possible_flight_airports;
     public $possible_flight_airports_for_dropdown;
 
-    private $possible_flight_airplanes;
     public $possible_flight_airplanes_for_dropdown;
 
 
@@ -61,9 +59,9 @@ class Flight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
+            [['terminal', 'departure_date', 'arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'string', 'message' => "{attribute} tem formato inválido."],
-            [['price', 'distance'], 'number'],
+            [['price', 'distance'], 'number','message'=>'{attribute} tem que ser um número.'],
             [['terminal', 'state'], 'trim'],
 
             ['state', 'in', 'range' => [
@@ -77,8 +75,8 @@ class Flight extends \yii\db\ActiveRecord
 
             ['state', 'default', 'value' => 'Previsto'],
 
-            [['discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'integer'],
-            ['terminal', 'string', 'max' => 30],
+            [['discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'integer','message'=>'{attribute} tem que ser um número inteiro.'],
+            ['terminal', 'string', 'max' => 30,'message'=>'{attribute} não pode exceder os 30 caracteres.'],
 
             ['airplane_id', 'exist', 'skipOnError' => true, 'targetClass' => Airplane::class, 'targetAttribute' => ['airplane_id' => 'id']],
             ['arrival_airport_id', 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['arrival_airport_id' => 'id']],
