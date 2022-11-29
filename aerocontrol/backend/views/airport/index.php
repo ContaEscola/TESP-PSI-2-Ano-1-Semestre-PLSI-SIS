@@ -18,29 +18,35 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar aeroporto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Pais</th>
-            <th>Cidade</th>
-            <th>Website</th>
-            <th>Ações</th>
-        </tr>
-        <?php
-        foreach ($airports as $airport) : ?>
-            <tr>
-                <th scope="row"><?= $airport->id ?></th>
-                <td><?= $airport->name ?></td>
-                <td><?= $airport->country ?></td>
-                <td><?= $airport->city ?></td>
-                <td><?= $airport->website ?></td>
-                <td>
-                    <a class="btn btn-primary" href="<?= Url::to(['airport/view', 'id' => $airport->id]) ?>">Visualizar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
+    <?= GridView::widget([
+        'summary' => '',
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            'id',
+            [
+                'label' => 'Nome',
+                'value' => 'name'
+            ],
+            [
+                'label' => 'País',
+                'value' => 'country'
+            ],
+            [
+                'label' => 'Cidade',
+                'value' => 'city'
+            ],
+            [
+                'label' => 'Website',
+                'value' => 'website'
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Airport $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],
+        ],
+    ]);
+    ?>
 
 </div>
