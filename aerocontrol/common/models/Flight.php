@@ -30,6 +30,7 @@ class Flight extends \yii\db\ActiveRecord
 {
     private $possible_flight_airports;
     public $possible_flight_airports_for_dropdown;
+
     private $possible_flight_airplanes;
     public $possible_flight_airplanes_for_dropdown;
 
@@ -61,7 +62,7 @@ class Flight extends \yii\db\ActiveRecord
     {
         return [
             [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
-            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'datetime', 'message' => "{attribute} tem formato inválido.", 'format' => 'yyyy/dd/mm HH:mm'],
+            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'string', 'message' => "{attribute} tem formato inválido."],
             [['price', 'distance'], 'number'],
             [['terminal', 'state'], 'trim'],
 
