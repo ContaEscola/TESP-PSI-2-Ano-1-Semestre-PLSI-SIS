@@ -28,8 +28,10 @@ use Yii;
  */
 class Flight extends \yii\db\ActiveRecord
 {
+    private $possible_flight_airports;
     public $possible_flight_airports_for_dropdown;
 
+    private $possible_flight_airplanes;
     public $possible_flight_airplanes_for_dropdown;
 
 
