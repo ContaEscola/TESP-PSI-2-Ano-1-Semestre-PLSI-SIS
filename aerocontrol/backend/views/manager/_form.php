@@ -17,6 +17,8 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'username')->textInput() ?>
 
+    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'first_name')->textInput() ?>
 
     <?= $form->field($model, 'last_name')->textInput() ?>
