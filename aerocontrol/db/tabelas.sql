@@ -90,15 +90,6 @@ CREATE TABLE IF NOT EXISTS `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Estrutura da tabela `manager`
---
-CREATE TABLE IF NOT EXISTS `manager` (
-  `manager_id` INT UNSIGNED,
-  CONSTRAINT `pk_manager_id` PRIMARY KEY(`manager_id`),
-  CONSTRAINT `fk_manager_manager_id` FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Estrutura da tabela `restaurant`
 --
 CREATE TABLE IF NOT EXISTS `restaurant` (
@@ -110,9 +101,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
   `close_time` TIME NULL,
   `logo` VARCHAR(50) NULL,
   `website` VARCHAR(50) NULL,
-  `manager_id` INT UNSIGNED NOT NULL,
   CONSTRAINT `pk_restaurant_id` PRIMARY KEY(`id`),
-  CONSTRAINT `fk_restaurant_manager_id` FOREIGN KEY(`manager_id`) REFERENCES `restaurant`(`id`),
   CONSTRAINT `uk_name` UNIQUE KEY(`name`),
   CONSTRAINT `uk_logo` UNIQUE KEY(`logo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -128,6 +117,17 @@ CREATE TABLE IF NOT EXISTS `restaurant_item` (
   `restaurant_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_restaurant_item_id` PRIMARY KEY(`id`),
   CONSTRAINT `fk_restaurant_item_restaurant_id` FOREIGN KEY(`restaurant_id`) REFERENCES `restaurant`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Estrutura da tabela `manager`
+--
+CREATE TABLE IF NOT EXISTS `manager` (
+  `manager_id` INT UNSIGNED,
+  `restaurant_id` INT(11) UNSIGNED NOT NULL,
+  CONSTRAINT `pk_manager_id` PRIMARY KEY(`manager_id`),
+  CONSTRAINT `fk_manager_manager_id` FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`),
+  CONSTRAINT `fk_manager_restaurant_id` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
