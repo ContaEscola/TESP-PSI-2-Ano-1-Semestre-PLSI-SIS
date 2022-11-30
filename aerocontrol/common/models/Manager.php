@@ -10,7 +10,7 @@ use Yii;
  * @property int $manager_id
  * @property int $restaurant_id
  *
- * @property User $manager
+ * @property User $user
  * @property Restaurant $restaurant
  */
 class Manager extends \yii\db\ActiveRecord

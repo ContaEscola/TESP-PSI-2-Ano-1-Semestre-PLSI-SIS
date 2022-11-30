@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $admin_id
  *
- * @property User $admin
+ * @property User $user
  */
 class Admin extends \yii\db\ActiveRecord
 {

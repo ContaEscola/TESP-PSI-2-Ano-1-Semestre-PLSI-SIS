@@ -17,7 +17,7 @@ use Yii;
  * @property string $qualifications
  * @property int $function_id
  *
- * @property User $employee
+ * @property User $user
  * @property EmployeeFunction $function
  * @property SupportTicket[] $supportTickets
  */
