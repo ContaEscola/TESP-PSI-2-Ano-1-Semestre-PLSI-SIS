@@ -96,59 +96,95 @@
                 <!-- <p class="fw-medium text-align-center"> Você ainda não comprou nenhum bilhete!</p> -->
 
                 <ul role="list" class="flow" data-flow-space="medium">
-                    <li class="[ flight-ticket__item ] [ bg-primary border-radius-1 ]">
-                        <p class="[ flight-date ] [ fs-350 ]">Data: <span class="fw-semi-bold">07/11/2022</span></p>
-                        <p class="[ flight-state ] [ fs-350 margin-top-50-sm ]">Estado: <span
-                                class="fw-semi-bold">Chegou</span></p>
+                    <li>
+                        <article class="[ flight-ticket__item ] [ bg-primary border-radius-1 ]">
+                            <p class="[ flight-date ] [ fs-350 ]">Data: <span class="fw-semi-bold">07/11/2022</span></p>
+                            <p class="[ flight-state ] [ fs-350 margin-top-50-sm ]">Estado: <span
+                                    class="fw-semi-bold">Chegou</span></p>
 
-                        <div class="[ flight-hours ] [ justify-self-end-sm justify-self-start-md ]">
-                            <div class="flight-trip">
+                            <div class="[ flight-hours ] [ justify-self-end-sm justify-self-start-md ]">
+                                <div class="flight-trip">
 
-                                <p
-                                    class="[ flight-trip__departure-time ] [ fs-350 fw-medium letter-spacing-2 text-align-right ]">
-                                    21.00</p>
-                                <p
-                                    class="[ flight-trip__departure-city ] [ fs-350 fw-light letter-spacing-2 text-align-right ]">
-                                    Lisboa</p>
+                                    <p
+                                        class="[ flight-trip__departure-time ] [ fs-350 fw-medium letter-spacing-2 text-align-right ]">
+                                        21.00</p>
+                                    <p
+                                        class="[ flight-trip__departure-city ] [ fs-350 fw-light letter-spacing-2 text-align-right ]">
+                                        Lisboa</p>
 
-                                <div class="[ flight-trip__icon ] [ align-self-center ]">
-                                    <span aria-hidden="true">
-                                        <svg class="icon">
-                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
-                                        </svg>
-                                    </span>
+                                    <div class="[ flight-trip__icon ] [ align-self-center ]">
+                                        <span aria-hidden="true">
+                                            <svg class="icon">
+                                                <use xlink:href="../images/flight-result-trip.svg#flight-result-trip">
+                                                </use>
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <p class="[ flight-trip__arrival-time ] [ fs-350 fw-medium letter-spacing-2 ]">
+                                        13.00
+                                    </p>
+                                    <p class="[ flight-trip__arrival-city ] [ fs-350 fw-light letter-spacing-2 ]">
+                                        Porto</p>
+
                                 </div>
-
-                                <p class="[ flight-trip__arrival-time ] [ fs-350 fw-medium letter-spacing-2 ]">
-                                    13.00
-                                </p>
-                                <p class="[ flight-trip__arrival-city ] [ fs-350 fw-light letter-spacing-2 ]">
-                                    Porto</p>
-
-                            </div>
-                        </div>
-
-                        <button
-                            class="[ flight-ticket__see-more-details button ] [ margin-top-200-sm height-min-content ]">Ver
-                            mais
-                            detalhes</button>
-
-                        <div class="flight-ticket__more-details width-100">
-                            <p class="[ flight-date ] [ fs-350 ]">Data de Compra: <span
-                                    class="fw-semi-bold">07/11/2022</span></p>
-                            <p class="[ flight-distance ] [ fs-350 ]">Distância: 600.00km</p>
-                            <p class="[ flight-company ] [ fs-350 ]">TAP</p>
-                            <p class="[ flight-terminal ] [ fs-350 ]">Terminal: <span class="fw-semi-bold">T1</span></p>
-
-                            <div class="[ flight-price ] [ fs-350 ]">
-                                <p><s class="text-black-200">100€</s></p>
-                                <p class="fw-semi-bold">200€</p>
                             </div>
 
-                            <div class="flight-passengers">
+                            <button
+                                class="[ flight-ticket__see-more-details button ] [ margin-top-200-sm height-min-content ]">Ver
+                                mais
+                                detalhes</button>
 
-                            </div>
-                        </div>
+                            <section class="[ flight-ticket__more-details ] [ width-100 margin-top-200 ]">
+                                <p class="[ flight-bought-date ] [ fs-350 ]">Data de Compra: <span
+                                        class="fw-semi-bold">07/11/2022</span></p>
+                                <p class="[ flight-distance ] [ fs-350 ]">Distância: 600.00km</p>
+                                <div class="[ flight-ticket__grouped-details ]">
+                                    <p class="[ flight-company ] [ fs-350 ]">TAP</p>
+                                    <p class="[ flight-terminal ] [ fs-350 ]">Terminal: <span
+                                            class="fw-semi-bold">T1</span>
+                                    </p>
+
+
+                                    <div class="[ flight-price ] [ fs-350 d-flex push-to-right ]">
+                                        <p><s class="text-black-200 italic">100€</s></p>
+                                        <p class="fw-semi-bold">200€</p>
+                                    </div>
+                                </div>
+                                <section class="flight-passengers">
+                                    <h2 class="fs-500 fw-semi-bold">Passageiros</h2>
+                                    <table class="margin-top-100 fs-350">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome:</th>
+                                                <th>Género:</th>
+                                                <th>Lugar:</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="padding-top: 1em;">
+                                            <tr>
+                                                <td>Marcio Soares</td>
+                                                <td>Masculino</td>
+                                                <td>S4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pedro Leandro</td>
+                                                <td>Masculino</td>
+                                                <td>S5</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="margin-top-200">
+                                        <button class="button" data-type="secondary">Alterar</button>
+                                        <button class="button" data-type="error">Cancelar</button>
+                                        <button class="button" data-type="secondary-outline">Guardar</button>
+                                    </div>
+                                </section>
+
+                                <button
+                                    class="[ flight-check-in button ] [ height-min-content width-max-content justify-self-end align-self-end ]">Check-in</button>
+                            </section>
+                        </article>
                     </li>
                 </ul>
             </div>

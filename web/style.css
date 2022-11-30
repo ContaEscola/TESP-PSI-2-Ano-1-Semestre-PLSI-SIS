@@ -281,9 +281,9 @@ footer {
 /* buttons */
 
 .button {
-  --outline-size: 0;
-  --outline-style: solid;
-  --outline-color: var(--clr-primary-accent-400);
+  --border-size: 0.14em;
+  --border-style: solid;
+  --border-color: transparent;
 
   --clr-text: var(--clr-white);
   --clr-bg: var(--clr-primary-accent-400);
@@ -299,8 +299,7 @@ footer {
   align-items: center;
   padding: 0.625em 0.9375em;
 
-  outline: var(--outline-size) var(--outline-style) var(--outline-color);
-  border: 0;
+  border: var(--border-size) var(--border-style) var(--border-color);
   border-radius: 0.313rem;
 
   font-size: var(--fs-300);
@@ -312,7 +311,8 @@ footer {
 
   cursor: pointer;
 
-  transition: color 250ms ease-in-out, background-color 250ms ease-in-out;
+  transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
+    border 250ms ease-in-out;
 }
 
 .button:where(:hover, :focus-visible) {
@@ -321,14 +321,14 @@ footer {
 }
 
 .button[data-type="primary-outline"] {
-  --outline-size: 0.14em;
-
   --clr-text: var(--clr-primary-accent-400);
   --clr-bg: var(--clr-white);
   --clr-text-on-event: var(--clr-white);
   --clr-bg-on-event: var(--clr-primary-accent-400);
 
   --clr-icon: var(--clr-primary-accent-400);
+
+  --border-color: var(--clr-primary-accent-400);
 }
 
 .button[data-type="primary-outline"]:where(:hover, :focus-visible) {
@@ -336,6 +336,8 @@ footer {
   --clr-bg: var(--clr-bg-on-event);
 
   --clr-icon: var(--clr-white);
+
+  --border-color: var(--clr-primary-accent-400);
 }
 
 .button[data-type="secondary"] {
@@ -350,15 +352,14 @@ footer {
 }
 
 .button[data-type="secondary-outline"] {
-  --outline-size: 0.14em;
-  --outline-color: var(--clr-secondary-accent-400);
-
   --clr-text: var(--clr-secondary-accent-400);
   --clr-bg: var(--clr-white);
   --clr-text-on-event: var(--clr-white);
   --clr-bg-on-event: var(--clr-secondary-accent-400);
 
   --clr-icon: var(--clr-secondary-accent-400);
+
+  --border-color: var(--clr-secondary-accent-400);
 }
 
 .button[data-type="secondary-outline"]:where(:hover, :focus-visible) {
@@ -366,6 +367,17 @@ footer {
   --clr-bg: var(--clr-bg-on-event);
 
   --clr-icon: var(--clr-white);
+}
+
+.button[data-type="error"] {
+  --clr-text: var(--clr-white);
+  --clr-bg: var(--clr-error);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-error);
+}
+
+.button[data-type="error"]:where(:hover, :focus-visible) {
+  --clr-bg: var(--clr-bg-on-event);
 }
 
 @media (min-width: 40em) {
@@ -906,7 +918,11 @@ select.form__input {
 
 @media (min-width: 40em) {
   .flight-ticket__item {
-    grid-template-columns: minmax(max-content, 20rem) 1fr min-content max-content;
+    grid-template-columns:
+      minmax(19rem, 1fr)
+      1fr
+      minmax(10rem, 1fr)
+      minmax(max-content, 12rem);
     column-gap: 0.625em;
     grid-template-areas:
       "flight-date          flight-hours        flight-state        btn-see-more-details"
@@ -934,15 +950,41 @@ select.form__input {
 
 .flight-ticket__more-details {
   /* display: none; */
-  margin-top: 1.5625rem;
   grid-area: flight-more-details;
   display: grid;
   column-gap: 0.625em;
-  grid-template-columns: minmax(max-content, 20rem) 1fr min-content max-content;
+  row-gap: var(--size-100);
+
+  grid-template-columns:
+    minmax(19rem, 1fr)
+    1fr
+    minmax(10rem, 1fr)
+    minmax(max-content, 12rem);
+
+  grid-template-areas:
+    "flight-bought-date flight-distance flight-ticket-grouped-details flight-check-in"
+    "flight-passengers  flight-passengers flight-passengers           flight-check-in";
+}
+
+.flight-bought-date {
+  grid-area: flight-bought-date;
 }
 
 .flight-distance {
   grid-area: flight-distance;
+}
+
+.flight-ticket__grouped-details {
+  grid-area: flight-ticket-grouped-details;
+
+  display: grid;
+  row-gap: var(--size-200);
+
+  justify-content: space-between;
+  grid-template-columns: repeat(2, max-content);
+  grid-template-areas:
+    "flight-company flight-terminal"
+    "flight-price flight-price";
 }
 
 .flight-terminal {
@@ -955,6 +997,10 @@ select.form__input {
 
 .flight-passengers {
   grid-area: flight-passengers;
+}
+
+.flight-check-in {
+  grid-area: flight-check-in;
 }
 
 /* utility classes */
@@ -1150,6 +1196,7 @@ select.form__input {
 .gap-2 {
   gap: var(--size-200);
 }
+
 .gap-0 {
   --gap-size: 0;
 }
@@ -1176,6 +1223,10 @@ select.form__input {
 
 .align-self-center {
   align-self: center;
+}
+
+.align-self-end {
+  align-self: end;
 }
 
 @media (min-width: 40em) {
@@ -1327,6 +1378,10 @@ select.form__input {
 
 .width-100 {
   width: 100%;
+}
+
+.width-max-content {
+  width: max-content;
 }
 
 @media (max-width: 39.999em) {
