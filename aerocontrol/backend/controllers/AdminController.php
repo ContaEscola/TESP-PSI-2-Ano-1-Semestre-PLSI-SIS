@@ -72,8 +72,7 @@ class AdminController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->create()) {
-                var_dump($model->admin_id);
-                //return $this->redirect(['view', 'admin_id' => $model->admin_id]);
+                return $this->redirect(['view', 'admin_id' => $model->admin_id]);
             }
         } else {
             $model->resetAttributesOnInvalid();

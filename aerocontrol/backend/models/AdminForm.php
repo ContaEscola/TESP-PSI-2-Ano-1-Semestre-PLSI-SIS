@@ -43,6 +43,7 @@ class AdminForm extends UserForm
             if (!$admin->save())
                 throw new ErrorException();
 
+            $this->admin_id = $admin->admin_id;
 
             $auth = Yii::$app->authManager;
             $adminRole = $auth->getRole('admin');
