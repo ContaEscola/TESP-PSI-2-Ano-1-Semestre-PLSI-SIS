@@ -84,7 +84,7 @@ class AdminForm extends UserForm
     protected function setupAdminOnForm($admin_id)
     {
         $this->admin_id = $admin_id;
-        $admin = $this->getManager();
+        $admin = $this->getAdmin();
         $this->setAttributes($admin->getAttributes());
     }
 
@@ -93,7 +93,7 @@ class AdminForm extends UserForm
      *
      * @return Admin|null
      */
-    protected function getManager()
+    protected function getAdmin()
     {
         if ($this->_admin === null) {
             $this->_admin = Admin::findOne($this->admin_id);
