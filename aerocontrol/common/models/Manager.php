@@ -8,10 +8,8 @@ use Yii;
  * This is the model class for table "manager".
  *
  * @property int $manager_id
- * @property int $restaurant_id
  *
  * @property User $manager
- * @property Restaurant $restaurant
  */
 class Manager extends \yii\db\ActiveRecord
 {
@@ -20,7 +18,7 @@ class Manager extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%manager}}';
+        return 'manager';
     }
 
     /**
@@ -29,11 +27,10 @@ class Manager extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['manager_id', 'restaurant_id'], 'required'],
-            [['manager_id', 'restaurant_id'], 'integer'],
-            ['manager_id', 'unique'],
-            ['manager_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['manager_id' => 'id']],
-            ['restaurant_id', 'exist', 'skipOnError' => true, 'targetClass' => Restaurant::class, 'targetAttribute' => ['restaurant_id' => 'id']],
+            [['manager_id'], 'required'],
+            [['manager_id'], 'integer'],
+            [['manager_id'], 'unique'],
+            [['manager_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['manager_id' => 'id']],
         ];
     }
 
@@ -43,8 +40,7 @@ class Manager extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'manager_id' => 'ID do Gerente',
-            'restaurant_id' => 'ID do Restaurante',
+            'manager_id' => 'Manager ID',
         ];
     }
 
@@ -56,15 +52,5 @@ class Manager extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::class, ['id' => 'manager_id']);
-    }
-
-    /**
-     * Gets query for [[Restaurant]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRestaurant()
-    {
-        return $this->hasOne(Restaurant::class, ['id' => 'restaurant_id']);
     }
 }

@@ -75,7 +75,7 @@ class ManagerController extends Controller
                 return $this->redirect(['view', 'manager_id' => $model->manager_id]);
             }
         } else {
-            $model->loadDefaultValues();
+            $model->resetAttributesOnInvalid();
         }
 
         return $this->render('create', [

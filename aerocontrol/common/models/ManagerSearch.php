@@ -17,7 +17,7 @@ class ManagerSearch extends Manager
     public function rules()
     {
         return [
-            [['manager_id', 'restaurant_id'], 'integer'],
+            [['manager_id'], 'integer'],
         ];
     }
 
@@ -58,7 +58,6 @@ class ManagerSearch extends Manager
         // grid filtering conditions
         $query->andFilterWhere([
             'manager_id' => $this->manager_id,
-            'restaurant_id' => $this->restaurant_id,
         ]);
 
         return $dataProvider;
