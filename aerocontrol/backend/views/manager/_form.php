@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -14,6 +15,11 @@ use yii\bootstrap5\ActiveForm;
         'validateOnType' => true,
         'validationDelay' => 500,
     ]); ?>
+
+    <?= $form->field($model, 'restaurant_id')->dropDownList(
+        ArrayHelper::map(\common\models\Restaurant::find()->asArray()->all(),'id','name'), [
+        'class' => 'form-control'
+    ]) ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
 

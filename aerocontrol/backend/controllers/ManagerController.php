@@ -75,7 +75,7 @@ class ManagerController extends Controller
                 return $this->redirect(['view', 'manager_id' => $model->manager_id]);
             }
         } else {
-            $model->loadDefaultValues();
+            $model->resetAttributesOnInvalid();
         }
 
         return $this->render('create', [
@@ -95,7 +95,7 @@ class ManagerController extends Controller
         $validManager = $this->findModel($manager_id);
         $model = new ManagerForm($validManager->manager_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
             return $this->redirect(['view', 'manager_id' => $model->manager_id]);
         }
 

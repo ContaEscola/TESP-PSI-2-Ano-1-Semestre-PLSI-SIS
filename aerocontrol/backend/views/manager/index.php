@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'label' => 'Id',
-                'value' => 'client_id',
+                'value' => 'manager_id',
             ],
             [
                 'label' => 'Username',
