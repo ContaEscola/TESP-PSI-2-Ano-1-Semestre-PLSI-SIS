@@ -9,7 +9,7 @@ dropdowns.forEach((e) => {
             e.setAttribute('aria-expanded', true)
 
         // Get Dropdown-Menu
-        const dropdownMenu = e.parentElement.querySelector('.dropdown-menu');
+        let dropdownMenu = e.parentElement.querySelector('.dropdown-menu');
 
         dropdownMenu.toggleAttribute("data-visible");
     })

@@ -18,7 +18,8 @@
   --clr-secondary-accent-400: hsl(85 37% 50%);
 
   --clr-success: hsl(85 77% 69%);
-  --clr-error: hsl(0 100% 66% / 0.85);
+  --clr-error-400: hsl(0 100% 66% / 0.85);
+  --clr-error-900: hsl(0 100% 59% / 0.85);
 
   --clr-form-invalid-submit-btn: hsl(0 0% 100% / 0.75);
   --clr-form-invalid-submit-btn-bg: hsl(198 56% 42%);
@@ -371,9 +372,9 @@ footer {
 
 .button[data-type="error"] {
   --clr-text: var(--clr-white);
-  --clr-bg: var(--clr-error);
+  --clr-bg: var(--clr-error-400);
   --clr-text-on-event: var(--clr-white);
-  --clr-bg-on-event: var(--clr-error);
+  --clr-bg-on-event: var(--clr-error-900);
 }
 
 .button[data-type="error"]:where(:hover, :focus-visible) {
@@ -461,8 +462,8 @@ footer {
 }
 
 .dropdown-menu__link[data-type="logout"] {
-  color: var(--clr-error);
-  --clr-icon: var(--clr-error);
+  color: var(--clr-error-400);
+  --clr-icon: var(--clr-error-400);
 }
 
 .dropdown-link__icon {
@@ -637,7 +638,7 @@ footer {
 .form__input.invalid:focus {
   --box-shadow-blur: 0.3em;
   --box-shadow-size: 0.1em;
-  --box-shadow-color: var(--clr-error);
+  --box-shadow-color: var(--clr-error-400);
 }
 
 .form__input:not([type="date"]).valid {
@@ -650,7 +651,7 @@ footer {
 }
 
 .form__input:not([type="date"]).invalid {
-  --clr-border: var(--clr-error);
+  --clr-border: var(--clr-error-400);
   --icon-url: url("../images/input-invalid.svg");
   padding-right: calc(
     var(--icon-size) + (var(--icon-position-left-offset) * 2) +
@@ -662,7 +663,7 @@ footer {
   --clr-border: var(--clr-success);
 }
 .form__input[type="date"].invalid {
-  --clr-border: var(--clr-error);
+  --clr-border: var(--clr-error-400);
 }
 
 select.form__input {
@@ -679,7 +680,7 @@ select.form__input {
   letter-spacing: 0.046875em;
   font-style: italic;
 
-  color: var(--clr-error);
+  color: var(--clr-error-400);
 }
 
 /* Alert */
@@ -878,7 +879,12 @@ select.form__input {
 }
 
 .flight-result__trip:not(:first-child)
-  :where(.flight-result__departure-time, .flight-result__arrival-time, .flight-result__departure-city, .flight-result__arrival-city) {
+  :where(
+    .flight-result__departure-time,
+    .flight-result__arrival-time,
+    .flight-result__departure-city,
+    .flight-result__arrival-city
+  ) {
   font-size: var(--fs-200);
 }
 
@@ -918,12 +924,8 @@ select.form__input {
 
 @media (min-width: 40em) {
   .flight-ticket__item {
-    grid-template-columns:
-      minmax(19rem, 1fr)
-      1fr
-      minmax(10rem, 1fr)
-      minmax(max-content, 12rem);
-    column-gap: 0.625em;
+    grid-template-columns: max-content 1fr min-content max-content;
+    column-gap: 1em;
     grid-template-areas:
       "flight-date          flight-hours        flight-state        btn-see-more-details"
       "flight-more-details  flight-more-details flight-more-details flight-more-details";
@@ -932,7 +934,12 @@ select.form__input {
 
 @media (min-width: 60em) {
   .flight-ticket__item {
-    outline: 2rem solid dodgerblue;
+    grid-template-columns:
+      minmax(16rem, 1fr)
+      1fr
+      minmax(10rem, 1fr)
+      15rem;
+    column-gap: 0.625em;
   }
 }
 
@@ -948,22 +955,39 @@ select.form__input {
   grid-area: btn-see-more-details;
 }
 
-.flight-ticket__more-details {
-  /* display: none; */
+.flight-more-details__wrapper {
+  display: none;
   grid-area: flight-more-details;
+}
+
+.flight-more-details__wrapper[data-visible] {
+  display: block;
+  animation: fade-in 250ms ease-in;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.flight-ticket__more-details {
   display: grid;
   column-gap: 0.625em;
   row-gap: var(--size-100);
 
   grid-template-columns:
-    minmax(19rem, 1fr)
+    minmax(16rem, 1fr)
     1fr
     minmax(10rem, 1fr)
-    minmax(max-content, 12rem);
+    15rem;
 
   grid-template-areas:
-    "flight-bought-date flight-distance flight-ticket-grouped-details flight-check-in"
-    "flight-passengers  flight-passengers flight-passengers           flight-check-in";
+    "flight-bought-date flight-distance flight-ticket-grouped-details flight-ticket-actions"
+    "flight-passengers  flight-passengers flight-passengers           flight-ticket-actions";
 }
 
 .flight-bought-date {
@@ -999,8 +1023,51 @@ select.form__input {
   grid-area: flight-passengers;
 }
 
-.flight-check-in {
-  grid-area: flight-check-in;
+.flight-ticket-actions {
+  grid-area: flight-ticket-actions;
+}
+
+.flight-passengers-table {
+  border-collapse: collapse;
+  background-color: var(--clr-neutral-400);
+  min-width: 30rem;
+  /* box-shadow: 0 0 0.1rem 0.01rem hsl(0 0% 0% / 0.95); */
+}
+
+.flight-passengers-table :where(td, th) {
+  padding: 0.5em 1em;
+}
+
+.flight-passengers-table thead th {
+  background-color: var(--clr-neutral-800);
+}
+
+.flight-passengers-table thead tr {
+  border-bottom: 0.05rem solid var(--clr-black-200);
+}
+
+.flight-passengers-table tbody tr {
+  border-bottom: 0.05rem solid var(--clr-neutral-900);
+}
+
+.flight-passengers-table tbody tr:last-child {
+  border-bottom: 0.05rem solid var(--clr-black-200);
+}
+
+/* modal */
+
+.flight-ticket-modal {
+  inset: 0;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.modal__close-btn {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 /* utility classes */
@@ -1062,8 +1129,16 @@ select.form__input {
   font-style: italic;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .text-white {
   color: var(--clr-white);
+}
+
+.text-black-400 {
+  color: var(--clr-black-400);
 }
 
 .text-black-200 {
@@ -1084,6 +1159,10 @@ select.form__input {
 
 .bg-neutral-400 {
   background-color: var(--clr-neutral-400);
+}
+
+.letter-spacing-3 {
+  letter-spacing: 0.12em;
 }
 
 .letter-spacing-2 {
@@ -1134,9 +1213,17 @@ select.form__input {
   display: block;
 }
 
+.d-inline-block {
+  display: inline-block;
+}
+
 .d-grid {
   display: grid;
   gap: var(--gap-size, 1rem);
+}
+
+.grid-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
 
 .even-columns {
@@ -1191,6 +1278,10 @@ select.form__input {
   .flex-flow-column-sm {
     flex-flow: column;
   }
+}
+
+.gap-5 {
+  gap: var(--size-500);
 }
 
 .gap-2 {
@@ -1306,6 +1397,33 @@ select.form__input {
   --flow-space: var(--size-50);
 }
 
+@media (max-width: 39.999em) {
+  .flow-sm > :where(:not(:first-child)) {
+    --flow-space: var(--size-200);
+    margin-top: var(--flow-space);
+  }
+
+  .flow[data-flow-space="large"] > :where(:not(:first-child)) {
+    --flow-space: var(--size-400);
+  }
+
+  .flow-sm[data-flow-space="medium"] > :where(:not(:first-child)) {
+    --flow-space: var(--size-300);
+  }
+
+  .flow-sm[data-flow-space="small"] > :where(:not(:first-child)) {
+    --flow-space: var(--size-200);
+  }
+
+  .flow-sm[data-flow-space="very-small"] > :where(:not(:first-child)) {
+    --flow-space: var(--size-100);
+  }
+
+  .flow-sm[data-flow-space="extra-small"] > :where(:not(:first-child)) {
+    --flow-space: var(--size-50);
+  }
+}
+
 .padding-block-700 {
   padding-block: var(--size-700);
 }
@@ -1317,12 +1435,24 @@ select.form__input {
   padding-block: var(--size-100);
 }
 
+.padding-300 {
+  padding: var(--size-300);
+}
+
+.margin-inline-auto {
+  margin-inline: auto;
+}
+
 .margin-top-600 {
   margin-top: var(--size-600);
 }
 
 .margin-top-400 {
   margin-top: var(--size-400);
+}
+
+.margin-top-300 {
+  margin-top: var(--size-300);
 }
 
 .margin-top-200 {
