@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 CREATE TABLE IF NOT EXISTS `admin` (
   `admin_id` INT UNSIGNED,
+  `status` SMALLINT(6) NOT NULL,
   CONSTRAINT `pk_admin_id` PRIMARY KEY(`admin_id`),
   CONSTRAINT `fk_admin_admin_id` FOREIGN KEY (`admin_id`) REFERENCES `user`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 CREATE TABLE IF NOT EXISTS `client` (
   `client_id` INT UNSIGNED,
+  `status` SMALLINT(6) NOT NULL,
   CONSTRAINT `pk_client_id` PRIMARY KEY(`client_id`),
   CONSTRAINT `fk_client_client_id` FOREIGN KEY (`client_id`) REFERENCES `user`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -79,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
     'Mestrado',
     'Doutoramento'
   ) NOT NULL,
+  `status` SMALLINT(6) NOT NULL,
   `function_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_employee_id` PRIMARY KEY(`employee_id`),
   CONSTRAINT `fk_employee_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `user`(`id`),
@@ -125,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `restaurant_item` (
 CREATE TABLE IF NOT EXISTS `manager` (
   `manager_id` INT UNSIGNED,
   `restaurant_id` INT(11) UNSIGNED NOT NULL,
+  `status` SMALLINT(6) NOT NULL,
   CONSTRAINT `pk_manager_id` PRIMARY KEY(`manager_id`),
   CONSTRAINT `fk_manager_manager_id` FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`),
   CONSTRAINT `fk_manager_restaurant_id` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant`(`id`)
