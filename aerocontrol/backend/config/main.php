@@ -41,9 +41,12 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
+
+        'formatter' => [
+            'datetimeFormat' => 'YYYY-MM-DD hh:mm:ss'
+        ]
 
     ],
     'params' => $params,

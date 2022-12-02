@@ -97,8 +97,8 @@ class FlightController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->estimated_arrival_date = $model->arrival_date;
-                $model->estimated_departure_date = $model->departure_date;
+                var_dump(strtotime($model->estimated_departure_date));
+                var_dump(strtotime($model->estimated_arrival_date));
                 if ($model->save())
                     return $this->redirect(['view', 'id' => $model->id]);
             }

@@ -92,8 +92,7 @@ class Airport extends \yii\db\ActiveRecord
     public static function getPossibleAirportsIDs()
     {
         $possibleAirports = self::find()->select(['id'])->all();
-
-        // Makes an array of ID´s from all the possible companies
+        // Makes an array of ID´s from all the possible airports
         return ArrayHelper::getColumn($possibleAirports, 'id');
     }
 
@@ -105,7 +104,7 @@ class Airport extends \yii\db\ActiveRecord
     {
         $possibleAirports = self::find()->select(['id', 'name'])->all();
 
-        // Maps the array containing the companies to an associative array of 'id' => 'name'
+        // Maps the array containing the airports to an associative array of 'id' => 'name'
         return ArrayHelper::map($possibleAirports, 'id', 'name');
     }
 }
