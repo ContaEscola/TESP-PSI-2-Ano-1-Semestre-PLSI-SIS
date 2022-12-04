@@ -28,6 +28,31 @@ class AdminController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                [
+                    'allow' => true,
+                    'actions' => ['index'],
+                    'roles' => ['viewAdmin'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => ['view'],
+                    'roles' => ['viewAdmin'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => ['create'],
+                    'roles' => ['createAdmin'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => ['update'],
+                    'roles' => ['updateAdmin'],
+                ],
+                [
+                    'allow' => true,
+                    'actions' => ['delete'],
+                    'roles' => ['deleteAdmin'],
+                ],
             ]
         );
     }
