@@ -28,6 +28,8 @@ use Yii;
  */
 class Flight extends \yii\db\ActiveRecord
 {
+    const SCENARIO_ON_UPDATE = 'on_udpate';
+
     const POSSIBLE_STATES = [
         'Previsto',
         'Chegou',
@@ -64,12 +66,28 @@ class Flight extends \yii\db\ActiveRecord
         parent::__construct($config);
     }
 
+    // Formatar as datas visualmente se encontrar um registo
+    public function afterFind()
+    {
+        $this->estimated_departure_date = Yii::$app->formatter->asDatetime($this->estimated_departure_date);
+        $this->estimated_arrival_date = Yii::$app->formatter->asDatetime($this->estimated_arrival_date);
+        $this->departure_date = Yii::$app->formatter->asDatetime($this->departure_date);
+        $this->arrival_date = Yii::$app->formatter->asDatetime($this->arrival_date);
+    }
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return '{{%flight}}';
+    }
+
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_ON_UPDATE] = ['departure_date', 'arrival_date'];
+        return $scenarios;
     }
 
     /**
@@ -88,17 +106,12 @@ class Flight extends \yii\db\ActiveRecord
             [
                 ['estimated_departure_date', 'estimated_arrival_date'],
                 'datetime',
-                'format' => 'php:d-m-Y H:i'
             ],
 
-            ['estimated_arrival_date', function ($attribute, $params, $validator) {
-                $start_date = strtotime($this->estimated_departure_date);
-                $end_date = strtotime($attribute);
+            ['estimated_arrival_date', 'compareEstimatedDepartureDate'],
 
-                if (!$this->hasErrors() && $start_date > $end_date) {
-                    $this->addError($attribute, 'A data de chegada não pode ser antes da data de partida.');
-                }
-            },],
+            ['departure_date', 'compareEstimatedDepartureDate', 'on' => self::SCENARIO_ON_UPDATE],
+            ['arrival_date', 'compareArrivalDate', 'on' => self::SCENARIO_ON_UPDATE],
 
             ['state', 'in', 'range' => self::POSSIBLE_STATES, 'strict' => true],
 
@@ -133,10 +146,10 @@ class Flight extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'terminal' => 'Terminal',
-            'estimated_departure_date' => 'Data de partida estimada',
-            'estimated_arrival_date' => 'Data de chegada estimada',
-            'departure_date' => 'Data de partida',
-            'arrival_date' => 'Data de chegada',
+            'estimated_departure_date' => 'Data de Partida Estimada',
+            'estimated_arrival_date' => 'Data de Chegada Estimada',
+            'departure_date' => 'Data de Partida',
+            'arrival_date' => 'Data de Chegada',
             'price' => 'Preço',
             'distance' => 'Distância',
             'state' => 'Estado',
@@ -147,13 +160,26 @@ class Flight extends \yii\db\ActiveRecord
         ];
     }
 
-
-    public function compareEstimatedDates($attribute, $params, $validator)
+    /**
+     * Compara a end date com a data de partida estimada
+     */
+    public function compareEstimatedDepartureDate($attribute, $params, $validator)
     {
         $start_date = strtotime($this->estimated_departure_date);
-        $end_date = strtotime($attribute);
+        $end_date = strtotime($this->$attribute);
         if ($end_date < $start_date)
-            $this->addError($attribute, 'A data de chegada não pode ser antes da data de partida.');
+            $validator->addError($this, $attribute, 'A {attribute} não pode ser antes da Data de Partida Estimada.');
+    }
+
+    /**
+     * Compara a end date com a data de partida
+     */
+    public function compareArrivalDate($attribute, $params, $validator)
+    {
+        $start_date = strtotime($this->departure_date);
+        $end_date = strtotime($this->$attribute);
+        if ($end_date < $start_date)
+            $validator->addError($this, $attribute, 'A {attribute} não pode ser antes da Data de Partida.');
     }
 
     public function beforeSave($insert)
@@ -162,10 +188,19 @@ class Flight extends \yii\db\ActiveRecord
             return false;
         }
 
+        // Se for para criar um voo entao as datas certas são iguais às datas estimadas
         if ($insert) {
-            $this->estimated_departure_date = Yii::$app->formatter->asDatetime($this->estimated_departure_date);
-            $this->estimated_arrival_date = Yii::$app->formatter->asDatetime($this->estimated_arrival_date);
+            $this->departure_date = $this->estimated_departure_date;
+            $this->arrival_date = $this->estimated_arrival_date;
         }
+
+        // Formatar as datas para a BD MySQL
+        $this->estimated_departure_date = Yii::$app->formatter->asDatetime($this->estimated_departure_date, 'php:Y-m-d H:i');
+        $this->estimated_arrival_date = Yii::$app->formatter->asDatetime($this->estimated_arrival_date, 'php:Y-m-d H:i');
+        $this->departure_date = Yii::$app->formatter->asDatetime($this->departure_date, 'php:Y-m-d H:i');
+        $this->arrival_date = Yii::$app->formatter->asDatetime($this->arrival_date, 'php:Y-m-d H:i');
+
+
         return true;
     }
 

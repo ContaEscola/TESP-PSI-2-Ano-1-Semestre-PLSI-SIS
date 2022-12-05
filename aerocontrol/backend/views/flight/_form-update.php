@@ -40,6 +40,26 @@ use kartik\datetime\DateTimePicker;
         ]
     ]) ?>
 
+    <?= $form->field($model, 'departure_date')->widget(DateTimePicker::classname(), [
+        'options' => [
+            'class' => 'form-control'
+        ],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'dd-mm-yyyy hh:ii'
+        ]
+    ]) ?>
+
+    <?= $form->field($model, 'arrival_date')->widget(DateTimePicker::classname(), [
+        'options' => [
+            'class' => 'form-control'
+        ],
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'dd-mm-yyyy hh:ii'
+        ]
+    ]) ?>
+
     <?= $form->field($model, 'price')->textInput() ?>
 
     <?= $form->field($model, 'distance')->textInput() ?>

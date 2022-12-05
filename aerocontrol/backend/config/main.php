@@ -45,7 +45,7 @@ return [
         ],
 
         'formatter' => [
-            'datetimeFormat' => 'YYYY-MM-DD hh:mm:ss'
+            'datetimeFormat' => 'php:d-m-Y H:i'
         ]
 
     ],

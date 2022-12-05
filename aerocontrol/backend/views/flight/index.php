@@ -25,43 +25,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             [
-                'label' => 'Origem',
-                'value' => function($model){
-                    return $model->originAirport->name . " - " . $model->departure_date;
+                'label' => 'Origem - Data de Partida Estimada',
+                'value' => function ($model) {
+                    return $model->originAirport->name . " - " . $model->estimated_departure_date;
                 },
             ],
             [
-                'label' => 'Destino',
-                'value' => function($model){
-                    return $model->arrivalAirport->name;
+                'label' => 'Destino - Data de Chegada Estimada',
+                'value' => function ($model) {
+                    return $model->arrivalAirport->name . ' - ' . $model->estimated_arrival_date;
                 },
             ],
-            [
-                'label' => 'Terminal',
-                'value' => 'terminal'
-            ],
-            [
-                'label' => 'Hora de Partida',
-                'value' => function($model){
-                    return Yii::$app->formatter->asDatetime($model->departure_date,'dd-MM-yyyy HH:mm');
-                },
-            ],
-            [
-                'label' => 'Hora de Chegada',
-                'value' => function($model){
-                    return Yii::$app->formatter->asDatetime($model->arrival_date,'dd-MM-yyyy HH:mm');
-                },
-            ],
+            'terminal',
+            'departure_date',
+            'arrival_date',
             [
                 'label' => 'Avião',
-                'value' => function($model){
+                'value' => function ($model) {
                     return $model->airplane->name;
                 },
             ],
-            [
-                'label' => 'Estado',
-                'value' => 'state'
-            ],
+            'state',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Flight $model, $key, $index, $column) {

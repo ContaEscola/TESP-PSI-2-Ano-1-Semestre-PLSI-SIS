@@ -96,11 +96,8 @@ class FlightController extends Controller
         $model = new Flight();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                var_dump(strtotime($model->estimated_departure_date));
-                var_dump(strtotime($model->estimated_arrival_date));
-                if ($model->save())
-                    return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -121,6 +118,7 @@ class FlightController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Flight::SCENARIO_ON_UPDATE;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
