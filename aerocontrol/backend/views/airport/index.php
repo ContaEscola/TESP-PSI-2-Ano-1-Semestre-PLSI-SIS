@@ -21,23 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
             'id',
-            [
-                'label' => 'Nome',
-                'value' => 'name'
-            ],
-            [
-                'label' => 'País',
-                'value' => 'country'
-            ],
-            [
-                'label' => 'Cidade',
-                'value' => 'city'
-            ],
+            'name',
+            'country',
+            'city',
             [
                 'label' => 'Website',
-                'value' => 'website'
+                'attribute' => 'website',
+                'filter' => ''
             ],
             [
                 'class' => ActionColumn::className(),
