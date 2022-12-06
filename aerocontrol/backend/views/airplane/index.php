@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Airplane;
+use common\models\Company;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -21,25 +22,25 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
             'id',
-            [
-                'label' => 'Nome',
-                'value' => 'name'
-            ],
-            [
-                'label' => 'Capacidade',
-                'value' => 'capacity'
-            ],
+            'name',
+            'capacity',
             [
                 'label' => 'Estado',
-                'value' => function($model){
+                'attribute' => 'state',
+                'filter' => [0 => 'Inativo', 1 => 'Ativo'],
+                'value' => function ($model) {
                     return $model->state == 0 ? "Inativo" : "Ativo";
                 }
             ],
             [
                 'label' => 'Companhia',
-                'value' => function($model){
+                'attribute' => 'company_id',
+                'filter' => Company::getPossibleCompaniesForDropdowns(),
+                'value' => function ($model) {
                     return $model->company->name;
                 },
             ],
