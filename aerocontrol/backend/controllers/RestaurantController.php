@@ -71,13 +71,13 @@ class RestaurantController extends Controller
         $model = new Restaurant();
 
         if ($this->request->isPost) {
-            $restaurantName = $model->name;
-            $logo = UploadedFile::getInstance($model, 'logo');
-            //$model->logo = $restaurantName . date(Yii::$app->formatter->datetimeFormat) . $logo->getExtension();
-            //$logo->saveAs(Yii::getAlias('@restaurantImgPath') . '/' . $imgName);
+
+            $model->logo = UploadedFile::getInstance($model, 'logo');
+            $image_name = $model->name . "." . $model->logo->getExtension();
+            $image_path = Yii::getAlias('@base') . "/images/restaurant/" . $image_name;
+            $model->logo = $image_path;
+            $model->logo->saveAs($image_path);
             $model->save();
-
-
 
 
 

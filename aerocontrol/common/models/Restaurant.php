@@ -41,7 +41,8 @@ class Restaurant extends \yii\db\ActiveRecord
             ['name', 'string', 'max' => 75],
             ['description', 'string', 'max' => 255],
             ['phone', 'string', 'max' => 20],
-            [['logo', 'website'], 'string', 'max' => 50],
+            ['website', 'string', 'max' => 50],
+            ['logo', 'file', 'extensions'  => 'jpeg,jpg,png,gif'],
             ['name', 'unique'],
             ['logo', 'unique'],
         ];
