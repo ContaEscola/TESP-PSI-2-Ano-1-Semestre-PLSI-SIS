@@ -18,35 +18,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
             'client_id',
             [
                 'label' => 'Username',
-                'value' => function($model){
-                    return $model->user->username;
-                }
+                'attribute' => 'user',
+                'value' => 'user.username'
             ],
             [
                 'label' => 'Nome',
-                'value' => function($model){
-                    return $model->user->first_name.' '.$model->user->last_name;
+                'value' => function ($model) {
+                    return $model->user->first_name . ' ' . $model->user->last_name;
                 }
             ],
             [
                 'label' => 'Email',
-                'value' => function($model){
-                    return $model->user->email;
-                }
+                'attribute' => 'user',
+                'value' => 'user.email'
             ],
             [
                 'label' => 'Telefone',
-                'value' => function($model){
-                    return $model->user->phone;
-                }
+                'attribute' => 'user',
+                'value' => 'user.phone'
             ],
             [
                 'label' => 'Género',
-                'value' => function($model){
+                'value' => function ($model) {
                     return $model->user->gender;
                 }
             ],

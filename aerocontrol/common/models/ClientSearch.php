@@ -11,6 +11,9 @@ use common\models\Client;
  */
 class ClientSearch extends Client
 {
+
+    public $user;
+
     /**
      * {@inheritdoc}
      */
@@ -18,6 +21,7 @@ class ClientSearch extends Client
     {
         return [
             [['client_id'], 'integer'],
+            ['user', 'safe']
         ];
     }
 
@@ -41,11 +45,26 @@ class ClientSearch extends Client
     {
         $query = Client::find();
 
+        // https://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview
+
+        $query->joinWith(['user']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['user'] = [
+            'asc' => ['user.username' => SORT_ASC],
+            'desc' => ['user.username' => SORT_DESC],
+
+            'asc' => ['user.email' => SORT_ASC],
+            'desc' => ['user.email' => SORT_DESC],
+
+            'asc' => ['user.phone' => SORT_ASC],
+            'desc' => ['user.phone' => SORT_DESC]
+        ];
 
         $this->load($params);
 
@@ -58,7 +77,10 @@ class ClientSearch extends Client
         // grid filtering conditions
         $query->andFilterWhere([
             'client_id' => $this->client_id,
-        ]);
+        ])
+            ->andFilterWhere(['like', 'user.username', $this->user])
+            ->andFilterWhere(['like', 'user.phone', $this->user])
+            ->andFilterWhere(['like', 'user.email', $this->user]);
 
         return $dataProvider;
     }
