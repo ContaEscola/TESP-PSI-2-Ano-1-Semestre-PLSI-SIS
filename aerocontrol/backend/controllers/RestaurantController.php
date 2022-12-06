@@ -1,12 +1,14 @@
 <?php
 
-namespace app\controllers;
+namespace backend\controllers;
 
 use common\models\Restaurant;
 use common\models\RestaurantSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * RestaurantController implements the CRUD actions for Restaurant model.
@@ -40,7 +42,6 @@ class RestaurantController extends Controller
     {
         $searchModel = new RestaurantSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -70,6 +71,18 @@ class RestaurantController extends Controller
         $model = new Restaurant();
 
         if ($this->request->isPost) {
+            $restaurantName = $model->name;
+            $logo = UploadedFile::getInstance($model, 'logo');
+            //$model->logo = $restaurantName . date(Yii::$app->formatter->datetimeFormat) . $logo->getExtension();
+            //$logo->saveAs(Yii::getAlias('@restaurantImgPath') . '/' . $imgName);
+            $model->save();
+
+
+
+
+
+
+
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

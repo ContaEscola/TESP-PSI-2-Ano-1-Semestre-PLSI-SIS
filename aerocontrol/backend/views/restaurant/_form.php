@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="restaurant-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'close_time')->textInput() ?>
 
-    <?= $form->field($model, 'logo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'logo')->fileInput() ?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
