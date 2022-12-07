@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\Company;
+use common\models\CompanySearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -50,11 +51,6 @@ class CompanyController extends Controller
                             'actions' => ['update'],
                             'roles' => ['updateCompany'],
                         ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['deleteCompany'],
-                        ],
                     ],
                 ],
             ]
@@ -68,9 +64,12 @@ class CompanyController extends Controller
      */
     public function actionIndex()
     {
-        $companies = Company::find()->all();
+        $searchModel = new CompanySearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('index', [
-            'companies' => $companies,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -127,20 +126,6 @@ class CompanyController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Deletes an existing Company model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**

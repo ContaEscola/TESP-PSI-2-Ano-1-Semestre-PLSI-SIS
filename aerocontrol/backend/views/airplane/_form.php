@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Airplane;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -19,7 +20,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'capacity')->textInput() ?>
 
-    <?= $form->field($model, 'state')->dropDownList(['0' => 'Inativo', '1' => 'Ativo'], [
+    <?= $form->field($model, 'state')->dropDownList([Airplane::STATE_INACTIVE => 'Inativo', Airplane::STATE_ACTIVE => 'Ativo'], [
         'class' => 'form-control'
     ]) ?>
 
