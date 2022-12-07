@@ -31,18 +31,21 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Estado',
                 'attribute' => 'state',
-                'filter' => [0 => 'Inativo', 1 => 'Ativo'],
                 'value' => function ($model) {
-                    return $model->state == 0 ? "Inativo" : "Ativo";
-                }
+                    return $model->getState();
+                },
+                'filter' => [
+                    Airplane::STATE_INACTIVE => 'Inativo',
+                    Airplane::STATE_ACTIVE => 'Ativo'
+                ],
             ],
             [
                 'label' => 'Companhia',
                 'attribute' => 'company_id',
-                'filter' => Company::getPossibleCompaniesForDropdowns(),
                 'value' => function ($model) {
                     return $model->company->name;
                 },
+                'filter' => Company::getPossibleCompaniesForDropdowns(),
             ],
             [
                 'class' => ActionColumn::className(),

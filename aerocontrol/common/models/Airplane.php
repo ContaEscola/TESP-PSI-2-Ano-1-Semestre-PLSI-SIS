@@ -18,6 +18,9 @@ use Yii;
  */
 class Airplane extends \yii\db\ActiveRecord
 {
+    const STATE_ACTIVE = 1;
+    const STATE_INACTIVE = 0;
+
     private $possible_airplane_companies;
     public $possible_airplane_companies_for_dropdown;
 
@@ -84,6 +87,14 @@ class Airplane extends \yii\db\ActiveRecord
     {
         $this->possible_airplane_companies = Company::getPossibleCompaniesIDs();
         $this->possible_airplane_companies_for_dropdown = Company::getPossibleCompaniesForDropdowns();
+    }
+
+    /**
+     * Getter for airplane state in string
+     */
+    public function getState()
+    {
+        return $this->state == self::STATE_INACTIVE ? "Inativo" : "Ativo";
     }
 
     /**

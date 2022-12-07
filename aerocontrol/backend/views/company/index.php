@@ -21,17 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
             'id',
-            [
-                'label' => 'Nome',
-                'value' => 'name'
-            ],
+            'name',
             [
                 'label' => 'Estado',
-                'value' => function($model){
-                    return $model->state == 0 ? "Inativo" : "Ativo";
-                }
+                'attribute' => 'state',
+                'value' => function ($model) {
+                    return $model->getState();
+                },
+                'filter' => [
+                    Company::STATE_INACTIVE => 'Inativo',
+                    Company::STATE_ACTIVE => 'Ativo'
+                ]
             ],
             [
                 'class' => ActionColumn::className(),
