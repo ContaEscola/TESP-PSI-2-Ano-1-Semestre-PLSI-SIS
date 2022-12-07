@@ -51,7 +51,6 @@ class ClientSearch extends Client
         $query = Client::find();
 
         // https://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview
-
         $query->joinWith(['user']);
 
         // add conditions that should always apply here
@@ -78,6 +77,7 @@ class ClientSearch extends Client
             'asc' => ['user.phone_country_code' => SORT_ASC],
             'desc' => ['user.phone_country_code' => SORT_DESC],
         ];
+
         $dataProvider->sort->attributes['user_phone'] = [
             'asc' => ['user.phone' => SORT_ASC],
             'desc' => ['user.phone' => SORT_DESC],
