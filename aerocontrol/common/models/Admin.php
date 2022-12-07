@@ -13,6 +13,9 @@ use Yii;
  */
 class Admin extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -30,6 +33,8 @@ class Admin extends \yii\db\ActiveRecord
             ['admin_id', 'required'],
             ['admin_id', 'integer'],
             ['admin_id', 'unique'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'boolean'],
             ['admin_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['admin_id' => 'id']],
         ];
     }
