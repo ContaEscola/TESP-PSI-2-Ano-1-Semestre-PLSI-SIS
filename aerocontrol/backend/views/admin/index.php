@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Admin;
+use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -19,45 +20,56 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar Administrador', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
             [
                 'label' => 'ID',
+                'attribute' => 'admin_id',
                 'value' => 'admin_id'
             ],
             [
                 'label' => 'Username',
-                'value' => function($model){
+                'attribute' => 'user_username',
+                'value' => function ($model) {
                     return $model->user->username;
                 }
             ],
             [
                 'label' => 'Nome',
-                'value' => function($model){
-                    return $model->user->first_name.' '.$model->user->last_name;
+                'attribute' => 'user_fullname',
+                'value' => function ($model) {
+                    return $model->user->getFullName();
                 }
             ],
             [
                 'label' => 'Email',
-                'value' => function($model){
+                'attribute' => 'user_email',
+                'value' => function ($model) {
                     return $model->user->email;
                 }
             ],
             [
                 'label' => 'Telefone',
-                'value' => function($model){
+                'attribute' => 'user_phone',
+                'value' => function ($model) {
                     return $model->user->phone;
                 }
             ],
             [
                 'label' => 'Género',
-                'value' => function($model){
+                'attribute' => 'user_gender',
+                'value' => function ($model) {
                     return $model->user->gender;
-                }
+                },
+                'filter' => User::POSSIBLE_GENDERS_FOR_DROPDOWN,
             ],
             [
                 'class' => ActionColumn::className(),
@@ -68,6 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
     ?>
-
+    <?php \yii\widgets\Pjax::end(); ?>
 
 </div>

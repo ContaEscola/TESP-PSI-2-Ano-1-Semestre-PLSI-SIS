@@ -3,8 +3,6 @@
 namespace backend\controllers;
 
 use common\models\Airplane;
-use common\models\AirplaneSearch;
-use common\models\Company;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

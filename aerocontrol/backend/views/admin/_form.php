@@ -27,7 +27,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'phone_country_code')->textInput() ?>
 
-    <?= $form->field($model, 'phone')->input('number') ?>
+    <?= $form->field($model, 'phone')->input('tel') ?>
 
     <?= $form->field($model, 'gender')->dropDownList($model->possible_genders_for_dropdown, [
         'class' => 'form-control'

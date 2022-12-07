@@ -8,6 +8,8 @@ use common\models\AdminSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 /**
  * AdminController implements the CRUD actions for Admin model.
@@ -28,31 +30,36 @@ class AdminController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
-                [
-                    'allow' => true,
-                    'actions' => ['index'],
-                    'roles' => ['viewAdmin'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['view'],
-                    'roles' => ['viewAdmin'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['create'],
-                    'roles' => ['createAdmin'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['update'],
-                    'roles' => ['updateAdmin'],
-                ],
-                [
-                    'allow' => true,
-                    'actions' => ['delete'],
-                    'roles' => ['deleteAdmin'],
-                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['viewAdmin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewAdmin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createAdmin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateAdmin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteAdmin'],
+                        ],
+                    ],
+                ]
             ]
         );
     }
