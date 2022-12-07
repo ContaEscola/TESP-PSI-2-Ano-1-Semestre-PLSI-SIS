@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\EmployeeForm;
 use common\models\Employee;
+use common\models\EmployeeSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -70,9 +71,12 @@ class EmployeeController extends Controller
      */
     public function actionIndex()
     {
-        $employees = Employee::find()->all();
+        $searchModel = new EmployeeSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('index', [
-            'employees' => $employees,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
