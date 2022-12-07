@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-index">
 
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
@@ -75,5 +76,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
     ?>
+    <?php \yii\widgets\Pjax::end(); ?>
 
 </div>

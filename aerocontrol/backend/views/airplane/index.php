@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar avião', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
@@ -56,5 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
     ?>
+    <?php \yii\widgets\Pjax::end(); ?>
 
 </div>
