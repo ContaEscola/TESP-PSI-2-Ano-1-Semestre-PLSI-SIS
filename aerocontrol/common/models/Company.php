@@ -54,6 +54,14 @@ class Company extends \yii\db\ActiveRecord
     }
 
     /**
+     * Getter for company state in string
+     */
+    public function getState()
+    {
+        return $this->state == self::STATE_INACTIVE ? "Inativo" : "Ativo";
+    }
+
+    /**
      * Gets query for [[Airplanes]].
      *
      * @return \yii\db\ActiveQuery

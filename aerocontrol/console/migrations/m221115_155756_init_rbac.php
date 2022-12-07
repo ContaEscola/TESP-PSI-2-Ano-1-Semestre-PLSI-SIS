@@ -510,8 +510,19 @@ class m221115_155756_init_rbac extends Migration
         $auth->assign($admin,1);
         $auth->assign($employee,2);
         $auth->assign($employee,3);
+        $auth->assign($employee,7);
+        $auth->assign($employee,8);
+        $auth->assign($employee,9);
         $auth->assign($client,4);
         $auth->assign($client,5);
+        $auth->assign($client,6);
+        $auth->assign($client,10);
+        $auth->assign($client,11);
+        $auth->assign($client,12);
+        $auth->assign($client,13);
+        $auth->assign($client,14);
+        $auth->assign($client,15);
+
     }
 
     /**

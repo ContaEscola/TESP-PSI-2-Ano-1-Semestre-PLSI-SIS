@@ -1,38 +1,38 @@
 <?php
 
-use common\models\Employee;
-use common\models\EmployeeFunction;
-use yii\grid\GridView;
+use common\models\Manager;
+use common\models\Restaurant;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
-use yii\widgets\ListView;
+use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\EmployeeSearch $searchModel */
+/** @var common\models\ManagerSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Trabalhadores';
+$this->title = 'Gerentes de Restaurantes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="employee-index">
+<div class="manager-index">
+
     <p>
-        <?= Html::a('Criar novo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Gerente', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'emptyText' => "Nenhum resultado encontrado!",
+        'emptyText' => 'Nenhum resultado encontrado!',
         'columns' => [
-            'employee_id',
             [
-                'label' => 'Nº Empregado',
-                'attribute' => 'num_emp',
-                'value' => function ($model) {
-                    return $model->num_emp;
-                }
+                'label' => 'Id',
+                'attribute' => 'manager_id',
+                'value' => 'manager_id',
             ],
             [
                 'label' => 'Username',
@@ -56,13 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'Indicativo do país',
-                'attribute' => 'user_phone_country_code',
-                'value' => function ($model) {
-                    return $model->user->phone_country_code;
-                }
-            ],
-            [
                 'label' => 'Telefone',
                 'attribute' => 'user_phone',
                 'value' => function ($model) {
@@ -70,28 +63,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'Nº Contribuinte',
-                'attribute' => 'tin',
+                'label' => 'Restaurante',
+                'attribute' => 'restaurant_id',
                 'value' => function ($model) {
-                    return $model->tin;
-                }
-            ],
-            [
-                'label' => 'Função',
-                'attribute' => 'function_id',
-                'value' => function ($model) {
-                    return $model->function->name;
+                    return $model->restaurant->name;
                 },
-                'filter' => EmployeeFunction::getPossibleEmployeeFunctionsForDropdowns()
+                'filter' => Restaurant::getPossibleRestaurantsForDropdowns()
             ],
+
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Employee $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'employee_id' => $model->employee_id]);
+                'urlCreator' => function ($action, Manager $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'manager_id' => $model->manager_id]);
                 }
             ],
         ],
-    ]);
-    ?>
+    ]); ?>
+
 
 </div>

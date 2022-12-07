@@ -1,21 +1,33 @@
 <?php
 
+use common\models\Restaurant;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var common\models\Client $model */
-/** @var yii\bootstrap5\ActiveForm $form */
+/** @var common\models\Manager $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="client-form">
+<div class="manager-form">
 
     <?php $form = ActiveForm::begin([
         'validateOnType' => true,
         'validationDelay' => 500,
     ]); ?>
 
+    <?= $form->field($model, 'restaurant_id')->dropDownList(
+        ArrayHelper::map(Restaurant::find()->asArray()->all(), 'id', 'name'),
+        [
+            'class' => 'form-control',
+            'prompt' => '',
+        ]
+    ) ?>
+
     <?= $form->field($model, 'username')->textInput() ?>
+
+    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'first_name')->textInput() ?>
 

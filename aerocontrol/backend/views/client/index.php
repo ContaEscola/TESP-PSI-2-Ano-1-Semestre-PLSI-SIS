@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Client;
+use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -15,30 +16,64 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="client-index">
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Género</th>
-            <th>Ações</th>
-        </tr>
-        <?php
-        foreach ($clients as $client):?>
-            <tr>
-                <th scope="row"><?= $client->user->id?></th>
-                <td><?= $client->user->username?></td>
-                <td><?= $client->user->first_name." ".$client->user->last_name?></td>
-                <td><?= $client->user->email?></td>
-                <td><?= $client->user->phone?></td>
-                <td><?= $client->user->gender?></td>
-                <td>
-                    <a class="btn btn-primary" href="<?=Url::to(['client/view','client_id'=>$client->user->id])?>">Visualizar</a>
-                </td>
-            </tr>
-        <?php endforeach;?>
-    </table>
+    <?= GridView::widget([
+        'summary' => '',
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
+        'columns' => [
+            'client_id',
+            [
+                'label' => 'Username',
+                'attribute' => 'user_username',
+                'value' => function ($model) {
+                    return $model->user->username;
+                }
+            ],
+            [
+                'label' => 'Nome',
+                'attribute' => 'user_fullname',
+                'value' => function ($model) {
+                    return $model->user->getFullName();
+                }
+            ],
+            [
+                'label' => 'Email',
+                'attribute' => 'user_email',
+                'value' => function ($model) {
+                    return $model->user->email;
+                }
+            ],
+            [
+                'label' => 'Indicativo do país',
+                'attribute' => 'user_phone_country_code',
+                'value' => function ($model) {
+                    return $model->user->phone_country_code;
+                }
+            ],
+            [
+                'label' => 'Telefone',
+                'attribute' => 'user_phone',
+                'value' => function ($model) {
+                    return $model->user->phone;
+                }
+            ],
+            [
+                'label' => 'Género',
+                'attribute' => 'user_gender',
+                'value' => function ($model) {
+                    return $model->user->gender;
+                },
+                'filter' => User::POSSIBLE_GENDERS_FOR_DROPDOWN
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Client $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'client_id' => $model->client_id]);
+                }
+            ],
+        ],
+    ]);
+    ?>
 
 </div>

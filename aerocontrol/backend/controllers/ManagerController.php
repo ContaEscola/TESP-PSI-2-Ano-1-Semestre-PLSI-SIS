@@ -2,17 +2,18 @@
 
 namespace backend\controllers;
 
-use common\models\Airport;
-use common\models\AirportSearch;
+use backend\models\ManagerForm;
+use common\models\Manager;
+use common\models\ManagerSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AirportController implements the CRUD actions for Airport model.
+ * ManagerController implements the CRUD actions for Manager model.
  */
-class AirportController extends Controller
+class ManagerController extends Controller
 {
     /**
      * @inheritDoc
@@ -23,7 +24,7 @@ class AirportController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::class,
+                    'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -34,22 +35,27 @@ class AirportController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewAirport'],
+                            'roles' => ['viewManager'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewAirport'],
+                            'roles' => ['viewManager'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createAirport'],
+                            'roles' => ['createManager'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateAirport'],
+                            'roles' => ['updateManager'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteManager'],
                         ],
                     ],
                 ],
@@ -58,13 +64,13 @@ class AirportController extends Controller
     }
 
     /**
-     * Lists all Airport models.
+     * Lists all Manager models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new AirportSearch();
+        $searchModel = new ManagerSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -74,33 +80,33 @@ class AirportController extends Controller
     }
 
     /**
-     * Displays a single Airport model.
-     * @param int $id ID
+     * Displays a single Manager model.
+     * @param int $manager_id ID do Gerente
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($manager_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($manager_id),
         ]);
     }
 
     /**
-     * Creates a new Airport model.
+     * Creates a new Manager model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Airport();
+        $model = new ManagerForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->create()) {
+                return $this->redirect(['view', 'manager_id' => $model->manager_id]);
             }
         } else {
-            $model->loadDefaultValues();
+            $model->resetAttributesOnInvalid();
         }
 
         return $this->render('create', [
@@ -109,18 +115,19 @@ class AirportController extends Controller
     }
 
     /**
-     * Updates an existing Airport model.
+     * Updates an existing Manager model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param int $manager_id ID do Gerente
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($manager_id)
     {
-        $model = $this->findModel($id);
+        $validManager = $this->findModel($manager_id);
+        $model = new ManagerForm($validManager->manager_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+            return $this->redirect(['view', 'manager_id' => $model->manager_id]);
         }
 
         return $this->render('update', [
@@ -129,29 +136,29 @@ class AirportController extends Controller
     }
 
     /**
-     * Deletes an existing Airport model.
+     * Deletes an existing Manager model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param int $manager_id ID do Gerente
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($manager_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($manager_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Airport model based on its primary key value.
+     * Finds the Manager model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Airport the loaded model
+     * @param int $manager_id ID do Gerente
+     * @return Manager the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($manager_id)
     {
-        if (($model = Airport::findOne(['id' => $id])) !== null) {
+        if (($model = Manager::findOne(['manager_id' => $manager_id])) !== null) {
             return $model;
         }
 

@@ -23,6 +23,9 @@ use Yii;
  */
 class Employee extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
     const POSSIBLE_QUALIFICATIONS = [
         'Até ao 9º ano de escolaridade',
         'Secundário',
@@ -64,6 +67,8 @@ class Employee extends \yii\db\ActiveRecord
     {
         return [
             ['qualifications', 'in', 'range' => self::POSSIBLE_QUALIFICATIONS, 'strict' => true],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'boolean'],
         ];
     }
 
