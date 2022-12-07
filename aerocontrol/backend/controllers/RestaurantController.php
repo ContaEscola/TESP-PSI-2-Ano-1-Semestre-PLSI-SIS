@@ -72,20 +72,20 @@ class RestaurantController extends Controller
 
         if ($this->request->isPost) {
 
-            $model->logo = UploadedFile::getInstance($model, 'logo');
-            $image_name = $model->name . "." . $model->logo->getExtension();
-            $image_path = Yii::getAlias('@base') . "/images/restaurant/" . $image_name;
-            $model->logo = $image_path;
-            $model->logo->saveAs($image_path);
-            $model->save();
+            if ($model->load($this->request->post())){
 
-
-
-
-
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                if($model->validate()){
+                    $model->logo = UploadedFile::getInstance($model, 'logo');
+                    $image_name = $model->name . '.' . $model->logo->getExtension();
+                    $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
+                    $model->logo->saveAs($image_path);
+                    $model->logo = date("d-m-Y_H:i") .'_'. $image_name;
+                    if($model->save()){
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                }
             }
+
         } else {
             $model->loadDefaultValues();
         }
