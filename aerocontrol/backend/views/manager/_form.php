@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Restaurant;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
@@ -17,9 +18,12 @@ use yii\bootstrap5\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'restaurant_id')->dropDownList(
-        ArrayHelper::map(\common\models\Restaurant::find()->asArray()->all(),'id','name'), [
-        'class' => 'form-control'
-    ]) ?>
+        ArrayHelper::map(Restaurant::find()->asArray()->all(), 'id', 'name'),
+        [
+            'class' => 'form-control',
+            'prompt' => '',
+        ]
+    ) ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
 
@@ -33,7 +37,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'phone_country_code')->textInput() ?>
 
-    <?= $form->field($model, 'phone')->input('number') ?>
+    <?= $form->field($model, 'phone')->input('tel') ?>
 
     <?= $form->field($model, 'gender')->dropDownList($model->possible_genders_for_dropdown, [
         'class' => 'form-control'

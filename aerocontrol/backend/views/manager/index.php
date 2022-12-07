@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Manager;
+use common\models\Restaurant;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -16,54 +17,65 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="manager-index">
 
     <p>
-        <?= Html::a('Criar Manager', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Gerente', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => 'Nenhum resultado encontrado!',
         'columns' => [
             [
                 'label' => 'Id',
+                'attribute' => 'manager_id',
                 'value' => 'manager_id',
             ],
             [
                 'label' => 'Username',
-                'value' => function ($model){
+                'attribute' => 'user_username',
+                'value' => function ($model) {
                     return $model->user->username;
                 }
             ],
             [
                 'label' => 'Nome',
-                'value' => function ($model){
-                    return $model->user->first_name.' '.$model->user->last_name;
+                'attribute' => 'user_fullname',
+                'value' => function ($model) {
+                    return $model->user->getFullName();
                 }
             ],
             [
                 'label' => 'Email',
-                'value' => function($model){
+                'attribute' => 'user_email',
+                'value' => function ($model) {
                     return $model->user->email;
                 }
             ],
             [
-                'label' => 'Restaurante',
-                'value' => function ($model){
-                    return $model->restaurant->name;
-                }
-            ],
-            [
                 'label' => 'Telefone',
-                'value' => function($model){
+                'attribute' => 'user_phone',
+                'value' => function ($model) {
                     return $model->user->phone;
                 }
             ],
             [
+                'label' => 'Restaurante',
+                'attribute' => 'restaurant_id',
+                'value' => function ($model) {
+                    return $model->restaurant->name;
+                },
+                'filter' => Restaurant::getPossibleRestaurantsForDropdowns()
+            ],
+
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Manager $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'manager_id' => $model->manager_id]);
-                 }
+                }
             ],
         ],
     ]); ?>
