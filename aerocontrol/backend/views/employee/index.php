@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Employee;
+use common\models\EmployeeFunction;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -22,49 +23,66 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
             'employee_id',
             [
                 'label' => 'Nº Empregado',
-                'value' => function($model){
+                'attribute' => 'num_emp',
+                'value' => function ($model) {
                     return $model->num_emp;
                 }
             ],
             [
                 'label' => 'Username',
-                'value' => function($model){
+                'attribute' => 'user_username',
+                'value' => function ($model) {
                     return $model->user->username;
                 }
             ],
             [
                 'label' => 'Nome',
-                'value' => function($model){
-                    return $model->user->first_name.' '.$model->user->last_name;
+                'attribute' => 'user_fullname',
+                'value' => function ($model) {
+                    return $model->user->getFullName();
                 }
             ],
             [
                 'label' => 'Email',
-                'value' => function($model){
+                'attribute' => 'user_email',
+                'value' => function ($model) {
                     return $model->user->email;
                 }
             ],
             [
+                'label' => 'Indicativo do país',
+                'attribute' => 'user_phone_country_code',
+                'value' => function ($model) {
+                    return $model->user->phone_country_code;
+                }
+            ],
+            [
                 'label' => 'Telefone',
-                'value' => function($model){
+                'attribute' => 'user_phone',
+                'value' => function ($model) {
                     return $model->user->phone;
                 }
             ],
             [
                 'label' => 'Nº Contribuinte',
-                'value' => function($model){
+                'attribute' => 'tin',
+                'value' => function ($model) {
                     return $model->tin;
                 }
             ],
             [
                 'label' => 'Função',
-                'value' => function($model){
+                'attribute' => 'function_id',
+                'value' => function ($model) {
                     return $model->function->name;
-                }
+                },
+                'filter' => EmployeeFunction::getPossibleEmployeeFunctionsForDropdowns()
             ],
             [
                 'class' => ActionColumn::className(),

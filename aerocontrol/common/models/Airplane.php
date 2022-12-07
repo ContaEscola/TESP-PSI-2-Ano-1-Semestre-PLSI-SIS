@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "airplane".
@@ -18,6 +19,9 @@ use Yii;
  */
 class Airplane extends \yii\db\ActiveRecord
 {
+    const STATE_ACTIVE = 1;
+    const STATE_INACTIVE = 0;
+
     private $possible_airplane_companies;
     public $possible_airplane_companies_for_dropdown;
 
@@ -87,6 +91,14 @@ class Airplane extends \yii\db\ActiveRecord
     }
 
     /**
+     * Getter for airplane state in string
+     */
+    public function getState()
+    {
+        return $this->state == self::STATE_INACTIVE ? "Inativo" : "Ativo";
+    }
+
+    /**
      * Gets query for [[Company]].
      *
      * @return \yii\db\ActiveQuery
@@ -104,5 +116,29 @@ class Airplane extends \yii\db\ActiveRecord
     public function getFlights()
     {
         return $this->hasMany(Flight::class, ['airplane_id' => 'id']);
+    }
+
+    /**
+     * Get all airplanes IDs
+     * @return array
+     */
+    public static function getPossibleAirplanesIDs()
+    {
+        $possibleAirplanes = self::find()->select(['id'])->all();
+
+        // Makes an array of ID´s from all the possible companies
+        return ArrayHelper::getColumn($possibleAirplanes, 'id');
+    }
+
+    /**
+     * Get all the airplanes for dropdowns
+     * @return array
+     */
+    public static function getPossibleAirplanesForDropdowns()
+    {
+        $possibleAirplanes = self::find()->select(['id', 'name'])->all();
+
+        // Maps the array containing the companies to an associative array of 'id' => 'name'
+        return ArrayHelper::map($possibleAirplanes, 'id', 'name');
     }
 }
