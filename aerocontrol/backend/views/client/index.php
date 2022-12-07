@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Client;
+use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -24,30 +25,46 @@ $this->params['breadcrumbs'][] = $this->title;
             'client_id',
             [
                 'label' => 'Username',
-                'attribute' => 'user',
-                'value' => 'user.username'
+                'attribute' => 'user_username',
+                'value' => function ($model) {
+                    return $model->user->username;
+                }
             ],
             [
                 'label' => 'Nome',
+                'attribute' => 'user_fullname',
                 'value' => function ($model) {
-                    return $model->user->first_name . ' ' . $model->user->last_name;
+                    return $model->user->getFullName();
                 }
             ],
             [
                 'label' => 'Email',
-                'attribute' => 'user',
-                'value' => 'user.email'
+                'attribute' => 'user_email',
+                'value' => function ($model) {
+                    return $model->user->email;
+                }
+            ],
+            [
+                'label' => 'Indicativo do país',
+                'attribute' => 'user_phone_country_code',
+                'value' => function ($model) {
+                    return $model->user->phone_country_code;
+                }
             ],
             [
                 'label' => 'Telefone',
-                'attribute' => 'user',
-                'value' => 'user.phone'
+                'attribute' => 'user_phone',
+                'value' => function ($model) {
+                    return $model->user->phone;
+                }
             ],
             [
                 'label' => 'Género',
+                'attribute' => 'user_gender',
                 'value' => function ($model) {
                     return $model->user->gender;
-                }
+                },
+                'filter' => User::POSSIBLE_GENDERS_FOR_DROPDOWN
             ],
             [
                 'class' => ActionColumn::className(),
