@@ -1,10 +1,13 @@
 <?php
 
+use common\models\Airplane;
 use common\models\Flight;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use kartik\datetime\DateTimePicker;
 
 /** @var yii\web\View $this */
 /** @var common\models\FlightSearch $searchModel */
@@ -19,9 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar Voo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
         'summary' => '',
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => 'Nenhum resultado encontrado!',
         'columns' => [
             'id',
             [
@@ -37,15 +43,46 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'terminal',
-            'departure_date',
-            'arrival_date',
+            [
+                'attribute' => 'departure_date',
+                // 'filter' => DateTimePicker::widget([
+                //     'model' => $searchModel,
+                //     'attribute' => 'departure_date',
+                //     'options' => [
+                //         'class' => 'form-control'
+                //     ],
+                //     'pluginOptions' => [
+                //         'autoclose' => true,
+                //         'format' => 'dd-mm-yyyy hh:ii'
+                //     ],
+                // ]),
+            ],
+            [
+                'attribute' => 'arrival_date',
+                // 'filter' => DateTimePicker::widget([
+                //     'model' => $searchModel,
+                //     'attribute' => 'arrival_date',
+                //     'options' => [
+                //         'class' => 'form-control'
+                //     ],
+                //     'pluginOptions' => [
+                //         'autoclose' => true,
+                //         'format' => 'dd-mm-yyyy hh:ii'
+                //     ],
+                // ]),
+            ],
             [
                 'label' => 'Avião',
+                'attribute' => 'airplane_id',
                 'value' => function ($model) {
                     return $model->airplane->name;
                 },
+                'filter' => ArrayHelper::map(Airplane::find()->asArray()->all(), 'id', 'name'),
             ],
-            'state',
+            [
+                'attribute' => 'state',
+                'filter' => Flight::POSSIBLE_STATES_FOR_DROPDOWN,
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Flight $model, $key, $index, $column) {
@@ -55,5 +92,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
     ?>
+    <?php \yii\widgets\Pjax::end(); ?>
 
 </div>

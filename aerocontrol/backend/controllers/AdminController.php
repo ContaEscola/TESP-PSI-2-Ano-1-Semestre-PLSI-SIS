@@ -2,17 +2,19 @@
 
 namespace backend\controllers;
 
-use common\models\Airplane;
-use common\models\AirplaneSearch;
+use backend\models\AdminForm;
+use common\models\Admin;
+use common\models\AdminSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
+
 /**
- * AirplaneController implements the CRUD actions for Airplane model.
+ * AdminController implements the CRUD actions for Admin model.
  */
-class AirplaneController extends Controller
+class AdminController extends Controller
 {
     /**
      * @inheritDoc
@@ -23,7 +25,7 @@ class AirplaneController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::class,
+                    'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -34,37 +36,42 @@ class AirplaneController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewAirplane'],
+                            'roles' => ['viewAdmin'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewAirplane'],
+                            'roles' => ['viewAdmin'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createAirplane'],
+                            'roles' => ['createAdmin'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateAirplane'],
+                            'roles' => ['updateAdmin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteAdmin'],
                         ],
                     ],
-                ],
+                ]
             ]
         );
     }
 
     /**
-     * Lists all Airplane models.
+     * Lists all Admin models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new AirplaneSearch();
+        $searchModel = new AdminSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -74,54 +81,54 @@ class AirplaneController extends Controller
     }
 
     /**
-     * Displays a single Airplane model.
-     * @param int $id ID
+     * Displays a single Admin model.
+     * @param int $admin_id ID do Admin
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($admin_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($admin_id),
         ]);
     }
 
     /**
-     * Creates a new Airplane model.
+     * Creates a new Admin model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Airplane();
+        $model = new AdminForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->create()) {
+                return $this->redirect(['view', 'admin_id' => $model->admin_id]);
             }
         } else {
-            $model->loadDefaultValues();
+            $model->resetAttributesOnInvalid();
         }
 
         return $this->render('create', [
             'model' => $model,
-
         ]);
     }
 
     /**
-     * Updates an existing Airplane model.
+     * Updates an existing Admin model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param int $admin_id ID do Admin
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($admin_id)
     {
-        $model = $this->findModel($id);
+        $validAdmin = $this->findModel($admin_id);
+        $model = new AdminForm($validAdmin->admin_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+            return $this->redirect(['view', 'admin_id' => $model->admin_id]);
         }
 
         return $this->render('update', [
@@ -130,29 +137,29 @@ class AirplaneController extends Controller
     }
 
     /**
-     * Deletes an existing Airplane model.
+     * Deletes an existing Admin model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param int $admin_id ID do Admin
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($admin_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($admin_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Airplane model based on its primary key value.
+     * Finds the Admin model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Airplane the loaded model
+     * @param int $admin_id ID do Admin
+     * @return Admin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($admin_id)
     {
-        if (($model = Airplane::findOne(['id' => $id])) !== null) {
+        if (($model = Admin::findOne(['admin_id' => $admin_id])) !== null) {
             return $model;
         }
 

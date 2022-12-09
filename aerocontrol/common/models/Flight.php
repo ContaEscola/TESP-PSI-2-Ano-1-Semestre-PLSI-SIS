@@ -86,7 +86,12 @@ class Flight extends \yii\db\ActiveRecord
     public function scenarios()
     {
         $scenarios = parent::scenarios();
-        $scenarios[self::SCENARIO_ON_UPDATE] = ['departure_date', 'arrival_date'];
+        $scenarios[self::SCENARIO_ON_UPDATE] = [
+            'terminal', 'estimated_departure_date', 'estimated_arrival_date',
+            'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id',
+            'arrival_airport_id', 'airplane_id',
+            'departure_date', 'arrival_date'
+        ];
         return $scenarios;
     }
 

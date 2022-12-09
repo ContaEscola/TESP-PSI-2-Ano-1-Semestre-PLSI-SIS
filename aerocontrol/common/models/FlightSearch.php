@@ -11,6 +11,7 @@ use common\models\Flight;
  */
 class FlightSearch extends Flight
 {
+
     /**
      * {@inheritdoc}
      */
@@ -42,6 +43,7 @@ class FlightSearch extends Flight
     public function search($params)
     {
         $query = Flight::find();
+
 
         // add conditions that should always apply here
 

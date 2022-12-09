@@ -1,6 +1,6 @@
 <?php
 
-use common\models\Client;
+use common\models\Admin;
 use common\models\User;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -8,13 +8,20 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\ClientSearch $searchModel */
+/** @var common\models\AdminSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Clientes';
+$this->title = 'Administradores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="client-index">
+<div class="admin-index">
+
+    <p>
+        <?= Html::a('Criar Administrador', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
@@ -23,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
-            'client_id',
+            [
+                'label' => 'ID',
+                'attribute' => 'admin_id',
+                'value' => 'admin_id'
+            ],
             [
                 'label' => 'Username',
                 'attribute' => 'user_username',
@@ -46,13 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'Indicativo do país',
-                'attribute' => 'user_phone_country_code',
-                'value' => function ($model) {
-                    return $model->user->phone_country_code;
-                }
-            ],
-            [
                 'label' => 'Telefone',
                 'attribute' => 'user_phone',
                 'value' => function ($model) {
@@ -65,12 +69,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model) {
                     return $model->user->gender;
                 },
-                'filter' => User::POSSIBLE_GENDERS_FOR_DROPDOWN
+                'filter' => User::POSSIBLE_GENDERS_FOR_DROPDOWN,
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Client $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'client_id' => $model->client_id]);
+                'urlCreator' => function ($action, Admin $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'admin_id' => $model->admin_id]);
                 }
             ],
         ],

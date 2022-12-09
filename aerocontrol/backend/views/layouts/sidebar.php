@@ -56,6 +56,7 @@ use hail812\adminlte\widgets\Menu;
                             'label' => 'Utilizadores',
                             'icon' => 'fas fa-solid fa-user',
                             'items' => [
+                                ['label' => 'Administradores', 'url' => ['admin/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Trabalhadores', 'url' => ['employee/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Clientes', 'url' => ['client/index'], 'iconStyle' => 'far']
                             ]
