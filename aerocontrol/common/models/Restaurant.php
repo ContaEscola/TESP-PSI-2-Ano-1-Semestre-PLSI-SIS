@@ -35,16 +35,16 @@ class Restaurant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'phone'], 'required'],
+            [['name', 'description', 'phone', 'logo'], 'required', 'message' => "{attribute} não pode ser vazio"],
             [['open_time', 'close_time'], 'datetime'],
             [['name', 'description', 'phone', 'logo', 'website'], 'trim'],
             ['name', 'string', 'max' => 75],
             ['description', 'string', 'max' => 255],
             ['phone', 'string', 'max' => 20],
             ['website', 'string', 'max' => 50],
-            ['name', 'unique'],
-            ['logo', 'unique'],
-            ['logo', 'file', 'extensions' => 'jpg,png,jpeg'],
+            ['name', 'unique', 'message' => "{attribute} não pode ser repetido"],
+            ['logo', 'unique', 'message' => "{attribute} não pode ser repetido"],
+            ['logo', 'file', 'extensions' => 'jpg,png,jpeg', 'checkExtensionByMimeType' => false],
         ];
     }
 

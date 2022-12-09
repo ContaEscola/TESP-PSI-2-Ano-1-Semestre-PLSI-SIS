@@ -35,7 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'open_time',
             'close_time',
-            'logo',
+            [
+                'label' => 'Logo',
+                'valeu' => $model->logo ,
+            ],
             'website',
         ],
     ]) ?>

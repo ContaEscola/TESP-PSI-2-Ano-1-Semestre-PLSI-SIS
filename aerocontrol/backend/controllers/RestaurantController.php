@@ -40,11 +40,9 @@ class RestaurantController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new RestaurantSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $restaurants = Restaurant::find()->all();
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'restaurants' => $restaurants,
         ]);
     }
 
@@ -74,15 +72,13 @@ class RestaurantController extends Controller
 
             if ($model->load($this->request->post())){
 
-                if($model->validate()){
-                    $model->logo = UploadedFile::getInstance($model, 'logo');
-                    $image_name = $model->name . '.' . $model->logo->getExtension();
-                    $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
-                    $model->logo->saveAs($image_path);
-                    $model->logo = date("d-m-Y_H:i") .'_'. $image_name;
-                    if($model->save()){
-                        return $this->redirect(['view', 'id' => $model->id]);
-                    }
+                $model->logo = UploadedFile::getInstance($model, 'logo');
+                $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
+                $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
+                $model->logo->saveAs($image_path);
+                $model->logo = $image_name;
+                if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
 

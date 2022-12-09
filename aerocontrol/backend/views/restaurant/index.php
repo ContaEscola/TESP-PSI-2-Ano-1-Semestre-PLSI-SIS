@@ -10,41 +10,43 @@ use yii\grid\GridView;
 /** @var common\models\RestaurantSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Restaurants';
+$this->title = 'Restaurantes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="restaurant-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Restaurant', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Restaurante', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'description',
-            'phone',
-            'open_time',
-            //'close_time',
-            //'logo',
-            //'website',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Restaurant $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Nº Telemóvel</th>
+            <th>Horário de Abertura</th>
+            <th>Horário de Fecho</th>
+            <th>Website</th>
+            <th>Ações</th>
+        </tr>
+        <?php
+        foreach ($restaurants as $restaurant) : ?>
+            <tr>
+                <th scope="row"><?= $restaurant->id ?></th>
+                <td><?= $restaurant->name ?></td>
+                <td><?= $restaurant->description ?></td>
+                <td><?= $restaurant->phone ?></td>
+                <td><?= $restaurant->open_time ?></td>
+                <td><?= $restaurant->close_time ?></td>
+                <td><?= $restaurant->website ?></td>
+                <td>
+                    <a class="btn btn-primary" href="<?= Url::to(['restaurant/view', 'id' => $restaurant->id]) ?>">Visualizar</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
 
 
 </div>
