@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $client_id
  *
- * @property User $client
+ * @property User $user
  * @property FlightTicket[] $flightTickets
  * @property SupportTicket[] $supportTickets
  */

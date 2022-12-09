@@ -191,7 +191,8 @@ class UserForm extends Model
 
         $user = $this->getUser();
         $user->setAttributes($this->getUserDetails(), false);
-        $user->setPassword($this->password_hash);
+        if($this->_user->validatePassword($user->password_hash))
+            $user->setPassword($this->password_hash);
 
         if (!$user->save())
             return null;
