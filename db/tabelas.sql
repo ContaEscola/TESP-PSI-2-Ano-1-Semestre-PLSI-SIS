@@ -128,7 +128,6 @@ CREATE TABLE IF NOT EXISTS `restaurant_item` (
 CREATE TABLE IF NOT EXISTS `manager` (
   `manager_id` INT UNSIGNED,
   `restaurant_id` INT(11) UNSIGNED NOT NULL,
-  `status` SMALLINT(6) NOT NULL,
   CONSTRAINT `pk_manager_id` PRIMARY KEY(`manager_id`),
   CONSTRAINT `fk_manager_manager_id` FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`),
   CONSTRAINT `fk_manager_restaurant_id` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant`(`id`)
