@@ -1,29 +1,40 @@
 <?php
 
-use common\models\Client;
-use common\models\User;
+use common\models\Manager;
+use common\models\Restaurant;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\ClientSearch $searchModel */
+/** @var common\models\ManagerSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Clientes';
+$this->title = 'Gerentes de Restaurantes';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="client-index">
+<div class="manager-index">
+
+    <p>
+        <?= Html::a('Criar Gerente', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'emptyText' => "Nenhum resultado encontrado!",
+        'emptyText' => 'Nenhum resultado encontrado!',
         'columns' => [
-            'client_id',
+            [
+                'label' => 'Id',
+                'attribute' => 'manager_id',
+                'value' => 'manager_id',
+            ],
             [
                 'label' => 'Username',
                 'attribute' => 'user_username',
@@ -46,13 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'Indicativo do país',
-                'attribute' => 'user_phone_country_code',
-                'value' => function ($model) {
-                    return $model->user->phone_country_code;
-                }
-            ],
-            [
                 'label' => 'Telefone',
                 'attribute' => 'user_phone',
                 'value' => function ($model) {
@@ -60,22 +64,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'Género',
-                'attribute' => 'user_gender',
+                'label' => 'Restaurante',
+                'attribute' => 'restaurant_id',
                 'value' => function ($model) {
-                    return $model->user->gender;
+                    return $model->restaurant->name;
                 },
-                'filter' => User::POSSIBLE_GENDERS_FOR_DROPDOWN
+                'filter' => Restaurant::getPossibleRestaurantsForDropdowns()
             ],
+
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Client $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'client_id' => $model->client_id]);
+                'urlCreator' => function ($action, Manager $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'manager_id' => $model->manager_id]);
                 }
             ],
         ],
-    ]);
-    ?>
+    ]); ?>
     <?php \yii\widgets\Pjax::end(); ?>
 
 </div>

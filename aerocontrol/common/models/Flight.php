@@ -28,6 +28,53 @@ use Yii;
  */
 class Flight extends \yii\db\ActiveRecord
 {
+    const SCENARIO_ON_UPDATE = 'on_udpate';
+
+    const POSSIBLE_STATES = [
+        'Previsto',
+        'Chegou',
+        'Partiu',
+        'Cancelado',
+        'Embarque',
+        'Última Chamada'
+    ];
+
+    const POSSIBLE_STATES_FOR_DROPDOWN = [
+        'Previsto' => 'Previsto',
+        'Chegou' => 'Chegou',
+        'Partiu' => 'Partiu',
+        'Cancelado' => 'Cancelado',
+        'Embarque' => 'Embarque',
+        'Última Chamada' => 'Última Chamada'
+    ];
+
+    private $possible_flight_airports;
+    public $possible_flight_airports_for_dropdown;
+
+    private $possible_flight_airplanes;
+    public $possible_flight_airplanes_for_dropdown;
+
+
+    public function __construct($config = [])
+    {
+        // Setups the possible values for flight airport
+        $this->setupPossibleFlightAirports();
+
+        // Setups the possible values for flight airplane
+        $this->setupPossibleFlightAirplanes();
+
+        parent::__construct($config);
+    }
+
+    // Formatar as datas visualmente se encontrar um registo
+    public function afterFind()
+    {
+        $this->estimated_departure_date = Yii::$app->formatter->asDatetime($this->estimated_departure_date);
+        $this->estimated_arrival_date = Yii::$app->formatter->asDatetime($this->estimated_arrival_date);
+        $this->departure_date = Yii::$app->formatter->asDatetime($this->departure_date);
+        $this->arrival_date = Yii::$app->formatter->asDatetime($this->arrival_date);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,34 +83,63 @@ class Flight extends \yii\db\ActiveRecord
         return '{{%flight}}';
     }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_ON_UPDATE] = [
+            'terminal', 'estimated_departure_date', 'estimated_arrival_date',
+            'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id',
+            'arrival_airport_id', 'airplane_id',
+            'departure_date', 'arrival_date'
+        ];
+        return $scenarios;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required'],
-            [['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'], 'datetime'],
-            [['price', 'distance'], 'number'],
-            [['terminal', 'state'], 'trim'],
+            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'trim'],
+            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
+            [['estimated_departure_date', 'estimated_arrival_date'], 'string', 'message' => "{attribute} tem formato inválido."],
+            [['price', 'distance'], 'number', 'message' => '{attribute} tem que ser um número.'],
 
-            ['state', 'in', 'range' => [
-                'Previsto',
-                'Chegou',
-                'Partiu',
-                'Cancelado',
-                'Embarque',
-                'Ultima Chamada'
-            ], 'strict' => true],
+            ['terminal', 'string', 'max' => 30, 'message' => '{attribute} não pode exceder os 30 caracteres.'],
+
+            [
+                ['estimated_departure_date', 'estimated_arrival_date'],
+                'datetime',
+            ],
+
+            ['estimated_arrival_date', 'compareEstimatedDepartureDate'],
+
+            ['departure_date', 'compareEstimatedDepartureDate', 'on' => self::SCENARIO_ON_UPDATE],
+            ['arrival_date', 'compareArrivalDate', 'on' => self::SCENARIO_ON_UPDATE],
+
+            ['state', 'in', 'range' => self::POSSIBLE_STATES, 'strict' => true],
 
             ['state', 'default', 'value' => 'Previsto'],
 
-            [['discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'integer'],
-            ['terminal', 'string', 'max' => 30],
+            [['discount_percentage'], 'integer', 'message' => '{attribute} tem que ser um número inteiro.'],
 
-            ['airplane_id', 'exist', 'skipOnError' => true, 'targetClass' => Airplane::class, 'targetAttribute' => ['airplane_id' => 'id']],
-            ['arrival_airport_id', 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['arrival_airport_id' => 'id']],
-            ['origin_airport_id', 'exist', 'skipOnError' => true, 'targetClass' => Airport::class, 'targetAttribute' => ['origin_airport_id' => 'id']],
+
+            [
+                'airplane_id', 'in',
+                'range' => $this->possible_flight_airplanes,
+                'message' => 'Avião inválido.'
+            ],
+            [
+                ['arrival_airport_id', 'origin_airport_id'], 'in',
+                'range' => $this->possible_flight_airports,
+                'message' => 'Aeroporto inválido.'
+            ],
+            [
+                'arrival_airport_id', 'compare',
+                'compareAttribute' => 'origin_airport_id', 'operator' => '!=',
+                'message' => 'O aeroporto de chegada têm de ser diferente do aeroporto de origem.'
+            ],
         ];
     }
 
@@ -75,18 +151,82 @@ class Flight extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'terminal' => 'Terminal',
-            'estimated_departure_date' => 'Data de partida estimada',
-            'estimated_arrival_date' => 'Data de chegada estimada',
-            'departure_date' => 'Data de partida',
-            'arrival_date' => 'Data de chegada',
+            'estimated_departure_date' => 'Data de Partida Estimada',
+            'estimated_arrival_date' => 'Data de Chegada Estimada',
+            'departure_date' => 'Data de Partida',
+            'arrival_date' => 'Data de Chegada',
             'price' => 'Preço',
             'distance' => 'Distância',
             'state' => 'Estado',
             'discount_percentage' => 'Desconto(%)',
-            'origin_airport_id' => 'ID do Aeroporto de Origem',
-            'arrival_airport_id' => 'ID do Aeroporto de Chegada',
-            'airplane_id' => 'ID do Aeroporto',
+            'origin_airport_id' => 'Aeroporto de Origem',
+            'arrival_airport_id' => 'Aeroporto de Chegada',
+            'airplane_id' => 'Avião',
         ];
+    }
+
+    /**
+     * Compara a end date com a data de partida estimada
+     */
+    public function compareEstimatedDepartureDate($attribute, $params, $validator)
+    {
+        $start_date = strtotime($this->estimated_departure_date);
+        $end_date = strtotime($this->$attribute);
+        if ($end_date < $start_date)
+            $validator->addError($this, $attribute, 'A {attribute} não pode ser antes da Data de Partida Estimada.');
+    }
+
+    /**
+     * Compara a end date com a data de partida
+     */
+    public function compareArrivalDate($attribute, $params, $validator)
+    {
+        $start_date = strtotime($this->departure_date);
+        $end_date = strtotime($this->$attribute);
+        if ($end_date < $start_date)
+            $validator->addError($this, $attribute, 'A {attribute} não pode ser antes da Data de Partida.');
+    }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        // Se for para criar um voo entao as datas certas são iguais às datas estimadas
+        if ($insert) {
+            $this->departure_date = $this->estimated_departure_date;
+            $this->arrival_date = $this->estimated_arrival_date;
+        }
+
+        // Formatar as datas para a BD MySQL
+        $this->estimated_departure_date = Yii::$app->formatter->asDatetime($this->estimated_departure_date, 'php:Y-m-d H:i');
+        $this->estimated_arrival_date = Yii::$app->formatter->asDatetime($this->estimated_arrival_date, 'php:Y-m-d H:i');
+        $this->departure_date = Yii::$app->formatter->asDatetime($this->departure_date, 'php:Y-m-d H:i');
+        $this->arrival_date = Yii::$app->formatter->asDatetime($this->arrival_date, 'php:Y-m-d H:i');
+
+
+        return true;
+    }
+
+    /**
+     * Setups the possible flight airport for this model
+     *
+     */
+    protected function setupPossibleFlightAirports()
+    {
+        $this->possible_flight_airports = Airport::getPossibleAirportsIDs();
+        $this->possible_flight_airports_for_dropdown = Airport::getPossibleAirportsForDropdowns();
+    }
+
+    /**
+     * Setups the possible flight airplane for this model
+     *
+     */
+    protected function setupPossibleFlightAirplanes()
+    {
+        $this->possible_flight_airplanes = Airplane::getPossibleAirplanesIDs();
+        $this->possible_flight_airplanes_for_dropdown = Airplane::getPossibleAirplanesForDropdowns();
     }
 
     /**

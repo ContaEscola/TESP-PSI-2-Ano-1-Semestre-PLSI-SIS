@@ -15,6 +15,9 @@ use Yii;
  */
 class Manager extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -32,6 +35,8 @@ class Manager extends \yii\db\ActiveRecord
             [['manager_id', 'restaurant_id'], 'required'],
             [['manager_id', 'restaurant_id'], 'integer'],
             ['manager_id', 'unique'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'boolean'],
             ['manager_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['manager_id' => 'id']],
             ['restaurant_id', 'exist', 'skipOnError' => true, 'targetClass' => Restaurant::class, 'targetAttribute' => ['restaurant_id' => 'id']],
         ];

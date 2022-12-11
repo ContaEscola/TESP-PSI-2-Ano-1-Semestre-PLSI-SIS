@@ -18,7 +18,7 @@ class CompanySearch extends Company
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'state'], 'safe'],
         ];
     }
 
@@ -59,6 +59,7 @@ class CompanySearch extends Company
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'state' => $this->state
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

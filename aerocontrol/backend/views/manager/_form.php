@@ -1,19 +1,29 @@
 <?php
 
+use common\models\Restaurant;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var common\models\Admin $model */
+/** @var common\models\Manager $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="admin-form">
+<div class="manager-form">
 
     <?php $form = ActiveForm::begin([
         'validateOnType' => true,
         'validationDelay' => 500,
     ]); ?>
+
+    <?= $form->field($model, 'restaurant_id')->dropDownList(
+        ArrayHelper::map(Restaurant::find()->asArray()->all(), 'id', 'name'),
+        [
+            'class' => 'form-control',
+            'prompt' => '',
+        ]
+    ) ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
 

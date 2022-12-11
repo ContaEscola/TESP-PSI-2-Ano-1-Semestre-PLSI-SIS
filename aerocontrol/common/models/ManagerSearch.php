@@ -4,19 +4,18 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Admin;
+use common\models\Manager;
 
 /**
- * AdminSearch represents the model behind the search form of `common\models\Admin`.
+ * ManagerSearch represents the model behind the search form of `common\models\Manager`.
  */
-class AdminSearch extends Admin
+class ManagerSearch extends Manager
 {
 
     public $user_username;
     public $user_fullname;
     public $user_phone;
     public $user_email;
-    public $user_gender;
 
     /**
      * {@inheritdoc}
@@ -24,8 +23,8 @@ class AdminSearch extends Admin
     public function rules()
     {
         return [
-            [['admin_id'], 'integer'],
-            [['user_username', 'user_fullname', 'user_phone', 'user_email', 'user_gender'], 'safe']
+            [['manager_id', 'restaurant_id'], 'integer'],
+            [['user_username', 'user_fullname', 'user_phone', 'user_email'], 'safe']
         ];
     }
 
@@ -47,11 +46,10 @@ class AdminSearch extends Admin
      */
     public function search($params)
     {
-        $query = Admin::find();
+        $query = Manager::find();
 
         // https://www.yiiframework.com/wiki/653/displaying-sorting-and-filtering-model-relations-on-a-gridview
         $query->joinWith(['user']);
-
 
         // add conditions that should always apply here
 
@@ -83,10 +81,6 @@ class AdminSearch extends Admin
             'desc' => ['user.email' => SORT_DESC],
         ];
 
-        $dataProvider->sort->attributes['user_gender'] = [
-            'asc' => ['user.gender' => SORT_ASC],
-            'desc' => ['user.gender' => SORT_DESC],
-        ];
 
         $this->load($params);
 
@@ -98,7 +92,8 @@ class AdminSearch extends Admin
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'admin_id' => $this->admin_id,
+            'manager_id' => $this->manager_id,
+            'restaurant_id' => $this->restaurant_id,
         ])
             ->andFilterWhere(['like', 'user.username', $this->user_username])
 
@@ -107,11 +102,8 @@ class AdminSearch extends Admin
                 ['like', 'user.first_name', $this->user_fullname],
                 ['like', 'user.last_name', $this->user_fullname]
             ])
-
             ->andFilterWhere(['like', 'user.phone', $this->user_phone])
-            ->andFilterWhere(['like', 'user.email', $this->user_email])
-            ->andFilterWhere(['like', 'user.gender', $this->user_gender]);
-
+            ->andFilterWhere(['like', 'user.email', $this->user_email]);
 
         return $dataProvider;
     }

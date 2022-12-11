@@ -2,19 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\ClientForm;
-use common\models\Client;
-use common\models\ClientSearch;
-use common\models\User;
+use common\models\Flight;
+use common\models\FlightSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ClientController implements the CRUD actions for Client model.
+ * FlightController implements the CRUD actions for Flight model.
  */
-class ClientController extends Controller
+class FlightController extends Controller
 {
     /**
      * @inheritDoc
@@ -25,7 +23,7 @@ class ClientController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::class,
+                    'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -36,17 +34,22 @@ class ClientController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewClient'],
+                            'roles' => ['viewFlight'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewClient'],
+                            'roles' => ['viewFlight'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createFlight'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateClient'],
+                            'roles' => ['updateFlight'],
                         ],
                     ],
                 ],
@@ -55,13 +58,13 @@ class ClientController extends Controller
     }
 
     /**
-     * Lists all Client models.
+     * Lists all Flight models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ClientSearch();
+        $searchModel = new FlightSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -71,33 +74,54 @@ class ClientController extends Controller
     }
 
     /**
-     * Displays a single Client model.
-     * @param int $client_id ID do Cliente
+     * Displays a single Flight model.
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($client_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($client_id),
+            'model' => $this->findModel($id),
         ]);
     }
 
+    /**
+     * Creates a new Flight model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        $model = new Flight();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
 
     /**
-     * Updates an existing Client model.
+     * Updates an existing Flight model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $client_id ID do Cliente
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($client_id)
+    public function actionUpdate($id)
     {
-        $validClient = $this->findModel($client_id);
-        $model = new ClientForm($validClient->client_id);
+        $model = $this->findModel($id);
+        $model->scenario = Flight::SCENARIO_ON_UPDATE;
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
-            return $this->redirect(['view', 'client_id' => $model->client_id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -106,15 +130,15 @@ class ClientController extends Controller
     }
 
     /**
-     * Finds the Client model based on its primary key value.
+     * Finds the Flight model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $client_id ID do Cliente
-     * @return Client the loaded model
+     * @param int $id ID
+     * @return Flight the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($client_id)
+    protected function findModel($id)
     {
-        if (($model = Client::findOne(['client_id' => $client_id])) !== null) {
+        if (($model = Flight::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
