@@ -55,8 +55,13 @@ class RestaurantController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['update'],
+                            'actions' => ['delete'],
                             'roles' => ['deleteRestaurant'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete-image'],
+                            'roles' => ['deleteRestaurantLogo'],
                         ],
                     ],
                 ],
@@ -183,7 +188,7 @@ class RestaurantController extends Controller
 
 
     //remover logo do restaurante
-    public function actionDeleteimage($id)
+    public function actionDeleteImage($id)
     {
         $model = $this->findModel($id);
         if ($model->logo != ""){
