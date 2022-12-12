@@ -101,9 +101,24 @@ class RestaurantController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $current = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+
+            $model->logo = UploadedFile::getInstance($model, 'logo');
+            //atualizar a imagem do restaurante caso o utilizador altere
+            if ($model->logo != null){
+                $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
+                $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
+                $model->logo->saveAs($image_path);
+                $model->logo = $image_name;
+            }else{
+                $model->logo = $current->logo;
+            }
+
+            if($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

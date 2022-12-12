@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\file\FileInput;
+use yii\helpers\Url;
 use kartik\time\TimePicker;
 
 /** @var yii\web\View $this */
@@ -13,7 +14,7 @@ use kartik\time\TimePicker;
 <div class="restaurant-form">
 
     <?php $form = ActiveForm::begin([
-            'options' => ['enctype' => 'multipart/form-data']
+        'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -37,7 +38,16 @@ use kartik\time\TimePicker;
     ]) ?>
 
     <?= $form->field($model, 'logo')->widget(FileInput::classname(), [
+        'name' => 'Restaurant[logo]',
         'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'initialPreview'=>Url::to(['../../images/restaurant/'.$model->logo]),
+            'initialPreviewAsData'=>true,
+            'initialCaption'=>"$model->logo",
+            'initialPreviewConfig' => [
+                ['caption' => $model->logo],
+            ],
+        ]
     ])?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>

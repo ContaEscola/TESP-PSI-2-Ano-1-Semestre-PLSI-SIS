@@ -21,6 +21,15 @@ use Yii;
  */
 class Restaurant extends \yii\db\ActiveRecord
 {
+
+    // Formatar as datas visualmente se encontrar um registo
+    public function afterFind()
+    {
+        $this->close_time = Yii::$app->formatter->asTime($this->close_time);
+        $this->open_time = Yii::$app->formatter->asTime($this->open_time);
+    }
+
+
     /**
      * {@inheritdoc}
      */
@@ -35,8 +44,8 @@ class Restaurant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'phone', 'logo'], 'required', 'message' => "{attribute} não pode ser vazio"],
-            [['open_time', 'close_time'], 'datetime'],
+            [['name', 'description', 'phone'], 'required', 'message' => "{attribute} não pode ser vazio"],
+            [['open_time', 'close_time'], 'time'],
             [['name', 'description', 'phone', 'logo', 'website'], 'trim'],
             ['name', 'string', 'max' => 75],
             ['description', 'string', 'max' => 255],
