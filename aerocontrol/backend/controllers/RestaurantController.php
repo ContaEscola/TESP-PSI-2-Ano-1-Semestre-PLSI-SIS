@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Restaurant;
 use common\models\RestaurantSearch;
+use yii\filters\AccessControl;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -27,6 +28,36 @@ class RestaurantController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['viewRestaurant'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewRestaurant'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createRestaurant'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['updateRestaurant'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['update'],
+                            'roles' => ['deleteRestaurant'],
+                        ],
                     ],
                 ],
             ]
@@ -108,6 +139,12 @@ class RestaurantController extends Controller
             $model->logo = UploadedFile::getInstance($model, 'logo');
             //atualizar a imagem do restaurante caso o utilizador altere
             if ($model->logo != null){
+
+                if ($current->logo != null){
+                    //retirar a imagem para meter a nova
+                    unlink(Yii::getAlias('@base') . '/images/restaurant/' . $current->logo);
+                }
+
                 $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
                 $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
                 $model->logo->saveAs($image_path);
@@ -135,9 +172,29 @@ class RestaurantController extends Controller
      */
     public function actionDelete($id)
     {
+        $model = $this->findModel($id);
+        if ($model->logo != ""){
+            //retirar a imagem
+            unlink(Yii::getAlias('@base') . '/images/restaurant/' . $model->logo);
+        }
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
+    }
+
+
+    //remover logo do restaurante
+    public function actionDeleteimage($id)
+    {
+        $model = $this->findModel($id);
+        if ($model->logo != ""){
+            //retirar a imagem
+            unlink(Yii::getAlias('@base') . '/images/restaurant/' . $model->logo);
+        }
+        $model->logo = "";
+
+        if($model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
     }
 
     /**
@@ -147,6 +204,7 @@ class RestaurantController extends Controller
      * @return Restaurant the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+
     protected function findModel($id)
     {
         if (($model = Restaurant::findOne(['id' => $id])) !== null) {

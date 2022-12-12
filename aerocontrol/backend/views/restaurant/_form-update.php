@@ -37,18 +37,27 @@ use kartik\time\TimePicker;
         ]
     ]) ?>
 
-    <?= $form->field($model, 'logo')->widget(FileInput::classname(), [
-        'name' => 'Restaurant[logo]',
-        'options' => ['accept' => 'image/*'],
-        'pluginOptions' => [
-            'initialPreview'=>Url::to(['../../images/restaurant/'.$model->logo]),
-            'initialPreviewAsData'=>true,
-            'initialCaption'=>"$model->logo",
-            'initialPreviewConfig' => [
-                ['caption' => $model->logo],
-            ],
-        ]
-    ])?>
+    <?php
+        if ($model->logo != ""){
+            echo $form->field($model, 'logo')->widget(FileInput::classname(), [
+                'name' => 'Restaurant[logo]',
+                'options' => ['accept' => 'image/*'],
+                'pluginOptions' => [
+                    'initialPreview'=>Url::to(['../../images/restaurant/'.$model->logo]),
+                    'initialPreviewAsData'=>true,
+                    'initialCaption'=>"$model->logo",
+                    'initialPreviewConfig' => [
+                        ['caption' => $model->logo],
+                    ],
+                ]
+            ]);
+        }else{
+            echo $form->field($model, 'logo')->widget(FileInput::classname(), [
+                'name' => 'Restaurant[logo]',
+                'options' => ['accept' => 'image/*'],
+            ]);
+        }
+    ?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
