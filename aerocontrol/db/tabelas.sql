@@ -93,6 +93,23 @@ CREATE TABLE IF NOT EXISTS `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Estrutura da tabela `store`
+--
+CREATE TABLE IF NOT EXISTS `store` (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `name` VARCHAR(75) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(20) NOT NULL,
+  `open_time` TIME NULL,
+  `close_time` TIME NULL,
+  `logo` VARCHAR(50) NULL,
+  `website` VARCHAR(50) NULL,
+  CONSTRAINT `pk_store_id` PRIMARY KEY(`id`),
+  CONSTRAINT `uk_name` UNIQUE KEY(`name`),
+  CONSTRAINT `uk_logo` UNIQUE KEY(`logo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Estrutura da tabela `restaurant`
 --
 CREATE TABLE IF NOT EXISTS `restaurant` (

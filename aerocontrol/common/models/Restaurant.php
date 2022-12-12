@@ -22,6 +22,8 @@ use yii\helpers\ArrayHelper;
  */
 class Restaurant extends \yii\db\ActiveRecord
 {
+    public $menu;
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +39,7 @@ class Restaurant extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'description', 'phone'], 'required'],
-            [['open_time', 'close_time'], 'datetime'],
+            [['open_time', 'close_time'], 'time'],
             [['name', 'description', 'phone', 'logo', 'website'], 'trim'],
             ['name', 'string', 'max' => 75],
             ['description', 'string', 'max' => 255],
@@ -64,6 +66,14 @@ class Restaurant extends \yii\db\ActiveRecord
             'website' => 'Website',
         ];
     }
+
+    public function fields()
+    {
+        $fields = parent::fields();
+        $fields['menu'] = "menu";
+        return $fields;
+    }
+
 
     /**
      * Gets query for [[Managers]].

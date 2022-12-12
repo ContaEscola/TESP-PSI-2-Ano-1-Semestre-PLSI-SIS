@@ -11,7 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'api' => [
+            'class' => 'backend\modules\api\ModuleAPI',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
@@ -41,11 +45,16 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/restaurant'],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/store'],
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/user']
+            ],
         ],
 
         'formatter' => [
-            'datetimeFormat' => 'php:d-m-Y H:i'
+            'datetimeFormat' => 'php:d-m-Y H:i',
+            'timeFormat' => 'php:H:i'
         ]
 
     ],
