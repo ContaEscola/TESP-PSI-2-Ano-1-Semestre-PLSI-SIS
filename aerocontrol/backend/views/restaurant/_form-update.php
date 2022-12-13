@@ -14,6 +14,8 @@ use kartik\time\TimePicker;
 <div class="restaurant-form">
 
     <?php $form = ActiveForm::begin([
+        'validateOnType' => true,
+        'validationDelay' => 500,
         'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
@@ -23,43 +25,46 @@ use kartik\time\TimePicker;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'open_time')->widget(TimePicker::className(),[
+    <?= $form->field($model, 'open_time')->widget(TimePicker::className(), [
         'pluginOptions' => [
             'showMeridian' => false,
             'minuteStep' => 1,
         ]
     ]) ?>
 
-    <?= $form->field($model, 'close_time')->widget(TimePicker::className(),[
+    <?= $form->field($model, 'close_time')->widget(TimePicker::className(), [
         'pluginOptions' => [
             'showMeridian' => false,
             'minuteStep' => 1,
         ]
     ]) ?>
-
-    <?php
-        if ($model->logo != ""){
-            echo $form->field($model, 'logo')->widget(FileInput::classname(), [
-                'name' => 'Restaurant[logo]',
-                'options' => ['accept' => 'image/*'],
-                'pluginOptions' => [
-                    'initialPreview'=>Url::to(['../../images/restaurant/'.$model->logo]),
-                    'initialPreviewAsData'=>true,
-                    'initialCaption'=>"$model->logo",
-                    'initialPreviewConfig' => [
-                        ['caption' => $model->logo],
-                    ],
-                ]
-            ]);
-        }else{
-            echo $form->field($model, 'logo')->widget(FileInput::classname(), [
-                'name' => 'Restaurant[logo]',
-                'options' => ['accept' => 'image/*'],
-            ]);
-        }
-    ?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
+
+
+    <?php
+    if ($model->logo != "") {
+        echo $form->field($model, 'logo')->widget(FileInput::classname(), [
+            'name' => 'Restaurant[logo]',
+            'options' => ['accept' => 'image/*'],
+            'pluginOptions' => [
+                'initialPreview' => Url::to(['../../images/restaurant/' . $model->logo]),
+                'initialPreviewAsData' => true,
+                'initialCaption' => "$model->logo",
+                'initialPreviewConfig' => [
+                    ['caption' => $model->logo],
+                ],
+                'showUpload' => false,
+            ]
+        ]);
+    } else {
+        echo $form->field($model, 'logo')->widget(FileInput::classname(), [
+            'name' => 'Restaurant[logo]',
+            'options' => ['accept' => 'image/*'],
+        ]);
+    }
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

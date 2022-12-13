@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var common\models\Restaurant $model */
@@ -43,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'open_time',
             'close_time',
             [
-                'attribute'=>'logo',
-                'value'=> '../../../images/restaurant/' . $model->logo,
-                'format' => ['image',['width'=>'100','height'=>'100']],
+                'attribute' => 'logo',
+                'value' => Yii::getAlias('@uploadLogosUrl/') . $model->logo,
+                'format' => ['image', ['width' => '100', 'class' => 'img-fluid']],
             ],
             'website',
         ],

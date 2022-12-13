@@ -13,7 +13,9 @@ use kartik\time\TimePicker;
 <div class="restaurant-form">
 
     <?php $form = ActiveForm::begin([
-            'options' => ['enctype' => 'multipart/form-data']
+        'validateOnType' => true,
+        'validationDelay' => 500,
+        'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
@@ -22,25 +24,30 @@ use kartik\time\TimePicker;
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'open_time')->widget(TimePicker::className(),[
+    <?= $form->field($model, 'open_time')->widget(TimePicker::className(), [
+        'pluginOptions' => [
+            'showMeridian' => false,
+            'minuteStep' => 1,
+
+        ]
+    ]) ?>
+
+    <?= $form->field($model, 'close_time')->widget(TimePicker::className(), [
         'pluginOptions' => [
             'showMeridian' => false,
             'minuteStep' => 1,
         ]
     ]) ?>
 
-    <?= $form->field($model, 'close_time')->widget(TimePicker::className(),[
-        'pluginOptions' => [
-            'showMeridian' => false,
-            'minuteStep' => 1,
-        ]
-    ]) ?>
+    <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'logo')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
-    ])?>
+        'pluginOptions' => [
+            'showUpload' => false,
+        ]
+    ])  ?>
 
-    <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>

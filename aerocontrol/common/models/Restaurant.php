@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "restaurant".
@@ -44,16 +46,23 @@ class Restaurant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'phone'], 'required', 'message' => "{attribute} não pode ser vazio"],
+            [['name', 'description', 'phone'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['open_time', 'close_time'], 'time'],
             [['name', 'description', 'phone', 'logo', 'website'], 'trim'],
             ['name', 'string', 'max' => 75],
             ['description', 'string', 'max' => 255],
-            ['phone', 'string', 'max' => 20],
+
+            [
+                'phone', 'number',
+                'numberPattern' => '/[\d]{4,15}$/', 'message' => "O nº de telemóvel só pode conter números, ter pelo menos 4 números e não pode exceder os 15 números.",
+            ],
+
             ['website', 'string', 'max' => 50],
-            ['name', 'unique', 'message' => "{attribute} não pode ser repetido"],
-            ['logo', 'unique', 'message' => "{attribute} não pode ser repetido"],
-            ['logo', 'file', 'extensions' => 'jpg,png,jpeg', 'checkExtensionByMimeType' => false],
+            [['name', 'logo'], 'unique', 'message' => "Este {attribute} já está a ser utilizado."],
+            [
+                'logo', 'image',
+                'extensions' => 'jpg, png, jpeg, jfif', 'wrongExtension' => 'Este tipo de imagem não é suportado.',
+            ],
         ];
     }
 
@@ -92,5 +101,47 @@ class Restaurant extends \yii\db\ActiveRecord
     public function getRestaurantItems()
     {
         return $this->hasMany(RestaurantItem::class, ['restaurant_id' => 'id']);
+    }
+
+    // public function beforeValidate()
+    // {
+    //     $this->logo = UploadedFile::getInstance($this, 'logo');
+
+    //     return parent::beforeValidate();
+    // }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        $this->logo = UploadedFile::getInstance($this, 'logo');
+        if (!$this->upload())
+            return false;
+
+        return true;
+    }
+
+
+    /**
+     * Uploads the [[$this->logo]] to the server
+     * 
+     * @return boolean true whether the upload was successfully
+     */
+    protected function upload()
+    {
+        if (!FileHelper::createDirectory(Yii::getAlias('@uploadLogos')))
+            return false;
+
+        $image_name =  $this->name . '_' . date("d-m-Y_H-i") . '.' . $this->logo->extension;
+        $image_path = Yii::getAlias('@uploadLogos') . '/' . $image_name;
+
+        if ($this->logo->saveAs($image_path)) {
+            $this->logo = $image_name;
+            return true;
+        }
+
+        return false;
     }
 }
