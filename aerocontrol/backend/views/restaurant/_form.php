@@ -41,12 +41,14 @@ use kartik\time\TimePicker;
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'logo')->widget(FileInput::classname(), [
+
+    <?= $form->field($model, 'logoFile')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => [
+            'showCancel' => false,
             'showUpload' => false,
         ]
-    ])  ?>
+    ]) ?>
 
 
     <div class="form-group">

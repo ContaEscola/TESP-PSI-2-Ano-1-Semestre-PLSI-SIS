@@ -17,10 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
-        <?= Html::a('Apagar Imagem', ['delete-image', 'id' => $model->id], [
+        <?= Html::a('Apagar Logo', ['delete-logo', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Tem a certeza que quer eliminar imagem?',
+                'confirm' => 'Tem a certeza que quer eliminar o logo?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'close_time',
             [
                 'attribute' => 'logo',
-                'value' => Yii::getAlias('@uploadLogosUrl/') . $model->logo,
+                'value' => Url::to($model->getLogoPathUrl()),
                 'format' => ['image', ['width' => '100', 'class' => 'img-fluid']],
             ],
             'website',

@@ -9,3 +9,5 @@ Yii::setAlias('@uploads', '@root/uploads');
 Yii::setAlias('@uploadsUrl', '../../../uploads');
 Yii::setAlias('@uploadLogos', '@uploads/logos');
 Yii::setAlias('@uploadLogosUrl', '@uploadsUrl/logos');
+Yii::setAlias('@uploadLogoRestaurants', '@uploadLogos/restaurants');
+Yii::setAlias('@uploadLogoRestaurantsUrl', '@uploadLogosUrl/restaurants');

@@ -61,7 +61,7 @@ class RestaurantController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['delete-image'],
+                            'actions' => ['delete-logo'],
                             'roles' => ['deleteRestaurantLogo'],
                         ],
                     ],
@@ -108,8 +108,6 @@ class RestaurantController extends Controller
         if ($this->request->isPost) {
 
             if ($model->load($this->request->post())) {
-
-                // $model->logo = UploadedFile::getInstance($model, 'logo');
                 // $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
                 // $image_path = Yii::getAlias('@uploadLogos') . $image_name;
                 // $model->logo->saveAs($image_path);
@@ -137,26 +135,25 @@ class RestaurantController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $current = $this->findModel($id);
+        // $current = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post())) {
+            // $model->logo = UploadedFile::getInstance($model, 'logo');
+            // //atualizar a imagem do restaurante caso o utilizador altere
+            // if ($model->logo != null) {
 
-            $model->logo = UploadedFile::getInstance($model, 'logo');
-            //atualizar a imagem do restaurante caso o utilizador altere
-            if ($model->logo != null) {
+            //     if ($current->logo != null) {
+            //         //retirar a imagem para meter a nova
+            //         unlink(Yii::getAlias('@base') . '/images/restaurant/' . $current->logo);
+            //     }
 
-                if ($current->logo != null) {
-                    //retirar a imagem para meter a nova
-                    unlink(Yii::getAlias('@base') . '/images/restaurant/' . $current->logo);
-                }
-
-                $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
-                $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
-                $model->logo->saveAs($image_path);
-                $model->logo = $image_name;
-            } else {
-                $model->logo = $current->logo;
-            }
+            //     $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
+            //     $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
+            //     $model->logo->saveAs($image_path);
+            //     $model->logo = $image_name;
+            // } else {
+            //     $model->logo = $current->logo;
+            // }
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -177,29 +174,20 @@ class RestaurantController extends Controller
      */
     public function actionDelete($id)
     {
-        $model = $this->findModel($id);
-        if ($model->logo != "") {
-            //retirar a imagem
-            unlink(Yii::getAlias('@base') . '/images/restaurant/' . $model->logo);
-        }
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 
 
     //remover logo do restaurante
-    public function actionDeleteImage($id)
+    public function actionDeleteLogo($id)
     {
         $model = $this->findModel($id);
-        if ($model->logo != "") {
-            //retirar a imagem
-            unlink(Yii::getAlias('@base') . '/images/restaurant/' . $model->logo);
-        }
-        $model->logo = "";
+        if ($model->deleteLogo())
+            $model->logo = null;
 
-        if ($model->save()) {
+        if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
-        }
     }
 
     /**

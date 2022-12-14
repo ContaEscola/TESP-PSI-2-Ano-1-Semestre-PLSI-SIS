@@ -43,24 +43,29 @@ use kartik\time\TimePicker;
 
 
     <?php
-    if ($model->logo != "") {
-        echo $form->field($model, 'logo')->widget(FileInput::classname(), [
-            'name' => 'Restaurant[logo]',
+    if (!is_null($model->logo)) {
+        echo $form->field($model, 'logoFile')->widget(FileInput::classname(), [
             'options' => ['accept' => 'image/*'],
             'pluginOptions' => [
-                'initialPreview' => Url::to(['../../images/restaurant/' . $model->logo]),
+                'initialPreview' => Url::to($model->getLogoPathUrl()),
                 'initialPreviewAsData' => true,
-                'initialCaption' => "$model->logo",
+                'initialCaption' => $model->logo,
                 'initialPreviewConfig' => [
-                    ['caption' => $model->logo],
+                    [
+                        'caption' => $model->logo,
+                    ],
                 ],
+                'showCancel' => false,
                 'showUpload' => false,
             ]
         ]);
     } else {
-        echo $form->field($model, 'logo')->widget(FileInput::classname(), [
-            'name' => 'Restaurant[logo]',
+        echo $form->field($model, 'logoFile')->widget(FileInput::classname(), [
             'options' => ['accept' => 'image/*'],
+            'pluginOptions' => [
+                'showCancel' => false,
+                'showUpload' => false,
+            ]
         ]);
     }
     ?>
