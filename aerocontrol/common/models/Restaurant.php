@@ -127,6 +127,9 @@ class Restaurant extends \yii\db\ActiveRecord
         return $this->hasMany(RestaurantItem::class, ['restaurant_id' => 'id']);
     }
 
+    /**
+     * Antes de validar dá a instancia do UploadedFila a [[$this->logoFile]]
+     */
     public function beforeValidate()
     {
         $this->logoFile = UploadedFile::getInstance($this, 'logoFile');
@@ -156,12 +159,12 @@ class Restaurant extends \yii\db\ActiveRecord
             }
         }
 
-
-
-
         return true;
     }
 
+    /**
+     * Antes de dar delete apaga o logo do server
+     */
     public function beforeDelete()
     {
         if (!parent::beforeDelete()) {
