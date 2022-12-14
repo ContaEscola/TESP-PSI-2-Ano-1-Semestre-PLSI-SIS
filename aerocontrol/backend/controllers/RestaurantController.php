@@ -106,12 +106,7 @@ class RestaurantController extends Controller
         $model = new Restaurant();
 
         if ($this->request->isPost) {
-
             if ($model->load($this->request->post())) {
-                // $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
-                // $image_path = Yii::getAlias('@uploadLogos') . $image_name;
-                // $model->logo->saveAs($image_path);
-                // $model->logo = $image_name;
                 if ($model->save()) {
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
@@ -135,29 +130,9 @@ class RestaurantController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        // $current = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            // $model->logo = UploadedFile::getInstance($model, 'logo');
-            // //atualizar a imagem do restaurante caso o utilizador altere
-            // if ($model->logo != null) {
-
-            //     if ($current->logo != null) {
-            //         //retirar a imagem para meter a nova
-            //         unlink(Yii::getAlias('@base') . '/images/restaurant/' . $current->logo);
-            //     }
-
-            //     $image_name = date("d-m-Y-H-i") . '_' . $model->name . '.' . $model->logo->getExtension();
-            //     $image_path = Yii::getAlias('@base') . '/images/restaurant/' . $image_name;
-            //     $model->logo->saveAs($image_path);
-            //     $model->logo = $image_name;
-            // } else {
-            //     $model->logo = $current->logo;
-            // }
-
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
