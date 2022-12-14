@@ -26,6 +26,8 @@ use function PHPUnit\Framework\isNan;
 class Restaurant extends \yii\db\ActiveRecord
 {
 
+    public $menu;
+
     public $logoFile;
 
     // Nome do ficheiro de placeholder caso o restaurante não ter logo
