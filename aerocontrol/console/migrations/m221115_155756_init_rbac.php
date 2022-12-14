@@ -205,6 +205,10 @@ class m221115_155756_init_rbac extends Migration
         $deleteRestaurant->description = "Apagar Restaurante";
         $auth->add($deleteRestaurant);
 
+        $deleteRestaurantLogo = $auth->createPermission('deleteRestaurantLogo');
+        $deleteRestaurantLogo->description = "Eliminar Logo do Restaurante";
+        $auth->add($deleteRestaurantLogo);
+
         /*
             RestaurantItem Permissions
         */
@@ -374,6 +378,12 @@ class m221115_155756_init_rbac extends Migration
         $auth->add($updateOwnRestaurant);
         $auth->addChild($updateOwnRestaurant,$updateRestaurant);
 
+        $deleteOwnRestaurantLogo = $auth->createPermission("deleteOwnRestaurantLogo");
+        $deleteOwnRestaurantLogo->description = "Eliminar Logo do Restaurante";
+        $deleteOwnRestaurantLogo->ruleName = $managerRule->name;
+        $auth->add($deleteOwnRestaurantLogo);
+        $auth->addChild($deleteOwnRestaurantLogo,$deleteRestaurantLogo);
+
         /*
             Own Ticket Permissions
          */
@@ -466,6 +476,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($manager,$viewOwnRestaurantItem);
         $auth->addChild($manager,$viewOwnRestaurant);
         $auth->addChild($manager,$updateOwnRestaurant);
+        $auth->addChild($manager,$deleteOwnRestaurantLogo);
 
         // Admin Permissions
         $auth->addChild($admin,$manager);
@@ -478,6 +489,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin,$viewRestaurant);
         $auth->addChild($admin,$createRestaurant);
         $auth->addChild($admin,$updateRestaurant);
+        $auth->addChild($admin,$deleteRestaurantLogo);
         $auth->addChild($admin,$createRestaurantItem);
         $auth->addChild($admin,$deleteRestaurantItem);
         $auth->addChild($admin,$viewRestaurantItem);

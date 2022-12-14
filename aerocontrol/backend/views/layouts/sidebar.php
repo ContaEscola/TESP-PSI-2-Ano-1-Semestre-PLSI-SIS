@@ -87,8 +87,8 @@ use hail812\adminlte\widgets\Menu;
                 echo Menu::widget([
                     'items' => [
 
-                        ['label' => 'Restaurantes', 'url' => ['/restaurant/view'], 'icon' => 'fas fa-house-user', 'target' => '_blank'],
-                        ['label' => 'Ementa', 'url' => ['/restaurantitem/index'], 'icon' => 'fas fa-solid fa-utensils', 'target' => '_blank'],
+                        ['label' => 'Restaurantes', 'url' => ['/restaurant/view'], 'icon' => 'fas fa-house-user'],
+                        ['label' => 'Ementa', 'url' => ['/restaurantitem/index'], 'icon' => 'fas fa-solid fa-utensils'],
                     ],
                 ]);
             }
@@ -112,8 +112,8 @@ use hail812\adminlte\widgets\Menu;
                                 ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
-                        ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user', 'target' => '_blank'],
-                        ['label' => 'Métodos de Pagamento', 'url' => ['/paymentmethod/index'], 'icon' => 'fas fa-solid fa-credit-card', 'target' => '_blank'],
+                        ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user'],
+                        ['label' => 'Métodos de Pagamento', 'url' => ['/paymentmethod/index'], 'icon' => 'fas fa-solid fa-credit-card'],
                     ],
                 ]);
             } ?>

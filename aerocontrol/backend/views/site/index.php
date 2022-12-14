@@ -2,124 +2,18 @@
 
 use yii\helpers\Url;
 
-$this->title = 'Starter Page';
-$this->params['breadcrumbs'] = [['label' => $this->title]];
+$this->title = 'Dashboard';
+
 ?>
 <div class="container-fluid">
-    <?php if(isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])): ?>
-    <div class="row">
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Voos',
-                'icon' => 'fas fa-plane-departure',
-                'linkUrl'=>Url::to(["/flight/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Aeroportos',
-                'icon' => 'fas fa-plane-arrival',
-                'linkUrl'=>Url::to(["/airport/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Aviões',
-                'icon' => 'fas fa-plane',
-                'linkUrl'=>Url::to(["/airplane/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Companhias',
-                'icon' => 'fas fa-building',
-                'linkUrl'=>Url::to(["/company/index"])
-            ]) ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Trabalhadores',
-                'icon' => 'fas fa-user',
-                'linkUrl'=>Url::to(["/employee/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Clientes',
-                'icon' => 'fas fa-user',
-                'linkUrl'=>Url::to(["/client/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Perdidos e achados',
-                'icon' => 'fas fa-suitcase-rolling',
-                'linkUrl'=>Url::to(["/lostitem/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Suporte ao cliente',
-                'icon' => 'fas fa-envelope',
-                'linkUrl'=>Url::to(["/supportticket/index"])
-            ]) ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Métodos de pagamento',
-
-                'icon' => 'fas fa-solid fa-credit-card',
-                'linkUrl'=>Url::to(["/paymentmethod/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Restaurante',
-                'icon' => 'fas fa-utensils',
-                'linkUrl'=>Url::to(["/restaurant/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Lojas',
-                'icon' => 'fas fa-shopping-cart',
-                'linkUrl'=>Url::to(["/store/index"])
-            ]) ?>
-        </div>
-        <div class="col">
-            <?= \hail812\adminlte\widgets\SmallBox::widget([
-                'title' => '150',
-                'text' => 'Server Log',
-                'icon' => 'fas fa-info',
-                'linkUrl'=>Url::to([""])
-            ]) ?>
-        </div>
-    </div>
-    <?php endif;?>
-
-    <?php if(isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['employee'])): ?>
+    <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) : ?>
         <div class="row">
             <div class="col">
                 <?= \hail812\adminlte\widgets\SmallBox::widget([
                     'title' => '150',
                     'text' => 'Voos',
                     'icon' => 'fas fa-plane-departure',
-                    'linkUrl'=>Url::to(["/flight/index"])
+                    'linkUrl' => Url::to(["/flight/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -127,7 +21,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                     'title' => '150',
                     'text' => 'Aeroportos',
                     'icon' => 'fas fa-plane-arrival',
-                    'linkUrl'=>Url::to(["/airport/index"])
+                    'linkUrl' => Url::to(["/airport/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -135,7 +29,15 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                     'title' => '150',
                     'text' => 'Aviões',
                     'icon' => 'fas fa-plane',
-                    'linkUrl'=>Url::to(["/airplane/index"])
+                    'linkUrl' => Url::to(["/airplane/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Companhias',
+                    'icon' => 'fas fa-building',
+                    'linkUrl' => Url::to(["/company/index"])
                 ]) ?>
             </div>
         </div>
@@ -143,9 +45,17 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
             <div class="col">
                 <?= \hail812\adminlte\widgets\SmallBox::widget([
                     'title' => '150',
+                    'text' => 'Trabalhadores',
+                    'icon' => 'fas fa-user',
+                    'linkUrl' => Url::to(["/employee/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
                     'text' => 'Clientes',
                     'icon' => 'fas fa-user',
-                    'linkUrl'=>Url::to(["/client/index"])
+                    'linkUrl' => Url::to(["/client/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -153,7 +63,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
-                    'linkUrl'=>Url::to(["/lostitem/index"])
+                    'linkUrl' => Url::to(["/lostitem/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -161,7 +71,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
-                    'linkUrl'=>Url::to(["/supportticket/index"])
+                    'linkUrl' => Url::to(["/supportticket/index"])
                 ]) ?>
             </div>
         </div>
@@ -172,7 +82,97 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                     'text' => 'Métodos de pagamento',
 
                     'icon' => 'fas fa-solid fa-credit-card',
-                    'linkUrl'=>Url::to(["/paymentmethod/index"])
+                    'linkUrl' => Url::to(["/paymentmethod/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Restaurante',
+                    'icon' => 'fas fa-utensils',
+                    'linkUrl' => Url::to(["/restaurant/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Lojas',
+                    'icon' => 'fas fa-shopping-cart',
+                    'linkUrl' => Url::to(["/store/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Server Log',
+                    'icon' => 'fas fa-info',
+                    'linkUrl' => Url::to([""])
+                ]) ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['employee'])) : ?>
+        <div class="row">
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Voos',
+                    'icon' => 'fas fa-plane-departure',
+                    'linkUrl' => Url::to(["/flight/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Aeroportos',
+                    'icon' => 'fas fa-plane-arrival',
+                    'linkUrl' => Url::to(["/airport/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Aviões',
+                    'icon' => 'fas fa-plane',
+                    'linkUrl' => Url::to(["/airplane/index"])
+                ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Clientes',
+                    'icon' => 'fas fa-user',
+                    'linkUrl' => Url::to(["/client/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Perdidos e achados',
+                    'icon' => 'fas fa-suitcase-rolling',
+                    'linkUrl' => Url::to(["/lostitem/index"])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Suporte ao cliente',
+                    'icon' => 'fas fa-envelope',
+                    'linkUrl' => Url::to(["/supportticket/index"])
+                ]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Métodos de pagamento',
+
+                    'icon' => 'fas fa-solid fa-credit-card',
+                    'linkUrl' => Url::to(["/paymentmethod/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -182,18 +182,18 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
             </div>
         </div>
-    <?php endif;?>
+    <?php endif; ?>
 
-    <?php if(isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])): ?>
+    <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) : ?>
         <div class="row">
             <div class="col">
                 <?= \hail812\adminlte\widgets\SmallBox::widget([
                     'title' => '150',
                     'text' => 'Restaurante',
                     'icon' => 'fas fa-utensils',
-                    'linkUrl'=>Url::to(["/restaurant/index"])
+                    'linkUrl' => Url::to(["/restaurant/index"])
                 ]) ?>
             </div>
         </div>
-    <?php endif;?>
+    <?php endif; ?>
 </div>
