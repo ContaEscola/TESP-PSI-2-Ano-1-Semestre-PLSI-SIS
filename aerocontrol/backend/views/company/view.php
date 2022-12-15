@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Estado',
-                'value' => ($model->state == 0) ? "Inativo" : "Ativo",
+                'value' => $model->getState(),
             ],
         ],
     ]) ?>

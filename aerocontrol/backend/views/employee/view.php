@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Nome',
-                'value' => $model->user->first_name . " " . $model->user->last_name,
+                'value' => $model->user->getFullName(),
             ],
             [
                 'label' => 'Email',
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Telefone',
-                'value' => $model->user->phone_country_code . " " . $model->user->phone,
+                'value' => $model->user->getFullPhone(),
             ],
             [
                 'label' => 'Género',

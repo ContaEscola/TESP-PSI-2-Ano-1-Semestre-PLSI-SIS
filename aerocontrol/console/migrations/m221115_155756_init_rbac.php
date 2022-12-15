@@ -35,6 +35,25 @@ class m221115_155756_init_rbac extends Migration
         //Create Permissions
 
         /*
+            Admin Permissions
+        */
+        $createAdmin = $auth->createPermission('createAdmin');
+        $createAdmin->description= "Criar Admin";
+        $auth->add($createAdmin);
+
+        $updateAdmin = $auth->createPermission('updateAdmin');
+        $updateAdmin->description = "Atualizar Admin";
+        $auth->add($updateAdmin);
+
+        $viewAdmin = $auth->createPermission('viewAdmin');
+        $viewAdmin->description = "Visualizar Admin";
+        $auth->add($viewAdmin);
+
+        $deleteAdmin = $auth->createPermission('deleteAdmin');
+        $deleteAdmin->description = "Apagar Admin";
+        $auth->add($deleteAdmin);
+
+        /*
             Flight Permissions
         */
         $createFlight = $auth->createPermission('createFlight');
@@ -451,6 +470,10 @@ class m221115_155756_init_rbac extends Migration
         // Admin Permissions
         $auth->addChild($admin,$manager);
         $auth->addChild($admin,$employee);
+        $auth->addChild($admin,$createAdmin);
+        $auth->addChild($admin,$updateAdmin);
+        $auth->addChild($admin,$viewAdmin);
+        $auth->addChild($admin,$deleteAdmin);
         $auth->addChild($admin,$deleteRestaurant);
         $auth->addChild($admin,$viewRestaurant);
         $auth->addChild($admin,$createRestaurant);
@@ -487,8 +510,19 @@ class m221115_155756_init_rbac extends Migration
         $auth->assign($admin,1);
         $auth->assign($employee,2);
         $auth->assign($employee,3);
+        $auth->assign($employee,7);
+        $auth->assign($employee,8);
+        $auth->assign($employee,9);
         $auth->assign($client,4);
         $auth->assign($client,5);
+        $auth->assign($client,6);
+        $auth->assign($client,10);
+        $auth->assign($client,11);
+        $auth->assign($client,12);
+        $auth->assign($client,13);
+        $auth->assign($client,14);
+        $auth->assign($client,15);
+
     }
 
     /**

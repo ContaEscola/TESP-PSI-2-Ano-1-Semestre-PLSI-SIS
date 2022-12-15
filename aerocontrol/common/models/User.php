@@ -247,6 +247,23 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->auth_key;
     }
 
+    /** 
+     * Getter for user full name
+     */
+    public function getFullName()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    /** 
+     * Getter for user full phone
+     */
+    public function getFullPhone()
+    {
+        return $this->phone_country_code . ' ' . $this->phone;
+    }
+
+
     /**
      * {@inheritdoc}
      */

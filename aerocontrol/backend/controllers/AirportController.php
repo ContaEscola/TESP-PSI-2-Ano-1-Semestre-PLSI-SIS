@@ -64,9 +64,12 @@ class AirportController extends Controller
      */
     public function actionIndex()
     {
-        $airports = Airport::find()->all();
+        $searchModel = new AirportSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('index', [
-            'airports' => $airports,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

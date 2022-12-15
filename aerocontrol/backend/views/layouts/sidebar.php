@@ -56,6 +56,7 @@ use hail812\adminlte\widgets\Menu;
                             'label' => 'Utilizadores',
                             'icon' => 'fas fa-solid fa-user',
                             'items' => [
+                                ['label' => 'Administradores', 'url' => ['admin/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Trabalhadores', 'url' => ['employee/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Clientes', 'url' => ['client/index'], 'iconStyle' => 'far']
                             ]
@@ -69,7 +70,14 @@ use hail812\adminlte\widgets\Menu;
                             ]
                         ],
                         ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['paymentmethod/index'], 'target' => '_blank'],
-                        ['label' => 'Restaurantes', 'url' => ['restaurant/index'], 'icon' => 'fas fa-solid fa-utensils', 'target' => '_blank'],
+                        [
+                            'label' => 'Restaurantes',
+                            'icon' => 'fas fa-solid fa-utensils',
+                            'items' => [
+                                ['label' => 'Restaurantes', 'url' => ['restaurant/index'],'iconStyle' => 'far'],
+                                ['label' => 'Gerentes', 'url' => ['manager/index'],'iconStyle' => 'far'],
+                            ]
+                        ],
                         ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart', 'target' => '_blank'],
                         ['label' => 'Server Log', 'url' => ['serverlog'], 'icon' => 'fas fa-solid fa-info', 'target' => '_blank'],
                     ],

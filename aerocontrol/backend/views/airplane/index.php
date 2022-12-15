@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Airplane;
+use common\models\Company;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -18,37 +19,44 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar avião', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Capacidade</th>
-            <th>Estado</th>
-            <th>Companhia</th>
-            <th>Ações</th>
-        </tr>
-        <?php
-        foreach ($airplanes as $airplane) : ?>
-            <tr>
-                <th scope="row"><?= $airplane->id ?></th>
-                <td><?= $airplane->name ?></td>
-                <td><?= $airplane->capacity ?></td>
-                <td>
-                    <?php
-                    if ($airplane->state == '0') {
-                        echo "Inativo";
-                    } else {
-                        echo "Ativo";
-                    }
-                    ?>
-                </td>
-                <td><?= $airplane->company->name ?></td>
-                <td>
-                    <a class="btn btn-primary" href="<?= Url::to(['airplane/view', 'id' => $airplane->id]) ?>">Visualizar</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
-
+    <?php \yii\widgets\Pjax::begin(); ?>
+    <?= GridView::widget([
+        'summary' => '',
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
+        'columns' => [
+            'id',
+            'name',
+            'capacity',
+            [
+                'label' => 'Estado',
+                'attribute' => 'state',
+                'value' => function ($model) {
+                    return $model->getState();
+                },
+                'filter' => [
+                    Airplane::STATE_INACTIVE => 'Inativo',
+                    Airplane::STATE_ACTIVE => 'Ativo'
+                ],
+            ],
+            [
+                'label' => 'Companhia',
+                'attribute' => 'company_id',
+                'value' => function ($model) {
+                    return $model->company->name;
+                },
+                'filter' => Company::getPossibleCompaniesForDropdowns(),
+            ],
+            [
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Airplane $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
+                }
+            ],
+        ],
+    ]);
+    ?>
+    <?php \yii\widgets\Pjax::end(); ?>
 
 </div>

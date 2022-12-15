@@ -73,3 +73,15 @@ INSERT INTO `airplane` (`id`, `name`, `capacity`, `state`, `company_id`) VALUES
 (6, 'Tupolev Tu-95 bomber', 60, 0, 1),
 (7, 'Bf 109 fighter', 12, 0, 2),
 (8, 'P-51 Mustang', 12, 0, 3);
+
+
+INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
+(1, 'Portugal', 'Lisboa', 'ANA Aeroporto de Lisboa', 'https://www.aeroportolisboa.pt/pt/lis/home'),
+(2, 'Portugal', 'Porto', 'ANA Aeroporto do Porto', 'https://www.aeroportoporto.pt/pt/opo/home'),
+(3, 'Portugal', 'Faro', 'ANA Aeroporto de Faro', 'https://www.aeroportofaro.pt/pt/fao/home'),
+(4, 'Espanha', 'Madrid', 'Aena Aeropuerto de Madrid-Barajas', 'https://www.aena.es/es/adolfo-suarez-madrid-baraja'),
+(5, 'Espanha', 'Burgos', 'Aena Aeropuerto de Burgos', 'https://www.aena.es/es/burgos.html'),
+(6, 'Espanha', 'Ibiza', 'Aena Aeropuerto de Ibiza', 'https://www.aena.es/es/ibiza.html'),
+(7, 'França', 'Paris', 'Paris Aéroport', 'https://www.parisaeroport.fr/'),
+(8, 'França', 'Marseille', 'Aéroport Marseille Provence', 'https://www.marseille.aeroport.fr/'),
+(9, 'França', 'Lyon', 'Lyon Aéroport', 'https://www.lyonaeroports.com/');
