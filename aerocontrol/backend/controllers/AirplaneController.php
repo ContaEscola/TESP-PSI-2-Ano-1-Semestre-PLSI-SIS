@@ -4,7 +4,6 @@ namespace backend\controllers;
 
 use common\models\Airplane;
 use common\models\AirplaneSearch;
-use common\models\Company;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,9 +64,12 @@ class AirplaneController extends Controller
      */
     public function actionIndex()
     {
-        $airplanes = Airplane::find()->all();
+        $searchModel = new AirplaneSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('index', [
-            'airplanes' => $airplanes,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

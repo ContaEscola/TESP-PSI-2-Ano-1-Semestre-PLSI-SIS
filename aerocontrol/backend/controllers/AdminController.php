@@ -2,17 +2,19 @@
 
 namespace backend\controllers;
 
-use common\models\Airport;
-use common\models\AirportSearch;
-use yii\filters\AccessControl;
+use backend\models\AdminForm;
+use common\models\Admin;
+use common\models\AdminSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+
 
 /**
- * AirportController implements the CRUD actions for Airport model.
+ * AdminController implements the CRUD actions for Admin model.
  */
-class AirportController extends Controller
+class AdminController extends Controller
 {
     /**
      * @inheritDoc
@@ -23,7 +25,7 @@ class AirportController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::class,
+                    'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -34,37 +36,42 @@ class AirportController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewAirport'],
+                            'roles' => ['viewAdmin'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewAirport'],
+                            'roles' => ['viewAdmin'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createAirport'],
+                            'roles' => ['createAdmin'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateAirport'],
+                            'roles' => ['updateAdmin'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['delete'],
+                            'roles' => ['deleteAdmin'],
                         ],
                     ],
-                ],
+                ]
             ]
         );
     }
 
     /**
-     * Lists all Airport models.
+     * Lists all Admin models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new AirportSearch();
+        $searchModel = new AdminSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -74,33 +81,33 @@ class AirportController extends Controller
     }
 
     /**
-     * Displays a single Airport model.
-     * @param int $id ID
+     * Displays a single Admin model.
+     * @param int $admin_id ID do Admin
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($admin_id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($admin_id),
         ]);
     }
 
     /**
-     * Creates a new Airport model.
+     * Creates a new Admin model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Airport();
+        $model = new AdminForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->create()) {
+                return $this->redirect(['view', 'admin_id' => $model->admin_id]);
             }
         } else {
-            $model->loadDefaultValues();
+            $model->resetAttributesOnInvalid();
         }
 
         return $this->render('create', [
@@ -109,18 +116,19 @@ class AirportController extends Controller
     }
 
     /**
-     * Updates an existing Airport model.
+     * Updates an existing Admin model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param int $admin_id ID do Admin
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($admin_id)
     {
-        $model = $this->findModel($id);
+        $validAdmin = $this->findModel($admin_id);
+        $model = new AdminForm($validAdmin->admin_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+            return $this->redirect(['view', 'admin_id' => $model->admin_id]);
         }
 
         return $this->render('update', [
@@ -129,29 +137,29 @@ class AirportController extends Controller
     }
 
     /**
-     * Deletes an existing Airport model.
+     * Deletes an existing Admin model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param int $admin_id ID do Admin
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($admin_id)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($admin_id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Airport model based on its primary key value.
+     * Finds the Admin model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Airport the loaded model
+     * @param int $admin_id ID do Admin
+     * @return Admin the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($admin_id)
     {
-        if (($model = Airport::findOne(['id' => $id])) !== null) {
+        if (($model = Admin::findOne(['admin_id' => $admin_id])) !== null) {
             return $model;
         }
 

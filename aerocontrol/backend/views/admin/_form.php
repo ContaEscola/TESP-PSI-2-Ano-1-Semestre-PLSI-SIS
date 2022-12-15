@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var common\models\Client $model */
-/** @var yii\bootstrap5\ActiveForm $form */
+/** @var common\models\Admin $model */
+/** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="client-form">
+<div class="admin-form">
 
     <?php $form = ActiveForm::begin([
         'validateOnType' => true,
@@ -16,6 +16,8 @@ use yii\bootstrap5\ActiveForm;
     ]); ?>
 
     <?= $form->field($model, 'username')->textInput() ?>
+
+    <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'first_name')->textInput() ?>
 

@@ -9,12 +9,16 @@ use Yii;
  *
  * @property int $client_id
  *
- * @property User $client
+ * @property User $user
  * @property FlightTicket[] $flightTickets
  * @property SupportTicket[] $supportTickets
  */
 class Client extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
+
     /**
      * {@inheritdoc}
      */
@@ -32,6 +36,8 @@ class Client extends \yii\db\ActiveRecord
             ['client_id', 'required'],
             ['client_id', 'integer'],
             ['client_id', 'unique'],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
+            ['status', 'boolean'],
             ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['client_id' => 'id']],
         ];
     }

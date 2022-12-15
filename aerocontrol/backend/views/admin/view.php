@@ -4,17 +4,24 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var common\models\Client $model */
+/** @var common\models\Admin $model */
 
 $this->title = $model->user->first_name . " " . $model->user->last_name;
-$this->params['breadcrumbs'][] = ['label' => 'Clientes', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Administradores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="client-view">
+<div class="admin-view">
 
     <p>
-        <?= Html::a('Atualizar', ['update', 'client_id' => $model->client_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Atualizar', ['update', 'admin_id' => $model->admin_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Apagar', ['delete', 'admin_id' => $model->admin_id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Tem a certeza que pretende apagar?',
+                'method' => 'post',
+            ],
+        ]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -22,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             [
                 'label' => 'ID',
-                'value' => $model->client_id,
+                'value' => $model->admin_id,
             ],
             [
                 'label' => 'Username',
@@ -30,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Nome',
-                'value' => $model->user->getFullName(),
+                'value' => $model->user->first_name . " " . $model->user->last_name,
             ],
             [
                 'label' => 'Email',
@@ -38,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'label' => 'Telefone',
-                'value' => $model->user->getFullPhone(),
+                'value' => $model->user->phone_country_code . " " . $model->user->phone,
             ],
             [
                 'label' => 'Género',

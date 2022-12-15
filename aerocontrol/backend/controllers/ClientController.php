@@ -61,10 +61,12 @@ class ClientController extends Controller
      */
     public function actionIndex()
     {
-        $clients = Client::find()->all();
+        $searchModel = new ClientSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
-            'clients' => $clients,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

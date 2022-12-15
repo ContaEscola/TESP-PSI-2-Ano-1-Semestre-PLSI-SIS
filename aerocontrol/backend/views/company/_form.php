@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Company;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -17,7 +18,7 @@ use yii\bootstrap5\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'state')->dropDownList(['0' => 'Inativo', '1' => 'Ativo'], [
+    <?= $form->field($model, 'state')->dropDownList([Company::STATE_INACTIVE => 'Inativo', Company::STATE_ACTIVE => 'Ativo'], [
         'class' => 'form-control'
     ]) ?>
 

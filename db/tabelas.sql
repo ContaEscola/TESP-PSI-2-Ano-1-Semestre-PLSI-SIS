@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 CREATE TABLE IF NOT EXISTS `admin` (
   `admin_id` INT UNSIGNED,
+  `status`   TINYINT UNSIGNED NOT NULL DEFAULT 1,
   CONSTRAINT `pk_admin_id` PRIMARY KEY(`admin_id`),
   CONSTRAINT `fk_admin_admin_id` FOREIGN KEY (`admin_id`) REFERENCES `user`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 CREATE TABLE IF NOT EXISTS `client` (
   `client_id` INT UNSIGNED,
+  `status` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   CONSTRAINT `pk_client_id` PRIMARY KEY(`client_id`),
   CONSTRAINT `fk_client_client_id` FOREIGN KEY (`client_id`) REFERENCES `user`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -79,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
     'Mestrado',
     'Doutoramento'
   ) NOT NULL,
+  `status` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   `function_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_employee_id` PRIMARY KEY(`employee_id`),
   CONSTRAINT `fk_employee_employee_id` FOREIGN KEY (`employee_id`) REFERENCES `user`(`id`),
