@@ -223,8 +223,10 @@ class Restaurant extends \yii\db\ActiveRecord
     public function deleteLogo()
     {
         if (!is_null($this->logo)) {
-            if (!unlink(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
-                return false;
+            if (file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo)) {
+                if (!unlink(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+                    return false;
+            }
         }
 
         return true;

@@ -29,7 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'name',
-            'logo',
             'phone',
             'open_time',
             'close_time',
