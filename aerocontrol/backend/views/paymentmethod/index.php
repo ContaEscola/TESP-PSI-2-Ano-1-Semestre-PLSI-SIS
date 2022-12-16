@@ -21,27 +21,33 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'emptyText' => 'Nenhum resultado encontrado!',
+
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'name',
             [
                 'label' => 'Estado',
                 'attribute' => 'state',
+
                 'value' => function ($model) {
                     return $model->getState();
                 },
                 'filter' => [
                     PaymentMethod::STATE_INACTIVE => 'Inativo',
                     PaymentMethod::STATE_ACTIVE => 'Ativo'
-                ]
+                ],
             ],
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, PaymentMethod $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'template' => '{update}',
+                'buttons'=>[
+                    'update' => function ($url, $model) {
+                        if($model->getState() == "Ativo") $text = 'Desativar';
+                        else $text = 'Ativar';
+                        return Html::a($text, ['update','id'=>$model->id], ['class' => 'btn btn-primary']);
+                    },
+                ],
             ],
         ],
     ]); ?>

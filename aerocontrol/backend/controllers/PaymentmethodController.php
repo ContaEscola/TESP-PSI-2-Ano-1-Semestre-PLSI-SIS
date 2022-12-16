@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\PaymentMethod;
 use common\models\PaymentMethodSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -97,9 +98,14 @@ class PaymentmethodController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($model->state == 1) $model->state = 0;
+        else $model->state = 1;
+
+        if ($model->save()) {
+            return $this->redirect(['index']);
         }
+
+        Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
 
         return $this->render('update', [
             'model' => $model,
