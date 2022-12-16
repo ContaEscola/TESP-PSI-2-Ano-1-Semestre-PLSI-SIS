@@ -43,3 +43,8 @@ password: 12345678
 
 >username: Joaquim
 password: 12345678
+
+
+# Known Issues
+
+- Na gestão de restaurantes (backend), ao atualizar um restaurante quando remove o logo do file input, se existir já um na DB, este não atualiza a DB para ficar null.
