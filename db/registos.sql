@@ -94,3 +94,18 @@ INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `cl
 (4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
 (5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
 
+
+INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
+(1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
+(2, 'Big Tasty', 'Big Tasty_15-12-2022_20-49.png', 1, 4),
+(3, 'CBO', 'CBO_15-12-2022_20-49.png', 1, 4),
+(4, 'Chicken McNuggets', 'Chicken McNuggets_15-12-2022_20-49.png', 1, 4),
+(5, 'Brutal Bacon', 'Brutal Bacon_15-12-2022_20-49.png', 1, 1),
+(6, 'King Chicken', 'King Chicken_15-12-2022_20-49.png', 1, 1),
+(7, 'Whopper', 'Whopper_15-12-2022_20-49.png', 1, 1),
+(8, 'Big King XXL', 'Big King XXL_15-12-2022_20-49.png', 1, 1),
+(9, 'Buger Double', 'Buger Double_15-12-2022_20-49.png', 1, 3),
+(10, 'BBC', 'BBC_15-12-2022_20-49.png', 1, 3),
+(11, 'Iced Latte', 'Iced Latte_15-12-2022_20-49.png', 1, 5),
+(12, 'Caffe Americano', 'Caffe Americano_15-12-2022_20-49.png', 1, 5);
+
