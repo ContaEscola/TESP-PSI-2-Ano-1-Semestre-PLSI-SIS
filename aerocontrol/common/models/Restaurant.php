@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
@@ -125,6 +126,18 @@ class Restaurant extends \yii\db\ActiveRecord
             'logoFile' => 'Logo do Restaurante',
             'website' => 'Website',
         ];
+    }
+
+    /**
+     * Get all the restaurants for dropdowns
+     * @return array
+     */
+    public static function getPossibleRestaurantsForDropdowns()
+    {
+        $possibleRestaurants = self::find()->select(['id', 'name'])->all();
+
+        // Maps the array containing the Restaurants to an associative array of 'id' => 'name'
+        return ArrayHelper::map($possibleRestaurants, 'id', 'name');
     }
 
     /**
