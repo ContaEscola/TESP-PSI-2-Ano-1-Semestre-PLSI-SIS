@@ -23,7 +23,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'emptyText' => 'Nenhum resultado encontrado!',
 
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'id',
             'name',
             [
