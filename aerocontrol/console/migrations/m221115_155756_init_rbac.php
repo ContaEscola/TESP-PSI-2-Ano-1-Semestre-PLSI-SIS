@@ -266,6 +266,10 @@ class m221115_155756_init_rbac extends Migration
         $deleteStore->description = "Apagar Loja";
         $auth->add($deleteStore);
 
+        $deleteStoreLogo = $auth->createPermission('deleteStoreLogo');
+        $deleteStoreLogo->description = "Eliminar Logo da Loja";
+        $auth->add($deleteStoreLogo);
+
         /*
             Company Permissions
         */
@@ -505,6 +509,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin,$viewStore);
         $auth->addChild($admin,$updateStore);
         $auth->addChild($admin,$deleteStore);
+        $auth->addChild($admin,$deleteStoreLogo);
         $auth->addChild($admin,$createCompany);
         $auth->addChild($admin,$viewCompany);
         $auth->addChild($admin,$updateCompany);

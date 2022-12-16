@@ -94,3 +94,9 @@ INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `cl
 (4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
 (5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
 
+INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
+(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Acium_16-12-2022_12-27.jpg', 'https://acium.pt'),
+(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Benfica Official Store_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
+(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
+(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
+(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
