@@ -16,6 +16,9 @@ use Yii;
  */
 class PaymentMethod extends \yii\db\ActiveRecord
 {
+    const STATE_ACTIVE = 1;
+    const STATE_INACTIVE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -50,6 +53,14 @@ class PaymentMethod extends \yii\db\ActiveRecord
             'state' => 'Estado',
             'icon' => 'Icone',
         ];
+    }
+
+    /**
+     * Getter for company state in string
+     */
+    public function getState()
+    {
+        return $this->state == self::STATE_INACTIVE ? "Inativo" : "Ativo";
     }
 
     /**

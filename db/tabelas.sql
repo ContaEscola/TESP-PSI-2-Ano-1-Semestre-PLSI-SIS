@@ -179,10 +179,8 @@ CREATE TABLE IF NOT EXISTS `payment_method` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `state` TINYINT(1) NOT NULL,
-  `icon` VARCHAR(50) NOT NULL,
   CONSTRAINT `pk_payment_method` PRIMARY KEY(`id`),
-  CONSTRAINT `uk_name` UNIQUE KEY(`name`),
-  CONSTRAINT `uk_icon` UNIQUE KEY(`icon`)
+  CONSTRAINT `uk_name` UNIQUE KEY(`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --

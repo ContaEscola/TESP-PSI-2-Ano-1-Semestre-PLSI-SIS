@@ -139,10 +139,6 @@ class m221115_155756_init_rbac extends Migration
         /*
             PaymentMethod Permissions
         */
-        $createPaymentMethod = $auth->createPermission('createPaymentMethod');
-        $createPaymentMethod->description= "Criar método de pagamento";
-        $auth->add($createPaymentMethod);
-
         $updatePaymentMethod = $auth->createPermission('updatePaymentMethod');
         $updatePaymentMethod->description = "Atualizar método de pagamento";
         $auth->add($updatePaymentMethod);
@@ -150,10 +146,6 @@ class m221115_155756_init_rbac extends Migration
         $viewPaymentMethod = $auth->createPermission('viewPaymentMethod');
         $viewPaymentMethod->description = "Visualizar método de pagamento";
         $auth->add($viewPaymentMethod);
-
-        $deletePaymentMethod = $auth->createPermission('deletePaymentMethod');
-        $deletePaymentMethod->description = "Apagar método de pagamento";
-        $auth->add($deletePaymentMethod);
 
         /*
             Client Permissions
@@ -498,8 +490,6 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin,$deleteRestaurantItem);
         $auth->addChild($admin,$viewRestaurantItem);
         $auth->addChild($admin,$updateRestaurantItem);
-        $auth->addChild($admin,$createPaymentMethod);
-        $auth->addChild($admin,$deletePaymentMethod);
         $auth->addChild($admin,$deleteClient);
         $auth->addChild($admin,$createManager);
         $auth->addChild($admin,$viewManager);

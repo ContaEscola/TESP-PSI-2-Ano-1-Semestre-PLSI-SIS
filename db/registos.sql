@@ -100,3 +100,10 @@ INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_t
 (3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
 (4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
 (5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
+
+INSERT INTO `payment_method` (`id`,`name`,`state`) VALUES
+(1,'Cartão de crédito',1),
+(2,'Cartão de débito',0),
+(3,'MBWay',1),
+(4,'Multibanco',1),
+(5,'Paypal',1);
