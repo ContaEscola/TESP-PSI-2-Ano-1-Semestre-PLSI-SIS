@@ -85,3 +85,12 @@ INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
 (7, 'França', 'Paris', 'Paris Aéroport', 'https://www.parisaeroport.fr/'),
 (8, 'França', 'Marseille', 'Aéroport Marseille Provence', 'https://www.marseille.aeroport.fr/'),
 (9, 'França', 'Lyon', 'Lyon Aéroport', 'https://www.lyonaeroports.com/');
+
+
+INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
+(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Burger King_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
+(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Delta_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
+(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'KFC_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
+(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
+(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
+
