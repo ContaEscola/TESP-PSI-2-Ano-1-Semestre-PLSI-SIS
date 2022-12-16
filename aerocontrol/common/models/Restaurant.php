@@ -32,6 +32,8 @@ class Restaurant extends \yii\db\ActiveRecord
 
     // Nome do ficheiro de placeholder caso o restaurante não ter logo
     public $logoPlaceholder = 'logo-placeholder.svg';
+    // Nome do ficheiro de placeholder caso o restaurante ter logo mas não foi possível carregá-lo
+    public $logoPlaceholderOnError = 'logo-placeholder-on-error.svg';
 
     /**
      * Retorna o url do path do logo,
@@ -41,10 +43,19 @@ class Restaurant extends \yii\db\ActiveRecord
      */
     public function getLogoPathUrl()
     {
+        $pathUrl = '';
+
+        // Se não existir logo na DB então dá o URL do [[$this->placeholder]]
         if (is_null($this->logo))
-            return '@web/images/' . $this->logoPlaceholder;
+            $pathUrl = '@web/images/' . $this->logoPlaceholder;
+        // Se existir logo na DB mas não existir no server então dá o URL do [[$this->placeholder-on-error]]
+        else if (!file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+            $pathUrl = '@web/images/' . $this->logoPlaceholderOnError;
+        // Se existir logo na DB e no server então dá o URL do logo
         else
-            return '@uploadLogoRestaurantsUrl/' . $this->logo;
+            $pathUrl = '@uploadLogoRestaurantsUrl/' . $this->logo;
+
+        return $pathUrl;
     }
 
     // Formatar as datas visualmente se encontrar um registo
@@ -69,13 +80,19 @@ class Restaurant extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'description', 'phone', 'logo', 'website'], 'trim'],
-            [['logo', 'website'], 'default', 'value' => null],
+            [['name', 'description', 'phone', 'logo', 'website', 'open_time', 'close_time'], 'trim'],
+            [['logo', 'website', 'open_time', 'close_time'], 'default', 'value' => null],
 
             [['name', 'description', 'phone'], 'required', 'message' => "{attribute} não pode ser vazio."],
-            [['open_time', 'close_time'], 'time'],
-            ['name', 'string', 'max' => 75],
-            ['description', 'string', 'max' => 255],
+            [['open_time', 'close_time'], 'time', 'message' => "{attribute} contém o formato errado."],
+            [
+                'name', 'string',
+                'max' => 75, 'tooLong' => 'O {attribute} e não pode exceder os 75 caracteres.'
+            ],
+            [
+                'description', 'string',
+                'max' => 255, 'tooLong' => 'A {attribute} não pode exceder os 255 caracteres.'
+            ],
 
             [
                 'phone', 'number',
@@ -216,8 +233,10 @@ class Restaurant extends \yii\db\ActiveRecord
     public function deleteLogo()
     {
         if (!is_null($this->logo)) {
-            if (!unlink(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
-                return false;
+            if (file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo)) {
+                if (!unlink(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+                    return false;
+            }
         }
 
         return true;

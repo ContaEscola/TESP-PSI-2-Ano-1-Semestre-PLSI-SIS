@@ -17,7 +17,7 @@ class RestaurantSearch extends Restaurant
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id'], 'integer', 'message' => 'O {attribute} tem de ser um número inteiro.'],
             [['name', 'description', 'phone', 'open_time', 'close_time', 'logo', 'website'], 'safe'],
         ];
     }

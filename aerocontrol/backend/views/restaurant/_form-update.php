@@ -57,6 +57,7 @@ use kartik\time\TimePicker;
                 ],
                 'showCancel' => false,
                 'showUpload' => false,
+                'showRemove' => false,
             ]
         ]);
     } else {

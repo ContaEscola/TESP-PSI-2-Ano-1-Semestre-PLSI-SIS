@@ -77,9 +77,13 @@ class RestaurantController extends Controller
      */
     public function actionIndex()
     {
-        $restaurants = Restaurant::find()->all();
+        $searchModel = new RestaurantSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+
         return $this->render('index', [
-            'restaurants' => $restaurants,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

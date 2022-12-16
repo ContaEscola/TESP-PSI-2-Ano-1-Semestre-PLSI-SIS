@@ -69,7 +69,7 @@ use hail812\adminlte\widgets\Menu;
                                 ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
-                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['paymentmethod/index'], 'target' => '_blank'],
+                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['paymentmethod/index']],
                         [
                             'label' => 'Restaurantes',
                             'icon' => 'fas fa-solid fa-utensils',
@@ -78,8 +78,8 @@ use hail812\adminlte\widgets\Menu;
                                 ['label' => 'Gerentes', 'url' => ['manager/index'],'iconStyle' => 'far'],
                             ]
                         ],
-                        ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart', 'target' => '_blank'],
-                        ['label' => 'Server Log', 'url' => ['serverlog'], 'icon' => 'fas fa-solid fa-info', 'target' => '_blank'],
+                        ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
+                        ['label' => 'Server Log', 'url' => ['serverlog'], 'icon' => 'fas fa-solid fa-info'],
                     ],
                 ]);
             }
