@@ -107,3 +107,17 @@ INSERT INTO `payment_method` (`id`,`name`,`state`) VALUES
 (3,'MBWay',1),
 (4,'Multibanco',1),
 (5,'Paypal',1);
+
+INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
+(1, 'Camisa às riscas azul e branca.', 'Perdido', '19-12-2022_20-03-20.jpg'),
+(2, 'Camisa vermelha, marca BOSS.', 'Por entregar', '19-12-2022_20-04-20.jpg'),
+(3, 'Casaco azul de inverno para mulher.', 'Entregue', '19-12-2022_20-06-34.jpg'),
+(4, 'Casaco cinzento da Lacoste.', 'Entregue', '19-12-2022_20-09-46.jpg'),
+(5, 'Casaco preto da carhatt de inverno.', 'Perdido', '19-12-2022_20-10-56.jpg'),
+(6, 'Mala de viagem cinzenta com 20kg.', 'Perdido', '19-12-2022_20-11-37.jfif'),
+(7, 'Mala de viagem preta 20kg', 'Perdido', '19-12-2022_20-12-20.jpg'),
+(8, 'Mala de viagem verde da PepeJeans de 10kg', 'Perdido', '19-12-2022_20-12-56.jpg'),
+(9, 'Mala de viagem vermelha com código na parte lateral de 20kg', 'Perdido', '19-12-2022_20-13-29.jpg'),
+(10, 'Mala de viagem azul da ITACA de 20kg', 'Por entregar', '19-12-2022_20-14-19.jpeg'),
+(11, 'Mochila de escola da Nike azul.', 'Entregue', '19-12-2022_20-15-13.jpg'),
+(12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
