@@ -87,6 +87,10 @@ class m221115_155756_init_rbac extends Migration
         $deleteLostItem->description = "Apagar item dos perdidos e achados";
         $auth->add($deleteLostItem);
 
+        $deleteLostItemLogo = $auth->createPermission('deleteLostItemLogo');
+        $deleteLostItemLogo->description = "Eliminar imagem do item dos perdidos e achados";
+        $auth->add($deleteLostItemLogo);
+
         /*
             SupportTicket Messages Permissions
         */
@@ -450,6 +454,8 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee,$createLostItem);
         $auth->addChild($employee,$updateLostItem);
         $auth->addChild($employee,$viewLostItem);
+        $auth->addChild($employee,$deleteLostItem);
+        $auth->addChild($employee,$deleteLostItemLogo);
         $auth->addChild($employee,$createAirplane);
         $auth->addChild($employee,$updateAirplane);
         $auth->addChild($employee,$viewAirplane);
