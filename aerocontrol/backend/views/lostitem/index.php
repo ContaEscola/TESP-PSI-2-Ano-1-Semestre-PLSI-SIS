@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= GridView::widget([
+        'summary' => '',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'emptyText' => "Nenhum resultado encontrado!",
