@@ -1,21 +1,22 @@
 <?php
 
-use common\models\Company;
+use common\models\Store;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var common\models\CompanySearch $searchModel */
+/** @var common\models\StoreSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Companhias';
+$this->title = 'Lojas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="company-index">
+<div class="store-index">
+
     <p>
-        <?= Html::a('Criar nova', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Loja', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>
@@ -27,27 +28,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'id',
             'name',
-            [
-                'label' => 'Estado',
-                'attribute' => 'state',
-                'value' => function ($model) {
-                    return $model->getState();
-                },
-                'filter' => [
-                    Company::STATE_INACTIVE => 'Inativo',
-                    Company::STATE_ACTIVE => 'Ativo'
-                ]
-            ],
+            'phone',
+            'open_time',
+            'close_time',
+            'website',
             [
                 'class' => ActionColumn::className(),
-                'template' => '{update} {view}',
-                'urlCreator' => function ($action, Company $model, $key, $index, $column) {
+                'urlCreator' => function ($action, Store $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                 }
             ],
         ],
-    ]);
-    ?>
+    ]) ?>
     <?php \yii\widgets\Pjax::end(); ?>
 
 </div>

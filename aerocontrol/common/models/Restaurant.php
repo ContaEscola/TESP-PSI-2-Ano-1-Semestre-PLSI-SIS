@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
@@ -99,7 +100,10 @@ class Restaurant extends \yii\db\ActiveRecord
                 'numberPattern' => '/[\d]{4,15}$/', 'message' => "O nº de telemóvel só pode conter números, ter pelo menos 4 números e não pode exceder os 15 números.",
             ],
 
-            ['website', 'string', 'max' => 50],
+            [
+                'website', 'string',
+                'max' => 50, 'tooLong' => 'O {attribute} e não pode exceder os 75 caracteres.'
+            ],
             [['name'], 'unique', 'message' => "Este {attribute} já está a ser utilizado."],
 
             [
@@ -133,6 +137,18 @@ class Restaurant extends \yii\db\ActiveRecord
         return $fields;
     }
 
+
+    /**
+     * Get all the restaurants for dropdowns
+     * @return array
+     */
+    public static function getPossibleRestaurantsForDropdowns()
+    {
+        $possibleRestaurants = self::find()->select(['id', 'name'])->all();
+
+        // Maps the array containing the Restaurants to an associative array of 'id' => 'name'
+        return ArrayHelper::map($possibleRestaurants, 'id', 'name');
+    }
 
     /**
      * Gets query for [[Managers]].

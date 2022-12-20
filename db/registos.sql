@@ -94,6 +94,33 @@ INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `cl
 (4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
 (5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
 
+INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
+(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Acium_16-12-2022_12-27.jpg', 'https://acium.pt'),
+(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Benfica Official Store_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
+(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
+(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
+(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
+
+INSERT INTO `payment_method` (`id`,`name`,`state`) VALUES
+(1,'Cartão de crédito',1),
+(2,'Cartão de débito',0),
+(3,'MBWay',1),
+(4,'Multibanco',1),
+(5,'Paypal',1);
+
+INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
+(1, 'Camisa às riscas azul e branca.', 'Perdido', '19-12-2022_20-03-20.jpg'),
+(2, 'Camisa vermelha, marca BOSS.', 'Por entregar', '19-12-2022_20-04-20.jpg'),
+(3, 'Casaco azul de inverno para mulher.', 'Entregue', '19-12-2022_20-06-34.jpg'),
+(4, 'Casaco cinzento da Lacoste.', 'Entregue', '19-12-2022_20-09-46.jpg'),
+(5, 'Casaco preto da carhatt de inverno.', 'Perdido', '19-12-2022_20-10-56.jpg'),
+(6, 'Mala de viagem cinzenta com 20kg.', 'Perdido', '19-12-2022_20-11-37.jfif'),
+(7, 'Mala de viagem preta 20kg', 'Perdido', '19-12-2022_20-12-20.jpg'),
+(8, 'Mala de viagem verde da PepeJeans de 10kg', 'Perdido', '19-12-2022_20-12-56.jpg'),
+(9, 'Mala de viagem vermelha com código na parte lateral de 20kg', 'Perdido', '19-12-2022_20-13-29.jpg'),
+(10, 'Mala de viagem azul da ITACA de 20kg', 'Por entregar', '19-12-2022_20-14-19.jpeg'),
+(11, 'Mochila de escola da Nike azul.', 'Entregue', '19-12-2022_20-15-13.jpg'),
+(12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
 
 INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
 (1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
