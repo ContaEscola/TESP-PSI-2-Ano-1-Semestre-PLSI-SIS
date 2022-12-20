@@ -48,7 +48,13 @@ return [
             'rules' => [
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/restaurant'],
                 ['class' => 'yii\rest\UrlRule','controller' => 'api/store'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/user']
+                ['class' => 'yii\rest\UrlRule','controller' => 'api/user'],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/auth',
+                    'extraPatterns' => [
+                        'GET login' => 'login'  // Faz a action "login"
+                    ],
+                ]
             ],
         ],
 
