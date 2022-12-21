@@ -55,6 +55,12 @@ return [
                         'POST login' => 'login'  // Faz a actionLogin
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule','controller' => 'api/flightticket',
+                    'extraPatterns' => [
+                        'GET mytickets' => 'mytickets'  // Faz a actionMytickets
+                    ],
+                ],
             ],
         ],
 

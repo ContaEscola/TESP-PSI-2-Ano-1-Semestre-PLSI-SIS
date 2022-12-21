@@ -21,13 +21,12 @@ class UserController extends ActiveController
         return $actions;
     }
 
-    public function actionView(){
+    public function actionView($id){
         $user = new $this->modelClass;
-        return $user->find('id')->select(
+        return $user->find()->where(['id'=>$id])->select(
             [
                 'id',
                 'username',
-                'auth_key',
                 'first_name',
                 'last_name',
                 'gender',
