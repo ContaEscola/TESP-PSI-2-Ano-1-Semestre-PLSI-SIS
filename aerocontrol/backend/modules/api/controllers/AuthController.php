@@ -3,6 +3,7 @@
 namespace backend\modules\api\controllers;
 
 use common\models\User;
+use Psy\Util\Json;
 use Yii;
 use yii\base\UserException;
 use yii\db\Exception;
@@ -24,8 +25,11 @@ class AuthController extends Controller
         $username = Yii::$app->request->post('username');
         $password = Yii::$app->request->post('password');
         $user = User::findByUsername($username);
-        if ($user && $user->validatePassword($password)) return $user->auth_key;
-        else return "Invalid credentials";
+        if ($user && $user->validatePassword($password)){
+
+            return Json::encode(["success"=>"true","token"=>$user->auth_key],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        }
+        else return Json::encode(["success"=>"false","token"=>"error"],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
 }

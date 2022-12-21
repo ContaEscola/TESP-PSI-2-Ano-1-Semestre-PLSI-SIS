@@ -23,7 +23,8 @@
         "kartik-v/yii2-widget-datetimepicker": "*",
         "kartik-v/yii2-widget-activeform": "dev-master",
         "kartik-v/yii2-widget-fileinput": "@dev",
-        "kartik-v/yii2-widget-timepicker": "@dev"
+        "kartik-v/yii2-widget-timepicker": "@dev",
+      "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
