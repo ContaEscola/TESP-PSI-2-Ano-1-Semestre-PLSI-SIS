@@ -3,6 +3,7 @@
 namespace backend\modules\api\controllers;
 
 use common\models\User;
+use Yii;
 use yii\base\UserException;
 use yii\db\Exception;
 use yii\filters\auth\HttpBasicAuth;
@@ -12,37 +13,19 @@ use yii\web\ForbiddenHttpException;
 
 class AuthController extends Controller
 {
-    public $user = null;
 
-    /*
-         COM HttpBasicAuth
-    */
-
-    public function behaviors()
+    public function beforeAction($action)
     {
-        $behaviors = parent::behaviors();
-        $behaviors['authenticator'] = [
-            'class'=> HttpBasicAuth::className(),
-            'auth'=> [$this,'auth']
-        ];
-        return $behaviors;
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
     }
-
-    public function auth($username, $password)
-    {
-        $user = User::findByUsername($username);
-        if ($user && $user->validatePassword($password))
-        {
-            $this->user = $user;
-            return $user;
-        }
-        throw new ForbiddenHttpException('No authentication'); //403
-    }
-
 
     public function actionLogin(){
-        if($this->user != null)
-            return $this->user->authkey;
+        $username = Yii::$app->request->post('username');
+        $password = Yii::$app->request->post('password');
+        $user = User::findByUsername($username);
+        if ($user && $user->validatePassword($password)) return $user->auth_key;
+        else return "Invalid credentials";
     }
 
 }

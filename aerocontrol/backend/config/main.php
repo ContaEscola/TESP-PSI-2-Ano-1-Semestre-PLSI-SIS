@@ -52,9 +52,9 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule','controller' => 'api/auth',
                     'extraPatterns' => [
-                        'GET login' => 'login'  // Faz a action "login"
+                        'POST login' => 'login'  // Faz a actionLogin
                     ],
-                ]
+                ],
             ],
         ],
 
