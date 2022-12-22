@@ -5,31 +5,62 @@ namespace backend\modules\api\controllers;
 use common\models\User;
 use Psy\Util\Json;
 use Yii;
+use yii\base\Module;
 use yii\base\UserException;
 use yii\db\Exception;
 use yii\filters\auth\HttpBasicAuth;
 use yii\rest\ActiveController;
-use yii\web\Controller;
+
+use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
+use yii\web\Response;
 
 class AuthController extends Controller
 {
+    public $user;
 
-    public function beforeAction($action)
+    public function __construct($id, $module, $config = [])
     {
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        parent::__construct($id, $module, $config);
     }
 
-    public function actionLogin(){
-        $username = Yii::$app->request->post('username');
-        $password = Yii::$app->request->post('password');
-        $user = User::findByUsername($username);
-        if ($user && $user->validatePassword($password)){
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class'=> HttpBasicAuth::className(),
+            'auth'=> [$this,'auth']
+        ];
+        return $behaviors;
+    }
 
-            return Json::encode(["success"=>"true","token"=>$user->auth_key],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    public function auth($username, $password)
+    {
+        $user = User::findByUsername($username);
+        if ($user && $user->validatePassword($password))
+        {
+            $this->user = $user;
+            return $user;
         }
-        else return Json::encode(["success"=>"false","token"=>"error"],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        throw new ForbiddenHttpException('No authentication'); //403
+    }
+
+
+    public function actionLogin(){
+        $array['token'] = $this->user->auth_key;
+        $array['id'] = $this->user->id;
+        $array['username'] = $this->user->username;
+        $array['first_name'] = $this->user->first_name;
+        $array['last_name'] = $this->user->last_name;
+        $array['gender'] = $this->user->gender;
+        $array['country'] = $this->user->country;
+        $array['city'] = $this->user->city;
+        $array['birthdate'] = $this->user->birthdate;
+        $array['email'] = $this->user->email;
+        $array['phone'] = $this->user->phone;
+        $array['phone_country_code'] = $this->user->phone_country_code;
+        return $array;
     }
 
 }

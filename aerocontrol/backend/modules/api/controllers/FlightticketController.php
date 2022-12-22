@@ -3,13 +3,13 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\components\CustomAuth;
-use common\models\FlightTicket;
 use common\models\User;
-use DateInterval;
-use Psy\Util\Json;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
+
+use yii\web\ServerErrorHttpException;
 
 class FlightticketController extends ActiveController
 {
@@ -54,10 +54,16 @@ class FlightticketController extends ActiveController
 
             // Compara se a data  de possível cancelamento é superior à atual
             if($cancelTicketTime >= $now){
-                if ($flightTicket->delete()) return Json::encode(["success"=>"success","message"=>"Ticket deleted"],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-                else return Json::encode(["success"=>"false","message"=>"Error when canceling"],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-            } else return Json::encode(["success"=>"false","message"=>"Impossible to cancel the ticket seven days before the flight, please contact support"],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        } else return Json::encode(["success"=>"false","message"=>"Ticket not found"],JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+                if ($flightTicket->delete()){
+                    $array['success'] = "success";
+                    $array['message'] = "Ticket eliminado.";
+                    return $array;
+                }
+                throw new ServerErrorHttpException("Ocorreu um erro ao cancelar.");
+            }
+            throw new ForbiddenHttpException("Impossível cancelar o bilhete sete dias antes do voo, por favor contacte o suporte.");
+        }
+        throw new NotFoundHttpException("Bilhete não encontrado.");
     }
 
     public function actionMytickets(){
