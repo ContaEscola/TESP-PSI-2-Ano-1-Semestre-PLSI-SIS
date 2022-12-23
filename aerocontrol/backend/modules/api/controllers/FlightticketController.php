@@ -82,11 +82,21 @@ class FlightticketController extends ActiveController
                 $array[$i]['flightArrivalTime'] = date('H:i', strtotime($flightTicket->flight->estimated_arrival_date));
                 $array[$i]['terminal'] = $flightTicket->flight->terminal;
                 $array[$i]['originalPrice'] = $flightTicket->flight->price;
-                $array[$i]['paidPrice'] = $flightTicket->flight->price - ($flightTicket->flight->discount_percentage / 100 * $flightTicket->flight->price);
+                $array[$i]['paidPrice'] = $flightTicket->price;
                 $array[$i]['flightDate'] = date('d-m-Y', strtotime($flightTicket->flight->estimated_departure_date));;
                 $array[$i]['purchaseDate'] = $flightTicket->purchase_date;
                 $array[$i]['distance'] = $flightTicket->flight->distance;
                 $array[$i]['checkin'] = $flightTicket->checkin;
+                $array[$i]['passengers'] = array();
+                $j = 0;
+                foreach ($flightTicket->passengers as $passenger){
+                    $array[$i]['passengers'][$j]['id'] = $passenger->id;
+                    $array[$i]['passengers'][$j]['name'] = $passenger->name;
+                    $array[$i]['passengers'][$j]['gender'] = $passenger->gender;
+                    $array[$i]['passengers'][$j]['seat'] = $passenger->seat;
+                    $array[$i]['passengers'][$j]['extra_baggage'] = $passenger->extra_baggage;
+                    $j++;
+                }
                 $i++;
             }
         }
