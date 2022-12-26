@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\base\ErrorException;
 
 /**
  * This is the model class for table "flight_ticket".
@@ -38,7 +39,7 @@ class FlightTicket extends \yii\db\ActiveRecord
         return [
             [['price', 'purchase_date', 'checkin', 'client_id', 'flight_id', 'payment_method_id'], 'required'],
             ['price', 'number'],
-            ['purchase_date', 'datetime'],
+            ['purchase_date', 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['client_id', 'flight_id', 'payment_method_id'], 'integer'],
             ['checkin', 'boolean'],
             ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
@@ -61,6 +62,28 @@ class FlightTicket extends \yii\db\ActiveRecord
             'flight_id' => 'ID do Voo',
             'payment_method_id' => 'ID do Método de Pagamento',
         ];
+    }
+
+    /**
+     * Apaga os passageiros do Ticket e o Ticket
+     */
+    public function deleteTicket (){
+        $transaction = FlightTicket::getDb()->beginTransaction();
+        try {
+            foreach ($this->passengers as $passenger){
+                $passenger->delete();
+            }
+            $this->delete();
+
+            $transaction->commit();
+        } catch (ErrorException $e) {
+            $transaction->rollBack();
+            return null;
+        } catch (\Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+        return true;
     }
 
     /**

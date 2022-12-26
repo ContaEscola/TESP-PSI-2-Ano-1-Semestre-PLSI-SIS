@@ -54,16 +54,12 @@ class FlightticketController extends ActiveController
 
             // Compara se a data  de possível cancelamento é superior à atual
             if($cancelTicketTime >= $now){
-                if ($flightTicket->delete()){
-                    $array['success'] = "success";
+                if ($flightTicket->deleteTicket()){
                     $array['message'] = "Ticket eliminado.";
                     return $array;
-                }
-                throw new ServerErrorHttpException("Ocorreu um erro ao cancelar.");
-            }
-            throw new ForbiddenHttpException("Impossível cancelar o bilhete sete dias antes do voo, por favor contacte o suporte.");
-        }
-        throw new NotFoundHttpException("Bilhete não encontrado.");
+                } else throw new ServerErrorHttpException("Ocorreu um erro ao cancelar.");
+            } else throw new ForbiddenHttpException("Impossível cancelar o bilhete sete dias antes do voo, por favor contacte o suporte.");
+        } else throw new NotFoundHttpException("Bilhete não encontrado.");
     }
 
     public function actionMytickets(){
@@ -101,6 +97,20 @@ class FlightticketController extends ActiveController
             }
         }
         return $array;
+    }
+
+    public function actionUpdate($id){
+        $checkin = Yii::$app->request->post('checkin');
+        $model = new $this->modelClass;
+        $ticket = $model::findOne(['flight_ticket_id' => $id]);
+        if($ticket)
+        {
+            $ticket->checkin = $checkin;
+            if ($ticket->save()){
+                $array['message'] = "Check-in efetuado.";
+                return $array;
+            }else throw new ServerErrorHttpException("Ocorreu um erro ao efetuar a gravação.");
+        } else throw new NotFoundHttpException("Bilhete não encontrado");
     }
 
 }
