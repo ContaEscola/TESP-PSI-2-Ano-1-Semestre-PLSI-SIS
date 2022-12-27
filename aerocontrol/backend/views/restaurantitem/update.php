@@ -1,0 +1,19 @@
+<?php
+
+use yii\helpers\Html;
+
+/** @var yii\web\View $this */
+/** @var common\models\RestaurantItem $model */
+
+$this->title = 'Atualizar item: ' . $model->item;
+$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['index', 'restaurant_id'=>$model->restaurant_id]];
+$this->params['breadcrumbs'][] = ['label' => $model->item, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Atualizar';
+?>
+<div class="restaurant-item-update">
+
+    <?= $this->render('_form-update', [
+        'model' => $model,
+    ]) ?>
+
+</div>
