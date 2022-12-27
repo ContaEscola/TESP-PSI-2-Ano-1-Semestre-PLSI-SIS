@@ -2,8 +2,14 @@
 namespace console\rules;
 
 //use common\models\Restaurant;
+use common\models\Manager;
+use common\models\Restaurant;
+use common\models\User;
+use http\Exception;
+use Yii;
 use yii\rbac\Item;
 use yii\rbac\Rule;
+use function PHPUnit\Framework\throwException;
 
 class ManagerRule extends Rule
 {
@@ -19,8 +25,9 @@ class ManagerRule extends Rule
     {
         if (isset($params['restaurant']))
         {
-            $restaurantManager = User::findOne($params['restaurant']->manager_id);
-            return $restaurantManager == $user;
+            foreach ($params['restaurant']->managers as $manager)
+                if($manager->manager_id == $user)
+                    return true;
         }
         return false;
     }
