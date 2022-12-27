@@ -43,6 +43,9 @@ class RestaurantController extends Controller
                             'allow' => true,
                             'actions' => ['view'],
                             'roles' => ['viewRestaurant'],
+                            'roleParams' => function() {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])];
+                            },
                         ],
                         [
                             'allow' => true,
@@ -53,6 +56,9 @@ class RestaurantController extends Controller
                             'allow' => true,
                             'actions' => ['update'],
                             'roles' => ['updateRestaurant'],
+                            'roleParams' => function() {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])];
+                            },
                         ],
                         [
                             'allow' => true,
@@ -63,6 +69,9 @@ class RestaurantController extends Controller
                             'allow' => true,
                             'actions' => ['delete-logo'],
                             'roles' => ['deleteRestaurantLogo'],
+                            'roleParams' => function() {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])];
+                            },
                         ],
                     ],
                 ],

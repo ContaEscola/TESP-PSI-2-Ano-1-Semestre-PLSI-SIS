@@ -2,17 +2,21 @@
 
 namespace backend\controllers;
 
-use common\models\LostItem;
-use common\models\LostItemSearch;
+use common\models\Manager;
+use common\models\Restaurant;
+use common\models\RestaurantItem;
+use common\models\RestaurantItemSearch;
+use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LostitemController implements the CRUD actions for LostItem model.
+ * RestaurantitemController implements the CRUD actions for RestaurantItem model.
  */
-class LostitemController extends Controller
+class RestaurantitemController extends Controller
 {
     /**
      * @inheritDoc
@@ -34,48 +38,68 @@ class LostitemController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewLostItem'],
+                            'roles' => ['viewRestaurantItem'],
+                            'roleParams' => function() {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewLostItem'],
+                            'roles' => ['viewRestaurantItem'],
+                            'roleParams' => function() {
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createLostItem'],
+                            'roles' => ['createRestaurantItem'],
+                            'roleParams' => function() {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateLostItem'],
+                            'roles' => ['updateRestaurantItem'],
+                            'roleParams' => function() {
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteLostItem'],
+                            'roles' => ['deleteRestaurantItem'],
+                            'roleParams' => function() {
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete-logo'],
-                            'roles' => ['deleteLostItemLogo'],
+                            'roles' => ['deleteRestaurantItemLogo'],
+                            'roleParams' => function() {
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
+                            },
                         ],
                     ],
-                ],
+                ]
             ]
         );
     }
 
     /**
-     * Lists all LostItem models.
+     * Lists all RestaurantItem models.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($restaurant_id)
     {
-        $searchModel = new LostItemSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel = new RestaurantItemSearch();
+        $query = RestaurantItem::find()->where(['restaurant_id'=>$restaurant_id]);
+        $dataProvider = new ActiveDataProvider(['query' => $query,]);
+        //$dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -84,7 +108,7 @@ class LostitemController extends Controller
     }
 
     /**
-     * Displays a single LostItem model.
+     * Displays a single RestaurantItem model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -97,13 +121,16 @@ class LostitemController extends Controller
     }
 
     /**
-     * Creates a new LostItem model.
+     * Creates a new RestaurantItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new LostItem();
+        $model = new RestaurantItem();
+
+        $manager = Manager::findOne(Yii::$app->user->getId());
+        $model->restaurant_id = $manager->restaurant_id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -119,7 +146,7 @@ class LostitemController extends Controller
     }
 
     /**
-     * Updates an existing LostItem model.
+     * Updates an existing RestaurantItem model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -139,7 +166,7 @@ class LostitemController extends Controller
     }
 
     /**
-     * Deletes an existing LostItem model.
+     * Deletes an existing RestaurantItem model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -147,12 +174,14 @@ class LostitemController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $restaurant_id = $model->restaurant_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index','restaurant_id'=>$restaurant_id]);
     }
 
-    //remover imagem do lost item
+    //remover imagem do item do restaurante
     public function actionDeleteLogo($id)
     {
         $model = $this->findModel($id);
@@ -160,19 +189,19 @@ class LostitemController extends Controller
             $model->image = null;
         if ($model->save())
             return $this->redirect(['view', 'id' => $model->id]);
-        else var_dump($model->errors);
+        else return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**
-     * Finds the LostItem model based on its primary key value.
+     * Finds the RestaurantItem model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return LostItem the loaded model
+     * @return RestaurantItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = LostItem::findOne(['id' => $id])) !== null) {
+        if (($model = RestaurantItem::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
