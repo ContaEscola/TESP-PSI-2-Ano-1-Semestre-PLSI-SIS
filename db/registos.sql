@@ -21,7 +21,9 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (12, 'joana', 'Mp9wa07PoGl3TVkV63_pt-p6aEi-cpJ1', '$2y$13$Rx/5L7/.UBJf9b0qO3VgI.gZXf/WfmuYZ58AqBGCnCJYxFSoOvu6O', NULL, 'Joana', 'Maria', 'Feminino', 'França', 'Paris', '1996-09-02', 'joana@gmail.pt', '913249815', '+351', 10, 1669144519, 1669144519, 'IdGl19M7LQhFkKl16WOItANYWWZqlnJ6_1669144519'),
 (13, 'joaquina', 'iwTUez0kQ3CYl_BPlpU7p0bh9n2HD4ar', '$2y$13$Wxu5hFSdWw2OIblQhEXVy.JKT4OOXoBXHM3XiLlXjN7KZS8ljTPiS', NULL, 'Joaquina', 'Santos', 'Feminino', 'Portugal', 'Porto', '2004-02-22', 'joaquina@gmail.pt', '968483219', '+351', 10, 1669144583, 1669144583, 'lgz1gmJLdMxmfo3_CFopv1zVsdZW7hKW_1669144583'),
 (14, 'tiago', 'tGYZhx8iparOM_XWY26Q6BU9rdv7mkhJ', '$2y$13$1MP2ZbecBaJ6WLCI9RNsKOIpk1fG86bWlODg0KS2YQk9kJ5rWvtFC', NULL, 'Tiago', 'Santos', 'Masculino', 'Portugal', 'Santarém', '1999-05-22', 'tiago@gmail.pt', '986142367', '+351', 10, 1669144760, 1669144760, 'zHSMLfY0UKQTdV1_lW87eN89OoKqqWm7_1669144760'),
-(15, 'gonçalo', 'UZJof0DKXT0CZ5ElVh4SF5-VEEuGVEfw', '$2y$13$xJeXGwL1V2BZTnN4SBdpxOGmcSsr4ayIxPUe9o.XuyzuwfBSisnyO', NULL, 'Gonçalo', 'António', 'Masculino', 'Portugal', 'Braga', '2000-12-14', 'goncalo@gmail.com', '930139168', '+351', 10, 1669144816, 1669144816, 'ylcW1N-avvr6F332pae7JBV73v_Miyym_1669144816');
+(15, 'gonçalo', 'UZJof0DKXT0CZ5ElVh4SF5-VEEuGVEfw', '$2y$13$xJeXGwL1V2BZTnN4SBdpxOGmcSsr4ayIxPUe9o.XuyzuwfBSisnyO', NULL, 'Gonçalo', 'António', 'Masculino', 'Portugal', 'Braga', '2000-12-14', 'goncalo@gmail.com', '930139168', '+351', 10, 1669144816, 1669144816, 'ylcW1N-avvr6F332pae7JBV73v_Miyym_1669144816'),
+(16, 'santos', 'mTTnBM1p-RSSQpPlUk4q8tM1TJyxI4qL', '$2y$13$eIBQ/na4mmkJ8pX8j6DgFef.1SmDJkgFknsUDYXW4jNBb8e1MP89.', NULL, 'Manuel', 'Santos', 'Masculino', 'Portugal', 'Aveiro', '1997-01-13', 'manuel@gmail.pt', '965896589', '+351', 10, 1672157137, 1672157137, 'SqIiyieRDtaSYqI_SeyZkp72KjaVbn3X_1672157137');
+
 
 INSERT INTO `admin`(admin_id) VALUES
 (1);
@@ -85,6 +87,10 @@ INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
 (7, 'França', 'Paris', 'Paris Aéroport', 'https://www.parisaeroport.fr/'),
 (8, 'França', 'Marseille', 'Aéroport Marseille Provence', 'https://www.marseille.aeroport.fr/'),
 (9, 'França', 'Lyon', 'Lyon Aéroport', 'https://www.lyonaeroports.com/');
+
+
+INSERT INTO `manager`(`manager_id`,`restaurant_id`) VALUES
+(16,1);
 
 
 INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES

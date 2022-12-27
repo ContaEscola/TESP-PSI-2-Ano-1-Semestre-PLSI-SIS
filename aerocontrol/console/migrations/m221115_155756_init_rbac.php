@@ -1,5 +1,7 @@
 <?php
 
+use console\rules\ClientRule;
+use console\rules\ManagerRule;
 use yii\db\Migration;
 
 /**
@@ -9,6 +11,7 @@ class m221115_155756_init_rbac extends Migration
 {
     /**
      * {@inheritdoc}
+     * @throws Exception
      */
     public function safeUp()
     {
@@ -224,6 +227,10 @@ class m221115_155756_init_rbac extends Migration
         $deleteRestaurantItem->description = "Apagar item da ementa";
         $auth->add($deleteRestaurantItem);
 
+        $deleteRestaurantItemLogo = $auth->createPermission('deleteRestaurantItemLogo');
+        $deleteRestaurantItemLogo->description = "Eliminar Logo do item do Restaurante";
+        $auth->add($deleteRestaurantItemLogo);
+
         /*
             Manager Permissions
         */
@@ -325,10 +332,10 @@ class m221115_155756_init_rbac extends Migration
         /*
           Rules
          */
-        $managerRule = new \console\rules\ManagerRule;
+        $managerRule = new ManagerRule;
         $auth->add($managerRule);
 
-        $clientRule = new \console\rules\ClientRule();
+        $clientRule = new ClientRule();
         $auth->add($clientRule);
 
         /*
@@ -338,11 +345,6 @@ class m221115_155756_init_rbac extends Migration
         /*
             Own Restaurant Item Permissions
          */
-        $createOwnRestaurantItem = $auth->createPermission("createOwnRestaurantItem");
-        $createOwnRestaurantItem->description = "Criar item do restaurante";
-        $createOwnRestaurantItem->ruleName = $managerRule->name;
-        $auth->add($createOwnRestaurantItem);
-        $auth->addChild($createOwnRestaurantItem,$createRestaurantItem);
 
         $viewOwnRestaurantItem = $auth->createPermission("viewOwnRestaurantItem");
         $viewOwnRestaurantItem->description = "Visualizar item do restaurante";
@@ -361,6 +363,12 @@ class m221115_155756_init_rbac extends Migration
         $updateOwnRestaurantItem->ruleName = $managerRule->name;
         $auth->add($updateOwnRestaurantItem);
         $auth->addChild($updateOwnRestaurantItem,$updateRestaurantItem);
+
+        $deleteOwnRestaurantItemLogo = $auth->createPermission("deleteOwnRestaurantItemLogo");
+        $deleteOwnRestaurantItemLogo->description = "Eliminar Logo do item do Restaurante";
+        $deleteOwnRestaurantItemLogo->ruleName = $managerRule->name;
+        $auth->add($deleteOwnRestaurantItemLogo);
+        $auth->addChild($deleteOwnRestaurantItemLogo,$deleteRestaurantItemLogo);
 
         /*
             Own Restaurant Permissions
@@ -382,7 +390,7 @@ class m221115_155756_init_rbac extends Migration
         $deleteOwnRestaurantLogo->description = "Eliminar Logo do Restaurante";
         $deleteOwnRestaurantLogo->ruleName = $managerRule->name;
         $auth->add($deleteOwnRestaurantLogo);
-        $auth->addChild($deleteOwnRestaurantLogo,$deleteRestaurantLogo);
+        $auth->addChild($deleteOwnRestaurantLogo,$deleteOwnRestaurantItemLogo);
 
         /*
             Own Ticket Permissions
@@ -472,10 +480,11 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee,$viewSupportTicket);
 
         //Manager Permissions
-        $auth->addChild($manager,$createOwnRestaurantItem);
+        $auth->addChild($manager,$createRestaurantItem);
         $auth->addChild($manager,$deleteOwnRestaurantItem);
         $auth->addChild($manager,$updateOwnRestaurantItem);
         $auth->addChild($manager,$viewOwnRestaurantItem);
+        $auth->addChild($manager,$deleteOwnRestaurantItemLogo);
         $auth->addChild($manager,$viewOwnRestaurant);
         $auth->addChild($manager,$updateOwnRestaurant);
         $auth->addChild($manager,$deleteOwnRestaurantLogo);
@@ -535,6 +544,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->assign($client,13);
         $auth->assign($client,14);
         $auth->assign($client,15);
+        $auth->assign($manager, 16);
 
     }
 

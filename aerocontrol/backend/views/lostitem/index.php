@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Criar item Perdidos e achados', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
         'summary' => '',
         'dataProvider' => $dataProvider,
