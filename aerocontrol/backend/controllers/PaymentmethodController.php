@@ -98,18 +98,14 @@ class PaymentmethodController extends Controller
     {
         $model = $this->findModel($id);
 
-        if($model->state == 1) $model->state = 0;
-        else $model->state = 1;
+        if ($model->state == PaymentMethod::STATE_ACTIVE) $model->state = PaymentMethod::STATE_INACTIVE;
+        else $model->state = PaymentMethod::STATE_ACTIVE;
 
-        if ($model->save()) {
-            return $this->redirect(['index']);
-        }
+        if (!$model->save())
+            Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
 
-        Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
 
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        return $this->redirect(['index']);
     }
 
     /**
