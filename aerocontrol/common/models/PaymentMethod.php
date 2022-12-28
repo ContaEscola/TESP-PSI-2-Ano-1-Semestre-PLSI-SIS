@@ -10,12 +10,14 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property int $state
- * @property string $icon
  *
  * @property FlightTicket[] $flightTickets
  */
 class PaymentMethod extends \yii\db\ActiveRecord
 {
+    const STATE_ACTIVE = 1;
+    const STATE_INACTIVE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -30,12 +32,11 @@ class PaymentMethod extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'state', 'icon'], 'required'],
-            ['state', 'boolean'],
-            [['name', 'icon'], 'trim'],
-            [['name', 'icon'], 'string', 'max' => 50],
-            ['name', 'unique'],
-            ['icon', 'unique'],
+            [['name', 'state'], 'required', 'message' => '{attribute} não pode ser vazio.'],
+            ['state', 'boolean', 'message' => 'Selecione um dos estados.'],
+            ['name', 'trim'],
+            ['name', 'string', 'max' => 50, 'message' => '{attribute} não pode exceder os 50 caracteres.'],
+            ['name', 'unique', 'targetClass' => '\common\models\PaymentMethod', 'message' => 'Este nome já está a ser utilizado.'],
         ];
     }
 
@@ -48,8 +49,15 @@ class PaymentMethod extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Nome',
             'state' => 'Estado',
-            'icon' => 'Icone',
         ];
+    }
+
+    /**
+     * Getter for company state in string
+     */
+    public function getState()
+    {
+        return $this->state == self::STATE_INACTIVE ? "Inativo" : "Ativo";
     }
 
     /**

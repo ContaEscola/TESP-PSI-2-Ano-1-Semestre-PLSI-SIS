@@ -3,41 +3,34 @@
 namespace common\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
-use function PHPUnit\Framework\isNan;
-
 /**
- * This is the model class for table "restaurant".
+ * This is the model class for table "store".
  *
  * @property int $id
- * @property string|null $name
+ * @property string $name
  * @property string $description
  * @property string $phone
  * @property string|null $open_time
  * @property string|null $close_time
  * @property string|null $logo
  * @property string|null $website
- *
- * @property Manager[] $managers
- * @property RestaurantItem[] $restaurantItems
  */
-class Restaurant extends \yii\db\ActiveRecord
+class Store extends \yii\db\ActiveRecord
 {
-
     public $logoFile;
 
-    // Nome do ficheiro de placeholder caso o restaurante não ter logo
+    // Nome do ficheiro de placeholder caso a loja não ter logo
     public $logoPlaceholder = 'logo-placeholder.svg';
-    // Nome do ficheiro de placeholder caso o restaurante ter logo mas não foi possível carregá-lo
+    // Nome do ficheiro de placeholder caso a loja ter logo mas não foi possível carregá-lo
     public $logoPlaceholderOnError = 'logo-placeholder-on-error.svg';
 
     /**
      * Retorna o url do path do logo,
      * caso seja null na BD então retorna [[$this->logoPlaceholder]]
-     * 
+     *
      * @return string Url do path do logo
      */
     public function getLogoPathUrl()
@@ -48,11 +41,11 @@ class Restaurant extends \yii\db\ActiveRecord
         if (is_null($this->logo))
             $pathUrl = '@web/images/' . $this->logoPlaceholder;
         // Se existir logo na DB mas não existir no server então dá o URL do [[$this->placeholder-on-error]]
-        else if (!file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+        else if (!file_exists(Yii::getAlias('@uploadLogoStores/') . $this->logo))
             $pathUrl = '@web/images/' . $this->logoPlaceholderOnError;
         // Se existir logo na DB e no server então dá o URL do logo
         else
-            $pathUrl = '@uploadLogoRestaurantsUrl/' . $this->logo;
+            $pathUrl = '@uploadLogoStoresUrl/' . $this->logo;
 
         return $pathUrl;
     }
@@ -64,13 +57,12 @@ class Restaurant extends \yii\db\ActiveRecord
         $this->open_time = Yii::$app->formatter->asTime($this->open_time);
     }
 
-
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{%restaurant}}';
+        return 'store';
     }
 
     /**
@@ -100,7 +92,7 @@ class Restaurant extends \yii\db\ActiveRecord
 
             [
                 'website', 'string',
-                'max' => 50, 'tooLong' => 'O {attribute} não pode exceder os 75 caracteres.'
+                'max' => 50, 'tooLong' => 'O {attribute} e não pode exceder os 50 caracteres.'
             ],
             [['name'], 'unique', 'message' => "Este {attribute} já está a ser utilizado."],
 
@@ -122,42 +114,10 @@ class Restaurant extends \yii\db\ActiveRecord
             'phone' => 'Nº Telemóvel',
             'open_time' => 'Horário de abertura',
             'close_time' => 'Horário de fecho',
-            'logo' => 'Logo do Restaurante',
-            'logoFile' => 'Logo do Restaurante',
+            'logo' => 'Logo da loja',
+            'logoFile' => 'Logo da loja',
             'website' => 'Website',
         ];
-    }
-
-    /**
-     * Get all the restaurants for dropdowns
-     * @return array
-     */
-    public static function getPossibleRestaurantsForDropdowns()
-    {
-        $possibleRestaurants = self::find()->select(['id', 'name'])->all();
-
-        // Maps the array containing the Restaurants to an associative array of 'id' => 'name'
-        return ArrayHelper::map($possibleRestaurants, 'id', 'name');
-    }
-
-    /**
-     * Gets query for [[Managers]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getManagers()
-    {
-        return $this->hasMany(Manager::class, ['restaurant_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[RestaurantItems]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRestaurantItems()
-    {
-        return $this->hasMany(RestaurantItem::class, ['restaurant_id' => 'id']);
     }
 
     /**
@@ -212,16 +172,16 @@ class Restaurant extends \yii\db\ActiveRecord
 
     /**
      * Uploads [[$this->logoFile]] to the server and assigns [[$this->logo]] to the logo file name
-     * 
+     *
      * @return boolean true whether the upload was successfully
      */
     protected function upload()
     {
-        if (!FileHelper::createDirectory(Yii::getAlias('@uploadLogoRestaurants')))
+        if (!FileHelper::createDirectory(Yii::getAlias('@uploadLogoStores')))
             return false;
 
         $image_name =  $this->name . '_' . date("d-m-Y_H-i") . '.' . $this->logoFile->extension;
-        $image_path = Yii::getAlias('@uploadLogoRestaurants/') . $image_name;
+        $image_path = Yii::getAlias('@uploadLogoStores/') . $image_name;
 
         if ($this->logoFile->saveAs($image_path)) {
             $this->logo = $image_name;
@@ -233,14 +193,14 @@ class Restaurant extends \yii\db\ActiveRecord
 
     /**
      * Deletes the logo from the server if [[$this->logo] != null]
-     * 
+     *
      * @return boolean true whether the logo file was deleted from the server successfully
      */
     public function deleteLogo()
     {
         if (!is_null($this->logo)) {
-            if (file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo)) {
-                if (!unlink(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+            if (file_exists(Yii::getAlias('@uploadLogoStores/') . $this->logo)) {
+                if (!unlink(Yii::getAlias('@uploadLogoStores/') . $this->logo))
                     return false;
             }
         }

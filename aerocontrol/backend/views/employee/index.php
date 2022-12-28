@@ -57,17 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'label' => 'Indicativo do país',
-                'attribute' => 'user_phone_country_code',
-                'value' => function ($model) {
-                    return $model->user->phone_country_code;
-                }
-            ],
-            [
                 'label' => 'Telefone',
                 'attribute' => 'user_phone',
                 'value' => function ($model) {
-                    return $model->user->phone;
+                    return $model->user->phone_country_code. " " .$model->user->phone;
                 }
             ],
             [
@@ -87,6 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => ActionColumn::className(),
+                'template' => '{update} {view}',
                 'urlCreator' => function ($action, Employee $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'employee_id' => $model->employee_id]);
                 }
