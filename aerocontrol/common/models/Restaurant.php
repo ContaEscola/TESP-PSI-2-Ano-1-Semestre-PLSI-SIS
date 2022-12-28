@@ -102,7 +102,7 @@ class Restaurant extends \yii\db\ActiveRecord
 
             [
                 'website', 'string',
-                'max' => 50, 'tooLong' => 'O {attribute} e não pode exceder os 75 caracteres.'
+                'max' => 50, 'tooLong' => 'O {attribute} não pode exceder os 75 caracteres.'
             ],
             [['name'], 'unique', 'message' => "Este {attribute} já está a ser utilizado."],
 
@@ -137,6 +137,18 @@ class Restaurant extends \yii\db\ActiveRecord
         return $fields;
     }
 
+
+    /**
+     * Get all the restaurants for dropdowns
+     * @return array
+     */
+    public static function getPossibleRestaurantsForDropdowns()
+    {
+        $possibleRestaurants = self::find()->select(['id', 'name'])->all();
+
+        // Maps the array containing the Restaurants to an associative array of 'id' => 'name'
+        return ArrayHelper::map($possibleRestaurants, 'id', 'name');
+    }
 
     /**
      * Get all the restaurants for dropdowns
