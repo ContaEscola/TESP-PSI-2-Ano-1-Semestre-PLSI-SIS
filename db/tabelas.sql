@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `restaurant_item` (
 CREATE TABLE IF NOT EXISTS `manager` (
   `manager_id` INT UNSIGNED,
   `restaurant_id` INT(11) UNSIGNED NOT NULL,
+  `status` TINYINT UNSIGNED NOT NULL DEFAULT 1,
   CONSTRAINT `pk_manager_id` PRIMARY KEY(`manager_id`),
   CONSTRAINT `fk_manager_manager_id` FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`),
   CONSTRAINT `fk_manager_restaurant_id` FOREIGN KEY (`restaurant_id`) REFERENCES `restaurant`(`id`)
@@ -179,10 +180,8 @@ CREATE TABLE IF NOT EXISTS `payment_method` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `state` TINYINT(1) NOT NULL,
-  `icon` VARCHAR(50) NOT NULL,
   CONSTRAINT `pk_payment_method` PRIMARY KEY(`id`),
-  CONSTRAINT `uk_name` UNIQUE KEY(`name`),
-  CONSTRAINT `uk_icon` UNIQUE KEY(`icon`)
+  CONSTRAINT `uk_name` UNIQUE KEY(`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -293,4 +292,21 @@ CREATE TABLE IF NOT EXISTS `ticket_message` (
   CONSTRAINT `pk_ticket_message` PRIMARY KEY(`id`),
   CONSTRAINT `fk_ticket_message_support_ticket_id` FOREIGN KEY(`support_ticket_id`) REFERENCES `support_ticket`(`id`),
   CONSTRAINT `uk_photo` UNIQUE KEY(`photo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Estrutura da tabela `store`
+--
+CREATE TABLE IF NOT EXISTS `store` (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `name` VARCHAR(75) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(20) NOT NULL,
+  `open_time` TIME NULL,
+  `close_time` TIME NULL,
+  `logo` VARCHAR(50) NULL,
+  `website` VARCHAR(50) NULL,
+  CONSTRAINT `pk_store_id` PRIMARY KEY(`id`),
+  CONSTRAINT `uk_name` UNIQUE KEY(`name`),
+  CONSTRAINT `uk_logo` UNIQUE KEY(`logo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

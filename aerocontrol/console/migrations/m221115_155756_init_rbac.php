@@ -139,10 +139,6 @@ class m221115_155756_init_rbac extends Migration
         /*
             PaymentMethod Permissions
         */
-        $createPaymentMethod = $auth->createPermission('createPaymentMethod');
-        $createPaymentMethod->description= "Criar método de pagamento";
-        $auth->add($createPaymentMethod);
-
         $updatePaymentMethod = $auth->createPermission('updatePaymentMethod');
         $updatePaymentMethod->description = "Atualizar método de pagamento";
         $auth->add($updatePaymentMethod);
@@ -150,10 +146,6 @@ class m221115_155756_init_rbac extends Migration
         $viewPaymentMethod = $auth->createPermission('viewPaymentMethod');
         $viewPaymentMethod->description = "Visualizar método de pagamento";
         $auth->add($viewPaymentMethod);
-
-        $deletePaymentMethod = $auth->createPermission('deletePaymentMethod');
-        $deletePaymentMethod->description = "Apagar método de pagamento";
-        $auth->add($deletePaymentMethod);
 
         /*
             Client Permissions
@@ -265,6 +257,10 @@ class m221115_155756_init_rbac extends Migration
         $deleteStore = $auth->createPermission('deleteStore');
         $deleteStore->description = "Apagar Loja";
         $auth->add($deleteStore);
+
+        $deleteStoreLogo = $auth->createPermission('deleteStoreLogo');
+        $deleteStoreLogo->description = "Eliminar Logo da Loja";
+        $auth->add($deleteStoreLogo);
 
         /*
             Company Permissions
@@ -494,8 +490,6 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin,$deleteRestaurantItem);
         $auth->addChild($admin,$viewRestaurantItem);
         $auth->addChild($admin,$updateRestaurantItem);
-        $auth->addChild($admin,$createPaymentMethod);
-        $auth->addChild($admin,$deletePaymentMethod);
         $auth->addChild($admin,$deleteClient);
         $auth->addChild($admin,$createManager);
         $auth->addChild($admin,$viewManager);
@@ -505,6 +499,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin,$viewStore);
         $auth->addChild($admin,$updateStore);
         $auth->addChild($admin,$deleteStore);
+        $auth->addChild($admin,$deleteStoreLogo);
         $auth->addChild($admin,$createCompany);
         $auth->addChild($admin,$viewCompany);
         $auth->addChild($admin,$updateCompany);
