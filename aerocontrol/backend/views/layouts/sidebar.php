@@ -65,7 +65,7 @@ use hail812\adminlte\widgets\Menu;
                             'icon' => 'fas fa-solid fa-suitcase-rolling',
                             'label' => 'Perdidos e Achados',
                             'items' => [
-                                ['label' => 'Itens', 'url' => ['lostitem/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
@@ -108,7 +108,7 @@ use hail812\adminlte\widgets\Menu;
                             'label' => 'Perdidos e Achados',
                             'icon' => 'fas fa-solid fa-suitcase-rolling',
                             'items' => [
-                                ['label' => 'Itens', 'url' => ['lostitem/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
