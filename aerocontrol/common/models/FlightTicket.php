@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\base\ErrorException;
+use yii\web\ForbiddenHttpException;
 
 /**
  * This is the model class for table "flight_ticket".
@@ -62,6 +63,25 @@ class FlightTicket extends \yii\db\ActiveRecord
             'flight_id' => 'ID do Voo',
             'payment_method_id' => 'ID do Método de Pagamento',
         ];
+    }
+
+    /**
+     * Verifica se é permitido apagar o ticket
+     * @throws ForbiddenHttpException
+     */
+    public function deleteTicketIsPossible()
+    {
+        if ($this->checkin == true) throw new ForbiddenHttpException("Impossível cancelar o bilhete se o checkin já tiver sido efetuado.");
+        $flightTicketTime = strtotime($this->flight->estimated_departure_date);
+        $day = 60 * 60 * 24;
+        $cancelTicketTime =  $flightTicketTime - ($day * 7);    // data sete dias antes do Voo
+
+        $now = strtotime( date("d-m-Y H:i"));
+
+        // Compara se a data  de possível cancelamento é superior à atual
+        if($cancelTicketTime >= $now){
+            return true;
+        } else throw new ForbiddenHttpException("Impossível cancelar o bilhete sete dias antes do voo, por favor contacte o suporte.");
     }
 
     /**
