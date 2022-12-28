@@ -22,11 +22,11 @@ class ClientRule extends Rule
         if (isset($params['ticket']))
         {
             $client = User::findOne($params['ticket']->client_id);
-            return $client == $user;
+            return $client->id == $user;
         }
         if (isset($params['user']))
         {
-            return $params['user'] == $user;
+            return $params['user']->id == $user;
         }
         if (isset($params['supportTicket']))
         {

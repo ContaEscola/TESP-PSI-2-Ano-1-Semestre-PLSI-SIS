@@ -45,15 +45,7 @@ class FlightticketController extends ActiveController
         $flightTicket = $class->find()->where(['flight_ticket_id'=>$id])->one();
 
         if ($flightTicket){
-
-            $flightTicketTime = strtotime($flightTicket->flight->estimated_departure_date);
-            $day = 60 * 60 * 24;
-            $cancelTicketTime =  $flightTicketTime - ($day * 7);    // data sete dias antes do Voo
-
-            $now = strtotime( date("d-m-Y H:i"));
-
-            // Compara se a data  de possível cancelamento é superior à atual
-            if($cancelTicketTime >= $now){
+            if($flightTicket->deleteTicketIsPossible()){
                 if ($flightTicket->deleteTicket()){
                     $array['message'] = "Ticket eliminado.";
                     return $array;
