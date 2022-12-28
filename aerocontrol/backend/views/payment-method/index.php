@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\PaymentMethodSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Payment Methods';
+$this->title = 'Métodos de Pagamentos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="payment-method-index">
