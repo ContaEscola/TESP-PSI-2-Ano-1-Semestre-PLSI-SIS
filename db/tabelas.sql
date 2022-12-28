@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `description` VARCHAR(100) NOT NULL,
   `state` ENUM('Entregue','Por entregar','Perdido') NOT NULL DEFAULT 'Por entregar',
-  `image` VARCHAR(75) NOT NULL,
+  `image` VARCHAR(75) NULL,
   CONSTRAINT `pk_lost_item_id` PRIMARY KEY(`id`),
   CONSTRAINT `uk_image` UNIQUE KEY(`image`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

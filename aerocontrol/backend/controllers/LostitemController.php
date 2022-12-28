@@ -2,20 +2,18 @@
 
 namespace backend\controllers;
 
-use common\models\Store;
-use common\models\StoreSearch;
-use yii\filters\AccessControl;
+use common\models\LostItem;
+use common\models\LostItemSearch;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use yii\helpers\FileHelper;
 
 /**
- * StoreController implements the CRUD actions for Store model.
+ * LostItemController implements the CRUD actions for LostItem model.
  */
-class StoreController extends Controller
+class LostItemController extends Controller
 {
     /**
      * @inheritDoc
@@ -37,32 +35,32 @@ class StoreController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewStore'],
+                            'roles' => ['viewLostItem'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewStore'],
+                            'roles' => ['viewLostItem'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createStore'],
+                            'roles' => ['createLostItem'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateStore'],
+                            'roles' => ['updateLostItem'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteStore'],
+                            'roles' => ['deleteLostItem'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete-logo'],
-                            'roles' => ['deleteStoreLogo'],
+                            'roles' => ['deleteLostItemLogo'],
                         ],
                     ],
                 ],
@@ -71,15 +69,14 @@ class StoreController extends Controller
     }
 
     /**
-     * Lists all Store models.
+     * Lists all LostItem models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new StoreSearch();
+        $searchModel = new LostItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -88,7 +85,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Displays a single Store model.
+     * Displays a single LostItem model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -101,19 +98,17 @@ class StoreController extends Controller
     }
 
     /**
-     * Creates a new Store model.
+     * Creates a new LostItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Store();
+        $model = new LostItem();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                if ($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -125,7 +120,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Updates an existing Store model.
+     * Updates an existing LostItem model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -145,7 +140,7 @@ class StoreController extends Controller
     }
 
     /**
-     * Deletes an existing Store model.
+     * Deletes an existing LostItem model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -154,16 +149,16 @@ class StoreController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
     }
 
-
-    //remover logo da loja
+    //remover imagem do lost item
     public function actionDeleteLogo($id)
     {
         $model = $this->findModel($id);
-        if ($model->deleteLogo())
-            $model->logo = null;
+        if ($model->deleteImage())
+            $model->image = null;
 
         if (!$model->save())
             Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
@@ -172,16 +167,15 @@ class StoreController extends Controller
     }
 
     /**
-     * Finds the Store model based on its primary key value.
+     * Finds the LostItem model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Store the loaded model
+     * @return LostItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-
     protected function findModel($id)
     {
-        if (($model = Store::findOne(['id' => $id])) !== null) {
+        if (($model = LostItem::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
