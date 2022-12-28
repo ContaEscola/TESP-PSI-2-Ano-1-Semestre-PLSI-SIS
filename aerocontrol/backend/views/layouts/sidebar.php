@@ -112,7 +112,7 @@ use hail812\adminlte\widgets\Menu;
                                 ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
-                        ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user'],
+                        ['label' => 'Clientes', 'url' => ['client/index'], 'icon' => 'fas fa-solid fa-user'],
                         ['label' => 'Métodos de Pagamento', 'url' => ['payment-method/index'], 'icon' => 'fas fa-solid fa-credit-card'],
                     ],
                 ]);
