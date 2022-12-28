@@ -13,5 +13,5 @@ Yii::setAlias('@uploadLogoRestaurants', '@uploadLogos/restaurants');
 Yii::setAlias('@uploadLogoRestaurantsUrl', '@uploadLogosUrl/restaurants');
 Yii::setAlias('@uploadLogoStores', '@uploadLogos/stores');
 Yii::setAlias('@uploadLogoStoresUrl', '@uploadLogosUrl/stores');
-Yii::setAlias('@uploadLostItems', '@uploads/lostitems');
-Yii::setAlias('@uploadLostItemsUrl', '@uploadsUrl/lostitems');
+Yii::setAlias('@uploadLostItems', '@uploads/lost-items');
+Yii::setAlias('@uploadLostItemsUrl', '@uploadsUrl/lost-items');

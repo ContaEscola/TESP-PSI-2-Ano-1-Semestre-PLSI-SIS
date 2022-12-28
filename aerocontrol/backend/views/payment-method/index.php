@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\PaymentMethodSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Payment Methods';
+$this->title = 'Métodos de Pagamentos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="payment-method-index">
@@ -40,11 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class' => ActionColumn::className(),
                 'template' => '{update}',
-                'buttons'=>[
+                'buttons' => [
                     'update' => function ($url, $model) {
-                        if($model->getState() == "Ativo") $text = 'Desativar';
+                        if ($model->getState() == "Ativo") $text = 'Desativar';
                         else $text = 'Ativar';
-                        return Html::a($text, ['update','id'=>$model->id], ['class' => 'btn btn-primary']);
+                        return Html::a($text, ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
                     },
                 ],
             ],

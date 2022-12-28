@@ -65,17 +65,17 @@ use hail812\adminlte\widgets\Menu;
                             'icon' => 'fas fa-solid fa-suitcase-rolling',
                             'label' => 'Perdidos e Achados',
                             'items' => [
-                                ['label' => 'Itens', 'url' => ['lostitem/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
-                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['paymentmethod/index']],
+                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['payment-method/index']],
                         [
                             'label' => 'Restaurantes',
                             'icon' => 'fas fa-solid fa-utensils',
                             'items' => [
-                                ['label' => 'Restaurantes', 'url' => ['restaurant/index'],'iconStyle' => 'far'],
-                                ['label' => 'Gerentes', 'url' => ['manager/index'],'iconStyle' => 'far'],
+                                ['label' => 'Restaurantes', 'url' => ['restaurant/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Gerentes', 'url' => ['manager/index'], 'iconStyle' => 'far'],
                             ]
                         ],
                         ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
@@ -87,8 +87,8 @@ use hail812\adminlte\widgets\Menu;
                 echo Menu::widget([
                     'items' => [
 
-                        ['label' => 'Restaurantes', 'url' => ['/restaurant/view'], 'icon' => 'fas fa-house-user'],
-                        ['label' => 'Ementa', 'url' => ['/restaurantitem/index'], 'icon' => 'fas fa-solid fa-utensils'],
+                        ['label' => 'Restaurantes', 'url' => ['restaurant/view'], 'icon' => 'fas fa-house-user'],
+                        ['label' => 'Ementa', 'url' => ['restaurantitem/index'], 'icon' => 'fas fa-solid fa-utensils'],
                     ],
                 ]);
             }
@@ -99,21 +99,21 @@ use hail812\adminlte\widgets\Menu;
                             'label' => 'Aeroporto',
                             'icon' => 'fas fa-solid fa-plane',
                             'items' => [
-                                ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Voos', 'url' => ['flight/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aeroportos', 'url' => ['airport/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aviões', 'url' => ['airplane/index'], 'iconStyle' => 'far'],
                             ]
                         ],
                         [
                             'label' => 'Perdidos e Achados',
                             'icon' => 'fas fa-solid fa-suitcase-rolling',
                             'items' => [
-                                ['label' => 'Itens', 'url' => ['/lostitem/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
                         ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user'],
-                        ['label' => 'Métodos de Pagamento', 'url' => ['/paymentmethod/index'], 'icon' => 'fas fa-solid fa-credit-card'],
+                        ['label' => 'Métodos de Pagamento', 'url' => ['payment-method/index'], 'icon' => 'fas fa-solid fa-credit-card'],
                     ],
                 ]);
             } ?>

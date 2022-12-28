@@ -20,7 +20,8 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
 
     <?= $form->field($model, 'state')->dropDownList($model->POSSIBLE_STATES_FOR_DROPDOWN, [
-        'class' => 'form-control'
+        'class' => 'form-control',
+        'custom' => true
     ]) ?>
 
     <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [

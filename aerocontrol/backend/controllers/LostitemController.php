@@ -4,15 +4,16 @@ namespace backend\controllers;
 
 use common\models\LostItem;
 use common\models\LostItemSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LostitemController implements the CRUD actions for LostItem model.
+ * LostItemController implements the CRUD actions for LostItem model.
  */
-class LostitemController extends Controller
+class LostItemController extends Controller
 {
     /**
      * @inheritDoc
@@ -158,10 +159,11 @@ class LostitemController extends Controller
         $model = $this->findModel($id);
         if ($model->deleteImage())
             $model->image = null;
-        var_dump($model);
-        if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
-        else var_dump($model->errors);
+
+        if (!$model->save())
+            Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**

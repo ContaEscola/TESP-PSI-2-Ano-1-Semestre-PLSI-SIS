@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="lost-item-index">
 
     <p>
-        <?= Html::a('Criar item Perdidos e achados', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar Item', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, LostItem $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

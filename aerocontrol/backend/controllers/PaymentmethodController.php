@@ -11,9 +11,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PaymentmethodController implements the CRUD actions for PaymentMethod model.
+ * PaymentMethodController implements the CRUD actions for PaymentMethod model.
  */
-class PaymentmethodController extends Controller
+class PaymentMethodController extends Controller
 {
     /**
      * @inheritDoc
@@ -98,7 +98,7 @@ class PaymentmethodController extends Controller
     {
         $model = $this->findModel($id);
 
-        if($model->state == 1) $model->state = 0;
+        if ($model->state == 1) $model->state = 0;
         else $model->state = 1;
 
         if ($model->save()) {
