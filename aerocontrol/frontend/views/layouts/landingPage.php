@@ -24,7 +24,7 @@ AppAsset::register($this);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <script type="module" src="<?= Url::to('@web/js/flight-tickets.js') ?>"></script>
 
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -103,6 +103,13 @@ AppAsset::register($this);
                                                         </svg>
                                                     </span>
                                                 </a>
+                                            </li>
+                                            <li class="dropdown-menu__item">
+                                                <?= Html::a('Meus Bilhetes' . '<span aria-hidden="true">
+                                                        <svg class="icon dropdown-link__icon">
+                                                            <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
+                                                        </svg>
+                                                    </span>', ['flightticket/index'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                             </li>
                                             <li class="dropdown-menu__item">
                                                 <?= Html::a('Logout' . '<span aria-hidden="true">
