@@ -25,12 +25,12 @@ class AuthController extends Controller
         return $behaviors;
     }
 
-    protected function verbs()
-    {
-        return [
-            'login' => ['POST'],
-        ];
-    }
+    // protected function verbs()
+    // {
+    //     return [
+    //         'login' => ['POST'],
+    //     ];
+    // }
 
     public function auth($username, $password)
     {
