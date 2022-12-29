@@ -106,7 +106,7 @@ class Flight extends \yii\db\ActiveRecord
             [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['price', 'distance'], 'number', 'message' => '{attribute} tem que ser um número.'],
 
-            ['terminal', 'string', 'max' => 30, 'message' => '{attribute} não pode exceder os 30 caracteres.'],
+            ['terminal', 'string', 'max' => 3, 'message' => '{attribute} não pode exceder os 3 caracteres.'],
 
             [
                 ['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'],
