@@ -101,15 +101,16 @@ class Flight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'trim'],
+            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'trim'],
+            [['departure_date', 'arrival_date'], 'default', 'value' => null],
             [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['price', 'distance'], 'number', 'message' => '{attribute} tem que ser um número.'],
 
             ['terminal', 'string', 'max' => 30, 'message' => '{attribute} não pode exceder os 30 caracteres.'],
 
             [
-                ['estimated_departure_date', 'estimated_arrival_date'],
-                'datetime',
+                ['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'],
+                'datetime', 'message' => "{attribute} tem o formato errado."
             ],
 
             ['estimated_arrival_date', 'compareEstimatedDepartureDate'],
