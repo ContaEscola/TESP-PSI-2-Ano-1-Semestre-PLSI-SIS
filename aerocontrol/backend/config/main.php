@@ -64,7 +64,6 @@ return [
                 ],
                 [
                     'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight-ticket',
-                    'pluralize' => false,
                     'extraPatterns' => [
                         'GET my-tickets' => 'my-tickets'  // Faz a actionMytickets
                     ],
