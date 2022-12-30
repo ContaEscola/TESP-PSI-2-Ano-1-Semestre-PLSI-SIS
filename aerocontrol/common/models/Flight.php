@@ -101,16 +101,16 @@ class Flight extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'trim'],
+            [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'trim'],
+            [['departure_date', 'arrival_date'], 'default', 'value' => null],
             [['terminal', 'estimated_departure_date', 'estimated_arrival_date', 'price', 'distance', 'state', 'discount_percentage', 'origin_airport_id', 'arrival_airport_id', 'airplane_id'], 'required', 'message' => "{attribute} não pode ser vazio."],
-            [['estimated_departure_date', 'estimated_arrival_date'], 'string', 'message' => "{attribute} tem formato inválido."],
             [['price', 'distance'], 'number', 'message' => '{attribute} tem que ser um número.'],
 
-            ['terminal', 'string', 'max' => 30, 'message' => '{attribute} não pode exceder os 30 caracteres.'],
+            ['terminal', 'string', 'max' => 3, 'message' => '{attribute} não pode exceder os 3 caracteres.'],
 
             [
-                ['estimated_departure_date', 'estimated_arrival_date'],
-                'datetime',
+                ['estimated_departure_date', 'estimated_arrival_date', 'departure_date', 'arrival_date'],
+                'datetime', 'message' => "{attribute} tem o formato errado."
             ],
 
             ['estimated_arrival_date', 'compareEstimatedDepartureDate'],
@@ -204,7 +204,6 @@ class Flight extends \yii\db\ActiveRecord
         $this->estimated_arrival_date = Yii::$app->formatter->asDatetime($this->estimated_arrival_date, 'php:Y-m-d H:i');
         $this->departure_date = Yii::$app->formatter->asDatetime($this->departure_date, 'php:Y-m-d H:i');
         $this->arrival_date = Yii::$app->formatter->asDatetime($this->arrival_date, 'php:Y-m-d H:i');
-
 
         return true;
     }
