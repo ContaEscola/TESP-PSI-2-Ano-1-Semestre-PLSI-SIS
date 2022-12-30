@@ -1,4 +1,7 @@
 <?php
+
+use yii\web\Response;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -11,10 +14,17 @@ return [
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
-    'modules' => [],
+    'modules' => [
+        'api' => [
+            'class' => 'backend\modules\api\ModuleAPI',
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -41,7 +51,34 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/restaurant'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/store'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/auth',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST login' => 'login'  // Faz a actionLogin
+                    ],
+                ],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight-ticket',
+                    'extraPatterns' => [
+                        'GET my-tickets' => 'my-tickets'  // Faz a actionMytickets
+                    ],
+                ],
+            ],
+        ],
+
+        'response' => [
+            'formatters' => [
+                Response::FORMAT_JSON => [
+                    'class' => 'yii\web\JsonResponseFormatter',
+                    'prettyPrint' => YII_DEBUG,
+                    'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT
+                ]
+            ]
         ],
 
         'formatter' => [

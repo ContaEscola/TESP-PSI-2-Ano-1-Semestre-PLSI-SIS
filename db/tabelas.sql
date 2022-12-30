@@ -93,6 +93,23 @@ CREATE TABLE IF NOT EXISTS `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Estrutura da tabela `store`
+--
+CREATE TABLE IF NOT EXISTS `store` (
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `name` VARCHAR(75) NOT NULL,
+  `description` VARCHAR(255) NOT NULL,
+  `phone` VARCHAR(20) NOT NULL,
+  `open_time` TIME NULL,
+  `close_time` TIME NULL,
+  `logo` VARCHAR(50) NULL,
+  `website` VARCHAR(50) NULL,
+  CONSTRAINT `pk_store_id` PRIMARY KEY(`id`),
+  CONSTRAINT `uk_name` UNIQUE KEY(`name`),
+  CONSTRAINT `uk_logo` UNIQUE KEY(`logo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
 -- Estrutura da tabela `restaurant`
 --
 CREATE TABLE IF NOT EXISTS `restaurant` (
@@ -234,6 +251,8 @@ CREATE TABLE IF NOT EXISTS `passenger` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `gender` ENUM('Masculino','Feminino','Outro') NOT NULL,
+  `extra_baggage` TINYINT(1) NOT NULL,
+  `seat` INT UNSIGNED NOT NULL,
   `flight_ticket_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_passenger_id` PRIMARY KEY (`id`),
   CONSTRAINT `fk_passenger_flight_ticket_id` FOREIGN KEY(`flight_ticket_id`) REFERENCES `flight_ticket`(`flight_ticket_id`)
@@ -292,21 +311,4 @@ CREATE TABLE IF NOT EXISTS `ticket_message` (
   CONSTRAINT `pk_ticket_message` PRIMARY KEY(`id`),
   CONSTRAINT `fk_ticket_message_support_ticket_id` FOREIGN KEY(`support_ticket_id`) REFERENCES `support_ticket`(`id`),
   CONSTRAINT `uk_photo` UNIQUE KEY(`photo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Estrutura da tabela `store`
---
-CREATE TABLE IF NOT EXISTS `store` (
-  `id` INT UNSIGNED AUTO_INCREMENT,
-  `name` VARCHAR(75) NOT NULL,
-  `description` VARCHAR(255) NOT NULL,
-  `phone` VARCHAR(20) NOT NULL,
-  `open_time` TIME NULL,
-  `close_time` TIME NULL,
-  `logo` VARCHAR(50) NULL,
-  `website` VARCHAR(50) NULL,
-  CONSTRAINT `pk_store_id` PRIMARY KEY(`id`),
-  CONSTRAINT `uk_name` UNIQUE KEY(`name`),
-  CONSTRAINT `uk_logo` UNIQUE KEY(`logo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

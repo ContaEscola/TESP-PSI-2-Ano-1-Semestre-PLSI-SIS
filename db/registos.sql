@@ -121,3 +121,18 @@ INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
 (10, 'Mala de viagem azul da ITACA de 20kg', 'Por entregar', '19-12-2022_20-14-19.jpeg'),
 (11, 'Mochila de escola da Nike azul.', 'Entregue', '19-12-2022_20-15-13.jpg'),
 (12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
+
+INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
+(1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
+(2, 'Big Tasty', 'Big Tasty_15-12-2022_20-49.png', 1, 4),
+(3, 'CBO', 'CBO_15-12-2022_20-49.png', 1, 4),
+(4, 'Chicken McNuggets', 'Chicken McNuggets_15-12-2022_20-49.png', 1, 4),
+(5, 'Brutal Bacon', 'Brutal Bacon_15-12-2022_20-49.png', 1, 1),
+(6, 'King Chicken', 'King Chicken_15-12-2022_20-49.png', 1, 1),
+(7, 'Whopper', 'Whopper_15-12-2022_20-49.png', 1, 1),
+(8, 'Big King XXL', 'Big King XXL_15-12-2022_20-49.png', 1, 1),
+(9, 'Buger Double', 'Buger Double_15-12-2022_20-49.png', 1, 3),
+(10, 'BBC', 'BBC_15-12-2022_20-49.png', 1, 3),
+(11, 'Iced Latte', 'Iced Latte_15-12-2022_20-49.png', 1, 5),
+(12, 'Caffe Americano', 'Caffe Americano_15-12-2022_20-49.png', 1, 5);
+
