@@ -52,19 +52,21 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/restaurant'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/store'],
-                ['class' => 'yii\rest\UrlRule','controller' => 'api/user'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/restaurant'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/store'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
                 [
-                    'class' => 'yii\rest\UrlRule','controller' => 'api/auth',
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/auth',
+                    'pluralize' => false,
                     'extraPatterns' => [
                         'POST login' => 'login'  // Faz a actionLogin
                     ],
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule','controller' => 'api/flightticket',
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight-ticket',
+                    'pluralize' => false,
                     'extraPatterns' => [
-                        'GET mytickets' => 'mytickets'  // Faz a actionMytickets
+                        'GET my-tickets' => 'my-tickets'  // Faz a actionMytickets
                     ],
                 ],
             ],

@@ -205,7 +205,6 @@ class Flight extends \yii\db\ActiveRecord
         $this->departure_date = Yii::$app->formatter->asDatetime($this->departure_date, 'php:Y-m-d H:i');
         $this->arrival_date = Yii::$app->formatter->asDatetime($this->arrival_date, 'php:Y-m-d H:i');
 
-
         return true;
     }
 

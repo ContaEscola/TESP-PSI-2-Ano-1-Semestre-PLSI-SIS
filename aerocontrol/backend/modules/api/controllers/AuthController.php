@@ -25,12 +25,12 @@ class AuthController extends Controller
         return $behaviors;
     }
 
-    // protected function verbs()
-    // {
-    //     return [
-    //         'login' => ['POST'],
-    //     ];
-    // }
+    protected function verbs()
+    {
+        return [
+            'login' => ['POST'],
+        ];
+    }
 
     public function auth($username, $password)
     {
@@ -39,7 +39,7 @@ class AuthController extends Controller
             $this->user = $user;
             return $user;
         }
-        throw new ForbiddenHttpException('No authentication.'); //403
+        throw new ForbiddenHttpException('No authentication'); //403
     }
 
 

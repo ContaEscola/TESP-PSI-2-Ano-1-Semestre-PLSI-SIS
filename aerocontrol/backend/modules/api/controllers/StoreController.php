@@ -17,4 +17,11 @@ class StoreController extends ActiveController
         unset($actions['delete']);
         return $actions;
     }
+
+    protected function verbs()
+    {
+        return [
+            'index' => ['GET'],
+        ];
+    }
 }

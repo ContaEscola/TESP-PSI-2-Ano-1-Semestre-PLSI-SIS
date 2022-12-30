@@ -151,18 +151,6 @@ class Restaurant extends \yii\db\ActiveRecord
     }
 
     /**
-     * Get all the restaurants for dropdowns
-     * @return array
-     */
-    public static function getPossibleRestaurantsForDropdowns()
-    {
-        $possibleRestaurants = self::find()->select(['id', 'name'])->all();
-
-        // Maps the array containing the Restaurants to an associative array of 'id' => 'name'
-        return ArrayHelper::map($possibleRestaurants, 'id', 'name');
-    }
-
-    /**
      * Gets query for [[Managers]].
      *
      * @return \yii\db\ActiveQuery
