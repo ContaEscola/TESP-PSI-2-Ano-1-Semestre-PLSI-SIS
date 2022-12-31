@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Manager;
+use hail812\adminlte\widgets\SmallBox;
 use yii\helpers\Url;
 
 $this->title = 'Dashboard';
@@ -9,7 +11,7 @@ $this->title = 'Dashboard';
     <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) : ?>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Voos',
                     'icon' => 'fas fa-plane-departure',
@@ -17,7 +19,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Aeroportos',
                     'icon' => 'fas fa-plane-arrival',
@@ -25,7 +27,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Aviões',
                     'icon' => 'fas fa-plane',
@@ -33,7 +35,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Companhias',
                     'icon' => 'fas fa-building',
@@ -43,7 +45,7 @@ $this->title = 'Dashboard';
         </div>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Trabalhadores',
                     'icon' => 'fas fa-user',
@@ -51,7 +53,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Clientes',
                     'icon' => 'fas fa-user',
@@ -59,7 +61,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
@@ -67,7 +69,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
@@ -77,7 +79,7 @@ $this->title = 'Dashboard';
         </div>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Métodos de pagamento',
 
@@ -86,7 +88,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Restaurante',
                     'icon' => 'fas fa-utensils',
@@ -94,7 +96,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Lojas',
                     'icon' => 'fas fa-shopping-cart',
@@ -102,7 +104,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Server Log',
                     'icon' => 'fas fa-info',
@@ -115,7 +117,7 @@ $this->title = 'Dashboard';
     <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['employee'])) : ?>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Voos',
                     'icon' => 'fas fa-plane-departure',
@@ -123,7 +125,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Aeroportos',
                     'icon' => 'fas fa-plane-arrival',
@@ -131,7 +133,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Aviões',
                     'icon' => 'fas fa-plane',
@@ -141,7 +143,7 @@ $this->title = 'Dashboard';
         </div>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Clientes',
                     'icon' => 'fas fa-user',
@@ -149,7 +151,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
@@ -157,7 +159,7 @@ $this->title = 'Dashboard';
                 ]) ?>
             </div>
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
@@ -167,7 +169,7 @@ $this->title = 'Dashboard';
         </div>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Métodos de pagamento',
 
@@ -184,14 +186,23 @@ $this->title = 'Dashboard';
         </div>
     <?php endif; ?>
 
-    <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) : ?>
+    <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) :
+        $manager = Manager::find()->where(['manager_id'=>Yii::$app->user->getId()])->one();?>
         <div class="row">
             <div class="col">
-                <?= \hail812\adminlte\widgets\SmallBox::widget([
+                <?= SmallBox::widget([
                     'title' => '150',
                     'text' => 'Restaurante',
                     'icon' => 'fas fa-utensils',
-                    'linkUrl' => Url::to(["/restaurant/index"])
+                    'linkUrl' => Url::to(["/restaurant/view?id=" . $manager->restaurant_id])
+                ]) ?>
+            </div>
+            <div class="col">
+                <?= SmallBox::widget([
+                    'title' => '150',
+                    'text' => 'Ementa',
+                    'icon' => 'fas fa-utensils',
+                    'linkUrl' => Url::to(["/restaurantitem/index?restaurant_id=" . $manager->restaurant_id])
                 ]) ?>
             </div>
         </div>

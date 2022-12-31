@@ -132,8 +132,8 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 CREATE TABLE IF NOT EXISTS `restaurant_item` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `item` VARCHAR(100) NOT NULL,
-  `image` VARCHAR(50) NOT NULL,
-  `state` TINYINT(1) NOT NULL,
+  `image` VARCHAR(50) NULL,
+  `state` TINYINT(1) NOT NULL DEFAULT 1,
   `restaurant_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_restaurant_item_id` PRIMARY KEY(`id`),
   CONSTRAINT `fk_restaurant_item_restaurant_id` FOREIGN KEY(`restaurant_id`) REFERENCES `restaurant`(`id`)
