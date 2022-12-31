@@ -32,7 +32,7 @@ class Passenger extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'gender', 'flight_ticket_id','extra_baggage'], 'required'],
+            [['name', 'gender', 'flight_ticket_id'], 'required'],
             [['name', 'gender'], 'trim'],
 
             ['gender', 'in', 'range' => [

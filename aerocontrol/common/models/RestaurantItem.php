@@ -68,15 +68,20 @@ class RestaurantItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item', 'state'], 'required', 'message' => "{attribute} não pode ser vazio."],
             [['image', 'item'], 'trim'],
+            [['item', 'state'], 'required', 'message' => "{attribute} não pode ser vazio."],
+
             ['image', 'default', 'value' => null],
-            ['restaurant_id', 'integer'],
+            ['image', 'string', 'max' => 50, 'tooLong' => 'O {attribute} não pode exceder os 50 caracteres.'],
+
             ['state', 'boolean'],
             ['state', 'default', 'value' => 1],
-            ['item', 'string', 'max' => 100, 'tooLong' => 'O {attribute} e não pode exceder os 100 caracteres.'],
-            ['image', 'string', 'max' => 50, 'tooLong' => 'O {attribute} e não pode exceder os 50 caracteres.'],
+
+            ['item', 'string', 'max' => 100, 'tooLong' => 'O {attribute} não pode exceder os 100 caracteres.'],
+
+            ['restaurant_id', 'integer'],
             ['restaurant_id', 'exist', 'skipOnError' => true, 'targetClass' => Restaurant::class, 'targetAttribute' => ['restaurant_id' => 'id']],
+
             ['imageFile', 'image', 'notImage' => '{file} não é uma imagem.'],
         ];
     }
