@@ -86,12 +86,12 @@ use hail812\adminlte\widgets\Menu;
                 ]);
             }
             if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) {
-                $manager = Manager::find()->where(['manager_id'=>Yii::$app->user->getId()])->one();
+                $manager = Manager::find()->where(['manager_id' => Yii::$app->user->getId()])->one();
                 echo Menu::widget([
                     'items' => [
 
-                        ['label' => 'Restaurante', 'url' => ['/restaurant/view?id=' . $manager->restaurant_id], 'icon' => 'fas fa-house-user'],
-                        ['label' => 'Ementa', 'url' => ['/restaurantitem/index?restaurant_id=' . $manager->restaurant_id], 'icon' => 'fas fa-solid fa-utensils'],
+                        ['label' => 'Restaurante', 'url' => ['restaurant/view?id=' . $manager->restaurant_id], 'icon' => 'fas fa-house-user'],
+                        ['label' => 'Ementa', 'url' => ['restaurant-item/index?restaurant_id=' . $manager->restaurant_id], 'icon' => 'fas fa-solid fa-utensils'],
                     ],
                 ]);
             }

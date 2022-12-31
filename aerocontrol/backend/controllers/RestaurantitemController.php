@@ -14,9 +14,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * RestaurantitemController implements the CRUD actions for RestaurantItem model.
+ * RestaurantItemController implements the CRUD actions for RestaurantItem model.
  */
-class RestaurantitemController extends Controller
+class RestaurantItemController extends Controller
 {
     /**
      * @inheritDoc
@@ -27,7 +27,7 @@ class RestaurantitemController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -39,7 +39,7 @@ class RestaurantitemController extends Controller
                             'allow' => true,
                             'actions' => ['index'],
                             'roles' => ['viewRestaurantItem'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])];
                             },
                         ],
@@ -47,7 +47,7 @@ class RestaurantitemController extends Controller
                             'allow' => true,
                             'actions' => ['view'],
                             'roles' => ['viewRestaurantItem'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
@@ -55,7 +55,7 @@ class RestaurantitemController extends Controller
                             'allow' => true,
                             'actions' => ['create'],
                             'roles' => ['createRestaurantItem'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])];
                             },
                         ],
@@ -63,7 +63,7 @@ class RestaurantitemController extends Controller
                             'allow' => true,
                             'actions' => ['update'],
                             'roles' => ['updateRestaurantItem'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
@@ -71,7 +71,7 @@ class RestaurantitemController extends Controller
                             'allow' => true,
                             'actions' => ['delete'],
                             'roles' => ['deleteRestaurantItem'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
@@ -79,7 +79,7 @@ class RestaurantitemController extends Controller
                             'allow' => true,
                             'actions' => ['delete-logo'],
                             'roles' => ['deleteRestaurantItemLogo'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
@@ -176,7 +176,7 @@ class RestaurantitemController extends Controller
         $restaurant_id = $model->restaurant_id;
         $model->delete();
 
-        return $this->redirect(['index','restaurant_id'=>$restaurant_id]);
+        return $this->redirect(['index', 'restaurant_id' => $restaurant_id]);
     }
 
     //remover imagem do item do restaurante
@@ -185,9 +185,11 @@ class RestaurantitemController extends Controller
         $model = $this->findModel($id);
         if ($model->deleteImage())
             $model->image = null;
-        if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
-        else return $this->redirect(['view', 'id' => $model->id]);
+
+        if (!$model->save())
+            Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**
