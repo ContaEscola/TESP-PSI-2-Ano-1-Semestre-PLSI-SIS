@@ -41,7 +41,7 @@ class m221115_155756_init_rbac extends Migration
             Admin Permissions
         */
         $createAdmin = $auth->createPermission('createAdmin');
-        $createAdmin->description= "Criar Admin";
+        $createAdmin->description = "Criar Admin";
         $auth->add($createAdmin);
 
         $updateAdmin = $auth->createPermission('updateAdmin');
@@ -60,7 +60,7 @@ class m221115_155756_init_rbac extends Migration
             Flight Permissions
         */
         $createFlight = $auth->createPermission('createFlight');
-        $createFlight->description= "Criar voo";
+        $createFlight->description = "Criar voo";
         $auth->add($createFlight);
 
         $updateFlight = $auth->createPermission('updateFlight');
@@ -75,7 +75,7 @@ class m221115_155756_init_rbac extends Migration
             LostItems Permissions
         */
         $createLostItem = $auth->createPermission('createLostItem');
-        $createLostItem->description= "Criar item dos perdidos e achados";
+        $createLostItem->description = "Criar item dos perdidos e achados";
         $auth->add($createLostItem);
 
         $updateLostItem = $auth->createPermission('updateLostItem');
@@ -98,7 +98,7 @@ class m221115_155756_init_rbac extends Migration
             SupportTicket Messages Permissions
         */
         $createMessage = $auth->createPermission('createMessage');
-        $createMessage->description= "Criar Messagem";
+        $createMessage->description = "Criar Messagem";
         $auth->add($createMessage);
 
         $updateMessage = $auth->createPermission('updateMessage');
@@ -117,7 +117,7 @@ class m221115_155756_init_rbac extends Migration
             Airplane Permissions
         */
         $createAirplane = $auth->createPermission('createAirplane');
-        $createAirplane->description= "Criar Avião";
+        $createAirplane->description = "Criar Avião";
         $auth->add($createAirplane);
 
         $updateAirplane = $auth->createPermission('updateAirplane');
@@ -132,7 +132,7 @@ class m221115_155756_init_rbac extends Migration
             Airport Permissions
         */
         $createAirport = $auth->createPermission('createAirport');
-        $createAirport->description= "Criar Aeroporto";
+        $createAirport->description = "Criar Aeroporto";
         $auth->add($createAirport);
 
         $updateAirport = $auth->createPermission('updateAirport');
@@ -174,7 +174,7 @@ class m221115_155756_init_rbac extends Migration
             Ticket Permissions
         */
         $createTicket = $auth->createPermission('createTicket');
-        $createTicket->description= "Criar bilhete de voo";
+        $createTicket->description = "Criar bilhete de voo";
         $auth->add($createTicket);
 
         $updateTicket = $auth->createPermission('updateTicket');
@@ -189,7 +189,7 @@ class m221115_155756_init_rbac extends Migration
             Restaurant Permissions
         */
         $createRestaurant = $auth->createPermission('createRestaurant');
-        $createRestaurant->description= "Criar Restaurante";
+        $createRestaurant->description = "Criar Restaurante";
         $auth->add($createRestaurant);
 
         $updateRestaurant = $auth->createPermission('updateRestaurant');
@@ -212,7 +212,7 @@ class m221115_155756_init_rbac extends Migration
             RestaurantItem Permissions
         */
         $createRestaurantItem = $auth->createPermission('createRestaurantItem');
-        $createRestaurantItem->description= "Criar item da ementa";
+        $createRestaurantItem->description = "Criar item da ementa";
         $auth->add($createRestaurantItem);
 
         $updateRestaurantItem = $auth->createPermission('updateRestaurantItem');
@@ -235,7 +235,7 @@ class m221115_155756_init_rbac extends Migration
             Manager Permissions
         */
         $createManager = $auth->createPermission('createManager');
-        $createManager->description= "Criar gerente do restaurante";
+        $createManager->description = "Criar gerente do restaurante";
         $auth->add($createManager);
 
         $updateManager = $auth->createPermission('updateManager');
@@ -254,7 +254,7 @@ class m221115_155756_init_rbac extends Migration
             Store Permissions
         */
         $createStore = $auth->createPermission('createStore');
-        $createStore->description= "Criar Loja";
+        $createStore->description = "Criar Loja";
         $auth->add($createStore);
 
         $updateStore = $auth->createPermission('updateStore');
@@ -277,7 +277,7 @@ class m221115_155756_init_rbac extends Migration
             Company Permissions
         */
         $createCompany = $auth->createPermission('createCompany');
-        $createCompany->description= "Criar companhia";
+        $createCompany->description = "Criar companhia";
         $auth->add($createCompany);
 
         $updateCompany = $auth->createPermission('updateCompany');
@@ -292,7 +292,7 @@ class m221115_155756_init_rbac extends Migration
             Employee Permissions
         */
         $createEmployee = $auth->createPermission('createEmployee');
-        $createEmployee->description= "Criar Loja";
+        $createEmployee->description = "Criar Loja";
         $auth->add($createEmployee);
 
         $updateEmployee = $auth->createPermission('updateEmployee');
@@ -318,7 +318,7 @@ class m221115_155756_init_rbac extends Migration
             SupportTicket Permissions
         */
         $createSupportTicket = $auth->createPermission('createSupportTicket');
-        $createSupportTicket->description= "Criar Suport Ticket";
+        $createSupportTicket->description = "Criar Suport Ticket";
         $auth->add($createSupportTicket);
 
         $updateSupportTicket = $auth->createPermission('updateSuportTicket');
@@ -350,52 +350,53 @@ class m221115_155756_init_rbac extends Migration
         $viewOwnRestaurantItem->description = "Visualizar item do restaurante";
         $viewOwnRestaurantItem->ruleName = $managerRule->name;
         $auth->add($viewOwnRestaurantItem);
-        $auth->addChild($viewOwnRestaurantItem,$viewRestaurantItem);
+        $auth->addChild($viewOwnRestaurantItem, $viewRestaurantItem);
+
+        $createOwnRestaurantItem = $auth->createPermission("createOwnRestaurantItem");
+        $createOwnRestaurantItem->description = "Criar item do restaurante";
+        $createOwnRestaurantItem->ruleName = $managerRule->name;
+        $auth->add($createOwnRestaurantItem);
+        $auth->addChild($createOwnRestaurantItem, $createRestaurantItem);
 
         $deleteOwnRestaurantItem = $auth->createPermission("deleteOwnRestaurantItem");
         $deleteOwnRestaurantItem->description = "Apagar item do restaurante";
         $deleteOwnRestaurantItem->ruleName = $managerRule->name;
         $auth->add($deleteOwnRestaurantItem);
-        $auth->addChild($deleteOwnRestaurantItem,$deleteRestaurantItem);
+        $auth->addChild($deleteOwnRestaurantItem, $deleteRestaurantItem);
 
         $updateOwnRestaurantItem = $auth->createPermission("updateOwnRestaurantItem");
         $updateOwnRestaurantItem->description = "Atualizar item do restaurante";
         $updateOwnRestaurantItem->ruleName = $managerRule->name;
         $auth->add($updateOwnRestaurantItem);
-        $auth->addChild($updateOwnRestaurantItem,$updateRestaurantItem);
+        $auth->addChild($updateOwnRestaurantItem, $updateRestaurantItem);
 
         $deleteOwnRestaurantItemLogo = $auth->createPermission("deleteOwnRestaurantItemLogo");
         $deleteOwnRestaurantItemLogo->description = "Eliminar Logo do item do Restaurante";
         $deleteOwnRestaurantItemLogo->ruleName = $managerRule->name;
         $auth->add($deleteOwnRestaurantItemLogo);
-        $auth->addChild($deleteOwnRestaurantItemLogo,$deleteRestaurantItemLogo);
+        $auth->addChild($deleteOwnRestaurantItemLogo, $deleteRestaurantItemLogo);
 
         /*
             Own Restaurant Permissions
         */
-        $createOwnRestaurantItem = $auth->createPermission("createOwnRestaurantItem");
-        $createOwnRestaurantItem->description = "Criar item do restaurante";
-        $createOwnRestaurantItem->ruleName = $managerRule->name;
-        $auth->add($createOwnRestaurantItem);
-        $auth->addChild($createOwnRestaurantItem,$createRestaurantItem);
 
         $viewOwnRestaurant = $auth->createPermission("viewOwnRestaurant");
         $viewOwnRestaurant->description = "Visualizar restaurante";
         $viewOwnRestaurant->ruleName = $managerRule->name;
         $auth->add($viewOwnRestaurant);
-        $auth->addChild($viewOwnRestaurant,$viewRestaurant);
+        $auth->addChild($viewOwnRestaurant, $viewRestaurant);
 
         $updateOwnRestaurant = $auth->createPermission("updateOwnRestaurant");
         $updateOwnRestaurant->description = "Atualizar restaurante";
         $updateOwnRestaurant->ruleName = $managerRule->name;
         $auth->add($updateOwnRestaurant);
-        $auth->addChild($updateOwnRestaurant,$updateRestaurant);
+        $auth->addChild($updateOwnRestaurant, $updateRestaurant);
 
         $deleteOwnRestaurantLogo = $auth->createPermission("deleteOwnRestaurantLogo");
         $deleteOwnRestaurantLogo->description = "Eliminar Logo do Restaurante";
         $deleteOwnRestaurantLogo->ruleName = $managerRule->name;
         $auth->add($deleteOwnRestaurantLogo);
-        $auth->addChild($deleteOwnRestaurantLogo,$deleteOwnRestaurantItemLogo);
+        $auth->addChild($deleteOwnRestaurantLogo, $deleteRestaurantLogo);
 
         /*
             Own Ticket Permissions
@@ -405,13 +406,13 @@ class m221115_155756_init_rbac extends Migration
         $viewOwnTicket->description = "Visualizar bilhete";
         $viewOwnTicket->ruleName = $clientRule->name;
         $auth->add($viewOwnTicket);
-        $auth->addChild($viewOwnTicket,$viewTicket);
+        $auth->addChild($viewOwnTicket, $viewTicket);
 
         $updateOwnTicket = $auth->createPermission("updateOwnTicket");
         $updateOwnTicket->description = "Atualizar bilhete";
         $updateOwnTicket->ruleName = $clientRule->name;
         $auth->add($updateOwnTicket);
-        $auth->addChild($updateOwnTicket,$updateTicket);
+        $auth->addChild($updateOwnTicket, $updateTicket);
 
         /*
             Own Support Ticket Permissions
@@ -421,13 +422,13 @@ class m221115_155756_init_rbac extends Migration
         $viewOwnSupportTicket->description = "Visualizar Support Ticket";
         $viewOwnSupportTicket->ruleName = $clientRule->name;
         $auth->add($viewOwnSupportTicket);
-        $auth->addChild($viewOwnSupportTicket,$viewSupportTicket);
+        $auth->addChild($viewOwnSupportTicket, $viewSupportTicket);
 
         $updateOwnSupportTicket = $auth->createPermission("updateOwnSupportTicket");
         $updateOwnSupportTicket->description = "Atualizar Support Ticket";
         $updateOwnSupportTicket->ruleName = $clientRule->name;
         $auth->add($updateOwnSupportTicket);
-        $auth->addChild($updateOwnSupportTicket,$updateSupportTicket);
+        $auth->addChild($updateOwnSupportTicket, $updateSupportTicket);
 
         /*
             Own Profile Permissions
@@ -437,120 +438,119 @@ class m221115_155756_init_rbac extends Migration
         $viewOwnProfile->description = "Visualizar perfil";
         $viewOwnProfile->ruleName = $clientRule->name;
         $auth->add($viewOwnProfile);
-        $auth->addChild($viewOwnProfile,$viewClient);
+        $auth->addChild($viewOwnProfile, $viewClient);
 
         $updateOwnProfile = $auth->createPermission("updateOwnProfile");
         $updateOwnProfile->description = "Atualizar perfil";
         $updateOwnProfile->ruleName = $clientRule->name;
         $auth->add($updateOwnProfile);
-        $auth->addChild($updateOwnProfile,$updateClient);
+        $auth->addChild($updateOwnProfile, $updateClient);
 
         /*
          Roles Permissions
          */
 
         // Client Role Permissions
-        $auth->addChild($client,$createTicket);
-        $auth->addChild($client,$createSupportTicket);
-        $auth->addChild($client,$createMessage);
-        $auth->addChild($client,$viewOwnTicket);
-        $auth->addChild($client,$updateOwnTicket);
-        $auth->addChild($client,$viewOwnProfile);
-        $auth->addChild($client,$updateOwnProfile);
-        $auth->addChild($client,$updateOwnSupportTicket);
-        $auth->addChild($client,$viewOwnSupportTicket);
+        $auth->addChild($client, $createTicket);
+        $auth->addChild($client, $createSupportTicket);
+        $auth->addChild($client, $createMessage);
+        $auth->addChild($client, $viewOwnTicket);
+        $auth->addChild($client, $updateOwnTicket);
+        $auth->addChild($client, $viewOwnProfile);
+        $auth->addChild($client, $updateOwnProfile);
+        $auth->addChild($client, $updateOwnSupportTicket);
+        $auth->addChild($client, $viewOwnSupportTicket);
 
         // Employee Role Permissions
-        $auth->addChild($employee,$createFlight);
-        $auth->addChild($employee,$updateFlight);
-        $auth->addChild($employee,$viewFlight);
-        $auth->addChild($employee,$createLostItem);
-        $auth->addChild($employee,$updateLostItem);
-        $auth->addChild($employee,$viewLostItem);
-        $auth->addChild($employee,$deleteLostItem);
-        $auth->addChild($employee,$deleteLostItemLogo);
-        $auth->addChild($employee,$createAirplane);
-        $auth->addChild($employee,$updateAirplane);
-        $auth->addChild($employee,$viewAirplane);
-        $auth->addChild($employee,$createAirport);
-        $auth->addChild($employee,$updateAirport);
-        $auth->addChild($employee,$viewAirport);
-        $auth->addChild($employee,$updatePaymentMethod);
-        $auth->addChild($employee,$viewPaymentMethod);
-        $auth->addChild($employee,$updateClient);
-        $auth->addChild($employee,$viewClient);
-        $auth->addChild($employee,$viewTicket);
-        $auth->addChild($employee,$updateTicket);
-        $auth->addChild($employee,$updateSupportTicket);
-        $auth->addChild($employee,$viewSupportTicket);
+        $auth->addChild($employee, $createFlight);
+        $auth->addChild($employee, $updateFlight);
+        $auth->addChild($employee, $viewFlight);
+        $auth->addChild($employee, $createLostItem);
+        $auth->addChild($employee, $updateLostItem);
+        $auth->addChild($employee, $viewLostItem);
+        $auth->addChild($employee, $deleteLostItem);
+        $auth->addChild($employee, $deleteLostItemLogo);
+        $auth->addChild($employee, $createAirplane);
+        $auth->addChild($employee, $updateAirplane);
+        $auth->addChild($employee, $viewAirplane);
+        $auth->addChild($employee, $createAirport);
+        $auth->addChild($employee, $updateAirport);
+        $auth->addChild($employee, $viewAirport);
+        $auth->addChild($employee, $updatePaymentMethod);
+        $auth->addChild($employee, $viewPaymentMethod);
+        $auth->addChild($employee, $updateClient);
+        $auth->addChild($employee, $viewClient);
+        $auth->addChild($employee, $viewTicket);
+        $auth->addChild($employee, $updateTicket);
+        $auth->addChild($employee, $updateSupportTicket);
+        $auth->addChild($employee, $viewSupportTicket);
 
         //Manager Permissions
-        $auth->addChild($manager,$createOwnRestaurantItem);
-        $auth->addChild($manager,$deleteOwnRestaurantItem);
-        $auth->addChild($manager,$updateOwnRestaurantItem);
-        $auth->addChild($manager,$viewOwnRestaurantItem);
-        $auth->addChild($manager,$deleteOwnRestaurantItemLogo);
-        $auth->addChild($manager,$viewOwnRestaurant);
-        $auth->addChild($manager,$updateOwnRestaurant);
-        $auth->addChild($manager,$deleteOwnRestaurantLogo);
+        $auth->addChild($manager, $createOwnRestaurantItem);
+        $auth->addChild($manager, $deleteOwnRestaurantItem);
+        $auth->addChild($manager, $updateOwnRestaurantItem);
+        $auth->addChild($manager, $viewOwnRestaurantItem);
+        $auth->addChild($manager, $deleteOwnRestaurantItemLogo);
+        $auth->addChild($manager, $viewOwnRestaurant);
+        $auth->addChild($manager, $updateOwnRestaurant);
+        $auth->addChild($manager, $deleteOwnRestaurantLogo);
 
         // Admin Permissions
-        $auth->addChild($admin,$manager);
-        $auth->addChild($admin,$employee);
-        $auth->addChild($admin,$createAdmin);
-        $auth->addChild($admin,$updateAdmin);
-        $auth->addChild($admin,$viewAdmin);
-        $auth->addChild($admin,$deleteAdmin);
-        $auth->addChild($admin,$deleteRestaurant);
-        $auth->addChild($admin,$viewRestaurant);
-        $auth->addChild($admin,$createRestaurant);
-        $auth->addChild($admin,$updateRestaurant);
-        $auth->addChild($admin,$deleteRestaurantLogo);
-        $auth->addChild($admin,$createRestaurantItem);
-        $auth->addChild($admin,$deleteRestaurantItem);
-        $auth->addChild($admin,$viewRestaurantItem);
-        $auth->addChild($admin,$updateRestaurantItem);
-        $auth->addChild($admin,$deleteClient);
-        $auth->addChild($admin,$createManager);
-        $auth->addChild($admin,$viewManager);
-        $auth->addChild($admin,$updateManager);
-        $auth->addChild($admin,$deleteManager);
-        $auth->addChild($admin,$createStore);
-        $auth->addChild($admin,$viewStore);
-        $auth->addChild($admin,$updateStore);
-        $auth->addChild($admin,$deleteStore);
-        $auth->addChild($admin,$deleteStoreLogo);
-        $auth->addChild($admin,$createCompany);
-        $auth->addChild($admin,$viewCompany);
-        $auth->addChild($admin,$updateCompany);
-        $auth->addChild($admin,$createEmployee);
-        $auth->addChild($admin,$viewEmployee);
-        $auth->addChild($admin,$updateEmployee);
-        $auth->addChild($admin,$deleteEmployee);
-        $auth->addChild($admin,$viewServerLog);
+        $auth->addChild($admin, $manager);
+        $auth->addChild($admin, $employee);
+        $auth->addChild($admin, $createAdmin);
+        $auth->addChild($admin, $updateAdmin);
+        $auth->addChild($admin, $viewAdmin);
+        $auth->addChild($admin, $deleteAdmin);
+        $auth->addChild($admin, $deleteRestaurant);
+        $auth->addChild($admin, $viewRestaurant);
+        $auth->addChild($admin, $createRestaurant);
+        $auth->addChild($admin, $updateRestaurant);
+        $auth->addChild($admin, $deleteRestaurantLogo);
+        $auth->addChild($admin, $createRestaurantItem);
+        $auth->addChild($admin, $deleteRestaurantItem);
+        $auth->addChild($admin, $viewRestaurantItem);
+        $auth->addChild($admin, $updateRestaurantItem);
+        $auth->addChild($admin, $deleteClient);
+        $auth->addChild($admin, $createManager);
+        $auth->addChild($admin, $viewManager);
+        $auth->addChild($admin, $updateManager);
+        $auth->addChild($admin, $deleteManager);
+        $auth->addChild($admin, $createStore);
+        $auth->addChild($admin, $viewStore);
+        $auth->addChild($admin, $updateStore);
+        $auth->addChild($admin, $deleteStore);
+        $auth->addChild($admin, $deleteStoreLogo);
+        $auth->addChild($admin, $createCompany);
+        $auth->addChild($admin, $viewCompany);
+        $auth->addChild($admin, $updateCompany);
+        $auth->addChild($admin, $createEmployee);
+        $auth->addChild($admin, $viewEmployee);
+        $auth->addChild($admin, $updateEmployee);
+        $auth->addChild($admin, $deleteEmployee);
+        $auth->addChild($admin, $viewServerLog);
 
 
         /*
          Assign roles to users
          */
 
-        $auth->assign($admin,1);
-        $auth->assign($employee,2);
-        $auth->assign($employee,3);
-        $auth->assign($employee,7);
-        $auth->assign($employee,8);
-        $auth->assign($employee,9);
-        $auth->assign($client,4);
-        $auth->assign($client,5);
-        $auth->assign($client,6);
-        $auth->assign($client,10);
-        $auth->assign($client,11);
-        $auth->assign($client,12);
-        $auth->assign($client,13);
-        $auth->assign($client,14);
-        $auth->assign($client,15);
+        $auth->assign($admin, 1);
+        $auth->assign($employee, 2);
+        $auth->assign($employee, 3);
+        $auth->assign($employee, 7);
+        $auth->assign($employee, 8);
+        $auth->assign($employee, 9);
+        $auth->assign($client, 4);
+        $auth->assign($client, 5);
+        $auth->assign($client, 6);
+        $auth->assign($client, 10);
+        $auth->assign($client, 11);
+        $auth->assign($client, 12);
+        $auth->assign($client, 13);
+        $auth->assign($client, 14);
+        $auth->assign($client, 15);
         $auth->assign($manager, 16);
-
     }
 
     /**
