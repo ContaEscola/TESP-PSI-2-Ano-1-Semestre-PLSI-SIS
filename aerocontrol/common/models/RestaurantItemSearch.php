@@ -2,9 +2,9 @@
 
 namespace common\models;
 
+use common\models\RestaurantItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\RestaurantItem;
 
 /**
  * RestaurantItemSearch represents the model behind the search form of `common\models\RestaurantItem`.
@@ -40,8 +40,8 @@ class RestaurantItemSearch extends RestaurantItem
      */
     public function search($params)
     {
-        $query = RestaurantItem::find();
-
+        //$query = RestaurantItem::find();
+        $query = RestaurantItem::find()->where(['restaurant_id'=>$params['restaurant_id']]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

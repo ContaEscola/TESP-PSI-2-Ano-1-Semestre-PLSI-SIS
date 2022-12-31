@@ -9,6 +9,7 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var common\models\RestaurantItemSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var int $restaurant_id */
 
 $this->title = 'Menu';
 $this->params['breadcrumbs'][] = $this->title;
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="restaurant-item-index">
 
     <p>
-        <?= Html::a('Criar item do menu', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar item do menu', ['create','restaurant_id' => $restaurant_id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>
