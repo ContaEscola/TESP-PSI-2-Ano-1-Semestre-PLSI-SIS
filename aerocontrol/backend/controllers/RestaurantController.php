@@ -174,8 +174,10 @@ class RestaurantController extends Controller
         if ($model->deleteLogo())
             $model->logo = null;
 
-        if ($model->save())
-            return $this->redirect(['view', 'id' => $model->id]);
+        if (!$model->save())
+            Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
+
+        return $this->redirect(['view', 'id' => $model->id]);
     }
 
     /**
