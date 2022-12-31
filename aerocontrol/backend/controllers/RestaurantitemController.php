@@ -2,20 +2,21 @@
 
 namespace backend\controllers;
 
+use common\models\Manager;
 use common\models\Restaurant;
-use common\models\RestaurantSearch;
-use yii\filters\AccessControl;
+use common\models\RestaurantItem;
+use common\models\RestaurantItemSearch;
 use Yii;
+use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
-use yii\helpers\FileHelper;
 
 /**
- * RestaurantController implements the CRUD actions for Restaurant model.
+ * RestaurantItemController implements the CRUD actions for RestaurantItem model.
  */
-class RestaurantController extends Controller
+class RestaurantItemController extends Controller
 {
     /**
      * @inheritDoc
@@ -26,7 +27,7 @@ class RestaurantController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -37,67 +38,78 @@ class RestaurantController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewRestaurant'],
+                            'roles' => ['viewRestaurantItem'],
+                            'roleParams' => function () {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewRestaurant'],
+                            'roles' => ['viewRestaurantItem'],
                             'roleParams' => function () {
-                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])];
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['createRestaurant'],
+                            'roles' => ['createRestaurantItem'],
+                            'roleParams' => function () {
+                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updateRestaurant'],
+                            'roles' => ['updateRestaurantItem'],
                             'roleParams' => function () {
-                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])];
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete'],
-                            'roles' => ['deleteRestaurant'],
+                            'roles' => ['deleteRestaurantItem'],
+                            'roleParams' => function () {
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['delete-logo'],
-                            'roles' => ['deleteRestaurantLogo'],
+                            'roles' => ['deleteRestaurantItemLogo'],
                             'roleParams' => function () {
-                                return ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])];
+                                return ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant];
                             },
                         ],
                     ],
-                ],
+                ]
             ]
         );
     }
 
     /**
-     * Lists all Restaurant models.
+     * Lists all RestaurantItem models.
      *
      * @return string
      */
-    public function actionIndex()
+    public function actionIndex($restaurant_id)
     {
-        $searchModel = new RestaurantSearch();
+        $restaurant = $this->findRestaurant($restaurant_id);
+
+        $searchModel = new RestaurantItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-
         return $this->render('index', [
+            'restaurant' => $restaurant,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Restaurant model.
+     * Displays a single RestaurantItem model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -110,19 +122,19 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Creates a new Restaurant model.
+     * Creates a new RestaurantItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($restaurant_id)
     {
-        $model = new Restaurant();
+        $model = new RestaurantItem();
+
+        $model->restaurant_id = $restaurant_id;
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                if ($model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -134,7 +146,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Updates an existing Restaurant model.
+     * Updates an existing RestaurantItem model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -154,7 +166,7 @@ class RestaurantController extends Controller
     }
 
     /**
-     * Deletes an existing Restaurant model.
+     * Deletes an existing RestaurantItem model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -162,17 +174,19 @@ class RestaurantController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
+        $model = $this->findModel($id);
+        $restaurant_id = $model->restaurant_id;
+        $model->delete();
+
+        return $this->redirect(['index', 'restaurant_id' => $restaurant_id]);
     }
 
-
-    //remover logo do restaurante
+    //remover imagem do item do restaurante
     public function actionDeleteLogo($id)
     {
         $model = $this->findModel($id);
-        if ($model->deleteLogo())
-            $model->logo = null;
+        if ($model->deleteImage())
+            $model->image = null;
 
         if (!$model->save())
             Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
@@ -181,14 +195,29 @@ class RestaurantController extends Controller
     }
 
     /**
+     * Finds the RestaurantItem model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id ID
+     * @return RestaurantItem the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = RestaurantItem::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
      * Finds the Restaurant model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Restaurant the loaded model
+     * @return RestaurantItem the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-
-    protected function findModel($id)
+    protected function findRestaurant($id)
     {
         if (($model = Restaurant::findOne(['id' => $id])) !== null) {
             return $model;
