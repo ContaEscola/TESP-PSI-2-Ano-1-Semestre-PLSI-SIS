@@ -31,6 +31,32 @@ class RestaurantItem extends \yii\db\ActiveRecord
     public $imagePlaceholderOnError = 'logo-placeholder-on-error.svg';
 
     /**
+     * Retorna o path onde se faz os uploads relacionados a este modelo
+     * 
+     * @return string path
+     */
+    public function getUploadPath()
+    {
+        $parentPath = $this->restaurant->getUploadPath();
+        $path = $parentPath . '/menu';
+
+        return $path;
+    }
+
+    /**
+     * Retorna o url onde se faz os uploads relacionados a este modelo
+     * 
+     * @return string url
+     */
+    public function getUploadUrl()
+    {
+        $parentPath = $this->restaurant->getUploadUrl();
+        $path = $parentPath . '/menu';
+
+        return $path;
+    }
+
+    /**
      * Retorna o url do path da imagem,
      * caso seja null na BD então retorna [[$this->imagePlaceholder]]
      *
@@ -44,11 +70,11 @@ class RestaurantItem extends \yii\db\ActiveRecord
         if (is_null($this->image))
             $pathUrl = '@web/images/' . $this->imagePlaceholder;
         // Se existir imagem na DB, mas não existir no servidor então dá o URL do [[$this->placeholder-on-error]]
-        else if (!file_exists(Yii::getAlias('@uploadLogoRestaurantItems/') . $this->image))
+        else if (!file_exists($this->getUploadPath() . '/' . $this->image))
             $pathUrl = '@web/images/' . $this->imagePlaceholderOnError;
         // Se existir imagem na DB e no server então dá o URL da imagem
         else
-            $pathUrl = '@uploadLogoRestaurantItemsUrl/' . $this->image;
+            $pathUrl = $this->getUploadUrl() . '/' . $this->image;
 
         return $pathUrl;
     }
@@ -157,11 +183,11 @@ class RestaurantItem extends \yii\db\ActiveRecord
      */
     protected function upload()
     {
-        if (!FileHelper::createDirectory(Yii::getAlias('@uploadLogoRestaurantItems')))
+        if (!FileHelper::createDirectory($this->getUploadPath()))
             return false;
 
         $image_name = $this->item . '_' . date("d-m-Y_H-i") . '.' . $this->imageFile->extension;
-        $image_path = Yii::getAlias('@uploadLogoRestaurantItems/') . $image_name;
+        $image_path = $this->getUploadPath() . '/' . $image_name;
 
         if ($this->imageFile->saveAs($image_path)) {
             $this->image = $image_name;

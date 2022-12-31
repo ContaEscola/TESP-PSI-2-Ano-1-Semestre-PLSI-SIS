@@ -7,13 +7,12 @@ Yii::setAlias('@console', dirname(dirname(__DIR__)) . '/console');
 Yii::setAlias('@root', dirname(dirname(__DIR__)));
 Yii::setAlias('@uploads', '@root/uploads');
 Yii::setAlias('@uploadsUrl', '../../../uploads');
-Yii::setAlias('@uploadLogos', '@uploads/logos');
-Yii::setAlias('@uploadLogosUrl', '@uploadsUrl/logos');
-Yii::setAlias('@uploadLogoRestaurants', '@uploadLogos/restaurants');
-Yii::setAlias('@uploadLogoRestaurantsUrl', '@uploadLogosUrl/restaurants');
-Yii::setAlias('@uploadLogoStores', '@uploadLogos/stores');
-Yii::setAlias('@uploadLogoStoresUrl', '@uploadLogosUrl/stores');
+
+Yii::setAlias('@uploadRestaurants', '@uploads/restaurants');
+Yii::setAlias('@uploadRestaurantsUrl', '@uploadsUrl/restaurants');
+
+Yii::setAlias('@uploadStores', '@uploads/stores');
+Yii::setAlias('@uploadStoresUrl', '@uploadsUrl/stores');
+
 Yii::setAlias('@uploadLostItems', '@uploads/lost-items');
 Yii::setAlias('@uploadLostItemsUrl', '@uploadsUrl/lost-items');
-Yii::setAlias('@uploadLogoRestaurantItems', '@uploadLogos/restaurants/items');
-Yii::setAlias('@uploadLogoRestaurantItemsUrl', '@uploadLogosUrl/restaurants/items');
