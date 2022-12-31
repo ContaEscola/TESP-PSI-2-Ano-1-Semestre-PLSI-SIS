@@ -373,6 +373,11 @@ class m221115_155756_init_rbac extends Migration
         /*
             Own Restaurant Permissions
         */
+        $createOwnRestaurantItem = $auth->createPermission("createOwnRestaurantItem");
+        $createOwnRestaurantItem->description = "Criar item do restaurante";
+        $createOwnRestaurantItem->ruleName = $managerRule->name;
+        $auth->add($createOwnRestaurantItem);
+        $auth->addChild($createOwnRestaurantItem,$createRestaurantItem);
 
         $viewOwnRestaurant = $auth->createPermission("viewOwnRestaurant");
         $viewOwnRestaurant->description = "Visualizar restaurante";
@@ -480,7 +485,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee,$viewSupportTicket);
 
         //Manager Permissions
-        $auth->addChild($manager,$createRestaurantItem);
+        $auth->addChild($manager,$createOwnRestaurantItem);
         $auth->addChild($manager,$deleteOwnRestaurantItem);
         $auth->addChild($manager,$updateOwnRestaurantItem);
         $auth->addChild($manager,$viewOwnRestaurantItem);

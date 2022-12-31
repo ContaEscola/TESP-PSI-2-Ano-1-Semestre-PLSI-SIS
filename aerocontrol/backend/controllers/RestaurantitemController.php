@@ -97,11 +97,10 @@ class RestaurantitemController extends Controller
     public function actionIndex($restaurant_id)
     {
         $searchModel = new RestaurantItemSearch();
-        $query = RestaurantItem::find()->where(['restaurant_id'=>$restaurant_id]);
-        $dataProvider = new ActiveDataProvider(['query' => $query,]);
-        //$dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
+            'restaurant_id' => $restaurant_id,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -125,12 +124,11 @@ class RestaurantitemController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($restaurant_id)
     {
         $model = new RestaurantItem();
 
-        $manager = Manager::findOne(Yii::$app->user->getId());
-        $model->restaurant_id = $manager->restaurant_id;
+        $model->restaurant_id = $restaurant_id;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
