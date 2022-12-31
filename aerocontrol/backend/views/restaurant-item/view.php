@@ -8,7 +8,19 @@ use yii\widgets\DetailView;
 /** @var common\models\RestaurantItem $model */
 
 $this->title = $model->item;
-$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['index','restaurant_id'=>$model->restaurant_id]];
+
+if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
+    $this->params['breadcrumbs'][] = [
+        'label' => 'Restaurantes',
+        'url' => ['restaurant/index'],
+    ];
+    $this->params['breadcrumbs'][] = [
+        'label' => $model->restaurant->name,
+        'url' => ['restaurant/view', 'id' => $model->restaurant->id],
+    ];
+}
+
+$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['index', 'restaurant_id' => $model->restaurant_id]];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

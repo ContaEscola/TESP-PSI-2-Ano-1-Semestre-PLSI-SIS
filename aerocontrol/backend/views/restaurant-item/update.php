@@ -6,7 +6,20 @@ use yii\helpers\Html;
 /** @var common\models\RestaurantItem $model */
 
 $this->title = 'Atualizar item: ' . $model->item;
-$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['index', 'restaurant_id'=>$model->restaurant_id]];
+
+if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
+    $this->params['breadcrumbs'][] = [
+        'label' => 'Restaurantes',
+        'url' => ['restaurant/index'],
+    ];
+    $this->params['breadcrumbs'][] = [
+        'label' => $model->restaurant->name,
+        'url' => ['restaurant/view', 'id' => $model->restaurant->id],
+    ];
+}
+
+
+$this->params['breadcrumbs'][] = ['label' => 'Menu', 'url' => ['index', 'restaurant_id' => $model->restaurant_id]];
 $this->params['breadcrumbs'][] = ['label' => $model->item, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Atualizar';
 ?>

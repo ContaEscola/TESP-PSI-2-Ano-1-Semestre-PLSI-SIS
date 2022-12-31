@@ -9,15 +9,25 @@ use yii\grid\GridView;
 /** @var yii\web\View $this */
 /** @var common\models\RestaurantItemSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-/** @var int $restaurant_id */
+/** @var common\models\Restaurant $restaurant */
 
 $this->title = 'Menu';
+if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
+    $this->params['breadcrumbs'][] = [
+        'label' => 'Restaurantes',
+        'url' => ['restaurant/index'],
+    ];
+    $this->params['breadcrumbs'][] = [
+        'label' => $restaurant->name,
+        'url' => ['restaurant/view', 'id' => $restaurant->id],
+    ];
+}
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="restaurant-item-index">
 
     <p>
-        <?= Html::a('Criar item', ['create', 'restaurant_id' => $restaurant_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar item', ['create', 'restaurant_id' => $restaurant->id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>

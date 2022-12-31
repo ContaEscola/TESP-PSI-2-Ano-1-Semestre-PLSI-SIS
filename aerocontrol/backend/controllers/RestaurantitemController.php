@@ -96,11 +96,13 @@ class RestaurantItemController extends Controller
      */
     public function actionIndex($restaurant_id)
     {
+        $restaurant = $this->findRestaurant($restaurant_id);
+
         $searchModel = new RestaurantItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
-            'restaurant_id' => $restaurant_id,
+            'restaurant' => $restaurant,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -202,6 +204,22 @@ class RestaurantItemController extends Controller
     protected function findModel($id)
     {
         if (($model = RestaurantItem::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Finds the Restaurant model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id ID
+     * @return RestaurantItem the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findRestaurant($id)
+    {
+        if (($model = Restaurant::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
