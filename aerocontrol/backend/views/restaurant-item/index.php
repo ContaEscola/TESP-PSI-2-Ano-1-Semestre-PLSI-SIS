@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="restaurant-item-index">
 
     <p>
-        <?= Html::a('Criar item do menu', ['create','restaurant_id' => $restaurant_id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar item', ['create', 'restaurant_id' => $restaurant_id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>
@@ -48,10 +48,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ],
             [
-                'class' => ActionColumn::className(),
+                'class' => ActionColumn::class,
                 'urlCreator' => function ($action, RestaurantItem $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

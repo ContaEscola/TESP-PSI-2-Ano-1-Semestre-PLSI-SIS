@@ -44,6 +44,11 @@ password: 12345678
 >username: Joaquim
 password: 12345678
 
+### Gerente
+
+>username: Santos
+password: 12345678
+
 
 # Known Issues
 
