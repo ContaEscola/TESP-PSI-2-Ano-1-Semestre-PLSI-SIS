@@ -380,11 +380,6 @@ class m221115_155756_init_rbac extends Migration
         $auth->add($deleteOwnRestaurantItemLogo);
         $auth->addChild($deleteOwnRestaurantItemLogo, $deleteRestaurantItemLogo);
 
-        $deleteOwnRestaurantItemLogo = $auth->createPermission("deleteOwnRestaurantItemLogo");
-        $deleteOwnRestaurantItemLogo->description = "Eliminar Logo do item do Restaurante";
-        $deleteOwnRestaurantItemLogo->ruleName = $managerRule->name;
-        $auth->add($deleteOwnRestaurantItemLogo);
-        $auth->addChild($deleteOwnRestaurantItemLogo,$deleteRestaurantItemLogo);
 
         /*
             Own Restaurant Permissions
