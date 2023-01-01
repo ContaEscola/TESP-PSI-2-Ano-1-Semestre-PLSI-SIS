@@ -19,19 +19,16 @@ class ClientRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        if (isset($params['ticket']))
-        {
+        if (isset($params['ticket'])) {
             $client = User::findOne($params['ticket']->client_id);
             return $client->id == $user;
         }
-        if (isset($params['user']))
-        {
+        if (isset($params['user'])) {
             return $params['user']->id == $user;
         }
-        if (isset($params['supportTicket']))
-        {
+        if (isset($params['supportTicket'])) {
             $client = User::findOne($params['supportTicket']->client_id);
-            return $client == $user;
+            return $client->id == $user;
         }
         return false;
     }
