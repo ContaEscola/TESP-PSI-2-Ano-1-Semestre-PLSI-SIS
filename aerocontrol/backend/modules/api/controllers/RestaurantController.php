@@ -21,14 +21,20 @@ class RestaurantController extends ActiveController
         return $actions;
     }
 
-    public function actionIndex(){
+    protected function verbs()
+    {
+        return [
+            'index' => ['GET'],
+        ];
+    }
+
+    public function actionIndex()
+    {
         $restaurants = new $this->modelClass;
         $allRestaurants = $restaurants::find()->all();
 
-        foreach ($allRestaurants as $restaurant){
-            $items = RestaurantItem::find()->where(['restaurant_id'=>$restaurant->id])->all();
-            $restaurant->menu = $items;
-
+        foreach ($allRestaurants as $restaurant) {
+            $restaurant->menu = $restaurant->restaurantItems;
         }
         return $allRestaurants;
     }

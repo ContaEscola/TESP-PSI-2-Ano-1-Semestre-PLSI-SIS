@@ -37,6 +37,32 @@ class Restaurant extends \yii\db\ActiveRecord
     public $logoPlaceholderOnError = 'logo-placeholder-on-error.svg';
 
     /**
+     * Retorna o path onde se faz os uploads relacionados a este modelo
+     * 
+     * @return string path
+     */
+    public function getUploadPath()
+    {
+        $formatedName = preg_replace('/\s+/', '_', $this->name);
+        $path = Yii::getAlias('@uploadRestaurants/') . $formatedName;
+
+        return $path;
+    }
+
+    /**
+     * Retorna o url onde se faz os uploads relacionados a este modelo
+     * 
+     * @return string url
+     */
+    public function getUploadUrl()
+    {
+        $formatedName = preg_replace('/\s+/', '_', $this->name);
+        $path = '@uploadRestaurantsUrl/' . $formatedName;
+
+        return $path;
+    }
+
+    /**
      * Retorna o url do path do logo,
      * caso seja null na BD então retorna [[$this->logoPlaceholder]]
      * 
@@ -50,11 +76,11 @@ class Restaurant extends \yii\db\ActiveRecord
         if (is_null($this->logo))
             $pathUrl = '@web/images/' . $this->logoPlaceholder;
         // Se existir logo na DB mas não existir no server então dá o URL do [[$this->placeholder-on-error]]
-        else if (!file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+        else if (!file_exists($this->getUploadPath() . '/' .  $this->logo))
             $pathUrl = '@web/images/' . $this->logoPlaceholderOnError;
         // Se existir logo na DB e no server então dá o URL do logo
         else
-            $pathUrl = '@uploadLogoRestaurantsUrl/' . $this->logo;
+            $pathUrl = $this->getUploadUrl() . '/' . $this->logo;
 
         return $pathUrl;
     }
@@ -102,7 +128,7 @@ class Restaurant extends \yii\db\ActiveRecord
 
             [
                 'website', 'string',
-                'max' => 50, 'tooLong' => 'O {attribute} e não pode exceder os 75 caracteres.'
+                'max' => 50, 'tooLong' => 'O {attribute} não pode exceder os 75 caracteres.'
             ],
             [['name'], 'unique', 'message' => "Este {attribute} já está a ser utilizado."],
 
@@ -227,11 +253,11 @@ class Restaurant extends \yii\db\ActiveRecord
      */
     protected function upload()
     {
-        if (!FileHelper::createDirectory(Yii::getAlias('@uploadLogoRestaurants')))
+        if (!FileHelper::createDirectory($this->getUploadPath()))
             return false;
 
         $image_name =  $this->name . '_' . date("d-m-Y_H-i") . '.' . $this->logoFile->extension;
-        $image_path = Yii::getAlias('@uploadLogoRestaurants/') . $image_name;
+        $image_path = $this->getUploadPath() . '/' . $image_name;
 
         if ($this->logoFile->saveAs($image_path)) {
             $this->logo = $image_name;
@@ -249,8 +275,8 @@ class Restaurant extends \yii\db\ActiveRecord
     public function deleteLogo()
     {
         if (!is_null($this->logo)) {
-            if (file_exists(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo)) {
-                if (!unlink(Yii::getAlias('@uploadLogoRestaurants/') . $this->logo))
+            if (file_exists($this->getUploadPath() . '/' . $this->logo)) {
+                if (!unlink($this->getUploadPath() . '/' . $this->logo))
                     return false;
             }
         }

@@ -88,7 +88,6 @@ INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
 (8, 'França', 'Marseille', 'Aéroport Marseille Provence', 'https://www.marseille.aeroport.fr/'),
 (9, 'França', 'Lyon', 'Lyon Aéroport', 'https://www.lyonaeroports.com/');
 
-
 INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
 (1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Burger King_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
 (2, 'Delta', 'Café', '912222222', NULL, NULL, 'Delta_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),

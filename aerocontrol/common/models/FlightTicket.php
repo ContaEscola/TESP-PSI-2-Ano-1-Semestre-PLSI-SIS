@@ -4,7 +4,6 @@ namespace common\models;
 
 use Yii;
 use yii\base\ErrorException;
-use yii\web\ForbiddenHttpException;
 
 /**
  * This is the model class for table "flight_ticket".
@@ -24,6 +23,11 @@ use yii\web\ForbiddenHttpException;
  */
 class FlightTicket extends \yii\db\ActiveRecord
 {
+    // 7 dias antes de proibir o cancelamento do FlightTicket
+    const DAYS_QUANT_BEFORE_PROHIBITING_CANCELLATION = 7;
+
+    public $customErrorMessage;
+
     /**
      * {@inheritdoc}
      */
@@ -66,31 +70,19 @@ class FlightTicket extends \yii\db\ActiveRecord
     }
 
     /**
-     * Verifica se é permitido apagar o ticket
-     * @throws ForbiddenHttpException
-     */
-    public function deleteTicketIsPossible()
-    {
-        if ($this->checkin == true) throw new ForbiddenHttpException("Impossível cancelar o bilhete se o checkin já tiver sido efetuado.");
-        $flightTicketTime = strtotime($this->flight->estimated_departure_date);
-        $day = 60 * 60 * 24;
-        $cancelTicketTime =  $flightTicketTime - ($day * 7);    // data sete dias antes do Voo
-
-        $now = strtotime( date("d-m-Y H:i"));
-
-        // Compara se a data  de possível cancelamento é superior à atual
-        if($cancelTicketTime >= $now){
-            return true;
-        } else throw new ForbiddenHttpException("Impossível cancelar o bilhete sete dias antes do voo, por favor contacte o suporte.");
-    }
-
-    /**
      * Apaga os passageiros do Ticket e o Ticket
      */
-    public function deleteTicket (){
+    public function deleteTicket()
+    {
+        // Se não for permitada o cancelamento então adiciona a mensagem de erro ao [[$this->customErrorMessage]]
+        if (!$this->isAllowedToCancel()) {
+            $this->addError('customErrorMessage', "Impossível cancelar o bilhete " . self::DAYS_QUANT_BEFORE_PROHIBITING_CANCELLATION . " dias antes do voo, por favor contacte o suporte");
+            return null;
+        }
+
         $transaction = FlightTicket::getDb()->beginTransaction();
         try {
-            foreach ($this->passengers as $passenger){
+            foreach ($this->passengers as $passenger) {
                 $passenger->delete();
             }
             $this->delete();
@@ -105,6 +97,27 @@ class FlightTicket extends \yii\db\ActiveRecord
         }
         return true;
     }
+
+    /**
+     * Verifica se é permitido o cancelamento do ticket
+     */
+    public function isAllowedToCancel()
+    {
+        $flightTicketDepartureDateInTime = strtotime($this->flight->estimated_departure_date);
+        $dayInTime = 60 * 60 * 24;
+
+        $maximumAllowedDayToCancelInTime = $flightTicketDepartureDateInTime - ($dayInTime * self::DAYS_QUANT_BEFORE_PROHIBITING_CANCELLATION);
+
+        $currentDateInTime = strtotime(date("d-m-Y H:i"));
+
+        // Se a data de hoje for menor que a data máxima permitada para cancelar então pode cancelar
+        if ($currentDateInTime <= $maximumAllowedDayToCancelInTime) return true;
+
+        return false;
+    }
+
+
+
 
     /**
      * Gets query for [[Client]].

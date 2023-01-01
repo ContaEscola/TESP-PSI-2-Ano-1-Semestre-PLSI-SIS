@@ -21,6 +21,7 @@ class ModuleAPI extends \yii\base\Module
     {
         parent::init();
         Yii::$app->user->enableSession = false;
+        Yii::$app->user->loginUrl = null;
         // custom initialization code goes here
     }
 }

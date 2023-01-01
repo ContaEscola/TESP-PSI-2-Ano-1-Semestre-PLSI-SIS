@@ -17,6 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
+        <?= Html::a('Ver menu', ['restaurant-item/index', 'restaurant_id' => $model->id], ['class' => 'btn btn-primary']) ?>
+
         <?= Html::a('Apagar Logo', ['delete-logo', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
