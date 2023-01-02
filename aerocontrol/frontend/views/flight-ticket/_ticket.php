@@ -87,9 +87,9 @@ use yii\helpers\Url;
                     </section>
                 <?php endif; ?>
                 <div class="[ flight-ticket-actions ] [ d-flex justify-content-space-between align-self-end ]">
-                    <?php if ($model->checkin == 0) {
-                        echo Html::a('Cancelar', ['flightticket/delete', 'flight_ticket_id' => $model->flight_ticket_id], ['data-method' => 'post', 'class' => 'button', 'data-type' => 'error']);
-                        echo Html::a('Check-in', ['flightticket/checkin', 'flight_ticket_id' => $model->flight_ticket_id], ['data-method' => 'post', 'class' => 'button']);
+                    <?php if ($model->checkin === 0) {
+                        echo Html::a('Cancelar', ['flight-ticket/delete', 'flight_ticket_id' => $model->flight_ticket_id], ['data-method' => 'post', 'class' => 'button', 'data-type' => 'error']);
+                        echo Html::a('Check-in', ['flight-ticket/checkin', 'flight_ticket_id' => $model->flight_ticket_id], ['data-method' => 'post', 'class' => 'button']);
                     } ?>
                 </div>
 
