@@ -1201,6 +1201,10 @@ select.form__input {
   .container[data-type="very-small-md"] {
     --max-width: 40rem;
   }
+
+  .container[data-type="extra-small-md"] {
+    --max-width: 25rem;
+  }
 }
 
 @media (min-width: 40em) {
