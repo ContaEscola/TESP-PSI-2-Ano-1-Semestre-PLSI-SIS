@@ -44,13 +44,13 @@ class FlightticketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['create'],
-                            'roles' => ['@'],
+                            'roles' => ['createTicket'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['checkin'],
-                            'roles' => ['updateRestaurantItem'],
-                            'roleParams' => function() {
+                            'roles' => ['updateTicket'],
+                            'roleParams' => function () {
                                 return ['ticket' => FlightTicket::findOne(['flight_ticket_id' => Yii::$app->request->get('flight_ticket_id')])];
                             },
                         ],
@@ -58,7 +58,7 @@ class FlightticketController extends Controller
                             'allow' => true,
                             'actions' => ['delete'],
                             'roles' => ['deleteTicket'],
-                            'roleParams' => function() {
+                            'roleParams' => function () {
                                 return ['ticket' => FlightTicket::findOne(['flight_ticket_id' => Yii::$app->request->get('flight_ticket_id')])];
                             },
                         ],
@@ -75,9 +75,9 @@ class FlightticketController extends Controller
      */
     public function actionIndex()
     {
-        $client = Client::findOne(['client_id'=>Yii::$app->user->getId()]);
+        $client = Client::findOne(['client_id' => Yii::$app->user->getId()]);
         $dataProvider = new ActiveDataProvider([
-            'query' => FlightTicket::find()->where(['client_id'=>$client->client_id])->orderBy('purchase_date DESC'),
+            'query' => FlightTicket::find()->where(['client_id' => $client->client_id])->orderBy('purchase_date DESC'),
             'pagination' => [
                 'pageSize' => 20,
             ],
@@ -143,8 +143,8 @@ class FlightticketController extends Controller
     {
         $flightTicket = $this->findModel($flight_ticket_id);
 
-        if($flightTicket->deleteTicketIsPossible()){
-            if ($flightTicket->deleteTicket()){
+        if ($flightTicket->deleteTicketIsPossible()) {
+            if ($flightTicket->deleteTicket()) {
                 Yii::$app->session->setFlash('success', 'O seu bilhete foi cancelado, será reembolsado em breve!');
                 return $this->redirect(['index']);
             } else throw new ServerErrorHttpException("Ocorreu um erro ao cancelar.");
