@@ -59,7 +59,7 @@ use yii\helpers\Url;
                     </p>
 
                     <div class="[ flight-price ] [ fs-350 d-flex push-to-right ]">
-                        <p><s class="text-black-200 italic" flight-ticket-discount><?= Html::encode($model->flight->price) ?>€</s></p>
+                        <p><s class="text-black-200 italic" flight-ticket-discount><?= ($model->flight->discount_percentage !== 0) ? Html::encode($model->flight->price . '€') : ' ' ?></s></p>
                         <p class="fw-semi-bold" flight-ticket-price><?= Html::encode($model->price) ?>€</p>
                     </div>
                 </div>
