@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `passenger` (
   `name` VARCHAR(50) NOT NULL,
   `gender` ENUM('Masculino','Feminino','Outro') NOT NULL,
   `extra_baggage` TINYINT(1) NOT NULL,
-  `seat` INT UNSIGNED NOT NULL,
+  `seat` CHAR(2) NOT NULL,
   `flight_ticket_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_passenger_id` PRIMARY KEY (`id`),
   CONSTRAINT `fk_passenger_flight_ticket_id` FOREIGN KEY(`flight_ticket_id`) REFERENCES `flight_ticket`(`flight_ticket_id`)
