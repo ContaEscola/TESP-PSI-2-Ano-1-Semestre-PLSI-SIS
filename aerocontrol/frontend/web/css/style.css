@@ -1004,8 +1004,7 @@ select.form__input {
   display: grid;
   row-gap: var(--size-200);
 
-  justify-content: space-between;
-  grid-template-columns: repeat(2, max-content);
+  grid-template-columns: repeat(2, minmax(5rem, 1fr));
   grid-template-areas:
     "flight-company flight-terminal"
     "flight-price flight-price";
@@ -1173,6 +1172,10 @@ select.form__input {
   letter-spacing: 0.046875em;
 }
 
+.overflow-wrap-break {
+  overflow-wrap: break-word;
+}
+
 .text-align-center {
   text-align: center;
 }
@@ -1194,6 +1197,10 @@ select.form__input {
 }
 
 @media (min-width: 40em) {
+  .container[data-type="medium-md"] {
+    --max-width: 70rem;
+  }
+
   .container[data-type="small-md"] {
     --max-width: 60rem;
   }
