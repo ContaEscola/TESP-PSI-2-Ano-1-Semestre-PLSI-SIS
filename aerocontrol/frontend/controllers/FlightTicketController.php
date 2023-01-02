@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use common\models\Client;
 use common\models\FlightTicket;
-use common\models\FlightTicketSearch;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
