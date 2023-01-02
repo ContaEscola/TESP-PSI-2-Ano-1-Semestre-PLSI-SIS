@@ -159,7 +159,7 @@ VALUES
 INSERT INTO `flight_ticket` 
 (`flight_ticket_id`, `price`, `purchase_date`, `checkin`, `client_id`, `flight_id`, `payment_method_id`) 
 VALUES
-(1, 100, '2022-12-25 13:30:00', 0, 4, 1, 1);
+(1, 90, '2022-12-25 13:30:00', 0, 4, 1, 1);
 
 INSERT INTO `passenger`
 (`id`, `name`, `gender`, `extra_baggage`, `seat`, `flight_ticket_id`)
