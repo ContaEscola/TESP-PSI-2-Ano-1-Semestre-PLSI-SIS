@@ -15,9 +15,9 @@ use yii\filters\VerbFilter;
 use yii\web\ServerErrorHttpException;
 
 /**
- * FlightticketController implements the CRUD actions for FlightTicket model.
+ * FlightTicketController implements the CRUD actions for FlightTicket model.
  */
-class FlightticketController extends Controller
+class FlightTicketController extends Controller
 {
     /**
      * @inheritDoc
