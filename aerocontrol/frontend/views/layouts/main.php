@@ -109,11 +109,19 @@ AppAsset::register($this);
                                                     </span>', ['flight-ticket/index'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                         </li>
                                         <li class="dropdown-menu__item">
-                                            <?= Html::a('Logout' . '<span aria-hidden="true">
+
+                                            <?= Html::a(
+                                                'Logout' . '<span aria-hidden="true">
                                                         <svg class="icon dropdown-link__icon">
                                                             <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
                                                         </svg>
-                                                    </span>', ['site/logout'], ['data-method' => 'post', 'class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                                    </span>',
+                                                ['site/logout'],
+                                                [
+                                                    'data-method' => 'post', 'class' => 'dropdown-menu__link',
+                                                    'data-type' => 'logout'
+                                                ]
+                                            ) ?>
                                         </li>
                                     </ul>
                                 </div>
