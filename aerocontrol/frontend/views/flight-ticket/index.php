@@ -6,7 +6,9 @@
 use yii\widgets\ListView;
 
 $this->title = "Meus Bilhetes";
-$this->registerJsFile('@web/js/flight-tickets.js');
+$this->registerJsFile('@web/js/flight-tickets.js', [
+    'type' => 'module',
+]);
 ?>
 
 <section class="container padding-block-700" data-type="small-md">
