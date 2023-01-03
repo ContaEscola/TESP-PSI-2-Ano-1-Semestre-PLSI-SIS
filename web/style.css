@@ -1444,6 +1444,10 @@ select.form__input {
   padding: var(--size-300);
 }
 
+.padding-100 {
+  padding: var(--size-100);
+}
+
 .margin-inline-auto {
   margin-inline: auto;
 }
@@ -1462,6 +1466,10 @@ select.form__input {
 
 .margin-top-200 {
   margin-top: var(--size-200);
+}
+
+.margin-top-100 {
+  margin-top: var(--size-100);
 }
 
 @media (max-width: 39.999em) {
@@ -1545,6 +1553,11 @@ select.form__input {
 
 .box-shadow-1 {
   box-shadow: 0 0 0.3em 0.1em var(--clr-neutral-800);
+}
+
+.outline-1 {
+  --outline-size: 0.063rem;
+  outline: var(--outline-size) solid var(--clr-outline, var(--clr-neutral-900));
 }
 
 .border-radius-1 {

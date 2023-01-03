@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href=" ../images/logo-url-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>My Support Tickets Page</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script>
+</head>
+
+
+<body class="body-grid">
+
+    <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#">
+                    <picture>
+                        <source srcset="../images/logo-pc.svg" media="(min-width: 40em)">
+                        <img src="../images/logo-mobile.svg" alt="Logo">
+                    </picture>
+                </a>
+                <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
+                    aria-expanded="false">
+                    <img class="open-icon" src="../images/hamburger-icon.svg" alt="" aria-hidden="true">
+                    <img class="close-icon" src="../images/close-icon.svg" alt="" aria-hidden="true">
+                    <span class="visually-hidden">Menu</span>
+                </button>
+                <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                    <ul role="list" class="navigation-list">
+                        <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
+                        <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
+                        <li class="primary-navigation__item d-flex justify-content-center">
+                            <div class="dropdown " data-type="navbar">
+                                <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false"
+                                    data-dropdown>Pedro
+                                    Norberto
+                                    <span aria-hidden="true">
+                                        <svg class="icon dropdown__toggle-icon">
+                                            <use xlink:href="../images/caret.svg#caret"></use>
+                                        </svg>
+                                    </span>
+                                </button>
+                                <ul role="list" class="dropdown-menu">
+                                    <li class="dropdown-menu__item"><a
+                                            class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#">Ver
+                                            conta
+                                            <span aria-hidden="true">
+                                                <svg class="icon dropdown-link__icon">
+                                                    <use xlink:href="../images/perfil-icon.svg#perfil-icon"></use>
+                                                </svg>
+                                            </span>
+                                        </a></li>
+                                    <li class="dropdown-menu__item"><a
+                                            class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"
+                                            data-type="logout">Logout
+                                            <span aria-hidden="true">
+                                                <svg class="icon dropdown-link__icon">
+                                                    <use xlink:href="../images/logout-icon.svg#logout-icon"></use>
+                                                </svg>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="container padding-block-700" data-type="small-md">
+            <h1 class="fs-600 fw-bold text-align-center">Meus Tickets</h1>
+
+            <button class=" [ button ] [ d-block margin-top-400 push-to-right ]" data-type="primary-outline">Novo
+                Ticket</button>
+
+            <div class="margin-top-100">
+                <!-- Se ainda não tiver nenhum bilhete -->
+                <!-- <p class="fw-medium text-align-center"> Você ainda não fez nenhum ticket!</p> -->
+
+
+
+                <ul role="list" class="flow" data-flow-space="medium">
+                    <li>
+                        <article class="[ ] [ bg-primary border-radius-1 outline-1 padding-100 ]">
+                            <p class="[  ] [ fs-350 fw-medium ]">Ticket nº1 - Camisola</p>
+                            <p class="[ ] [ fs-350  ]">Estado: <span class="fw-medium fs-italic">Concluído</span></p>
+
+
+
+                            <button class="[ button ] [ margin-top-200-sm ]">Ver mais
+                                detalhes</button>
+
+                        </article>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="[ footer-wrapper ] [ container text-align-center ]">
+            <nav aria-label="Footer">
+                <ul role="list" class="footer-list">
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Termos e Condições</a></li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a>
+                    </li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Contactar Suporte</a></li>
+                </ul>
+            </nav>
+            <p class="fs-100 fw-light letter-spacing-2 ">@ 2022 AeroControl. Todos os direitos
+                reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
