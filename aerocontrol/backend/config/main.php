@@ -81,12 +81,6 @@ return [
             ]
         ],
 
-        'formatter' => [
-            'datetimeFormat' => 'php:d-m-Y H:i',
-            'timeFormat' => 'php:H:i',
-            'nullDisplay' => 'N/A'
-        ]
-
     ],
     'params' => $params,
 ];

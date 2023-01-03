@@ -71,12 +71,14 @@ class FlightTicket extends \yii\db\ActiveRecord
 
     /**
      * Apaga os passageiros do Ticket e o Ticket
+     * Se ocorrer um custom error (por exemplo: [[$this->isAllowedToCancel()]]) então adiciona esse erro em [[$this->customErrorMessage]],
+     * assim pode ver esses errors
      */
     public function deleteTicket()
     {
         // Se não for permitada o cancelamento então adiciona a mensagem de erro ao [[$this->customErrorMessage]]
         if (!$this->isAllowedToCancel()) {
-            $this->addError('customErrorMessage', "Impossível cancelar o bilhete " . self::DAYS_QUANT_BEFORE_PROHIBITING_CANCELLATION . " dias antes do voo, por favor contacte o suporte");
+            $this->addError('customErrorMessage', "Impossível cancelar o bilhete " . self::DAYS_QUANT_BEFORE_PROHIBITING_CANCELLATION . " dias antes do voo, por favor contacte o suporte!");
             return null;
         }
 
