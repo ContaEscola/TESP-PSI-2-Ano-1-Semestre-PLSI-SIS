@@ -1,5 +1,5 @@
 const alerts = document.querySelectorAll(".alert");
-const ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS = 5;
+const ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS = 60;
 
 alerts.forEach((alert) => {
 

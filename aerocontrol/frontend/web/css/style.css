@@ -712,7 +712,7 @@ select.form__input {
 }
 
 .alert[data-alert-type="warning"] {
-  --clr-alert-bg: var(--clr-error);
+  --clr-alert-bg: var(--clr-error-400);
 }
 
 .alert[data-close] {
