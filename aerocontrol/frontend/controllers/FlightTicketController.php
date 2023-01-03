@@ -139,12 +139,13 @@ class FlightTicketController extends Controller
     {
         $flightTicket = $this->findModel($flight_ticket_id);
 
-        if ($flightTicket->deleteTicketIsPossible()) {
-            if ($flightTicket->deleteTicket()) {
-                Yii::$app->session->setFlash('success', 'O seu bilhete foi cancelado, será reembolsado em breve!');
-                return $this->redirect(['index']);
-            } else throw new ServerErrorHttpException("Ocorreu um erro ao cancelar.");
-        }
+        if ($flightTicket->deleteTicket()) {
+            Yii::$app->session->setFlash('success', 'O seu bilhete foi cancelado, será reembolsado em breve!');
+            return $this->redirect(['index']);
+        } else if (!empty($flightTicket->getErrors('customErrorMessage')))
+            Yii::$app->session->setFlash('error', $flightTicket->getErrors('customErrorMessage')[0]);
+        else throw new ServerErrorHttpException("Ocorreu um erro ao cancelar.");
+
         return $this->redirect(['index']);
     }
 
