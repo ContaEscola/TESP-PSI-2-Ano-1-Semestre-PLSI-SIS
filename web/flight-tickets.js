@@ -106,14 +106,3 @@ function prepareFlightTicketModal(ticket) {
         modalPassengerList.append(passengerItem);
     }
 }
-
-
-
-const closeModalBtns = document.querySelectorAll("[data-close-modal]");
-
-closeModalBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-        let modal = btn.closest('[data-modal]');
-        modal.close();
-    })
-})

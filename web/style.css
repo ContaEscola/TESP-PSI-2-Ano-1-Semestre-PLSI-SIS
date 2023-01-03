@@ -1055,14 +1055,83 @@ select.form__input {
   border-bottom: 0.05rem solid var(--clr-black-200);
 }
 
-/* modal */
-
 .flight-ticket-modal {
   inset: 0;
   max-width: 100%;
   max-height: 100%;
   width: 100%;
   height: 100%;
+}
+
+/* support ticket */
+
+.support-ticket__item {
+  --gap-size: 0;
+}
+
+@media (min-width: 40em) {
+  .support-ticket__item {
+    grid-template-columns: 1fr 1fr max-content;
+    align-items: center;
+  }
+}
+
+.support-ticket-modal__image-item {
+  width: 70%;
+  height: 15rem;
+}
+
+.support-ticket-modal__image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.support-ticket-modal[open] {
+  animation: modal-fade-in 1s ease forwards;
+}
+
+.support-ticket-modal.hide {
+  animation: modal-fade-out 1s ease forwards;
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+  25% {
+    opacity: 25%;
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+  25% {
+    opacity: 75%;
+  }
+  100% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+}
+
+/* modal */
+
+.modal {
+  inset: 0 0 0 0;
+  margin-inline: auto;
+  margin-top: 10rem;
+  border: none;
+  box-shadow: 0 0 0.25em var(--clr-neutral-900);
 }
 
 .modal__close-btn {
@@ -1229,6 +1298,12 @@ select.form__input {
 
 .grid-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+@media (min-width: 40em) {
+  .grid-auto-flow-column-md {
+    grid-auto-flow: column;
+  }
 }
 
 .even-columns {
@@ -1475,6 +1550,10 @@ select.form__input {
 @media (max-width: 39.999em) {
   .margin-top-200-sm {
     margin-top: var(--size-200);
+  }
+
+  .margin-top-100-sm {
+    margin-top: var(--size-100);
   }
 
   .margin-top-50-sm {

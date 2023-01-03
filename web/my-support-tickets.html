@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="modal.js" defer></script>
+    <script src="support-tickets.js" defer></script>
 </head>
 
 
@@ -97,18 +99,66 @@
                 <!-- Se ainda não tiver nenhum bilhete -->
                 <!-- <p class="fw-medium text-align-center"> Você ainda não fez nenhum ticket!</p> -->
 
+                <dialog class="[ support-ticket-modal ] [ modal container padding-300 ]" data-type="very-small-md"
+                    data-modal data-support-ticket-modal>
+                    <button class="[ modal__close-btn ] [ d-block push-to-right ]" data-close-modal><span
+                            class="visually-hidden">Close
+                            modal</span>
+                        <img src="../images/close-icon.svg" alt="" aria-hidden="true"></button>
+
+
+                    <section class="[ support-ticket-modal__image-item ] [ margin-top-400 margin-inline-auto ]">
+                        <img src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
+                            alt="Imagem do item do support ticket">
+                    </section>
+                </dialog>
 
 
                 <ul role="list" class="flow" data-flow-space="medium">
                     <li>
-                        <article class="[ ] [ bg-primary border-radius-1 outline-1 padding-100 ]">
-                            <p class="[  ] [ fs-350 fw-medium ]">Ticket nº1 - Camisola</p>
-                            <p class="[ ] [ fs-350  ]">Estado: <span class="fw-medium fs-italic">Concluído</span></p>
+                        <article
+                            class="[ support-ticket__item ] [ d-grid grid-auto-flow-column-md bg-primary border-radius-1 outline-1 padding-100 ]"
+                            data-support-ticket>
+                            <p class="fs-350 fw-medium">Ticket nº1 - Camisola</p>
+                            <p class="fs-350 margin-top-100-sm">Estado: <span
+                                    class="fw-medium fs-italic">Concluído</span></p>
 
+                            <input type="hidden" name="support-ticket-item-image"
+                                data-image-path="https://source.unsplash.com/WLUHO9A_xik/1600x900"
+                                data-support-ticket-item-img>
 
+                            <div
+                                class="d-flex flex-flow-column-sm justify-content-space-between margin-top-200-sm gap-2">
+                                <button class="[ button ]" data-type="secondary-outline"
+                                    data-support-ticket-see-item>Ver
+                                    item</button>
+                                <button class="[ button ]">Ver mais
+                                    detalhes</button>
+                            </div>
 
-                            <button class="[ button ] [ margin-top-200-sm ]">Ver mais
-                                detalhes</button>
+                        </article>
+
+                    </li>
+                    <li>
+                        <article
+                            class="[ support-ticket__item ] [ d-grid grid-auto-flow-column-md bg-primary border-radius-1 outline-1 padding-100 ]"
+                            data-support-ticket>
+                            <p class="fs-350 fw-medium">Ticket nº1 - Camisola</p>
+                            <p class="fs-350 margin-top-100-sm">Estado: <span
+                                    class="fw-medium fs-italic">Concluído</span></p>
+
+                            <input type="hidden" name="support-ticket-item-image"
+                                data-image-path="https://source.unsplash.com/photos/random"
+                                data-support-ticket-item-img>
+
+                            <div
+                                class="d-flex flex-flow-column-sm justify-content-space-between margin-top-200-sm gap-2">
+                                <button class="[ button ]" data-type="secondary-outline"
+                                    data-support-ticket-see-item>Ver
+                                    item</button>
+                                <button class="[ button ]">Ver mais
+                                    detalhes</button>
+                            </div>
 
                         </article>
                     </li>
