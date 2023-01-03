@@ -48,40 +48,40 @@ use hail812\adminlte\widgets\Menu;
                             'label' => 'Aeroporto',
                             'icon' => 'fas fa-solid fa-plane',
                             'items' => [
-                                ['label' => 'Voos', 'url' => ['flight/index'], 'iconStyle' => 'far', 'icon'],
-                                ['label' => 'Aeroportos', 'url' => ['airport/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aviões', 'url' => ['airplane/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Companhias', 'url' => ['company/index'], 'iconStyle' => 'far']
+                                ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far', 'icon'],
+                                ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Companhias', 'url' => ['/company/index'], 'iconStyle' => 'far']
                             ]
                         ],
                         [
                             'label' => 'Utilizadores',
                             'icon' => 'fas fa-solid fa-user',
                             'items' => [
-                                ['label' => 'Administradores', 'url' => ['admin/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Trabalhadores', 'url' => ['employee/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Clientes', 'url' => ['client/index'], 'iconStyle' => 'far']
+                                ['label' => 'Administradores', 'url' => ['/admin/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Trabalhadores', 'url' => ['/employee/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Clientes', 'url' => ['/client/index'], 'iconStyle' => 'far']
                             ]
                         ],
                         [
                             'icon' => 'fas fa-solid fa-suitcase-rolling',
                             'label' => 'Perdidos e Achados',
                             'items' => [
-                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
+                                ['label' => 'Itens', 'url' => ['/lost-item/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
-                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['payment-method/index']],
+                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['/payment-method/index']],
                         [
                             'label' => 'Restaurantes',
                             'icon' => 'fas fa-solid fa-utensils',
                             'items' => [
-                                ['label' => 'Restaurantes', 'url' => ['restaurant/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Gerentes', 'url' => ['manager/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Restaurantes', 'url' => ['/restaurant/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Gerentes', 'url' => ['/manager/index'], 'iconStyle' => 'far'],
                             ]
                         ],
-                        ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
-                        ['label' => 'Server Log', 'url' => ['server-log/index'], 'icon' => 'fas fa-solid fa-info'],
+                        ['label' => 'Lojas', 'url' => ['/store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
+                        ['label' => 'Server Log', 'url' => ['/log-reader'], 'icon' => 'fas fa-solid fa-info'],
                     ],
                 ]);
             }
@@ -90,8 +90,8 @@ use hail812\adminlte\widgets\Menu;
                 echo Menu::widget([
                     'items' => [
 
-                        ['label' => 'Restaurante', 'url' => ['restaurant/view?id=' . $manager->restaurant_id], 'icon' => 'fas fa-house-user'],
-                        ['label' => 'Ementa', 'url' => ['restaurant-item/index?restaurant_id=' . $manager->restaurant_id], 'icon' => 'fas fa-solid fa-utensils'],
+                        ['label' => 'Restaurante', 'url' => ['/restaurant/view?id=' . $manager->restaurant_id], 'icon' => 'fas fa-house-user'],
+                        ['label' => 'Ementa', 'url' => ['/restaurant-item/index?restaurant_id=' . $manager->restaurant_id], 'icon' => 'fas fa-solid fa-utensils'],
                     ],
                 ]);
             }
@@ -102,21 +102,21 @@ use hail812\adminlte\widgets\Menu;
                             'label' => 'Aeroporto',
                             'icon' => 'fas fa-solid fa-plane',
                             'items' => [
-                                ['label' => 'Voos', 'url' => ['flight/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aeroportos', 'url' => ['airport/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aviões', 'url' => ['airplane/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
                             ]
                         ],
                         [
                             'label' => 'Perdidos e Achados',
                             'icon' => 'fas fa-solid fa-suitcase-rolling',
                             'items' => [
-                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
+                                ['label' => 'Itens', 'url' => ['/lost-item/index'], 'iconStyle' => 'far'],
+                                ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
                             ]
                         ],
-                        ['label' => 'Clientes', 'url' => ['client/index'], 'icon' => 'fas fa-solid fa-user'],
-                        ['label' => 'Métodos de Pagamento', 'url' => ['payment-method/index'], 'icon' => 'fas fa-solid fa-credit-card'],
+                        ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user'],
+                        ['label' => 'Métodos de Pagamento', 'url' => ['/payment-method/index'], 'icon' => 'fas fa-solid fa-credit-card'],
                     ],
                 ]);
             } ?>
