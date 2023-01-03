@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Airport;
 use common\models\AirportSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -97,6 +98,10 @@ class AirportController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+
+                //Criar logs
+                Yii::info("Criar aeroporto", 'airport');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -120,6 +125,10 @@ class AirportController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            //Criar logs
+            Yii::info("Editar aeroporto", 'airport');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -138,6 +147,9 @@ class AirportController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        //Criar logs
+        Yii::info("Eliminar aeroporto", 'airport');
 
         return $this->redirect(['index']);
     }

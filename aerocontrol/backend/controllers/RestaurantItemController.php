@@ -134,6 +134,10 @@ class RestaurantItemController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+
+                //Criar logs
+                Yii::info("Criar item do restaurante", 'restaurantItem');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -157,6 +161,10 @@ class RestaurantItemController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            //Criar logs
+            Yii::info("Editar item do restaurante", 'restaurantItem');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -178,6 +186,9 @@ class RestaurantItemController extends Controller
         $restaurant_id = $model->restaurant_id;
         $model->delete();
 
+        //Criar logs
+        Yii::info("Eliminar item do restaurante", 'restaurantItem');
+
         return $this->redirect(['index', 'restaurant_id' => $restaurant_id]);
     }
 
@@ -188,8 +199,13 @@ class RestaurantItemController extends Controller
         if ($model->deleteImage())
             $model->image = null;
 
-        if (!$model->save())
+        if (!$model->save()){
             Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
+        }else{
+            //Criar logs
+            Yii::info("Eliminar imagem do item do restaurante", 'restaurantItem');
+        }
+
 
         return $this->redirect(['view', 'id' => $model->id]);
     }
