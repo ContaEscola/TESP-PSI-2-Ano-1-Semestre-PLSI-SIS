@@ -13,11 +13,19 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log-reader'],
     'modules' => [
         'api' => [
             'class' => 'backend\modules\api\ModuleAPI',
         ],
+        'log-reader' => [
+            'class' => 'kriss\logReader\Module',
+            'aliases' => [
+                //'Frontend' => '@frontend/runtime/logs/app.log',
+                'Backend' => '@backend/runtime/logs/aerocontrol.log',
+                //'Console' => '@console/runtime/logs/app.log',
+            ],
+        ]
     ],
     'components' => [
         'request' => [
@@ -41,6 +49,13 @@ return [
                 [
                     'class' => \yii\log\FileTarget::class,
                     'levels' => ['error', 'warning'],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'categories' => ['airplane', 'airport', 'client', 'company', 'employee', 'flight', 'lostItem', 'manager', 'paymentMethod', 'restaurant', 'restaurantItem', 'store'],
+                    'exportInterval' => 1,
+                    'logFile' => '@backend/runtime/logs/aerocontrol.log',
+                    'logVars' => ["_POST", "_GET", "_FILES", "_SESSION"],
                 ],
             ],
         ],
