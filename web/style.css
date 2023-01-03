@@ -705,9 +705,13 @@ select.form__input {
   gap: 2rem;
   padding: 1em 1em;
   border-radius: 0.313em;
-  background-color: var(--clr-success);
+  background-color: var(--clr-alert-bg);
 
   animation: alert-anim 700ms ease-in-out forwards;
+}
+
+.alert[data-alert-type="warning"] {
+  --clr-alert-bg: var(--clr-error);
 }
 
 .alert[data-close] {
@@ -733,9 +737,6 @@ select.form__input {
 }
 
 .alert__message {
-  font-size: var(--fs-300);
-  font-weight: bold;
-  letter-spacing: 0.046875em;
   color: var(--clr-alert);
 }
 
@@ -752,8 +753,8 @@ select.form__input {
 }
 
 .alert__icon {
-  min-width: 1.2rem;
-  max-width: 1.2rem;
+  min-width: 1.7rem;
+  max-width: 1.7rem;
 }
 
 .alert-toggle-btn:where(:focus-visible, :hover) {
@@ -878,7 +879,12 @@ select.form__input {
 }
 
 .flight-result__trip:not(:first-child)
-  :where(.flight-result__departure-time, .flight-result__arrival-time, .flight-result__departure-city, .flight-result__arrival-city) {
+  :where(
+    .flight-result__departure-time,
+    .flight-result__arrival-time,
+    .flight-result__departure-city,
+    .flight-result__arrival-city
+  ) {
   font-size: var(--fs-200);
 }
 
