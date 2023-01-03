@@ -706,9 +706,13 @@ select.form__input {
   gap: 2rem;
   padding: 1em 1em;
   border-radius: 0.313em;
-  background-color: var(--clr-success);
+  background-color: var(--clr-alert-bg);
 
   animation: alert-anim 700ms ease-in-out forwards;
+}
+
+.alert[data-alert-type="warning"] {
+  --clr-alert-bg: var(--clr-error);
 }
 
 .alert[data-close] {
@@ -734,9 +738,6 @@ select.form__input {
 }
 
 .alert__message {
-  font-size: var(--fs-300);
-  font-weight: bold;
-  letter-spacing: 0.046875em;
   color: var(--clr-alert);
 }
 
@@ -753,8 +754,8 @@ select.form__input {
 }
 
 .alert__icon {
-  min-width: 1.2rem;
-  max-width: 1.2rem;
+  min-width: 1.7rem;
+  max-width: 1.7rem;
 }
 
 .alert-toggle-btn:where(:focus-visible, :hover) {
@@ -1004,7 +1005,8 @@ select.form__input {
   display: grid;
   row-gap: var(--size-200);
 
-  grid-template-columns: repeat(2, minmax(5rem, 1fr));
+  justify-content: space-between;
+  grid-template-columns: repeat(2, max-content);
   grid-template-areas:
     "flight-company flight-terminal"
     "flight-price flight-price";
@@ -1172,10 +1174,6 @@ select.form__input {
   letter-spacing: 0.046875em;
 }
 
-.overflow-wrap-break {
-  overflow-wrap: break-word;
-}
-
 .text-align-center {
   text-align: center;
 }
@@ -1197,10 +1195,6 @@ select.form__input {
 }
 
 @media (min-width: 40em) {
-  .container[data-type="medium-md"] {
-    --max-width: 70rem;
-  }
-
   .container[data-type="small-md"] {
     --max-width: 60rem;
   }

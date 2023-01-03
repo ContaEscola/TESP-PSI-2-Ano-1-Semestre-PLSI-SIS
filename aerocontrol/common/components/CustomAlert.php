@@ -12,7 +12,8 @@ class CustomAlert extends Widget
     public $viewPath = "@common/components/views";
 
     public $alertTypes = [
-        'success' => 'alert-success',
+        'success' => 'success',
+        'error' => 'warning'
     ];
 
 
