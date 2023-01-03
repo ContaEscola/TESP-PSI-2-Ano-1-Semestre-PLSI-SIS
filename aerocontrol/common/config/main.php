@@ -14,6 +14,13 @@ return [
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],
+
+        'formatter' => [
+            'datetimeFormat' => 'php:d-m-Y H:i',
+            'dateFormat' => 'php:d-m-Y',
+            'timeFormat' => 'php:H:i',
+            'nullDisplay' => 'N/A'
+        ]
     ],
     'timeZone' => 'Europe/Lisbon',
 ];

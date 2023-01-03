@@ -176,7 +176,6 @@ class Restaurant extends \yii\db\ActiveRecord
         return ArrayHelper::map($possibleRestaurants, 'id', 'name');
     }
 
-
     /**
      * Gets query for [[Managers]].
      *

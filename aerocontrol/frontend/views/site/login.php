@@ -11,7 +11,7 @@ use yii\bootstrap5\ActiveForm;
 $this->title = 'Login';
 ?>
 <div class="padding-block-700 height-100 d-grid align-items-center">
-    <div class="container" data-type="very-small-md">
+    <div class="container" data-type="extra-small-md">
         <h1 class="fs-600 fw-bold text-align-center">Login</h1>
 
 

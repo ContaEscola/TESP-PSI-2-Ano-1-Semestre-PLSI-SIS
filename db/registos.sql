@@ -58,6 +58,45 @@ INSERT INTO `client` (client_id) VALUES
 (14),
 (15);
 
+INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
+(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Acium_16-12-2022_12-27.jpg', 'https://acium.pt'),
+(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Benfica Official Store_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
+(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
+(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
+(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
+
+
+INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
+(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Burger King_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
+(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Delta_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
+(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'KFC_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
+(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
+(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
+
+INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
+(1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
+(2, 'Big Tasty', 'Big Tasty_15-12-2022_20-49.png', 1, 4),
+(3, 'CBO', 'CBO_15-12-2022_20-49.png', 1, 4),
+(4, 'Chicken McNuggets', 'Chicken McNuggets_15-12-2022_20-49.png', 1, 4),
+(5, 'Brutal Bacon', 'Brutal Bacon_15-12-2022_20-49.png', 1, 1),
+(6, 'King Chicken', 'King Chicken_15-12-2022_20-49.png', 1, 1),
+(7, 'Whopper', 'Whopper_15-12-2022_20-49.png', 1, 1),
+(8, 'Big King XXL', 'Big King XXL_15-12-2022_20-49.png', 1, 1),
+(9, 'Buger Double', 'Buger Double_15-12-2022_20-49.png', 1, 3),
+(10, 'BBC', 'BBC_15-12-2022_20-49.png', 1, 3),
+(11, 'Iced Latte', 'Iced Latte_15-12-2022_20-49.png', 1, 5),
+(12, 'Caffe Americano', 'Caffe Americano_15-12-2022_20-49.png', 1, 5);
+
+
+INSERT INTO `manager`(`manager_id`,`restaurant_id`) VALUES
+(16,1);
+
+
+
+
+
+
+
 
 INSERT INTO `company` (`id`, `name`, `state`) VALUES
 (1, 'TAP Portugal', 1),
@@ -88,30 +127,13 @@ INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
 (8, 'França', 'Marseille', 'Aéroport Marseille Provence', 'https://www.marseille.aeroport.fr/'),
 (9, 'França', 'Lyon', 'Lyon Aéroport', 'https://www.lyonaeroports.com/');
 
-INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
-(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Burger King_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
-(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Delta_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
-(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'KFC_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
-(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
-(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
-
-INSERT INTO `manager`(`manager_id`,`restaurant_id`) VALUES
-(16,1);
-
-
-INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
-(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Acium_16-12-2022_12-27.jpg', 'https://acium.pt'),
-(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Benfica Official Store_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
-(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
-(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
-(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
-
 INSERT INTO `payment_method` (`id`,`name`,`state`) VALUES
 (1,'Cartão de crédito',1),
 (2,'Cartão de débito',0),
 (3,'MBWay',1),
 (4,'Multibanco',1),
 (5,'Paypal',1);
+
 
 INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
 (1, 'Camisa às riscas azul e branca.', 'Perdido', '19-12-2022_20-03-20.jpg'),
@@ -127,17 +149,19 @@ INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
 (11, 'Mochila de escola da Nike azul.', 'Entregue', '19-12-2022_20-15-13.jpg'),
 (12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
 
-INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
-(1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
-(2, 'Big Tasty', 'Big Tasty_15-12-2022_20-49.png', 1, 4),
-(3, 'CBO', 'CBO_15-12-2022_20-49.png', 1, 4),
-(4, 'Chicken McNuggets', 'Chicken McNuggets_15-12-2022_20-49.png', 1, 4),
-(5, 'Brutal Bacon', 'Brutal Bacon_15-12-2022_20-49.png', 1, 1),
-(6, 'King Chicken', 'King Chicken_15-12-2022_20-49.png', 1, 1),
-(7, 'Whopper', 'Whopper_15-12-2022_20-49.png', 1, 1),
-(8, 'Big King XXL', 'Big King XXL_15-12-2022_20-49.png', 1, 1),
-(9, 'Buger Double', 'Buger Double_15-12-2022_20-49.png', 1, 3),
-(10, 'BBC', 'BBC_15-12-2022_20-49.png', 1, 3),
-(11, 'Iced Latte', 'Iced Latte_15-12-2022_20-49.png', 1, 5),
-(12, 'Caffe Americano', 'Caffe Americano_15-12-2022_20-49.png', 1, 5);
+INSERT INTO `flight`
+(`id`, `terminal`, `estimated_departure_date`, `estimated_arrival_date`, `departure_date`, `arrival_date`, `price`, `distance`, `state`, `discount_percentage`, `origin_airport_id`, `arrival_airport_id`, `airplane_id`)
+VALUES
+(1, 'T1', '2023-01-07 13:30:00', '2023-01-07 22:30:00', '2023-01-07 13:30:00', '2023-01-07 22:30:00', 100, 279, 'Previsto', 10, 1, 3, 1),
+(2, 'T2', '2023-01-15 08:00:00', '2023-01-16 00:25:00', '2023-01-15 08:00:00', '2023-01-16 00:25:00', 130, 1109, 'Previsto', 5, 6, 7, 2),
+(3, 'T3', '2023-01-30 09:45:00', '2023-01-30 23:45:00', '2023-01-30 09:45:00', '2023-01-30 23:45:00', 200, 1223, 'Previsto', 0, 4, 9, 1);
 
+INSERT INTO `flight_ticket` 
+(`flight_ticket_id`, `price`, `purchase_date`, `checkin`, `client_id`, `flight_id`, `payment_method_id`) 
+VALUES
+(1, 90, '2022-12-25 13:30:00', 0, 4, 1, 1);
+
+INSERT INTO `passenger`
+(`id`, `name`, `gender`, `extra_baggage`, `seat`, `flight_ticket_id`)
+VALUES
+(1, 'António Alberto', 'Masculino', 0, 'A1', 1);

@@ -185,6 +185,10 @@ class m221115_155756_init_rbac extends Migration
         $viewTicket->description = "Visualizar bilhete de voo";
         $auth->add($viewTicket);
 
+        $deleteTicket = $auth->createPermission('deleteTicket');
+        $deleteTicket->description = "Apagar bilhete de voo";
+        $auth->add($deleteTicket);
+
         /*
             Restaurant Permissions
         */
@@ -376,6 +380,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->add($deleteOwnRestaurantItemLogo);
         $auth->addChild($deleteOwnRestaurantItemLogo, $deleteRestaurantItemLogo);
 
+
         /*
             Own Restaurant Permissions
         */
@@ -402,11 +407,11 @@ class m221115_155756_init_rbac extends Migration
             Own Ticket Permissions
          */
 
-        $viewOwnTicket = $auth->createPermission("viewOwnTicket");
-        $viewOwnTicket->description = "Visualizar bilhete";
-        $viewOwnTicket->ruleName = $clientRule->name;
-        $auth->add($viewOwnTicket);
-        $auth->addChild($viewOwnTicket, $viewTicket);
+        $deleteOwnTicket = $auth->createPermission("deleteOwnTicket");
+        $deleteOwnTicket->description = "Apagar bilhete";
+        $deleteOwnTicket->ruleName = $clientRule->name;
+        $auth->add($deleteOwnTicket);
+        $auth->addChild($deleteOwnTicket,$deleteTicket);
 
         $updateOwnTicket = $auth->createPermission("updateOwnTicket");
         $updateOwnTicket->description = "Atualizar bilhete";
@@ -454,7 +459,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($client, $createTicket);
         $auth->addChild($client, $createSupportTicket);
         $auth->addChild($client, $createMessage);
-        $auth->addChild($client, $viewOwnTicket);
+        $auth->addChild($client, $deleteOwnTicket);
         $auth->addChild($client, $updateOwnTicket);
         $auth->addChild($client, $viewOwnProfile);
         $auth->addChild($client, $updateOwnProfile);
