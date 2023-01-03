@@ -1,5 +1,6 @@
 <?php
 
+use common\models\EmployeeFunction;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -15,20 +16,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Tem a certeza que deseja eliminar?',
-                'method' => 'post',
-            ],
-        ]) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'name',
+            [
+                'label' => 'Nome',
+                'value' => $model->name,
+            ],
+            [
+                'label' => 'Estado',
+                'value' => $model->getState(),
+            ],
         ],
     ]) ?>
 
