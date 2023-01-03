@@ -28,6 +28,17 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             [
+                'label' => 'Estado',
+                'attribute' => 'state',
+                'value' => function ($model) {
+                    return $model->getState();
+                },
+                'filter' => [
+                    EmployeeFunction::STATE_INACTIVE => 'Inativo',
+                    EmployeeFunction::STATE_ACTIVE => 'Ativo'
+                ],
+            ],
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, EmployeeFunction $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);

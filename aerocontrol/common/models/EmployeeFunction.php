@@ -10,11 +10,16 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property string $name
+ * @property string $state
  *
  * @property Employee[] $employees
  */
 class EmployeeFunction extends \yii\db\ActiveRecord
 {
+
+    const STATE_ACTIVE = 1;
+    const STATE_INACTIVE = 0;
+
     /**
      * {@inheritdoc}
      */
@@ -33,6 +38,9 @@ class EmployeeFunction extends \yii\db\ActiveRecord
             ['name', 'trim'],
             ['name', 'string', 'max' => 50],
             ['name', 'unique'],
+
+            ['state', 'boolean'],
+            ['state', 'default', 'value' => 1],
         ];
     }
 
@@ -44,6 +52,7 @@ class EmployeeFunction extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Nome',
+            'state' => 'Estado',
         ];
     }
 
@@ -57,6 +66,13 @@ class EmployeeFunction extends \yii\db\ActiveRecord
         return $this->hasMany(Employee::class, ['function_id' => 'id']);
     }
 
+    /**
+     * Getter for employeefunction state in string
+     */
+    public function getState()
+    {
+        return $this->state == self::STATE_INACTIVE ? "Inativo" : "Ativo";
+    }
 
     /**
      * Get all employeeFunctions IDs

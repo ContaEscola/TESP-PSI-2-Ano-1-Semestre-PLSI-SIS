@@ -17,7 +17,7 @@ class EmployeeFunctionSearch extends EmployeeFunction
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'state'], 'integer'],
             [['name'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class EmployeeFunctionSearch extends EmployeeFunction
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'state' => $this->state,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
