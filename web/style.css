@@ -1071,7 +1071,8 @@ select.form__input {
 
 @media (min-width: 40em) {
   .support-ticket__item {
-    grid-template-columns: 1fr 1fr max-content;
+    grid-template-columns: minmax(5rem, 15rem) 1fr minmax(20rem, 1fr);
+    --gap-size: 2rem;
     align-items: center;
   }
 }
