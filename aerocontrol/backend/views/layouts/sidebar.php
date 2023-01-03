@@ -81,7 +81,7 @@ use hail812\adminlte\widgets\Menu;
                             ]
                         ],
                         ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
-                        ['label' => 'Server Log', 'url' => ['serverlog'], 'icon' => 'fas fa-solid fa-info'],
+                        ['label' => 'Server Log', 'url' => ['server-log/index'], 'icon' => 'fas fa-solid fa-info'],
                     ],
                 ]);
             }
