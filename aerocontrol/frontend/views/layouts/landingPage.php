@@ -76,7 +76,7 @@ AppAsset::register($this);
                                     <a href="<?= Url::to(['site/index']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Home</a>
                                 </li>
                                 <li class="primary-navigation__item">
-                                    <a href="<?= Url::to(['site/voos']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
+                                    <a href="<?= Url::to(['flight/index']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Voos</a>
                                 </li>
                                 <li class="primary-navigation__item">
                                     <a href="<?= Url::to(['site/restaurantes']) ?>" class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a>

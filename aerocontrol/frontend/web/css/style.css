@@ -840,6 +840,7 @@ select.form__input {
 .flight-trip {
   display: grid;
   column-gap: 0.625rem;
+  height: min-content;
 
   grid-template-columns: minmax(5ch, 1fr) min-content minmax(5ch, 1fr);
   grid-template-areas:
@@ -1134,6 +1135,10 @@ select.form__input {
 
 .text-white {
   color: var(--clr-white);
+}
+
+.text-error {
+  color: var(--clr-error-400);
 }
 
 .text-black-400 {
