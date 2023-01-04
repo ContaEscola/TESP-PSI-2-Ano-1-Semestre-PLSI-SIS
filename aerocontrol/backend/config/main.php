@@ -52,7 +52,7 @@ return [
                 ],
                 [
                     'class' => 'yii\log\FileTarget',
-                    'categories' => ['admin', 'airplane', 'airport', 'client', 'company', 'employee', 'flight', 'lostItem', 'manager', 'paymentMethod', 'restaurant', 'restaurantItem', 'store'],
+                    'categories' => ['admin', 'airplane', 'airport', 'client', 'company', 'employee', 'employeeFunction', 'flight', 'lostItem', 'manager', 'paymentMethod', 'restaurant', 'restaurantItem', 'store'],
                     'exportInterval' => 1,
                     'logFile' => '@backend/runtime/logs/aerocontrol.log',
                     'logVars' => ["_POST", "_GET", "_FILES", "_SESSION"],
