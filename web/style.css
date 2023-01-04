@@ -5,6 +5,8 @@
   --clr-black-300: hsl(236 18% 19% / 0.6);
   --clr-black-200: hsl(236 18% 19% / 0.45);
 
+  --clr-black-400-no-alpha: hsl(236 18% 19%);
+
   --clr-primary: hsl(0 0% 98%);
 
   --clr-neutral-900: hsl(0 0% 82%);
@@ -839,6 +841,7 @@ select.form__input {
 }
 
 .flight-trip {
+  height: min-content;
   display: grid;
   column-gap: 0.625rem;
 
@@ -898,9 +901,17 @@ select.form__input {
   width: max-content;
 }
 
-.flight-result__book .icon {
+.flight-result-book__icon {
   display: none;
   width: 1rem;
+}
+
+.flight-result__book[data-status="locked"] {
+  --clr-text: var(--clr-neutral-800);
+  --clr-bg: var(--clr-secondary-accent-900);
+  --clr-text-on-event: var(--clr-neutral-800);
+  --clr-bg-on-event: var(--clr-secondary-accent-900);
+  --border-color: var(--clr-secondary-accent-900);
 }
 
 .flight-result__book[data-status="selected"] {
@@ -914,7 +925,7 @@ select.form__input {
   gap: 0.5rem;
 }
 
-.flight-result__book[data-status="selected"] .icon {
+.flight-result__book[data-status="selected"] .flight-result-book__icon {
   display: block;
 }
 
@@ -1161,6 +1172,54 @@ select.form__input {
   cursor: pointer;
 }
 
+/* tooltip */
+
+.tooltip-wrapper {
+  position: relative;
+  isolation: isolate;
+}
+
+.tooltip-wrapper[data-force-open] .tooltip,
+.tooltip-wrapper:hover .tooltip,
+.tooltip-wrapper:focus .tooltip {
+  display: block;
+}
+
+.tooltip {
+  --tooltip-icon-size: 0.8rem;
+
+  display: none;
+  isolation: isolate;
+
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+
+  pointer-events: none;
+}
+
+.tooltip-content {
+  width: max-content;
+  position: relative;
+
+  padding-block: 0.3em;
+  padding-inline: 0.6em;
+
+  background-color: var(--clr-black-400-no-alpha);
+}
+
+.tooltip-caret {
+  --clr-icon: var(--clr-black-400-no-alpha);
+  width: var(--tooltip-icon-size);
+
+  position: absolute;
+  z-index: -1;
+  top: calc(0rem - (0.45 * var(--tooltip-icon-size)));
+  right: 5%;
+
+  transform: rotate(90deg);
+}
+
 /* utility classes */
 
 .visually-hidden {
@@ -1226,6 +1285,10 @@ select.form__input {
 
 .text-white {
   color: var(--clr-white);
+}
+
+.text-error {
+  color: var(--clr-error-400);
 }
 
 .text-black-400 {
