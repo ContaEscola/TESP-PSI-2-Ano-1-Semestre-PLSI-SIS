@@ -30,9 +30,9 @@ use yii\helpers\Html;
         </p>
         <div class="flow" data-flow-space="extra-small">
             <?php if ($model->discount_percentage !== 0):?>
-            <p class="fs-300 italic text-error"><s><?= Html::encode($model->price - ($model->discount_percentage / 100 * $model->price)) ?>€</s></p>
+            <p class="fs-300 italic text-error"><s><?= Html::encode($model->price) ?>€</s></p>
             <?php endif;?>
-            <p class="fs-300 fw-bold letter-spacing-2"><?= Html::encode($model->price) ?>€</p>
+            <p class="fs-300 fw-bold letter-spacing-2"><?= Html::encode($model->price - ($model->discount_percentage / 100 * $model->price)) ?>€</p>
         </div>
 
     </div>

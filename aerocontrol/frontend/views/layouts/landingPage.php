@@ -39,7 +39,7 @@ AppAsset::register($this);
 
         <section class="[ hero ] [ d-grid place-content-center padding-block-700 ]">
             <h1 class="fs-600 fw-bold">Reserve já o seu próximo voo!</h1>
-            <a href="#" class="button">Reservar</a>
+            <?= Html::a('Reservar', ['flight/index'], ['class' => 'button'])?>
         </section>
     </div>
 
