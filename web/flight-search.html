@@ -17,6 +17,7 @@
 
     <script src="navbar.js" defer></script>
     <script src="form.js" defer></script>
+    <script src="flight-search.js" defer></script>
 </head>
 
 
@@ -63,7 +64,7 @@
                 <h1 class="fs-500 fw-semi-bold text-align-center">Reserve agora o seu voo</h1>
 
                 <form action="#" class="[ flight-search-form ] [ box-shadow-1  flow border-radius-1 ]"
-                    data-flow-space="small">
+                    data-flow-space="small" data-add-two-way-functionality>
                     <div class="even-columns gap-2">
                         <div class="[ form__group ] [ flex-flow-row gap-2 justify-content-space-between-sm ]">
                             <label for="one_way" class="radio-button-pill button" data-type="primary-outline"
@@ -139,7 +140,7 @@
 
 
                 <!-- Se houver voos -->
-                <ul role="list" class="margin-top-400 flow" data-flow-space="medium">
+                <ul role="list" class="margin-top-400 flow" data-flow-space="medium" data-flight-trip-go>
                     <li class="[ flight-result__wrapper ] [ bg-neutral-800 border-radius-1 ]">
                         <p class="[ flight-company ] [ fs-300 letter-spacing-2 ]">TAP</p>
                         <div class="[ flight-hours flight-result__hours ] [ justify-self-center-md ]">
@@ -229,8 +230,117 @@
                             </div>
 
                         </div>
-                        <a href="#" class="[ flight-result__book button ] [ justify-self-end ]"
-                            data-type="secondary">Reservar</a>
+                        <a class="[ flight-result__book button ] [ justify-self-end ]" data-type="secondary"
+                            data-flight-ticket-reserve>
+                            <span aria-hidden="true">
+                                <svg class="icon">
+                                    <use xlink:href="../images/success-icon.svg#success"></use>
+                                </svg>
+                            </span>
+                            <span data-book-btn-text>Reservar</span></a>
+                    </li>
+
+                </ul>
+
+
+                <ul role="list" class="margin-top-400 flow" data-flow-space="medium" data-flight-trip-back>
+                    <li class="[ flight-result__wrapper ] [ bg-neutral-800 border-radius-1 ]">
+                        <p class="[ flight-company ] [ fs-300 letter-spacing-2 ]">TAP</p>
+                        <div class="[ flight-hours flight-result__hours ] [ justify-self-center-md ]">
+                            <div class="flight-trip">
+
+                                <p
+                                    class="[ flight-trip__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
+                                    21:00</p>
+                                <p
+                                    class="[ flight-trip__departure-city ] [ fs-300 fw-light letter-spacing-2 text-align-right ]">
+                                    Lisboasadasdsadasdsadd</p>
+
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
+                                    <span aria-hidden="true">
+                                        <svg class="icon">
+                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <p class="[ flight-trip__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
+                                    13:00
+                                </p>
+                                <p class="[ flight-trip__arrival-city ] [ fs-300 fw-light letter-spacing-2 ]">
+                                    Portoasdasdasdasd</p>
+
+                            </div>
+
+                            <div class="flight-trip">
+
+                                <p
+                                    class="[ flight-trip__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
+                                    21:00</p>
+                                <p
+                                    class="[ flight-trip__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
+                                    Lisboaadasdasdasdsad</p>
+
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
+                                    <span aria-hidden="true">
+                                        <svg class="icon">
+                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <p class="[ flight-trip__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
+                                    13:00
+                                </p>
+                                <p class="[ flight-trip__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
+                                    Portoasdasdasdsadadasdsa</p>
+
+                            </div>
+
+                            <div class="flight-trip">
+
+                                <p
+                                    class="[ flight-trip__departure-time ] [ fs-300 fw-medium letter-spacing-2 text-align-right ]">
+                                    21:00</p>
+                                <p
+                                    class="[ flight-trip__departure-city ] [ fs-200 fw-light letter-spacing-2 text-align-right ]">
+                                    Lisboa</p>
+
+                                <div class="[ flight-trip__icon ] [ align-self-center ]">
+                                    <span aria-hidden="true">
+                                        <svg class="icon">
+                                            <use xlink:href="../images/flight-result-trip.svg#flight-result-trip"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+
+                                <p class="[ flight-trip__arrival-time ] [ fs-300 fw-medium letter-spacing-2 ]">
+                                    13:00
+                                </p>
+                                <p class="[ flight-trip__arrival-city ] [ fs-200 fw-light letter-spacing-2 ]">
+                                    Porto</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="[ flight-result__details ] [ flow text-align-right ]" data-flow-space="very-small">
+                            <p class="fs-300 letter-spacing-2">Lugares disponíveis: <span class="fw-semi-bold">3</span>
+                            </p>
+                            <div class="flow" data-flow-space="extra-small">
+                                <p class="fs-300 italic text-black-200"><s>100€</s></p>
+                                <p class="fs-300 fw-bold letter-spacing-2">90€</p>
+                            </div>
+
+                        </div>
+                        <a href="#" class="[ flight-result__book button ] [ justify-self-end ]" data-type="secondary"
+                            data-flight-ticket-reserve>
+                            <span aria-hidden="true">
+                                <svg class="icon">
+                                    <use xlink:href="../images/success-icon.svg#success"></use>
+                                </svg>
+                            </span>
+                            <span data-book-btn-text>Reservar</span></a>
                     </li>
 
                 </ul>

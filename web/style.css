@@ -898,6 +898,26 @@ select.form__input {
   width: max-content;
 }
 
+.flight-result__book .icon {
+  display: none;
+  width: 1rem;
+}
+
+.flight-result__book[data-status="selected"] {
+  --clr-icon: var(--clr-secondary-accent-400);
+
+  --clr-text: var(--clr-secondary-accent-400);
+  --clr-bg: var(--clr-white);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-secondary-accent-400);
+  --border-color: var(--clr-secondary-accent-400);
+  gap: 0.5rem;
+}
+
+.flight-result__book[data-status="selected"] .icon {
+  display: block;
+}
+
 .flights-not-found-grid {
   --gap-size: 1.25rem;
 }
