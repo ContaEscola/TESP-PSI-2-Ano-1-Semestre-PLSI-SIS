@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\ClientForm;
+use common\models\ClientForm;
 use common\models\Client;
 use common\models\ClientSearch;
 use common\models\User;
