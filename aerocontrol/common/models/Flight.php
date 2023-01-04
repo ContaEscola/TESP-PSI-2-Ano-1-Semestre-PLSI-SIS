@@ -20,6 +20,7 @@ use Yii;
  * @property int $origin_airport_id
  * @property int $arrival_airport_id
  * @property int $airplane_id
+ * @property int $passengers_left
  *
  * @property Airplane $airplane
  * @property Airport $arrivalAirport
@@ -162,6 +163,7 @@ class Flight extends \yii\db\ActiveRecord
             'origin_airport_id' => 'Aeroporto de Origem',
             'arrival_airport_id' => 'Aeroporto de Chegada',
             'airplane_id' => 'Avião',
+            'passengers_left' => 'Nº Passageiros restantes'
         ];
     }
 
@@ -195,6 +197,7 @@ class Flight extends \yii\db\ActiveRecord
 
         // Se for para criar um voo entao as datas certas são iguais às datas estimadas
         if ($insert) {
+            $this->passengers_left = $this->airplane->capacity;
             $this->departure_date = $this->estimated_departure_date;
             $this->arrival_date = $this->estimated_arrival_date;
         }
