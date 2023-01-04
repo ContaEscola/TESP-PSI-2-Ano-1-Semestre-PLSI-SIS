@@ -43,34 +43,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'terminal',
-            [
-                'attribute' => 'departure_date',
-                // 'filter' => DateTimePicker::widget([
-                //     'model' => $searchModel,
-                //     'attribute' => 'departure_date',
-                //     'options' => [
-                //         'class' => 'form-control'
-                //     ],
-                //     'pluginOptions' => [
-                //         'autoclose' => true,
-                //         'format' => 'dd-mm-yyyy hh:ii'
-                //     ],
-                // ]),
-            ],
-            [
-                'attribute' => 'arrival_date',
-                // 'filter' => DateTimePicker::widget([
-                //     'model' => $searchModel,
-                //     'attribute' => 'arrival_date',
-                //     'options' => [
-                //         'class' => 'form-control'
-                //     ],
-                //     'pluginOptions' => [
-                //         'autoclose' => true,
-                //         'format' => 'dd-mm-yyyy hh:ii'
-                //     ],
-                // ]),
-            ],
+            'departure_date',
+            'arrival_date',
             [
                 'label' => 'Avião',
                 'attribute' => 'airplane_id',
