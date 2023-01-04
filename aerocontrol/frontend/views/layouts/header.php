@@ -58,7 +58,6 @@ use yii\helpers\Url;
                                                             <use xlink:href="' . Url::to('@web/images/perfil-icon.svg#perfil-icon') . '"></use>
                                                         </svg>
                                                     </span>', ['account/profile'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
-                                        </a>
                                     </li>
                                     <li class="dropdown-menu__item">
                                         <?= Html::a('Meus Bilhetes' . '<span aria-hidden="true">
