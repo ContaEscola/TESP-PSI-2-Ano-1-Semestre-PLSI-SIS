@@ -1,10 +1,4 @@
 import * as toolTip from './toolTip.js';
-import * as screenUtils from './screenUtils.js';
-
-let screenWidth = innerWidth;
-window.addEventListener('resize', function () {
-    screenWidth = window.innerWidth;
-});
 
 const flightFormTwoWay = document.querySelector('.flight-search-form[data-add-two-way-functionality]');
 
@@ -26,20 +20,42 @@ if (flightFormTwoWay !== null) {
 
     const selectedBtns = new SelectedBtns();
 
-
     flightTicketsGo.forEach((btn) => {
-        btn.addEventListener('click', function () {
+
+        btn.addEventListener('click', function (e) {
+            e.target.focus();
             if (btn.getAttribute('data-status') != 'locked')
                 selectFlightBookBtn(this, RESERVE_BTN_GO);
 
         })
+
+
+        // Quando ganha o focus no mobile entao amostra o tooltip
+        btn.addEventListener('focus', function () {
+            toolTip.setForceOpenToolTip(btn, true);
+        });
+        // Quando perde o focus no mobile entao esconde o tooltip
+        btn.addEventListener('blur', function () {
+            toolTip.setForceOpenToolTip(btn, false);
+        });
     })
 
     flightTicketsBack.forEach((btn) => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (e) {
+
+            e.target.focus();
             if (btn.getAttribute('data-status') != 'locked')
                 selectFlightBookBtn(this, RESERVE_BTN_BACK);
         })
+
+        // Quando ganha o focus no mobile entao amostra o tooltip
+        btn.addEventListener('focus', function () {
+            toolTip.setForceOpenToolTip(btn, true);
+        });
+        // Quando perde o focus no mobile entao esconde o tooltip
+        btn.addEventListener('blur', function () {
+            toolTip.setForceOpenToolTip(btn, false);
+        });
     })
 
 
@@ -47,16 +63,9 @@ if (flightFormTwoWay !== null) {
         // Se já foi selecionado então dá reset
         if (selectedBtns[type] === btn) {
             selectedBtns[type] = null;
-            resetReserveBtn(btn);
 
-            switch (type) {
-                case RESERVE_BTN_BACK:
-                    unlockAllOtherBtns(flightTicketsBack);
-                    break;
-                case RESERVE_BTN_GO:
-                    unlockAllOtherBtns(flightTicketsGo);
-                    break;
-            }
+            unlockAllOtherBtns(type);
+            resetReserveBtn(btn);
 
         } else {
             selectedBtns[type] = btn;
@@ -69,16 +78,7 @@ if (flightFormTwoWay !== null) {
             btn.setAttribute('data-status', 'selected');
             btn.querySelector('[data-book-btn-text').textContent = "Selecionado";
 
-            switch (type) {
-                case RESERVE_BTN_BACK:
-                    lockAllOtherBtns(flightTicketsBack, 'Já tem o voo de volta selecionado!');
-                    break;
-                case RESERVE_BTN_GO:
-                    lockAllOtherBtns(flightTicketsGo, 'Já tem o voo de ida selecionado!');
-                    break;
-            }
-
-
+            lockAllOtherBtns(type);
         }
 
 
@@ -102,35 +102,50 @@ if (flightFormTwoWay !== null) {
         btn.querySelector('[data-book-btn-text').textContent = "Reservar";
     }
 
-    function lockAllOtherBtns(btns, titleForToolTip) {
-        btns.forEach((btn) => {
+    function lockAllOtherBtns(type) {
+        let btnsToLock;
+        let titleForToolTip;
+        switch (type) {
+            case RESERVE_BTN_BACK:
+                btnsToLock = flightTicketsBack;
+                titleForToolTip = 'Já tem o voo de volta selecionado!';
+                break;
+            case RESERVE_BTN_GO:
+                btnsToLock = flightTicketsGo;
+                titleForToolTip = 'Já tem o voo de ida selecionado!';
+                break;
+        }
+
+        btnsToLock.forEach((btn) => {
             if (btn.getAttribute('data-status') === 'selected') return;
 
             btn.setAttribute('data-status', 'locked');
             toolTip.addTooltip(btn, titleForToolTip);
 
-            // if (screenWidth < screenUtils.SMALL_MEDIA_QUERY) {
-
-            //     btn.addEventListener('touchStart', function () {
-            //         toolTip.forceOpenToolTip(btn, true)
-            //     });
-
-            //     btn.addEventListener('touchend', function () {
-            //         toolTip.forceOpenToolTip(btn, false);
-            //     })
-            // }
         })
     }
 
-    function unlockAllOtherBtns(btns) {
-        btns.forEach((btn) => {
+    function unlockAllOtherBtns(type) {
+        let btnsToUnlock;
+        switch (type) {
+            case RESERVE_BTN_BACK:
+                btnsToUnlock = flightTicketsBack;
+                break;
+            case RESERVE_BTN_GO:
+                btnsToUnlock = flightTicketsGo;
+                break;
+        }
+
+        btnsToUnlock.forEach((btn) => {
+            if (btn.getAttribute('data-status') === 'selected') return;
+
             btn.setAttribute('data-status', '');
             toolTip.removeToolTip(btn);
-            // toolTip.forceOpenToolTip(btn, false);
         })
     }
 
 
 }
+
 
 

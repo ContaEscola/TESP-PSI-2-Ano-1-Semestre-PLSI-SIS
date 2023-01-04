@@ -29,7 +29,7 @@ function getToolTipTemplate(title) {
 
     toolTip.appendChild(toolTipContent);
 
-    console.log(toolTip);
+
     return toolTip;
 }
 
@@ -41,14 +41,13 @@ function addTooltip(target, title) {
 
 function removeToolTip(target) {
     target.classList.remove('tooltip-wrapper');
-    let toolTip = target.querySelector('.tooltip');
-    target.removeChild(toolTip);
+    target.removeChild(target.querySelector('.tooltip'));
 }
 
-function forceOpenToolTip(wrapper, bool) {
+function setForceOpenToolTip(wrapper, bool) {
     wrapper.setAttribute('data-force-open', bool);
 }
 
 
 
-export { addTooltip, removeToolTip, forceOpenToolTip };
+export { addTooltip, removeToolTip, setForceOpenToolTip };

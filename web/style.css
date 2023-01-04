@@ -677,6 +677,10 @@ select.form__input {
   font-size: var(--fs-350);
 }
 
+.input__error:empty {
+  display: none;
+}
+
 .input__error {
   font-size: var(--fs-200);
   letter-spacing: 0.046875em;
@@ -1120,42 +1124,6 @@ select.form__input {
   object-position: center;
 }
 
-.support-ticket-modal[open] {
-  animation: modal-fade-in 1s ease forwards;
-}
-
-.support-ticket-modal.hide {
-  animation: modal-fade-out 1s ease forwards;
-}
-
-@keyframes modal-fade-in {
-  0% {
-    opacity: 0%;
-    transform: translateY(-50%);
-  }
-  25% {
-    opacity: 25%;
-  }
-  100% {
-    opacity: 100%;
-    transform: translateY(0%);
-  }
-}
-
-@keyframes modal-fade-out {
-  0% {
-    opacity: 100%;
-    transform: translateY(0%);
-  }
-  25% {
-    opacity: 75%;
-  }
-  100% {
-    opacity: 0%;
-    transform: translateY(-50%);
-  }
-}
-
 /* modal */
 
 .modal {
@@ -1172,6 +1140,36 @@ select.form__input {
   cursor: pointer;
 }
 
+.modal[open] {
+  animation: modal-fade-in 500ms ease-in-out forwards;
+}
+
+.modal.hide {
+  animation: modal-fade-out 500ms ease-in-out forwards;
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+}
+
 /* tooltip */
 
 .tooltip-wrapper {
@@ -1179,7 +1177,7 @@ select.form__input {
   isolation: isolate;
 }
 
-.tooltip-wrapper[data-force-open] .tooltip,
+.tooltip-wrapper[data-force-open="true"] .tooltip,
 .tooltip-wrapper:hover .tooltip,
 .tooltip-wrapper:focus .tooltip {
   display: block;
@@ -1725,4 +1723,8 @@ select.form__input {
 
 .border-radius-1 {
   border-radius: 0.3125rem;
+}
+
+.resize-none {
+  resize: none;
 }
