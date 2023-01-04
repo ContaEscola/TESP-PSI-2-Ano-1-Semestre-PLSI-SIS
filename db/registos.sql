@@ -150,11 +150,11 @@ INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
 (12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
 
 INSERT INTO `flight`
-(`id`, `terminal`, `estimated_departure_date`, `estimated_arrival_date`, `departure_date`, `arrival_date`, `price`, `distance`, `state`, `discount_percentage`, `origin_airport_id`, `arrival_airport_id`, `airplane_id`)
+(`id`, `terminal`, `estimated_departure_date`, `estimated_arrival_date`, `departure_date`, `arrival_date`, `price`, `distance`, `state`,`passengers_left`, `discount_percentage`, `origin_airport_id`, `arrival_airport_id`, `airplane_id`)
 VALUES
-(1, 'T1', '2023-01-07 13:30:00', '2023-01-07 22:30:00', '2023-01-07 13:30:00', '2023-01-07 22:30:00', 100, 279, 'Previsto', 10, 1, 3, 1),
-(2, 'T2', '2023-01-15 08:00:00', '2023-01-16 00:25:00', '2023-01-15 08:00:00', '2023-01-16 00:25:00', 130, 1109, 'Previsto', 5, 6, 7, 2),
-(3, 'T3', '2023-01-30 09:45:00', '2023-01-30 23:45:00', '2023-01-30 09:45:00', '2023-01-30 23:45:00', 200, 1223, 'Previsto', 0, 4, 9, 1);
+(1, 'T1', '2023-01-07 13:30:00', '2023-01-07 22:30:00', '2023-01-07 13:30:00', '2023-01-07 22:30:00', 100, 279, 'Previsto', 120, 10, 1, 3, 1),
+(2, 'T2', '2023-01-15 08:00:00', '2023-01-16 00:25:00', '2023-01-15 08:00:00', '2023-01-16 00:25:00', 130, 1109, 'Previsto', 100, 5, 6, 7, 2),
+(3, 'T3', '2023-01-30 09:45:00', '2023-01-30 23:45:00', '2023-01-30 09:45:00', '2023-01-30 23:45:00', 200, 1223, 'Previsto', 120, 0, 4, 9, 1);
 
 INSERT INTO `flight_ticket` 
 (`flight_ticket_id`, `price`, `purchase_date`, `checkin`, `client_id`, `flight_id`, `payment_method_id`) 
