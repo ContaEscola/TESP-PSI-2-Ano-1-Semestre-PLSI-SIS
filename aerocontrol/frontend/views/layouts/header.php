@@ -53,12 +53,11 @@ use yii\helpers\Url;
                                 </button>
                                 <ul role="list" class="dropdown-menu">
                                     <li class="dropdown-menu__item">
-                                        <a class="[ dropdown-menu__link ] [ text-primary-accent-400 ]" href="#"> Ver conta
-                                            <span aria-hidden="true">
+                                        <?= Html::a('Ver Conta' . '<span aria-hidden="true">
                                                         <svg class="icon dropdown-link__icon">
-                                                            <use xlink:href="<?= Url::to("@web/images/perfil-icon.svg#perfil-icon") ?>"></use>
+                                                            <use xlink:href="' . Url::to('@web/images/perfil-icon.svg#perfil-icon') . '"></use>
                                                         </svg>
-                                                    </span>
+                                                    </span>', ['account/profile'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                         </a>
                                     </li>
                                     <li class="dropdown-menu__item">
