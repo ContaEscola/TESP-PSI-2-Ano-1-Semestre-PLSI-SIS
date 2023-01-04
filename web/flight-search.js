@@ -20,6 +20,13 @@ if (flightFormTwoWay !== null) {
 
     const selectedBtns = new SelectedBtns();
 
+    function getUrlOnSuccess() {
+        let url = location.href;
+        url += `&flightGoId=${selectedBtns.RESERVE_BTN_GO.getAttribute('data-flight-id')}`;
+        url += `&flightBackId=${selectedBtns.RESERVE_BTN_BACK.getAttribute('data-flight-id')}`;
+        return url;
+    }
+
     flightTicketsGo.forEach((btn) => {
 
         btn.addEventListener('click', function (e) {
@@ -70,10 +77,13 @@ if (flightFormTwoWay !== null) {
         } else {
             selectedBtns[type] = btn;
 
-            // Verifica se já tão todos os butões necessários selecionados
+            // Verifica se já tão todos os butões necessários selecionados, se sim então redireciona a página
             if (!hasAllBtnTypesSelected()) {
                 resetOtherBtnTypes();
+            } else {
+                location.href = getUrlOnSuccess();
             }
+
 
             btn.setAttribute('data-status', 'selected');
             btn.querySelector('[data-book-btn-text').textContent = "Selecionado";
