@@ -10,6 +10,11 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 
 $this->title = "Voos";
+if ($model->two_way_trip){
+    $this->registerJsFile('@web/js/flight-search.js', [
+        'type' => 'module',
+    ]);
+}
 ?>
 
 <div class="container" data-type="small-md">
@@ -46,7 +51,8 @@ $this->title = "Voos";
                     'tag' => 'ul',
                     'class' => 'margin-top-400 flow',
                     'role' => 'list',
-                    'data-flow-space' => 'medium'
+                    'data-flow-space' => 'medium',
+                    'data-flight-trip-go' => true,
                 ],
                 'emptyText' => "",
                 'itemView' => '_flight',
@@ -61,7 +67,8 @@ $this->title = "Voos";
                         'tag' => 'ul',
                         'class' => 'margin-top-400 flow',
                         'role' => 'list',
-                        'data-flow-space' => 'medium'
+                        'data-flow-space' => 'medium',
+                        'data-flight-trip-back' => true,
                     ],
                     'emptyText' => "",
                     'itemView' => '_flight',

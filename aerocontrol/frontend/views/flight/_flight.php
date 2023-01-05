@@ -3,6 +3,7 @@
 
 use common\models\Airport;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 <li class="[ flight-result__wrapper ] [ bg-neutral-800 border-radius-1 ]">
@@ -36,7 +37,17 @@ use yii\helpers\Html;
         </div>
 
     </div>
-    <?= Html::a('Reservar', ['flight-ticket/create', 'id' => $model->id], ['class' => '[ flight-result__book button ] [ justify-self-end ]', 'data-type'=>'secondary']) ?>
-
-    <a href="" class="[ flight-result__book button ] [ justify-self-end ]" data-type="secondary">Reservar</a>
+    <?= Html::a('<span aria-hidden="true">
+                        <svg class="icon flight-result-book__icon">
+                            <use xlink:href="' . Url::to('@web/images/success-icon.svg#success') . '"></use>
+                        </svg>
+                    </span>
+                    <span data-book-btn-text>Reservar</span>'
+        , ['flight-ticket/create', 'id' => $model->id], [
+        'class' => '[ flight-result__book button ] [ justify-self-end ]',
+        'data-type'=>'secondary',
+        'tabindex' => 0,
+        'data-flight-ticket-reserve' => true,
+        'data-flight-id'=>$model->id
+    ]) ?>
 </li>
