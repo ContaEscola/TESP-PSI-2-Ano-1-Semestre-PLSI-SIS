@@ -1,5 +1,7 @@
 CREATE SCHEMA IF NOT EXISTS aerocontrol;
 
+CREATE SCHEMA IF NOT EXISTS aerocontrol_tests;
+
 USE aerocontrol;
 
 --
