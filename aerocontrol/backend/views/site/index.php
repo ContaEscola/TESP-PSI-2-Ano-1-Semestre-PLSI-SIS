@@ -108,7 +108,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Server Log',
                     'icon' => 'fas fa-info',
-                    'linkUrl' => Url::to([""])
+                    'linkUrl' => Url::to(["/log-reader"])
                 ]) ?>
             </div>
         </div>

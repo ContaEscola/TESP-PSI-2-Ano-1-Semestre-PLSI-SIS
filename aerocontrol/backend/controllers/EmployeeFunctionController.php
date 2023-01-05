@@ -2,18 +2,17 @@
 
 namespace backend\controllers;
 
-use common\models\PaymentMethod;
-use common\models\PaymentMethodSearch;
-use Yii;
+use common\models\EmployeeFunction;
+use common\models\EmployeeFunctionSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PaymentMethodController implements the CRUD actions for PaymentMethod model.
+ * EmployeeFunctionController implements the CRUD actions for EmployeeFunction model.
  */
-class PaymentMethodController extends Controller
+class EmployeeFunctionController extends Controller
 {
     /**
      * @inheritDoc
@@ -24,7 +23,7 @@ class PaymentMethodController extends Controller
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'delete' => ['POST'],
                     ],
@@ -35,17 +34,22 @@ class PaymentMethodController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewPaymentMethod'],
+                            'roles' => ['viewEmployeeFunction'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewPaymentMethod'],
+                            'roles' => ['viewEmployeeFunction'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['create'],
+                            'roles' => ['createEmployeeFunction'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['update'],
-                            'roles' => ['updatePaymentMethod'],
+                            'roles' => ['updateEmployeeFunction'],
                         ],
                     ],
                 ],
@@ -54,13 +58,13 @@ class PaymentMethodController extends Controller
     }
 
     /**
-     * Lists all PaymentMethod models.
+     * Lists all EmployeeFunction models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PaymentMethodSearch();
+        $searchModel = new EmployeeFunctionSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -70,7 +74,7 @@ class PaymentMethodController extends Controller
     }
 
     /**
-     * Displays a single PaymentMethod model.
+     * Displays a single EmployeeFunction model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -83,7 +87,33 @@ class PaymentMethodController extends Controller
     }
 
     /**
-     * Updates an existing PaymentMethod model.
+     * Creates a new EmployeeFunction model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return string|\yii\web\Response
+     */
+    public function actionCreate()
+    {
+        $model = new EmployeeFunction();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+
+                //Criar logs
+                Yii::info("Criar função do empregado", 'employeeFunction');
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing EmployeeFunction model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -93,29 +123,29 @@ class PaymentMethodController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->state == PaymentMethod::STATE_ACTIVE) $model->state = PaymentMethod::STATE_INACTIVE;
-        else $model->state = PaymentMethod::STATE_ACTIVE;
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
 
-        if (!$model->save()) {
-            Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
-        } else {
             //Criar logs
-            Yii::info("Editar metodo de pagamento", 'paymentMethod');
+            Yii::info("Editar função do empregado", 'employeeFunction');
+
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->redirect(['index']);
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Finds the PaymentMethod model based on its primary key value.
+     * Finds the EmployeeFunction model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return PaymentMethod the loaded model
+     * @return EmployeeFunction the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PaymentMethod::findOne(['id' => $id])) !== null) {
+        if (($model = EmployeeFunction::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
