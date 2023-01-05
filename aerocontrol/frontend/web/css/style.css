@@ -5,6 +5,8 @@
   --clr-black-300: hsl(236 18% 19% / 0.6);
   --clr-black-200: hsl(236 18% 19% / 0.45);
 
+  --clr-black-400-no-alpha: hsl(236 18% 19%);
+
   --clr-primary: hsl(0 0% 98%);
 
   --clr-neutral-900: hsl(0 0% 82%);
@@ -262,7 +264,7 @@ footer {
 
 @media (min-width: 40em) {
   .primary-navigation__item:not([data-type="active"]):hover
-    .primary-navigation__link {
+  .primary-navigation__link {
     color: var(--clr-black-200);
   }
 }
@@ -313,7 +315,7 @@ footer {
   cursor: pointer;
 
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
-    border 250ms ease-in-out;
+  border 250ms ease-in-out;
 }
 
 .button:where(:hover, :focus-visible) {
@@ -610,7 +612,7 @@ footer {
   background-size: var(--icon-size);
 
   box-shadow: var(--box-shadow-x-offset) var(--box-shadow-y-offset)
-    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
+  var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
 }
 
 .form__input::placeholder {
@@ -645,8 +647,8 @@ footer {
   --clr-border: var(--clr-success);
   --icon-url: url("../images/input-success.svg");
   padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
+          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+          var(--icon-margin-left-offset)
   );
 }
 
@@ -654,8 +656,8 @@ footer {
   --clr-border: var(--clr-error-400);
   --icon-url: url("../images/input-invalid.svg");
   padding-right: calc(
-    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-      var(--icon-margin-left-offset)
+          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+          var(--icon-margin-left-offset)
   );
 }
 
@@ -673,6 +675,10 @@ select.form__input {
 
 .input__label {
   font-size: var(--fs-350);
+}
+
+.input__error:empty {
+  display: none;
 }
 
 .input__error {
@@ -706,9 +712,13 @@ select.form__input {
   gap: 2rem;
   padding: 1em 1em;
   border-radius: 0.313em;
-  background-color: var(--clr-success);
+  background-color: var(--clr-alert-bg);
 
   animation: alert-anim 700ms ease-in-out forwards;
+}
+
+.alert[data-alert-type="warning"] {
+  --clr-alert-bg: var(--clr-error-400);
 }
 
 .alert[data-close] {
@@ -734,9 +744,6 @@ select.form__input {
 }
 
 .alert__message {
-  font-size: var(--fs-300);
-  font-weight: bold;
-  letter-spacing: 0.046875em;
   color: var(--clr-alert);
 }
 
@@ -753,8 +760,8 @@ select.form__input {
 }
 
 .alert__icon {
-  min-width: 1.2rem;
-  max-width: 1.2rem;
+  min-width: 1.7rem;
+  max-width: 1.7rem;
 }
 
 .alert-toggle-btn:where(:focus-visible, :hover) {
@@ -838,9 +845,9 @@ select.form__input {
 }
 
 .flight-trip {
+  height: min-content;
   display: grid;
   column-gap: 0.625rem;
-  height: min-content;
 
   grid-template-columns: minmax(5ch, 1fr) min-content minmax(5ch, 1fr);
   grid-template-areas:
@@ -880,7 +887,7 @@ select.form__input {
 }
 
 .flight-result__trip:not(:first-child)
-  :where(
+:where(
     .flight-result__departure-time,
     .flight-result__arrival-time,
     .flight-result__departure-city,
@@ -896,6 +903,34 @@ select.form__input {
 .flight-result__book {
   grid-area: book;
   width: max-content;
+}
+
+.flight-result-book__icon {
+  display: none;
+  width: 1rem;
+}
+
+.flight-result__book[data-status="locked"] {
+  --clr-text: var(--clr-neutral-800);
+  --clr-bg: var(--clr-secondary-accent-900);
+  --clr-text-on-event: var(--clr-neutral-800);
+  --clr-bg-on-event: var(--clr-secondary-accent-900);
+  --border-color: var(--clr-secondary-accent-900);
+}
+
+.flight-result__book[data-status="selected"] {
+  --clr-icon: var(--clr-secondary-accent-400);
+
+  --clr-text: var(--clr-secondary-accent-400);
+  --clr-bg: var(--clr-white);
+  --clr-text-on-event: var(--clr-white);
+  --clr-bg-on-event: var(--clr-secondary-accent-400);
+  --border-color: var(--clr-secondary-accent-400);
+  gap: 0.5rem;
+}
+
+.flight-result__book[data-status="selected"] .flight-result-book__icon {
+  display: block;
 }
 
 .flights-not-found-grid {
@@ -1005,7 +1040,8 @@ select.form__input {
   display: grid;
   row-gap: var(--size-200);
 
-  grid-template-columns: repeat(2, minmax(5rem, 1fr));
+  justify-content: space-between;
+  grid-template-columns: repeat(2, max-content);
   grid-template-areas:
     "flight-company flight-terminal"
     "flight-price flight-price";
@@ -1054,8 +1090,6 @@ select.form__input {
   border-bottom: 0.05rem solid var(--clr-black-200);
 }
 
-/* modal */
-
 .flight-ticket-modal {
   inset: 0;
   max-width: 100%;
@@ -1064,10 +1098,124 @@ select.form__input {
   height: 100%;
 }
 
+/* support ticket */
+
+.support-ticket__item {
+  --gap-size: 0;
+}
+
+@media (min-width: 40em) {
+  .support-ticket__item {
+    grid-template-columns: minmax(5rem, 15rem) 1fr minmax(20rem, 1fr);
+    --gap-size: 2rem;
+    align-items: center;
+  }
+}
+
+.support-ticket-modal__image-item {
+  width: 70%;
+  height: 15rem;
+}
+
+.support-ticket-modal__image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* modal */
+
+.modal {
+  inset: 0 0 0 0;
+  margin-inline: auto;
+  margin-top: 10rem;
+  border: none;
+  box-shadow: 0 0 0.25em var(--clr-neutral-900);
+}
+
 .modal__close-btn {
   border: 0;
   background-color: transparent;
   cursor: pointer;
+}
+
+.modal[open] {
+  animation: modal-fade-in 500ms ease-in-out forwards;
+}
+
+.modal.hide {
+  animation: modal-fade-out 500ms ease-in-out forwards;
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+}
+
+/* tooltip */
+
+.tooltip-wrapper {
+  position: relative;
+  isolation: isolate;
+}
+
+.tooltip-wrapper[data-force-open="true"] .tooltip,
+.tooltip-wrapper:hover .tooltip,
+.tooltip-wrapper:focus .tooltip {
+  display: block;
+}
+
+.tooltip {
+  --tooltip-icon-size: 0.8rem;
+
+  display: none;
+  isolation: isolate;
+
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+
+  pointer-events: none;
+}
+
+.tooltip-content {
+  width: max-content;
+  position: relative;
+
+  padding-block: 0.3em;
+  padding-inline: 0.6em;
+
+  background-color: var(--clr-black-400-no-alpha);
+}
+
+.tooltip-caret {
+  --clr-icon: var(--clr-black-400-no-alpha);
+  width: var(--tooltip-icon-size);
+
+  position: absolute;
+  z-index: -1;
+  top: calc(0rem - (0.45 * var(--tooltip-icon-size)));
+  right: 5%;
+
+  transform: rotate(90deg);
 }
 
 /* utility classes */
@@ -1177,10 +1325,6 @@ select.form__input {
   letter-spacing: 0.046875em;
 }
 
-.overflow-wrap-break {
-  overflow-wrap: break-word;
-}
-
 .text-align-center {
   text-align: center;
 }
@@ -1202,10 +1346,6 @@ select.form__input {
 }
 
 @media (min-width: 40em) {
-  .container[data-type="medium-md"] {
-    --max-width: 70rem;
-  }
-
   .container[data-type="small-md"] {
     --max-width: 60rem;
   }
@@ -1240,6 +1380,12 @@ select.form__input {
 
 .grid-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+@media (min-width: 40em) {
+  .grid-auto-flow-column-md {
+    grid-auto-flow: column;
+  }
 }
 
 .even-columns {
@@ -1455,6 +1601,10 @@ select.form__input {
   padding: var(--size-300);
 }
 
+.padding-100 {
+  padding: var(--size-100);
+}
+
 .margin-inline-auto {
   margin-inline: auto;
 }
@@ -1475,9 +1625,17 @@ select.form__input {
   margin-top: var(--size-200);
 }
 
+.margin-top-100 {
+  margin-top: var(--size-100);
+}
+
 @media (max-width: 39.999em) {
   .margin-top-200-sm {
     margin-top: var(--size-200);
+  }
+
+  .margin-top-100-sm {
+    margin-top: var(--size-100);
   }
 
   .margin-top-50-sm {
@@ -1558,6 +1716,15 @@ select.form__input {
   box-shadow: 0 0 0.3em 0.1em var(--clr-neutral-800);
 }
 
+.outline-1 {
+  --outline-size: 0.063rem;
+  outline: var(--outline-size) solid var(--clr-outline, var(--clr-neutral-900));
+}
+
 .border-radius-1 {
   border-radius: 0.3125rem;
+}
+
+.resize-none {
+  resize: none;
 }
