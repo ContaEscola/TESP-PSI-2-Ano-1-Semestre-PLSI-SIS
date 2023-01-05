@@ -39,7 +39,7 @@ use yii\helpers\Url;
     </div>
     <?= Html::a('<span aria-hidden="true">
                         <svg class="icon flight-result-book__icon">
-                            <use xlink:href="' . Url::to('@web/images/success-icon.svg#success') . '"></use>
+                            <use xlink:href="' . Url::to('@web/images/success-icon.svg#alert-success') . '"></use>
                         </svg>
                     </span>
                     <span data-book-btn-text>Reservar</span>'
