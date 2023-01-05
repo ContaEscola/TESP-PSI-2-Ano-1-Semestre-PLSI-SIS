@@ -11,7 +11,6 @@ use Yii;
  * @property string $title
  * @property string $state
  * @property int $client_id
- * @property int $employee_id
  *
  * @property Client $client
  * @property Employee $employee
@@ -34,19 +33,18 @@ class SupportTicket extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'state', 'client_id', 'employee_id'], 'required'],
+            [['title', 'state', 'client_id'], 'required'],
             [['title', 'state'], 'trim'],
             ['state', 'string'],
             [['state'], 'in', 'range' => [
-                'Em Progresso',
                 'Por Rever',
+                'Em Progresso',
                 'Concluido'
             ]],
             ['state', 'default', 'value' => 'Por Rever'],
             ['title', 'string', 'max' => 20],
-            [['client_id', 'employee_id'], 'integer'],
+            ['client_id', 'integer'],
             ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
-            ['employee_id', 'exist', 'skipOnError' => true, 'targetClass' => Employee::class, 'targetAttribute' => ['employee_id' => 'employee_id']],
         ];
     }
 
@@ -60,7 +58,6 @@ class SupportTicket extends \yii\db\ActiveRecord
             'title' => 'Título',
             'state' => 'Estado',
             'client_id' => 'ID do Cliente',
-            'employee_id' => 'ID do Funcionário',
         ];
     }
 

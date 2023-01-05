@@ -278,12 +278,10 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
 CREATE TABLE IF NOT EXISTS `support_ticket` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `title` VARCHAR(20) NOT NULL,
-  `state` ENUM('Em Progresso','Por Rever','Concluido') NOT NULL DEFAULT 'Por Rever',
+  `state` ENUM('Por Rever','Em Progresso','Concluido') NOT NULL DEFAULT 'Por Rever',
   `client_id` INT(11) UNSIGNED NOT NULL,
-  `employee_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
-  CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`),
-  CONSTRAINT `fk_support_ticket_employee_id` FOREIGN KEY(`employee_id`) REFERENCES `employee`(`employee_id`)
+  CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -305,7 +303,6 @@ CREATE TABLE IF NOT EXISTS `ticket_item` (
 CREATE TABLE IF NOT EXISTS `ticket_message` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `message` VARCHAR(255) NOT NULL,
-  `photo` VARCHAR(75) NULL,
   `sender_id` INT(11) UNSIGNED NOT NULL,
   `support_ticket_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_ticket_message` PRIMARY KEY(`id`),
