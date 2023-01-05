@@ -17,7 +17,6 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/navbar.js',
         'js/dropdown.js',
-        'js/form.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

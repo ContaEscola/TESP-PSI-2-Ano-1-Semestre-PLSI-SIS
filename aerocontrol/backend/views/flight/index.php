@@ -43,8 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'terminal',
-            'departure_date',
-            'arrival_date',
+            [
+                'attribute' => 'departure_date',
+                'filter' => false
+            ],
+            [
+                'attribute' => 'arrival_date',
+                'filter' => false
+            ],
             [
                 'label' => 'Avião',
                 'attribute' => 'airplane_id',

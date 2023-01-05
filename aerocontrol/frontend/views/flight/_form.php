@@ -1,4 +1,5 @@
 <?php
+
 /** @var yii\web\View $this */
 /** @var \frontend\models\FlightForm $model */
 /** @var \common\models\Airport[] $airports */
@@ -7,6 +8,7 @@ use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$this->registerJsFile('@web/js/flight-search-form.js');
 ?>
 
 <?php $form = ActiveForm::begin([
@@ -23,119 +25,145 @@ use yii\helpers\Url;
         'data-flow-space' => 'small',
     ]
 ]) ?>
-    <div class="even-columns gap-2">
-        <div class="[ form__group ] [ flex-flow-row gap-2 justify-content-space-between-sm ]">
-            <?=
-            $form->field($model, 'two_way_trip')
-                ->radioList(
-                    [
-                        '0' => 'Só Ida',
-                        '1' => 'Ida e Volta'
-                    ],
-                    [
-                        'item' => function($index, $label, $name, $checked, $value) {
-                            if ($checked) $return = '<label class="radio-button-pill button"  data-type="primary-outline" data-active="true">';
-                            else $return = '<label class="radio-button-pill button" data-type="primary-outline" data-active="false">';
-                            $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ' . ($checked ? "checked" : "") . '>';
-                            $return .= $label;
-                            $return .= '</label>';
+<div class="even-columns gap-2">
+    <?=
+    $form->field($model, 'two_way_trip', [
+        'errorOptions' => [
+            'tag' => false,
+        ]
+    ])
+        ->radioList(
+            [
+                '0' => 'Só Ida',
+                '1' => 'Ida e Volta'
+            ],
+            [
+                'item' => function ($index, $label, $name, $checked, $value) {
 
-                            return $return;
-                        }
-                    ]
-                )
-                ->label(false);
-            ?>
-        </div>
-    </div>
+                    $return = '<label class="radio-button-pill button" data-type="primary-outline" data-active="' . ($checked ? "true" : "false") . '">';
+                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : "") . ' ';
+                    switch ($index) {
+                            // Será o radio de 'Só Ida'
+                        case 0:
+                            // Se for o selecionado por defeito então adiciona o force-close
+                            if ($checked)
+                                $return .= 'data-force-close="true"';
+                            $return .= 'data-close="#destiny_departure_date__wrapper"';
+                            break;
 
-    <datalist id="airports">
-        <?php
-        foreach ($airports as $airport) {
-            echo '<option value=\''.$airport->name.'\'>';
-        }
-        ?>
-    </datalist>
+                            // Será o radio de 'Ida e Volta'
+                        case 1:
 
-    <div class="even-columns gap-2">
-            <?= $form->field($model, 'origin', [
-                'errorOptions' => [
-                    'tag' => 'p',
-                    'class' => 'input__error margin-top-50 '
-                ],
-                'options' => ['class' => 'form__group gap-0'],
-            ])
-                ->label(null, [
-                    'class' => '[ input__label ] [ margin-bottom-50 ]'
-                ])
-                ->textInput([
-                    'class' => 'form__input',
-                    'list' => 'airports',
-                ]) ?>
 
-            <?= $form->field($model, 'destiny', [
-                'errorOptions' => [
-                    'tag' => 'p',
-                    'class' => 'input__error margin-top-50'
-                ],
-                'options' => ['class' => 'form__group gap-0'],
-            ])
-                ->label(null, [
-                    'class' => '[ input__label ] [ margin-bottom-50 ]'
-                ])
-                ->textInput([
-                    'class' => 'form__input',
-                    'list' => 'airports',
-                ]) ?>
-    </div>
+                            $return .= 'data-open="#destiny_departure_date__wrapper"';
+                            break;
+                    }
 
-    <div class="even-columns gap-1">
-            <?= $form->field($model, 'origin_departure_date', [
-                'errorOptions' => [
-                    'tag' => 'p',
-                    'class' => 'input__error margin-top-50'
-                ],
-                'options' => ['class' => 'form__group gap-0'],
-            ])
-                ->label(null, [
-                    'class' => '[ input__label ] [ margin-bottom-50 ]'
-                ])
-                ->textInput([
-                    'class' => 'form__input',
-                    'type' => 'date'
-                ]) ?>
+                    $return .= ">";
+                    $return .= $label;
+                    $return .= '</label>';
 
-            <?= $form->field($model, 'destiny_departure_date', [
-                'errorOptions' => [
-                    'tag' => 'p',
-                    'class' => 'input__error margin-top-50'
-                ],
-                'options' => ['class' => 'form__group gap-0'],
-            ])
-                ->label(null, [
-                    'class' => '[ input__label ] [ margin-bottom-50 ]'
-                ])
-                ->textInput([
-                    'class' => 'form__input',
-                    'type' => 'date'
-                ]) ?>
+                    return $return;
+                },
+                'class' => '[ form__group ] [ flex-flow-row gap-2 justify-content-space-between-sm ]',
+            ]
+        )
+        ->label(false);
+    ?>
+</div>
 
-            <?= $form->field($model, 'passengers', [
-                'errorOptions' => [
-                    'tag' => 'p',
-                    'class' => 'input__error margin-top-50'
-                ],
-                'options' => ['class' => 'form__group gap-0'],
-            ])
-                ->label(null,[
-                    'class' => '[ input__label ] [ margin-bottom-50 ]'
-                ])
-                ->textInput([
-                    'class' => 'form__input',
-                    'type' => 'number'
-                ]) ?>
-    </div>
+<datalist id="airports">
+    <?php
+    foreach ($airports as $airport) {
+        echo '<option value=\'' . $airport->name . '\'>';
+    }
+    ?>
+</datalist>
 
-    <?= Html::submitButton('Pesquisar', ['class' => '[ form__submit-button button ] [ fill-sm  d-block push-to-right ]']) ?>
+<div class="even-columns gap-2">
+    <?= $form->field($model, 'origin', [
+        'errorOptions' => [
+            'tag' => 'p',
+            'class' => 'input__error margin-top-50 '
+        ],
+        'options' => ['class' => 'form__group gap-0'],
+    ])
+        ->label(null, [
+            'class' => '[ input__label ] [ margin-bottom-50 ]'
+        ])
+        ->textInput([
+            'class' => 'form__input',
+            'list' => 'airports',
+        ]) ?>
+
+    <?= $form->field($model, 'destiny', [
+        'errorOptions' => [
+            'tag' => 'p',
+            'class' => 'input__error margin-top-50'
+        ],
+        'options' => ['class' => 'form__group gap-0'],
+    ])
+        ->label(null, [
+            'class' => '[ input__label ] [ margin-bottom-50 ]'
+        ])
+        ->textInput([
+            'class' => 'form__input',
+            'list' => 'airports',
+        ]) ?>
+</div>
+
+<div class="even-columns gap-1">
+    <?= $form->field($model, 'origin_departure_date', [
+        'errorOptions' => [
+            'tag' => 'p',
+            'class' => 'input__error margin-top-50'
+        ],
+        'options' => [
+            'class' => 'form__group gap-0',
+        ],
+    ])
+        ->label(null, [
+            'class' => '[ input__label ] [ margin-bottom-50 ]'
+        ])
+        ->textInput([
+            'class' => 'form__input',
+            'type' => 'date'
+        ]) ?>
+
+    <?= $form->field($model, 'destiny_departure_date', [
+        'errorOptions' => [
+            'tag' => 'p',
+            'class' => 'input__error margin-top-50'
+        ],
+        'options' => [
+            'class' => 'form__group gap-0',
+            'id' => 'destiny_departure_date__wrapper'
+        ],
+    ])
+        ->label(null, [
+            'class' => '[ input__label ] [ margin-bottom-50 ]'
+        ])
+        ->textInput([
+            'class' => 'form__input',
+            'type' => 'date'
+        ]) ?>
+
+    <?= $form->field($model, 'passengers', [
+        'errorOptions' => [
+            'tag' => 'p',
+            'class' => 'input__error margin-top-50'
+        ],
+        'options' => ['class' => 'form__group gap-0'],
+    ])
+        ->label(null, [
+            'class' => '[ input__label ] [ margin-bottom-50 ]'
+        ])
+        ->textInput([
+            'class' => 'form__input',
+            'type' => 'number',
+            'value' => ($model->passengers === null) ? 1 : $model->passengers,
+        ]) ?>
+</div>
+
+<?= Html::submitButton('Pesquisar', ['class' => '[ form__submit-button button ] [ fill-sm  d-block push-to-right ]']) ?>
 <?php ActiveForm::end(); ?>
-

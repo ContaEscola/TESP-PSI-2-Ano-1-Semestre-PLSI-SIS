@@ -12,7 +12,7 @@ use yii\helpers\Url;
         </picture>
         <div>
             <p>Infelizmente não foi encontrado nenhum resultado, no entanto, experimente vêr quais são as próximas datas disponíveis.</p>
-            <a href="<?=Url::current(['src' => null]) . '&tryAgain=true'?>" class="[ button ] [ margin-top-600 ]" data-type="secondary-outline">Vêr próximas datas</a>
+            <a href="<?= Url::current(['src' => null, 'tryAgain' => true]) ?>" class="[ button ] [ margin-top-600 ]" data-type="secondary-outline">Vêr próximas datas</a>
         </div>
     </div>
 </div>

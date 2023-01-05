@@ -50,7 +50,8 @@ class FlightController extends Controller
         ]);
     }
 
-    public function actionSearch(){
+    public function actionSearch()
+    {
         $airports = Airport::find()->all();
         $model = new FlightForm();
 
@@ -58,12 +59,11 @@ class FlightController extends Controller
         $dataProviderBack = null;
 
         $tryAgain = $this->request->get("tryAgain");
-        if (isset($tryAgain)) $tryAgain = true;
 
         if ($this->request->isGet) {
             if ($model->load($this->request->get()) && $model->validate()) {
                 $dataProviderGo = $model->getDataProviderGo($tryAgain);
-                if($model->two_way_trip){
+                if ($model->two_way_trip) {
                     $dataProviderBack = $model->getDataProviderBack($tryAgain);
                 }
             } else $model->loadDefaultValues();
