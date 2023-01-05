@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-function-index">
     <p>
-        <?= Html::a('Criar novo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar função', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>
@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update} {view}',
                 'urlCreator' => function ($action, EmployeeFunction $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

@@ -34,13 +34,16 @@ class EmployeeFunction extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['name', 'required'],
             ['name', 'trim'],
-            ['name', 'string', 'max' => 50],
-            ['name', 'unique'],
+            ['name', 'required', 'message' => '{attribute} não pode ser vazio.'],
+            [
+                'name', 'string',
+                'max' => 50, 'tooLong' => 'O nome não pode exceder os 50 caracteres.'
+            ],
+            ['name', 'unique', 'message' => 'Este nome já está a ser utilizado.'],
 
             ['state', 'boolean'],
-            ['state', 'default', 'value' => 1],
+            ['state', 'default', 'value' => self::STATE_ACTIVE],
         ];
     }
 
