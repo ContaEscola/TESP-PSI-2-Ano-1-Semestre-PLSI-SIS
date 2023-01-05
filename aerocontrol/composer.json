@@ -24,7 +24,8 @@
         "kartik-v/yii2-widget-activeform": "dev-master",
         "kartik-v/yii2-widget-fileinput": "@dev",
         "kartik-v/yii2-widget-timepicker": "@dev",
-      "ext-json": "*"
+      "ext-json": "*",
+        "kriss/yii2-log-reader": "2.*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
