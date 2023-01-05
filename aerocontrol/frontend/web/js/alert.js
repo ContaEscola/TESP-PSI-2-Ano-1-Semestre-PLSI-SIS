@@ -1,5 +1,5 @@
 const alerts = document.querySelectorAll(".alert");
-const ALERT_CLOSE_AUTOMATICALLY_DELAY = 5000;
+const ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS = 60;
 
 alerts.forEach((alert) => {
 
@@ -9,7 +9,7 @@ alerts.forEach((alert) => {
     let animDuration = window.getComputedStyle(alert).animationDuration;
     animDuration = animDuration.replace("s", " ");
     let delayAfterClosing = animDuration * 1000;
-    let timerToCloseAutomatically = delayAfterClosing + ALERT_CLOSE_AUTOMATICALLY_DELAY;
+    let timerToCloseAutomatically = delayAfterClosing + (ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS * 1000);
     //Adicionar delay para ter a certeza que fez a animação
     delayAfterClosing += 100;
 

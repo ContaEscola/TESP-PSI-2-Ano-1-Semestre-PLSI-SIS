@@ -103,6 +103,10 @@ class EmployeeController extends Controller
         $model = new EmployeeForm();
 
         if ($this->request->isPost && $model->load(Yii::$app->request->post()) && $model->create()) {
+
+            //Criar logs
+            Yii::info("Criar empregado", 'employee');
+
             return $this->redirect(['view', 'employee_id' => $model->employee_id]);
         } else {
             $model->resetAttributesOnInvalid();
@@ -126,6 +130,10 @@ class EmployeeController extends Controller
         $model = new EmployeeForm($validEmployee->employee_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+
+            //Criar logs
+            Yii::info("Editar empregado", 'employee');
+
             return $this->redirect(['view', 'employee_id' => $model->employee_id]);
         }
 
@@ -144,6 +152,10 @@ class EmployeeController extends Controller
     public function actionDelete(int $employee_id)
     {
         $this->findModel($employee_id)->delete();
+
+        //Criar logs
+        Yii::info("Eliminar empregado", 'employee');
+
         return $this->redirect(['index']);
     }
 

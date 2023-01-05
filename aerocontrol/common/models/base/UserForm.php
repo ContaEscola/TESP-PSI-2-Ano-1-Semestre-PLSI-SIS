@@ -5,6 +5,8 @@ namespace common\models\base;
 use common\models\User;
 use yii\base\Model;
 use Yii;
+use yii\db\Exception;
+use yii\web\NotFoundHttpException;
 
 class UserForm extends Model
 {
@@ -27,7 +29,7 @@ class UserForm extends Model
 
     protected $statusOnCreate = User::STATUS_ACTIVE;
 
-    protected $_user;
+    protected $_user;       // Variável que recebe os dados do user da BD
 
     public function __construct($user_id = null, $config = [])
     {
@@ -191,8 +193,10 @@ class UserForm extends Model
 
         $user = $this->getUser();
         $user->setAttributes($this->getUserDetails(), false);
-        if($this->_user->validatePassword($user->password_hash))
+
+        if($this->_user->password_hash !== $user->password_hash) {
             $user->setPassword($this->password_hash);
+        }
 
         if (!$user->save())
             return null;
@@ -223,8 +227,7 @@ class UserForm extends Model
         if ($this->_user === null) {
             $this->_user = User::findOne($this->user_id);
         }
-
-        return $this->_user;
+        return clone($this->_user);
     }
 
     /**
@@ -234,6 +237,7 @@ class UserForm extends Model
     protected function getUserDetails()
     {
         return [
+            'password_hash' => $this->password_hash,
             'username' => $this->username,
             'email' => $this->email,
             'first_name' => $this->first_name,

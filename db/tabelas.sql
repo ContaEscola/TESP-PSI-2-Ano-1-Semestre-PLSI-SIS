@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 CREATE TABLE IF NOT EXISTS `employee_function` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
+  `state` TINYINT(1) NOT NULL DEFAULT 1,
   CONSTRAINT `pk_employee_function_id` PRIMARY KEY (`id`),
   CONSTRAINT `uk_name` UNIQUE KEY(`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

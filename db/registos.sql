@@ -29,14 +29,14 @@ INSERT INTO `admin`(admin_id) VALUES
 (1);
 
 
-INSERT INTO `employee_function`(id,name) VALUES
-(1,"Limpeza"),
-(2,"Empregado de Balcão"),
-(3,"Piloto"),
-(4,"Co-Piloto"),
-(5,"Segurança"),
-(6,"Comissário de bordo"),
-(7,"Carregador de bagagem");
+INSERT INTO `employee_function`(id,name,state) VALUES
+(1,"Limpeza",1),
+(2,"Empregado de Balcão",0),
+(3,"Piloto",1),
+(4,"Co-Piloto",1),
+(5,"Segurança",1),
+(6,"Comissário de bordo",1),
+(7,"Carregador de bagagem",1);
 
 
 INSERT INTO `employee` (`employee_id`, `tin`, `num_emp`, `ssn`, `street`, `zip_code`, `iban`, `qualifications`, `function_id`) VALUES

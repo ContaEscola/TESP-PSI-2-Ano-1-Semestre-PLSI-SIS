@@ -97,6 +97,10 @@ class FlightController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+
+                //Criar logs
+                Yii::info("Criar voo", 'flight');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             } else
                 return var_dump($model->getAttributes());
@@ -122,6 +126,10 @@ class FlightController extends Controller
         $model->scenario = Flight::SCENARIO_ON_UPDATE;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            //Criar logs
+            Yii::info("Editar voo", 'flight');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
