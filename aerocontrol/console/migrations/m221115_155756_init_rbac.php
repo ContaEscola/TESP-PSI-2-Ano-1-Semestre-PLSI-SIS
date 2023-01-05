@@ -454,12 +454,6 @@ class m221115_155756_init_rbac extends Migration
             Own Profile Permissions
         */
 
-        $viewOwnProfile = $auth->createPermission("viewOwnProfile");
-        $viewOwnProfile->description = "Visualizar perfil";
-        $viewOwnProfile->ruleName = $clientRule->name;
-        $auth->add($viewOwnProfile);
-        $auth->addChild($viewOwnProfile, $viewClient);
-
         $updateOwnProfile = $auth->createPermission("updateOwnProfile");
         $updateOwnProfile->description = "Atualizar perfil";
         $updateOwnProfile->ruleName = $clientRule->name;
@@ -476,7 +470,6 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($client, $createMessage);
         $auth->addChild($client, $deleteOwnTicket);
         $auth->addChild($client, $updateOwnTicket);
-        $auth->addChild($client, $viewOwnProfile);
         $auth->addChild($client, $updateOwnProfile);
         $auth->addChild($client, $updateOwnSupportTicket);
         $auth->addChild($client, $viewOwnSupportTicket);
