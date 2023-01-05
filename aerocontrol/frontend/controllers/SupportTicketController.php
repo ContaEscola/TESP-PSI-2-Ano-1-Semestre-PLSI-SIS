@@ -40,14 +40,21 @@ class SupportTicketController extends Controller
     public function actionCreate()
     {
         $model = new SupportTicketForm();
+
         $client = Client::findOne(['client_id' => Yii::$app->user->getId()]);
         $dataProvider = new ActiveDataProvider([
             'query' => SupportTicket::find()->where(['client_id' => $client->client_id])->orderBy('state ASC'),
         ]);
 
+        $model->client_id = $client->client_id;
+
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->validate()) {
-                var_dump("teste");
+            if ($model->load($this->request->post()) && $model->create()) {
+                $model = new SupportTicketForm();
+                return $this->render('index', [
+                    'dataProvider' => $dataProvider,
+                    'model' => $model
+                ]);
             }
         }
 
