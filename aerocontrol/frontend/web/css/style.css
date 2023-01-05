@@ -5,6 +5,8 @@
   --clr-black-300: hsl(236 18% 19% / 0.6);
   --clr-black-200: hsl(236 18% 19% / 0.45);
 
+  --clr-black-400-no-alpha: hsl(236 18% 19%);
+
   --clr-primary: hsl(0 0% 98%);
 
   --clr-neutral-900: hsl(0 0% 82%);
@@ -675,6 +677,10 @@ select.form__input {
   font-size: var(--fs-350);
 }
 
+.input__error:empty {
+  display: none;
+}
+
 .input__error {
   font-size: var(--fs-200);
   letter-spacing: 0.046875em;
@@ -839,6 +845,7 @@ select.form__input {
 }
 
 .flight-trip {
+  height: min-content;
   display: grid;
   column-gap: 0.625rem;
 
@@ -898,9 +905,17 @@ select.form__input {
   width: max-content;
 }
 
-.flight-result__book .icon {
+.flight-result-book__icon {
   display: none;
   width: 1rem;
+}
+
+.flight-result__book[data-status="locked"] {
+  --clr-text: var(--clr-neutral-800);
+  --clr-bg: var(--clr-secondary-accent-900);
+  --clr-text-on-event: var(--clr-neutral-800);
+  --clr-bg-on-event: var(--clr-secondary-accent-900);
+  --border-color: var(--clr-secondary-accent-900);
 }
 
 .flight-result__book[data-status="selected"] {
@@ -914,7 +929,7 @@ select.form__input {
   gap: 0.5rem;
 }
 
-.flight-result__book[data-status="selected"] .icon {
+.flight-result__book[data-status="selected"] .flight-result-book__icon {
   display: block;
 }
 
@@ -1109,42 +1124,6 @@ select.form__input {
   object-position: center;
 }
 
-.support-ticket-modal[open] {
-  animation: modal-fade-in 1s ease forwards;
-}
-
-.support-ticket-modal.hide {
-  animation: modal-fade-out 1s ease forwards;
-}
-
-@keyframes modal-fade-in {
-  0% {
-    opacity: 0%;
-    transform: translateY(-50%);
-  }
-  25% {
-    opacity: 25%;
-  }
-  100% {
-    opacity: 100%;
-    transform: translateY(0%);
-  }
-}
-
-@keyframes modal-fade-out {
-  0% {
-    opacity: 100%;
-    transform: translateY(0%);
-  }
-  25% {
-    opacity: 75%;
-  }
-  100% {
-    opacity: 0%;
-    transform: translateY(-50%);
-  }
-}
-
 /* modal */
 
 .modal {
@@ -1159,6 +1138,84 @@ select.form__input {
   border: 0;
   background-color: transparent;
   cursor: pointer;
+}
+
+.modal[open] {
+  animation: modal-fade-in 500ms ease-in-out forwards;
+}
+
+.modal.hide {
+  animation: modal-fade-out 500ms ease-in-out forwards;
+}
+
+@keyframes modal-fade-in {
+  0% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes modal-fade-out {
+  0% {
+    opacity: 100%;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0%;
+    transform: translateY(-50%);
+  }
+}
+
+/* tooltip */
+
+.tooltip-wrapper {
+  position: relative;
+  isolation: isolate;
+}
+
+.tooltip-wrapper[data-force-open="true"] .tooltip,
+.tooltip-wrapper:hover .tooltip,
+.tooltip-wrapper:focus .tooltip {
+  display: block;
+}
+
+.tooltip {
+  --tooltip-icon-size: 0.8rem;
+
+  display: none;
+  isolation: isolate;
+
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+
+  pointer-events: none;
+}
+
+.tooltip-content {
+  width: max-content;
+  position: relative;
+
+  padding-block: 0.3em;
+  padding-inline: 0.6em;
+
+  background-color: var(--clr-black-400-no-alpha);
+}
+
+.tooltip-caret {
+  --clr-icon: var(--clr-black-400-no-alpha);
+  width: var(--tooltip-icon-size);
+
+  position: absolute;
+  z-index: -1;
+  top: calc(0rem - (0.45 * var(--tooltip-icon-size)));
+  right: 5%;
+
+  transform: rotate(90deg);
 }
 
 /* utility classes */
@@ -1226,6 +1283,10 @@ select.form__input {
 
 .text-white {
   color: var(--clr-white);
+}
+
+.text-error {
+  color: var(--clr-error-400);
 }
 
 .text-black-400 {
@@ -1662,4 +1723,8 @@ select.form__input {
 
 .border-radius-1 {
   border-radius: 0.3125rem;
+}
+
+.resize-none {
+  resize: none;
 }
