@@ -38,7 +38,7 @@ class SupportTicket extends \yii\db\ActiveRecord
             [['title', 'state'], 'trim'],
             ['state', 'string'],
             [['state'], 'in', 'range' => [
-                'Em Processo',
+                'Em Progresso',
                 'Por Rever',
                 'Concluido'
             ]],

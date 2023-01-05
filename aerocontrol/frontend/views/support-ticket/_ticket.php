@@ -1,18 +1,14 @@
 <?php
-
 /** @var \common\models\SupportTicket $model */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+
 ?>
 <li>
-    <article
-            class="[ support-ticket__item ] [ d-grid grid-auto-flow-column-md bg-primary border-radius-1 outline-1 padding-100 ]"
-            data-support-ticket>
+    <article class="[ support-ticket__item ] [ d-grid grid-auto-flow-column-md bg-primary border-radius-1 outline-1 padding-100 ]" data-support-ticket>
         <p class="fs-350 fw-medium">Ticket nº<?= Html::encode($model->id) ?> - <?= Html::encode($model->title) ?></p>
-        <p class="fs-350 margin-top-100-sm">Estado: <span
-                    class="fw-medium fs-italic"><?= Html::encode($model->state) ?></span></p>
-
+        <p class="fs-350 margin-top-100-sm">Estado: <span class="fw-medium fs-italic"><?= Html::encode($model->state) ?></span></p>
         <?php
             if ($model->state == "Concluido"){
                 ?>
@@ -37,10 +33,5 @@ use yii\helpers\Url;
         <?php
             }
         ?>
-
-
-
-
     </article>
-
 </li>

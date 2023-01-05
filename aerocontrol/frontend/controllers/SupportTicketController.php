@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Client;
 use common\models\FlightTicket;
 use common\models\SupportTicket;
+use frontend\models\SupportTicketForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -24,13 +25,35 @@ class SupportTicketController extends Controller
      */
     public function actionIndex()
     {
+        $model = new SupportTicketForm();
         $client = Client::findOne(['client_id' => Yii::$app->user->getId()]);
         $dataProvider = new ActiveDataProvider([
             'query' => SupportTicket::find()->where(['client_id' => $client->client_id])->orderBy('state ASC'),
         ]);
 
         return $this->render('index', [
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'model' => $model
+        ]);
+    }
+
+    public function actionCreate()
+    {
+        $model = new SupportTicketForm();
+        $client = Client::findOne(['client_id' => Yii::$app->user->getId()]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => SupportTicket::find()->where(['client_id' => $client->client_id])->orderBy('state ASC'),
+        ]);
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->validate()) {
+                var_dump("teste");
+            }
+        }
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+            'model' => $model
         ]);
     }
 

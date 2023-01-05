@@ -1,7 +1,7 @@
 <?php
-
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var \frontend\models\SupportTicketForm $model */
 
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -25,25 +25,9 @@ $this->registerJsFile('@web/js/support-tickets.js', [
         </button>
 
         <section class="margin-top-100 text-black-400">
-            <form action="#">
-                <p class="fs-400 fw-medium ">Criar um novo ticket!</p>
-                <div class="flow margin-top-300" data-flow-space="small">
-                    <div class="form__group">
-                        <label for="title"
-                               class="[ input__label ] [ fw-light margin-bottom-50 ]">Titulo:</label>
-                        <input class="form__input" type="text" name="{TOCHANGE}" id="title" required>
-                        <p class="[ input__error ] [ margin-top-50 ]"></p>
-                    </div>
-                    <div class="form__group">
-                        <label for="message" class="[ input__label ] [ fw-light margin-bottom-50 ]">Mensagem:</label>
-                        <textarea class="form__input resize-none" name="{TOCHANGE}" id="message" rows="7" required></textarea>
-                        <p class="[ input__error ] [ margin-top-50 ]"></p>
-                    </div>
-                </div>
-                <button type="submit" class="[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]">
-                    Confirmar
-                </button>
-            </form>
+            <?= $this->render('_form', [
+                    'model' => $model,
+            ]) ?>
         </section>
     </dialog>
 
@@ -58,11 +42,8 @@ $this->registerJsFile('@web/js/support-tickets.js', [
                         class="visually-hidden">Close
                             modal</span>
                 <img src="../images/close-icon.svg" alt="" aria-hidden="true"></button>
-
-
             <section class="[ support-ticket-modal__image-item ] [ margin-top-400 margin-inline-auto ]">
-                <img src="https://source.unsplash.com/WLUHO9A_xik/1600x900"
-                     alt="Imagem do item do support ticket">
+                <img src="https://source.unsplash.com/WLUHO9A_xik/1600x900" alt="Imagem do item do support ticket">
             </section>
         </dialog>
             <?= ListView::widget([
@@ -73,7 +54,6 @@ $this->registerJsFile('@web/js/support-tickets.js', [
                     'class' => 'flow',
                     'role' => 'list',
                     'data-flow-space' => 'medium'
-
                 ],
                 'emptyText' => "<p class='fw-medium text-align-center'> Você ainda não fez nenhum ticket!</p>",
                 'itemView' => '_ticket',
