@@ -137,22 +137,6 @@ class AirportController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Airport model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-
-        //Criar logs
-        Yii::info("Eliminar aeroporto", 'airport');
-
-        return $this->redirect(['index']);
-    }
 
     /**
      * Finds the Airport model based on its primary key value.

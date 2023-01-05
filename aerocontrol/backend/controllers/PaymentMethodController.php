@@ -47,11 +47,6 @@ class PaymentMethodController extends Controller
                             'actions' => ['update'],
                             'roles' => ['updatePaymentMethod'],
                         ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['deletePaymentMethod'],
-                        ],
                     ],
                 ],
             ]
@@ -101,10 +96,9 @@ class PaymentMethodController extends Controller
         if ($model->state == PaymentMethod::STATE_ACTIVE) $model->state = PaymentMethod::STATE_INACTIVE;
         else $model->state = PaymentMethod::STATE_ACTIVE;
 
-        if (!$model->save()){
+        if (!$model->save()) {
             Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
-        }
-        else{
+        } else {
             //Criar logs
             Yii::info("Editar metodo de pagamento", 'paymentMethod');
         }
