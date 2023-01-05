@@ -103,6 +103,10 @@ class ManagerController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->create()) {
+
+                //Criar logs
+                Yii::info("Criar manager", 'manager');
+
                 return $this->redirect(['view', 'manager_id' => $model->manager_id]);
             }
         } else {
@@ -127,6 +131,10 @@ class ManagerController extends Controller
         $model = new ManagerForm($validManager->manager_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+
+            //Criar logs
+            Yii::info("Editar manager", 'manager');
+
             return $this->redirect(['view', 'manager_id' => $model->manager_id]);
         }
 
@@ -145,6 +153,9 @@ class ManagerController extends Controller
     public function actionDelete($manager_id)
     {
         $this->findModel($manager_id)->delete();
+
+        //Criar logs
+        Yii::info("Eliminar manager", 'manager');
 
         return $this->redirect(['index']);
     }
