@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
 CREATE TABLE IF NOT EXISTS `support_ticket` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `title` VARCHAR(20) NOT NULL,
-  `state` ENUM('Por Rever','Concluido','Em Processo') NOT NULL DEFAULT 'Por Rever',
+  `state` ENUM('Em Progresso','Por Rever','Concluido') NOT NULL DEFAULT 'Por Rever',
   `client_id` INT(11) UNSIGNED NOT NULL,
   `employee_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
