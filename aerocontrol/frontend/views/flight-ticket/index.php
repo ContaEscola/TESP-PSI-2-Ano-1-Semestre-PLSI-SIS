@@ -12,7 +12,7 @@ $this->registerJsFile('@web/js/flight-tickets.js', [
 ]);
 ?>
 
-<section class="container padding-block-700" data-type="medium-md">
+<section class="container padding-block-700" data-type="small-md">
     <h1 class="fs-600 fw-bold text-align-center">Meus Bilhetes</h1>
     <div class="margin-top-400">
 
