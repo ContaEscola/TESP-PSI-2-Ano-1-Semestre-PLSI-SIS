@@ -8,8 +8,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = $name;
-$this->params['breadcrumbs'] = [['label' => $this->title]];
+$this->title = "Erro";
+$this->params['breadcrumbs'] = [['label' => $name]];
 ?>
 <main>
     <div class="container padding-block-700 height-100">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
                 <img src="<?= Url::to('@web/images/error-icon-mobile.svg') ?>" alt="representação de erro">
             </picture>
             <div>
-                <h1 class="fs-600 fw-bold"><?= Html::encode($this->title) ?></h1>
+                <h1 class="fs-600 fw-bold"><?= Html::encode($name) ?></h1>
                 <p class="margin-top-100"> <?= nl2br(Html::encode($message)) ?></p>
                 <p>
                     O erro acima ocorreu enquanto o servidor Web estava processando a sua informação.

@@ -95,8 +95,15 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goHome();
+        if ($model->load(Yii::$app->request->post()) ) {
+            // Valida os dados para depois confirmar se é cliente
+            if ($model->validate()) {
+                if (!$model->isClient()) {
+                    Yii::$app->session->setFlash("error", 'Não está registado como cliente.');
+                } else if ($model->login()) {
+                    return $this->goHome();
+                }
+            }
         }
 
         return $this->render('login', [
