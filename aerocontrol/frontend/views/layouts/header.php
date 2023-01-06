@@ -22,23 +22,23 @@ use yii\helpers\Url;
             <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
                 <ul role="list" class="navigation-list">
                     <li class="[ primary-navigation__item ] [ push-to-right ]" <?= Yii::$app->controller->id == "site" ? 'data-type="active"' : '' ?>>
-                        <?= Html::a('Home', ['site/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]'])?>
+                        <?= Html::a('Home', ['site/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
                     <li class="primary-navigation__item" <?= Yii::$app->controller->id == "flight" ? 'data-type="active"' : '' ?>>
-                        <?= Html::a('Voos', ['flight/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]'])?>
+                        <?= Html::a('Voos', ['flight/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
                     <li class="primary-navigation__item" <?= Yii::$app->controller->id == "restaurant" ? 'data-type="active"' : '' ?>>
-                        <?= Html::a('Restaurants', ['restaurant/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]'])?>
+                        <?= Html::a('Restaurants', ['restaurant/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
                     <li class="[ primary-navigation__item ] [ push-to-left ]" <?= Yii::$app->controller->id == "stores" ? 'data-type="active"' : '' ?>>
-                        <?= Html::a('Lojas', ['store/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]'])?>
+                        <?= Html::a('Lojas', ['store/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
                     <?php if (Yii::$app->user->isGuest) : ?>
                         <li class="primary-navigation__item">
-                            <?= Html::a('Sign up', ['site/signup'], ['class' => 'button', 'data-type' => 'primary-outline'])?>
+                            <?= Html::a('Sign up', ['site/signup'], ['class' => 'button', 'data-type' => 'primary-outline']) ?>
                         </li>
                         <li class="primary-navigation__item">
-                            <?= Html::a('Login', ['site/login'], ['class' => 'button'])?>
+                            <?= Html::a('Login', ['site/login'], ['class' => 'button']) ?>
                         </li>
                     <?php else : ?>
                         <li class="primary-navigation__item d-flex justify-content-center">
@@ -46,30 +46,37 @@ use yii\helpers\Url;
                                 <button class="dropdown-button button" data-type="primary-outline" aria-expanded="false" data-dropdown>
                                     <?= \Yii::$app->user->identity->first_name . " " . Yii::$app->user->identity->last_name ?>
                                     <span aria-hidden="true">
-                                                <svg class="icon dropdown__toggle-icon">
-                                                    <use xlink:href="<?= Url::to("@web/images/caret.svg#caret") ?>"></use>
-                                                </svg>
-                                            </span>
+                                        <svg class="icon dropdown__toggle-icon">
+                                            <use xlink:href="<?= Url::to("@web/images/caret.svg#caret") ?>"></use>
+                                        </svg>
+                                    </span>
                                 </button>
                                 <ul role="list" class="dropdown-menu">
                                     <li class="dropdown-menu__item">
-                                        <?= Html::a('Ver Conta' . '<span aria-hidden="true">
-                                                        <svg class="icon dropdown-link__icon">
+                                        <?= Html::a('Ver Conta' . '<span aria-hidden="true" class="dropdown-link__icon">
+                                                        <svg class="icon">
                                                             <use xlink:href="' . Url::to('@web/images/perfil-icon.svg#perfil-icon') . '"></use>
                                                         </svg>
                                                     </span>', ['account/profile'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                     </li>
                                     <li class="dropdown-menu__item">
-                                        <?= Html::a('Meus Bilhetes' . '<span aria-hidden="true">
-                                                        <svg class="icon dropdown-link__icon">
+                                        <?= Html::a('Meus Bilhetes' . '<span aria-hidden="true" class="dropdown-link__icon">
+                                                        <svg class="icon">
                                                             <use xlink:href="' . Url::to('@web/images/flight-ticket.svg#flight-ticket') . '"></use>
                                                         </svg>
                                                     </span>', ['flight-ticket/index'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                     </li>
                                     <li class="dropdown-menu__item">
+                                        <?= Html::a('Meus Tickets Suporte' . '<span aria-hidden="true" class="dropdown-link__icon">
+                                                        <svg class="icon">
+                                                            <use xlink:href="' . Url::to('@web/images/support-ticket-icon.svg#support-ticket-icon') . '"></use>
+                                                        </svg>
+                                                    </span>', ['support-ticket/index'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                    </li>
+                                    <li class="dropdown-menu__item">
                                         <?= Html::a(
-                                            'Logout' . '<span aria-hidden="true">
-                                                        <svg class="icon dropdown-link__icon">
+                                            'Logout' . '<span aria-hidden="true" class="dropdown-link__icon">
+                                                        <svg class="icon">
                                                             <use xlink:href="' . Url::to('@web/images/logout-icon.svg#logout-icon') . '"></use>
                                                         </svg>
                                                     </span>',

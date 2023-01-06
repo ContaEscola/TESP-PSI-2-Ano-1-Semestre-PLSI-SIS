@@ -32,6 +32,7 @@ class TicketMessage extends \yii\db\ActiveRecord
         return [
             [['message', 'sender_id', 'support_ticket_id'], 'required'],
             [['sender_id', 'support_ticket_id'], 'integer'],
+            [ 'message', 'trim'],
             ['message', 'string', 'max' => 255],
             ['support_ticket_id', 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
         ];

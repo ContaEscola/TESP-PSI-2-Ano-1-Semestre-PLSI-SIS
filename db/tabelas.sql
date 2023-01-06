@@ -292,13 +292,13 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
 --
 
 CREATE TABLE IF NOT EXISTS `support_ticket` (
-    `id` INT UNSIGNED AUTO_INCREMENT,
-    `title` VARCHAR(20) NOT NULL,
-    `state` ENUM('Por Rever','Concluido','Em Processo') NOT NULL DEFAULT 'Por Rever',
-    `client_id` INT(11) UNSIGNED NOT NULL,
-    CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
-    CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `title` VARCHAR(20) NOT NULL,
+  `state` ENUM('Por Rever','Em Progresso','Concluido') NOT NULL DEFAULT 'Por Rever',
+  `client_id` INT(11) UNSIGNED NOT NULL,
+  CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Estrutura da tabela `ticket_item`

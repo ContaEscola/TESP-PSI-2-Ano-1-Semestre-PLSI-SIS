@@ -18,6 +18,11 @@ use Yii;
  */
 class SupportTicket extends \yii\db\ActiveRecord
 {
+
+    const STATE_TO_REVIEW = "Por Rever";
+    const STATE_DONE = "Concluido";
+    const STATE_IN_PROGRESS = "Em Progresso";
+
     /**
      * {@inheritdoc}
      */
@@ -32,19 +37,19 @@ class SupportTicket extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            ['state', 'default', 'value' => self::STATE_TO_REVIEW],
             [['title', 'state', 'client_id'], 'required'],
             [['title', 'state'], 'trim'],
             ['state', 'string'],
             [['state'], 'in', 'range' => [
-                'Por Rever',
-                'Em Progresso',
-                'Concluido'
+                self::STATE_TO_REVIEW,
+                self::STATE_IN_PROGRESS,
+                self::STATE_DONE
             ]],
-            ['state', 'default', 'value' => 'Por Rever'],
             ['title', 'string', 'max' => 20],
             ['client_id', 'integer'],
             ['client_id', 'exist', 'skipOnError' => true, 'targetClass' => Client::class, 'targetAttribute' => ['client_id' => 'client_id']],
-       ];
+        ];
     }
 
     /**
