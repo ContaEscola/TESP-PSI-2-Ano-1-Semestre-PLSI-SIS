@@ -12,13 +12,11 @@ use yii\helpers\Url;
         <p class="fs-350 fw-medium">Ticket nº<?= Html::encode($model->id) ?> - <?= Html::encode($model->title) ?></p>
         <p class="fs-350 margin-top-100-sm">Estado: <span class="fw-medium fs-italic"><?= Html::encode($model->state) ?></span></p>
         <div class="d-flex flex-flow-column-sm justify-content-space-between margin-top-200-sm gap-2">
-            <?php if ($model->state === SupportTicket::STATE_DONE) : ?>
+            <?php if ($model->state === SupportTicket::STATE_DONE && !empty($model->ticketItems)) : ?>
 
-                <button class="[ button ]" data-type="secondary-outline" data-support-ticket-see-item data-image-path=<?=
-                                                                                                                        (!empty($model->ticketItems)) ?
-                                                                                                                            // Vai buscar o Url do primeiro ticketItem
-                                                                                                                            Url::to($model->ticketItems[0]->lostItem->getImagePathUrl()) :
-                                                                                                                            Url::to('@web/images/logo-placeholder-on-error.svg')  ?>>
+                <button class="[ button ]" data-type="secondary-outline" data-support-ticket-see-item data-image-path=<?
+                                                                                                                        // Vai buscar o Url do primeiro ticketItem
+                                                                                                                        Url::to($model->ticketItems[0]->lostItem->getImagePathUrl()) ?>>
                     Ver item</button>
             <?php endif ?>
             <button class="[ button ] [ push-to-right-md ]">Ver mais
