@@ -425,7 +425,7 @@ footer {
   position: absolute;
   top: calc(100% + var(--gap-between));
   right: 0;
-  min-width: 100%;
+  min-width: 12rem;
 
   background-color: var(--clr-neutral-400);
   outline: 0.12em solid var(--clr-primary-accent-400);
@@ -443,6 +443,7 @@ footer {
   font-weight: 500;
   letter-spacing: 0.0625em;
   text-decoration: none;
+  text-align: left;
 
   display: grid;
   grid-auto-flow: column;
@@ -455,7 +456,7 @@ footer {
   cursor: pointer;
 }
 
-.dropdown-menu__link .dropdown-link__icon {
+.dropdown-link__icon {
   justify-self: right;
 }
 
