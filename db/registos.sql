@@ -164,7 +164,7 @@ VALUES
 INSERT INTO `passenger`
 (`id`, `name`, `gender`, `extra_baggage`, `seat`, `flight_ticket_id`)
 VALUES
-(1, 'António Alberto', 'Masculino', 0, 'A1', 1);
+(1, 'António Alberto', 'Masculino', 0, 'A1', 1),
 (2, 'Manuel Santos', 'Masculino', 0, 'A2', 1);
 
 INSERT INTO `support_ticket` (`id`,`title`,`state`,`client_id`) VALUES
