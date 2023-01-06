@@ -1,10 +1,9 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\SupportTicket;
 
 /**
  * SupportTicketSearch represents the model behind the search form of `common\models\SupportTicket`.
@@ -17,7 +16,7 @@ class SupportTicketSearch extends SupportTicket
     public function rules()
     {
         return [
-            [['id', 'client_id', 'employee_id'], 'integer'],
+            [['id', 'client_id'], 'integer'],
             [['title', 'state'], 'safe'],
         ];
     }
@@ -60,7 +59,6 @@ class SupportTicketSearch extends SupportTicket
         $query->andFilterWhere([
             'id' => $this->id,
             'client_id' => $this->client_id,
-            'employee_id' => $this->employee_id,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

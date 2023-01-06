@@ -1,13 +1,13 @@
 <?php
 
 use common\models\SupportTicket;
-use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
-/** @var app\models\SupportTicketSearch $searchModel */
+/** @var \common\models\base\SupportTicketSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Support Tickets';
@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'state',
             'client_id',
-            'employee_id',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, SupportTicket $model, $key, $index, $column) {

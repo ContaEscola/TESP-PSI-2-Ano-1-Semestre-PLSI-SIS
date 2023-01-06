@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var app\models\SupportTicketSearch $model */
+/** @var \common\models\base\SupportTicketSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -22,8 +22,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'state') ?>
 
     <?= $form->field($model, 'client_id') ?>
-
-    <?= $form->field($model, 'employee_id') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

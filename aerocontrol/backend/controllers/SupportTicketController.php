@@ -2,11 +2,11 @@
 
 namespace backend\controllers;
 
+use common\models\SupportTicketSearch;
 use common\models\SupportTicket;
-use app\models\SupportTicketSearch;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * SupportTicketController implements the CRUD actions for SupportTicket model.
