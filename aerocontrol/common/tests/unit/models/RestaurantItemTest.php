@@ -11,19 +11,20 @@ class RestaurantItemTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(RestaurantItem::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(RestaurantItem::class, [
             'item' => 'item_test',
             'image' => 'item_test_15-12-2022_20-49.png',
-            'state' => 1,
+            'state' => RestaurantItem::STATE_ACTIVE,
             'restaurant_id' => 1
         ]);
-        $this->tester->seeRecord(RestaurantItem::class,['item' => 'item_test']);
+        $this->tester->seeRecord(RestaurantItem::class, ['item' => 'item_test']);
     }
 
     public function testRead()
     {
-        $this->tester->seeRecord(RestaurantItem::class,['item' => 'Big Mac']);
+        $this->tester->seeRecord(RestaurantItem::class, ['item' => 'Big Mac']);
     }
 
     public function testUpdate()
@@ -31,6 +32,6 @@ class RestaurantItemTest extends \Codeception\Test\Unit
         $item = RestaurantItem::find()->where(['item' => 'Big Mac'])->one();
         $item->item = 'New Item name';
         $this->assertTrue($item->save());
-        $this->assertEquals('New Item name',$item->item);
+        $this->assertEquals('New Item name', $item->item);
     }
 }

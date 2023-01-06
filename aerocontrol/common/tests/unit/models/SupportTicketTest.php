@@ -11,18 +11,19 @@ class SupportTicketTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(SupportTicket::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(SupportTicket::class, [
             'title' => 'ticket_test',
-            'state' => 'Concluido',
+            'state' => SupportTicket::STATE_DONE,
             'client_id' => 5
         ]);
-        $this->tester->seeRecord(SupportTicket::class,['title' => 'ticket_test']);
+        $this->tester->seeRecord(SupportTicket::class, ['title' => 'ticket_test']);
     }
 
     public function testRead()
     {
-        $this->tester->seeRecord(SupportTicket::class,['title' => 'Casisola Perdida']);
+        $this->tester->seeRecord(SupportTicket::class, ['title' => 'Casisola Perdida']);
     }
 
     public function testUpdate()
@@ -30,6 +31,6 @@ class SupportTicketTest extends \Codeception\Test\Unit
         $ticket = SupportTicket::find()->where(['title' => 'Casisola Perdida'])->one();
         $ticket->title = 'New ticket name';
         $this->assertTrue($ticket->save());
-        $this->assertEquals('New ticket name',$ticket->title);
+        $this->assertEquals('New ticket name', $ticket->title);
     }
 }

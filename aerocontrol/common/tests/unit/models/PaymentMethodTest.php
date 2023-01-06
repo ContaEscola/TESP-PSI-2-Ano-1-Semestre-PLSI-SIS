@@ -11,17 +11,18 @@ class PaymentMethodTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(PaymentMethod::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(PaymentMethod::class, [
             'name' => 'method_test',
-            'state' => 1,
+            'state' => PaymentMethod::STATE_ACTIVE,
         ]);
-        $this->tester->seeRecord(PaymentMethod::class,['name' => 'method_test']);
+        $this->tester->seeRecord(PaymentMethod::class, ['name' => 'method_test']);
     }
 
     public function testRead()
     {
-        $this->tester->seeRecord(PaymentMethod::class,['name' => 'MBWay']);
+        $this->tester->seeRecord(PaymentMethod::class, ['name' => 'MBWay']);
     }
 
     public function testUpdate()

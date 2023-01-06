@@ -11,17 +11,18 @@ class CompanyTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(Company::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(Company::class, [
             'name' => 'company_test',
-            'state' => 1
+            'state' => Company::STATE_ACTIVE
         ]);
-        $this->tester->seeRecord(Company::class,['name' => 'company_test']);
+        $this->tester->seeRecord(Company::class, ['name' => 'company_test']);
     }
 
     public function testRead()
     {
-        $this->tester->seeRecord(Company::class,['name' => 'TAP Portugal']);
+        $this->tester->seeRecord(Company::class, ['name' => 'TAP Portugal']);
     }
 
     public function testUpdate()
@@ -29,6 +30,6 @@ class CompanyTest extends \Codeception\Test\Unit
         $company = Company::find()->where(['name' => 'TAP Portugal'])->one();
         $company->name = 'New Company name';
         $this->assertTrue($company->save());
-        $this->assertEquals('New Company name',$company->name);
+        $this->assertEquals('New Company name', $company->name);
     }
 }

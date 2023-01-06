@@ -16,14 +16,15 @@ class UserTest extends \Codeception\Test\Unit
     protected UnitTester $tester;
 
     // tests
-    public function testCreateUser(){
+    public function testCreateUser()
+    {
         $this->createUser();
-        $this->tester->seeRecord(User::class,['username' => 'test_user']);
+        $this->tester->seeRecord(User::class, ['username' => 'test_user']);
     }
 
     public function testReadUser()
     {
-        $this->tester->seeRecord(User::class,['username'=> 'rafael']);
+        $this->tester->seeRecord(User::class, ['username' => 'rafael']);
     }
 
     public function testUpdate()
@@ -31,23 +32,25 @@ class UserTest extends \Codeception\Test\Unit
         $user = User::find()->where(['username' => 'rafael'])->one();
         $user->username = "Novo Nome";
         $this->assertTrue($user->save());
-        $this->assertEquals('Novo Nome',$user->username);
+        $this->assertEquals('Novo Nome', $user->username);
     }
 
-    public function testCreateAdmin(){
+    public function testCreateAdmin()
+    {
         $this->createUser();
         $user = User::find()->where(['username' => 'test_user'])->one();
-        $this->tester->haveRecord(Admin::class,[
+        $this->tester->haveRecord(Admin::class, [
             'admin_id' => $user->id,
         ]);
-        $this->tester->seeRecord(Admin::class,['admin_id'=>$user->id]);
+        $this->tester->seeRecord(Admin::class, ['admin_id' => $user->id]);
     }
 
-    public function testCreateEmployee(){
+    public function testCreateEmployee()
+    {
         $this->createUser();
         $user = User::find()->where(['username' => 'test_user'])->one();
-        $this->tester->haveRecord(Employee::class,[
-            'employee_id'=>$user->id,
+        $this->tester->haveRecord(Employee::class, [
+            'employee_id' => $user->id,
             'tin' => '321421521',
             'num_emp' => 'a123',
             'ssn' => '512125634',
@@ -57,33 +60,38 @@ class UserTest extends \Codeception\Test\Unit
             'qualifications' => 'Mestrado',
             'function_id' => 1
         ]);
-        $this->tester->seeRecord(Employee::class,['employee_id' => $user->id]);
+        $this->tester->seeRecord(Employee::class, ['employee_id' => $user->id]);
     }
 
-    public function testCreateClient(){
+    public function testCreateClient()
+    {
         $this->createUser();
         $user = User::find()->where(['username' => 'test_user'])->one();
-        $this->tester->haveRecord(Client::class,[
+        $this->tester->haveRecord(Client::class, [
             'client_id' => $user->id,
         ]);
-        $this->tester->seeRecord(Client::class,['client_id' => $user->id]);
+        $this->tester->seeRecord(Client::class, ['client_id' => $user->id]);
     }
 
     /**
      * Cria um User na DB para posteriormente criar o Admin/Manager/Employee/Client
      */
-    public function testCreateManager(){
+    public function testCreateManager()
+    {
         $this->createUser();
         $user = User::find()->where(['username' => 'test_user'])->one();
-        $this->tester->haveRecord(Manager::class,[
+        $this->tester->haveRecord(Manager::class, [
             'manager_id' => $user->id,
             'restaurant_id' => 1
         ]);
-        $this->tester->seeRecord(Manager::class,['manager_id' => $user->id]);
+        $this->tester->seeRecord(Manager::class, ['manager_id' => $user->id]);
     }
 
-    public function createUser(){
-        $this->tester->haveRecord(User::class,[
+
+
+    public function createUser()
+    {
+        $this->tester->haveRecord(User::class, [
             'username' => 'test_user',
             'auth_key' => 'HP187Mvq7Mmm3CTU80dLkGmni_FUH_lR',
             'password_hash' => '$2y$13$EjaPFBnZOQsHdGuHI.xvhuDp1fHpo8hKRSk6yshqa9c5EG8s3C3lO',

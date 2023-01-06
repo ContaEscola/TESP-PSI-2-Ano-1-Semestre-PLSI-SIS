@@ -168,7 +168,7 @@ VALUES
 (2, 'Manuel Santos', 'Masculino', 0, 'A2', 1);
 
 INSERT INTO `support_ticket` (`id`,`title`,`state`,`client_id`) VALUES
-    (1, 'Casisola Perdida', 'Em Progresso', 4),
+    (1, 'Camisola Perdida', 'Em Progresso', 4),
     (2, 'Mala de Viagem' , 'Concluido', 5);
 
 INSERT INTO `ticket_item` (`lost_item_id`,`support_ticket_id`) VALUES
