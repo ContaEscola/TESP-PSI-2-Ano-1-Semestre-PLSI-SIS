@@ -217,6 +217,7 @@ CREATE TABLE IF NOT EXISTS `flight` (
   `distance` FLOAT NOT NULL,
   `state` ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL DEFAULT 'Previsto',
   `discount_percentage` TINYINT(4) NOT NULL,
+  `passengers_left` INT UNSIGNED NOT NULL,
   `origin_airport_id` INT UNSIGNED NOT NULL,
   `arrival_airport_id` INT UNSIGNED NOT NULL,
   `airplane_id` INT UNSIGNED NOT NULL,
