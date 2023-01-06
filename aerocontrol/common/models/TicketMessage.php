@@ -9,7 +9,6 @@ use Yii;
  *
  * @property int $id
  * @property string $message
- * @property string|null $photo
  * @property int $sender_id
  * @property int $support_ticket_id
  *
@@ -33,10 +32,7 @@ class TicketMessage extends \yii\db\ActiveRecord
         return [
             [['message', 'sender_id', 'support_ticket_id'], 'required'],
             [['sender_id', 'support_ticket_id'], 'integer'],
-            [['photo', 'message'], 'trim'],
             ['message', 'string', 'max' => 255],
-            ['photo', 'string', 'max' => 75],
-            ['photo', 'unique'],
             ['support_ticket_id', 'exist', 'skipOnError' => true, 'targetClass' => SupportTicket::class, 'targetAttribute' => ['support_ticket_id' => 'id']],
         ];
     }
@@ -49,7 +45,6 @@ class TicketMessage extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'message' => 'Mensagem',
-            'photo' => 'Imagem',
             'sender_id' => 'ID do Emissor',
             'support_ticket_id' => 'ID do Ticket de Suporte',
         ];
