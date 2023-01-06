@@ -264,7 +264,7 @@ footer {
 
 @media (min-width: 40em) {
   .primary-navigation__item:not([data-type="active"]):hover
-  .primary-navigation__link {
+    .primary-navigation__link {
     color: var(--clr-black-200);
   }
 }
@@ -315,7 +315,7 @@ footer {
   cursor: pointer;
 
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
-  border 250ms ease-in-out;
+    border 250ms ease-in-out;
 }
 
 .button:where(:hover, :focus-visible) {
@@ -612,7 +612,7 @@ footer {
   background-size: var(--icon-size);
 
   box-shadow: var(--box-shadow-x-offset) var(--box-shadow-y-offset)
-  var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
+    var(--box-shadow-blur) var(--box-shadow-spread) var(--box-shadow-color);
 }
 
 .form__input::placeholder {
@@ -647,8 +647,8 @@ footer {
   --clr-border: var(--clr-success);
   --icon-url: url("../images/input-success.svg");
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
@@ -656,8 +656,8 @@ footer {
   --clr-border: var(--clr-error-400);
   --icon-url: url("../images/input-invalid.svg");
   padding-right: calc(
-          var(--icon-size) + (var(--icon-position-left-offset) * 2) +
-          var(--icon-margin-left-offset)
+    var(--icon-size) + (var(--icon-position-left-offset) * 2) +
+      var(--icon-margin-left-offset)
   );
 }
 
@@ -887,7 +887,7 @@ select.form__input {
 }
 
 .flight-result__trip:not(:first-child)
-:where(
+  :where(
     .flight-result__departure-time,
     .flight-result__arrival-time,
     .flight-result__departure-city,
@@ -1120,7 +1120,7 @@ select.form__input {
 .support-ticket-modal__image-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 

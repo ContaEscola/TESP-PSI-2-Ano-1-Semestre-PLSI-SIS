@@ -83,11 +83,8 @@ class SupportTicketController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->create()) {
+                // Dá reset aos inputs do modal na pagina
                 $model = new SupportTicketForm();
-                return $this->render('index', [
-                    'dataProvider' => $dataProvider,
-                    'model' => $model
-                ]);
             }
         }
 
@@ -96,5 +93,4 @@ class SupportTicketController extends Controller
             'model' => $model
         ]);
     }
-
 }
