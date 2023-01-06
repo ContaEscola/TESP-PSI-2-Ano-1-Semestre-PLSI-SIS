@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `passenger` (
   `name` VARCHAR(50) NOT NULL,
   `gender` ENUM('Masculino','Feminino','Outro') NOT NULL,
   `extra_baggage` TINYINT(1) NOT NULL,
-  `seat` CHAR(2) NOT NULL,
+  `seat` VARCHAR(3) NOT NULL,
   `flight_ticket_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_passenger_id` PRIMARY KEY (`id`),
   CONSTRAINT `fk_passenger_flight_ticket_id` FOREIGN KEY(`flight_ticket_id`) REFERENCES `flight_ticket`(`flight_ticket_id`)
@@ -307,10 +307,8 @@ CREATE TABLE IF NOT EXISTS `ticket_item` (
 CREATE TABLE IF NOT EXISTS `ticket_message` (
   `id` INT UNSIGNED AUTO_INCREMENT,
   `message` VARCHAR(255) NOT NULL,
-  `photo` VARCHAR(75) NULL,
   `sender_id` INT(11) UNSIGNED NOT NULL,
   `support_ticket_id` INT(11) UNSIGNED NOT NULL,
   CONSTRAINT `pk_ticket_message` PRIMARY KEY(`id`),
-  CONSTRAINT `fk_ticket_message_support_ticket_id` FOREIGN KEY(`support_ticket_id`) REFERENCES `support_ticket`(`id`),
-  CONSTRAINT `uk_photo` UNIQUE KEY(`photo`)
+  CONSTRAINT `fk_ticket_message_support_ticket_id` FOREIGN KEY(`support_ticket_id`) REFERENCES `support_ticket`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

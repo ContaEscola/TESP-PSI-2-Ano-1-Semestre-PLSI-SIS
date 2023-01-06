@@ -203,24 +203,25 @@ CREATE TABLE IF NOT EXISTS `payment_method` (
 -- Estrutura da tabela `flight`
 --
 
-CREATE TABLE IF NOT EXISTS `flight` (
-    `id` INT UNSIGNED AUTO_INCREMENT,
-    `terminal` VARCHAR(30) NOT NULL,
-    `estimated_departure_date` DATETIME NOT NULL,
-    `estimated_arrival_date` DATETIME NOT NULL,
-    `departure_date` DATETIME NULL,
-    `arrival_date` DATETIME NULL,
-    `price` DOUBLE NOT NULL,
-    `distance` FLOAT NOT NULL,
-    `state` ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL DEFAULT 'Previsto',
-    `discount_percentage` TINYINT(4) NOT NULL,
-    `origin_airport_id` INT UNSIGNED NOT NULL,
-    `arrival_airport_id` INT UNSIGNED NOT NULL,
-    `airplane_id` INT UNSIGNED NOT NULL,
-    CONSTRAINT `pk_flight_id` PRIMARY KEY(`id`),
-    CONSTRAINT `fk_flight_origin_airport_id` FOREIGN KEY(`origin_airport_id`) REFERENCES `airport`(`id`),
-    CONSTRAINT `fk_flight_arrival_airport_id` FOREIGN KEY(`arrival_airport_id`) REFERENCES `airport`(`id`),
-    CONSTRAINT `fk_flight_airplane_id` FOREIGN KEY(`airplane_id`) REFERENCES `airplane`(`id`)
+CREATE TABLE IF NOT EXISTS flight (
+    id INT UNSIGNED AUTO_INCREMENT,
+    terminal VARCHAR(30) NOT NULL,
+    estimated_departure_date DATETIME NOT NULL,
+    estimated_arrival_date DATETIME NOT NULL,
+    departure_date DATETIME NULL,
+    arrival_date DATETIME NULL,
+    price DOUBLE NOT NULL,
+    distance FLOAT NOT NULL,
+    state ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL DEFAULT 'Previsto',
+    discount_percentage TINYINT(4) NOT NULL,
+    passengers_left INT UNSIGNED NOT NULL,
+    origin_airport_id INT UNSIGNED NOT NULL,
+    arrival_airport_id INT UNSIGNED NOT NULL,
+    airplane_id INT UNSIGNED NOT NULL,
+    CONSTRAINT pk_flight_id PRIMARY KEY(id),
+    CONSTRAINT fk_flight_origin_airport_id FOREIGN KEY(origin_airport_id) REFERENCES airport(id),
+    CONSTRAINT fk_flight_arrival_airport_id FOREIGN KEY(arrival_airport_id) REFERENCES airport(id),
+    CONSTRAINT fk_flight_airplane_id FOREIGN KEY(airplane_id) REFERENCES airplane(id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -250,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `passenger` (
     `name` VARCHAR(50) NOT NULL,
     `gender` ENUM('Masculino','Feminino','Outro') NOT NULL,
     `extra_baggage` TINYINT(1) NOT NULL,
-    `seat` CHAR(2) NOT NULL,
+    `seat` VARCHAR (3) NOT NULL,
     `flight_ticket_id` INT(11) UNSIGNED NOT NULL,
     CONSTRAINT `pk_passenger_id` PRIMARY KEY (`id`),
     CONSTRAINT `fk_passenger_flight_ticket_id` FOREIGN KEY(`flight_ticket_id`) REFERENCES `flight_ticket`(`flight_ticket_id`)
@@ -276,12 +277,10 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
 CREATE TABLE IF NOT EXISTS `support_ticket` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `title` VARCHAR(20) NOT NULL,
-    `state` ENUM('Por Rever','Concluido','Em Processo') NOT NULL DEFAULT 'Por Rever',
+    `state` ENUM('Por Rever','Em Progresso','Concluido') NOT NULL DEFAULT 'Por Rever',
     `client_id` INT(11) UNSIGNED NOT NULL,
-    `employee_id` INT(11) UNSIGNED NOT NULL,
     CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
-    CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`),
-    CONSTRAINT `fk_support_ticket_employee_id` FOREIGN KEY(`employee_id`) REFERENCES `employee`(`employee_id`)
+    CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -303,10 +302,8 @@ CREATE TABLE IF NOT EXISTS `ticket_item` (
 CREATE TABLE IF NOT EXISTS `ticket_message` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `message` VARCHAR(255) NOT NULL,
-    `photo` VARCHAR(75) NULL,
     `sender_id` INT(11) UNSIGNED NOT NULL,
     `support_ticket_id` INT(11) UNSIGNED NOT NULL,
     CONSTRAINT `pk_ticket_message` PRIMARY KEY(`id`),
-    CONSTRAINT `fk_ticket_message_support_ticket_id` FOREIGN KEY(`support_ticket_id`) REFERENCES `support_ticket`(`id`),
-    CONSTRAINT `uk_photo` UNIQUE KEY(`photo`)
+    CONSTRAINT `fk_ticket_message_support_ticket_id` FOREIGN KEY(`support_ticket_id`) REFERENCES `support_ticket`(`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

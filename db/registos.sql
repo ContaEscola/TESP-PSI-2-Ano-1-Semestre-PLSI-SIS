@@ -165,3 +165,14 @@ INSERT INTO `passenger`
 (`id`, `name`, `gender`, `extra_baggage`, `seat`, `flight_ticket_id`)
 VALUES
 (1, 'António Alberto', 'Masculino', 0, 'A1', 1);
+(2, 'Manuel Santos', 'Masculino', 0, 'A2', 1);
+
+INSERT INTO `support_ticket` (`id`,`title`,`state`,`client_id`) VALUES
+    (1, 'Casisola Perdida', 'Em Progresso', 4),
+    (2, 'Mala de Viagem' , 'Concluido', 5);
+
+INSERT INTO `ticket_item` (`lost_item_id`,`support_ticket_id`) VALUES
+    (1,2);
+
+INSERT INTO `ticket_message` (`id`, `message`, `sender_id`, `support_ticket_id`) VALUES
+    (1, 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.', 4,1);
