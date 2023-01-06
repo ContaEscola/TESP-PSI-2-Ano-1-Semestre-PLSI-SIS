@@ -68,7 +68,7 @@ use hail812\adminlte\widgets\Menu;
                         'label' => 'Perdidos e Achados',
                         'items' => [
                             ['label' => 'Itens', 'url' => ['/lost-item/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                            ['label' => 'Suporte ao cliente', 'url' => ['/support-ticket/index'], 'iconStyle' => 'far']
                         ]
                     ],
                     ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['/payment-method/index']],
@@ -107,7 +107,7 @@ use hail812\adminlte\widgets\Menu;
                         'icon' => 'fas fa-solid fa-suitcase-rolling',
                         'items' => [
                             ['label' => 'Itens', 'url' => ['/lost-item/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                            ['label' => 'Suporte ao cliente', 'url' => ['/support-ticket/index'], 'iconStyle' => 'far']
                         ]
                     ],
                     ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user'],
