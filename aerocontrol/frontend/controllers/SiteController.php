@@ -181,13 +181,9 @@ class SiteController extends Controller
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
-
-                return $this->goHome();
-            }
-
-            Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+            //Enviar email
+            //Yii::$app->session->setFlash('success', 'Verifique o seu email para mais informações.');
+            return $this->goHome();
         }
 
         return $this->render('requestPasswordResetToken', [

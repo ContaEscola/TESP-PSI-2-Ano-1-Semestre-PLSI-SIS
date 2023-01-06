@@ -324,6 +324,13 @@ footer {
   --clr-bg: var(--clr-bg-on-event);
 }
 
+.button.disabled {
+  --clr-text: var(--clr-neutral-900);
+  --clr-bg: var(--clr-primary-accent-900);
+  --clr-text-on-event: var(--clr-neutral-900);
+  --clr-bg-on-event: var(--clr-primary-accent-900);
+}
+
 .button[data-type="primary-outline"] {
   --clr-text: var(--clr-primary-accent-400);
   --clr-bg: var(--clr-white);
