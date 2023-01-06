@@ -3,44 +3,43 @@
 use common\models\SupportTicket;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\User;
 
 /** @var yii\web\View $this */
 /** @var \common\models\base\SupportTicketSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Support Tickets';
+$this->title = 'Tickets de Suporte';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="support-ticket-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Support Ticket', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
+    <?php \yii\widgets\Pjax::begin(); ?>
     <?= GridView::widget([
+        'summary' => '',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'emptyText' => "Nenhum resultado encontrado!",
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             'title',
             'state',
             'client_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, SupportTicket $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, $model){
+                        return Html::a("Responder", ['view', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                    },
+                ],
             ],
         ],
     ]); ?>
+    <?php \yii\widgets\Pjax::end(); ?>
 
 
 </div>
