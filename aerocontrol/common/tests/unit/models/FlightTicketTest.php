@@ -61,7 +61,7 @@ class FlightTicketTest extends \Codeception\Test\Unit
             'flight_id' => 1,
             'payment_method_id' => 1
         ]);
-        $flightTicket->deleteTicket();  // Função costumizada para dar delete a passageiros e após isso ao ticket
+        if(!$flightTicket->deleteTicket()) dump($flightTicket->errors);  // Função costumizada para dar delete a passageiros e após isso ao ticket
         $this->tester->dontSeeRecord(FlightTicket::class, ['flight_ticket_id' => $flightTicket->flight_ticket_id]);
     }
 }

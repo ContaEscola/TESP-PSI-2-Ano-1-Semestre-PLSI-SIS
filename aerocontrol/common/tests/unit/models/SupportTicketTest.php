@@ -23,7 +23,7 @@ class SupportTicketTest extends \Codeception\Test\Unit
 
     public function testRead()
     {
-        $this->tester->seeRecord(SupportTicket::class, ['title' => 'Casisola Perdida']);
+        $this->tester->seeRecord(SupportTicket::class, ['title' => 'Camisola Perdida']);
     }
 
     public function testUpdate()
