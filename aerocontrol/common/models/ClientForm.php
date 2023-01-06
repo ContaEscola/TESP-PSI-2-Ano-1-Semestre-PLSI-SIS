@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace common\models;
 
 use common\models\base\UserForm;
 use common\models\User;

@@ -62,7 +62,7 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($model, 'birthdate')->input('date') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

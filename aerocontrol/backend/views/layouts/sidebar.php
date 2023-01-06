@@ -40,86 +40,86 @@ use hail812\adminlte\widgets\Menu;
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
-            //ADMIN
+            $sideBarMenuItems = [];
             if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
-                echo \hail812\adminlte\widgets\Menu::widget([
-                    'items' => [
-                        [
-                            'label' => 'Aeroporto',
-                            'icon' => 'fas fa-solid fa-plane',
-                            'items' => [
-                                ['label' => 'Voos', 'url' => ['flight/index'], 'iconStyle' => 'far', 'icon'],
-                                ['label' => 'Aeroportos', 'url' => ['airport/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aviões', 'url' => ['airplane/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Companhias', 'url' => ['company/index'], 'iconStyle' => 'far']
-                            ]
-                        ],
-                        [
-                            'label' => 'Utilizadores',
-                            'icon' => 'fas fa-solid fa-user',
-                            'items' => [
-                                ['label' => 'Administradores', 'url' => ['admin/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Trabalhadores', 'url' => ['employee/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Clientes', 'url' => ['client/index'], 'iconStyle' => 'far']
-                            ]
-                        ],
-                        [
-                            'icon' => 'fas fa-solid fa-suitcase-rolling',
-                            'label' => 'Perdidos e Achados',
-                            'items' => [
-                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
-                            ]
-                        ],
-                        ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['payment-method/index']],
-                        [
-                            'label' => 'Restaurantes',
-                            'icon' => 'fas fa-solid fa-utensils',
-                            'items' => [
-                                ['label' => 'Restaurantes', 'url' => ['restaurant/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Gerentes', 'url' => ['manager/index'], 'iconStyle' => 'far'],
-                            ]
-                        ],
-                        ['label' => 'Lojas', 'url' => ['store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
-                        ['label' => 'Server Log', 'url' => ['serverlog'], 'icon' => 'fas fa-solid fa-info'],
+                $sideBarMenuItems = array_merge($sideBarMenuItems, [
+                    [
+                        'label' => 'Aeroporto',
+                        'icon' => 'fas fa-solid fa-plane',
+                        'items' => [
+                            ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far', 'icon'],
+                            ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Companhias', 'url' => ['/company/index'], 'iconStyle' => 'far']
+                        ]
                     ],
+                    [
+                        'label' => 'Utilizadores',
+                        'icon' => 'fas fa-solid fa-user',
+                        'items' => [
+                            ['label' => 'Administradores', 'url' => ['/admin/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Trabalhadores', 'url' => ['/employee/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Clientes', 'url' => ['/client/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Funções do trabalhador', 'url' => ['/employee-function/index'], 'iconStyle' => 'far']
+                        ]
+                    ],
+                    [
+                        'icon' => 'fas fa-solid fa-suitcase-rolling',
+                        'label' => 'Perdidos e Achados',
+                        'items' => [
+                            ['label' => 'Itens', 'url' => ['/lost-item/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                        ]
+                    ],
+                    ['label' => 'Métodos de Pagamento', 'icon' => 'fas fa-solid fa-credit-card', 'url' => ['/payment-method/index']],
+                    [
+                        'label' => 'Restaurantes',
+                        'icon' => 'fas fa-solid fa-utensils',
+                        'items' => [
+                            ['label' => 'Restaurantes', 'url' => ['/restaurant/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Gerentes', 'url' => ['/manager/index'], 'iconStyle' => 'far'],
+                        ]
+                    ],
+                    ['label' => 'Lojas', 'url' => ['/store/index'], 'icon' => 'fas fa-solid fa-shopping-cart'],
+                    ['label' => 'Server Log', 'url' => ['/log-reader'], 'icon' => 'fas fa-solid fa-info'],
                 ]);
             }
             if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) {
                 $manager = Manager::find()->where(['manager_id' => Yii::$app->user->getId()])->one();
-                echo Menu::widget([
-                    'items' => [
-
-                        ['label' => 'Restaurante', 'url' => ['restaurant/view?id=' . $manager->restaurant_id], 'icon' => 'fas fa-house-user'],
-                        ['label' => 'Ementa', 'url' => ['restaurant-item/index?restaurant_id=' . $manager->restaurant_id], 'icon' => 'fas fa-solid fa-utensils'],
-                    ],
+                $sideBarMenuItems = array_merge($sideBarMenuItems, [
+                    ['label' => 'Restaurante', 'url' => ['/restaurant/view?id=' . $manager->restaurant_id], 'icon' => 'fas fa-house-user'],
+                    ['label' => 'Ementa', 'url' => ['/restaurant-item/index?restaurant_id=' . $manager->restaurant_id], 'icon' => 'fas fa-solid fa-utensils'],
                 ]);
             }
             if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['employee'])) {
-                echo Menu::widget([
-                    'items' => [
-                        [
-                            'label' => 'Aeroporto',
-                            'icon' => 'fas fa-solid fa-plane',
-                            'items' => [
-                                ['label' => 'Voos', 'url' => ['flight/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aeroportos', 'url' => ['airport/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Aviões', 'url' => ['airplane/index'], 'iconStyle' => 'far'],
-                            ]
-                        ],
-                        [
-                            'label' => 'Perdidos e Achados',
-                            'icon' => 'fas fa-solid fa-suitcase-rolling',
-                            'items' => [
-                                ['label' => 'Itens', 'url' => ['lost-item/index'], 'iconStyle' => 'far'],
-                                ['label' => 'Suporte ao cliente', 'url' => ['supportticket/index'], 'iconStyle' => 'far']
-                            ]
-                        ],
-                        ['label' => 'Clientes', 'url' => ['client/index'], 'icon' => 'fas fa-solid fa-user'],
-                        ['label' => 'Métodos de Pagamento', 'url' => ['payment-method/index'], 'icon' => 'fas fa-solid fa-credit-card'],
+                $sideBarMenuItems = array_merge($sideBarMenuItems, [
+                    [
+                        'label' => 'Aeroporto',
+                        'icon' => 'fas fa-solid fa-plane',
+                        'items' => [
+                            ['label' => 'Voos', 'url' => ['/flight/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Aeroportos', 'url' => ['/airport/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Aviões', 'url' => ['/airplane/index'], 'iconStyle' => 'far'],
+                        ]
                     ],
+                    [
+                        'label' => 'Perdidos e Achados',
+                        'icon' => 'fas fa-solid fa-suitcase-rolling',
+                        'items' => [
+                            ['label' => 'Itens', 'url' => ['/lost-item/index'], 'iconStyle' => 'far'],
+                            ['label' => 'Suporte ao cliente', 'url' => ['/supportticket/index'], 'iconStyle' => 'far']
+                        ]
+                    ],
+                    ['label' => 'Clientes', 'url' => ['/client/index'], 'icon' => 'fas fa-solid fa-user'],
+                    ['label' => 'Métodos de Pagamento', 'url' => ['/payment-method/index'], 'icon' => 'fas fa-solid fa-credit-card'],
                 ]);
-            } ?>
+            }
+
+            echo Menu::widget([
+                'items' => $sideBarMenuItems
+            ]);
+
+            ?>
         </nav>
         <!-- /.sidebar-menu -->
     </div>

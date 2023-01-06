@@ -80,14 +80,16 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post())) {
+            // Valida os dados para depois confirmar se não é cliente
+            if ($model->validate()) {
+                if ($model->isClient()) {
+                    Yii::$app->session->setFlash('error', 'Não pode entrar como cliente!');
+                    return $this->goHome();
+                }
 
-            if ($model->isClient()) {
-                Yii::$app->session->setFlash('error', 'Não pode entrar como cliente!');
-                return $this->goHome();
+                if ($model->login())
+                    return $this->goBack();
             }
-
-            if ($model->login())
-                return $this->goBack();
         }
 
         return $this->render('login', [

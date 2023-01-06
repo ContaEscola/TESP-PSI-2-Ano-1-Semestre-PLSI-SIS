@@ -108,6 +108,10 @@ class LostItemController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+
+                //Criar logs
+                Yii::info("Criar item perdido", 'lostItem');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -131,6 +135,10 @@ class LostItemController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+
+            //Criar logs
+            Yii::info("Editar item perdido", 'lostItem');
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -150,6 +158,9 @@ class LostItemController extends Controller
     {
         $this->findModel($id)->delete();
 
+        //Criar logs
+        Yii::info("Eliminar item perdido", 'lostItem');
+
         return $this->redirect(['index']);
     }
 
@@ -160,8 +171,14 @@ class LostItemController extends Controller
         if ($model->deleteImage())
             $model->image = null;
 
-        if (!$model->save())
+        if (!$model->save()){
             Yii::$app->session->setFlash('error', 'Algo correu mal ao efetuar a operação!');
+        }
+        else{
+            //Criar logs
+            Yii::info("Eliminar imagem item perdido", 'lostItem');
+        }
+
 
         return $this->redirect(['view', 'id' => $model->id]);
     }
