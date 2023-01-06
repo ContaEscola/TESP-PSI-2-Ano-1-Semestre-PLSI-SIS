@@ -296,10 +296,8 @@ CREATE TABLE IF NOT EXISTS `support_ticket` (
     `title` VARCHAR(20) NOT NULL,
     `state` ENUM('Por Rever','Concluido','Em Processo') NOT NULL DEFAULT 'Por Rever',
     `client_id` INT(11) UNSIGNED NOT NULL,
-    `employee_id` INT(11) UNSIGNED NULL,
     CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
-    CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`),
-    CONSTRAINT `fk_support_ticket_employee_id` FOREIGN KEY(`employee_id`) REFERENCES `employee`(`employee_id`)
+    CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
