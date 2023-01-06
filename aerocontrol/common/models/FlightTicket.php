@@ -84,6 +84,10 @@ class FlightTicket extends \yii\db\ActiveRecord
 
         $transaction = FlightTicket::getDb()->beginTransaction();
         try {
+
+            $this->flight->passengers_left += sizeof($this->passengers);
+            $this->flight->save();
+
             foreach ($this->passengers as $passenger) {
                 $passenger->delete();
             }

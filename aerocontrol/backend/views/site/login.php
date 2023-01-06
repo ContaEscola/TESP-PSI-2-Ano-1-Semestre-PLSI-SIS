@@ -2,6 +2,10 @@
 
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
+
+/** @var yii\web\View $this */
+
+$this->title = "Login";
 ?>
 <main>
     <div class="padding-block-700 height-100 d-grid align-items-center">

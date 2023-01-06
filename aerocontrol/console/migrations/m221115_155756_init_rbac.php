@@ -296,20 +296,35 @@ class m221115_155756_init_rbac extends Migration
             Employee Permissions
         */
         $createEmployee = $auth->createPermission('createEmployee');
-        $createEmployee->description = "Criar Loja";
+        $createEmployee->description = "Criar Trabalhador";
         $auth->add($createEmployee);
 
         $updateEmployee = $auth->createPermission('updateEmployee');
-        $updateEmployee->description = "Atualizar Loja";
+        $updateEmployee->description = "Atualizar Trabalhador";
         $auth->add($updateEmployee);
 
         $viewEmployee = $auth->createPermission('viewEmployee');
-        $viewEmployee->description = "Visualizar Loja";
+        $viewEmployee->description = "Visualizar trabalhador";
         $auth->add($viewEmployee);
 
         $deleteEmployee = $auth->createPermission('deleteEmployee');
-        $deleteEmployee->description = "Apagar Loja";
+        $deleteEmployee->description = "Apagar trabalhador";
         $auth->add($deleteEmployee);
+
+        /*
+            Employee Function Permissions
+        */
+        $createEmployeeFunction = $auth->createPermission('createEmployeeFunction');
+        $createEmployeeFunction->description = "Criar função do trabalhador";
+        $auth->add($createEmployeeFunction);
+
+        $updateEmployeeFunction = $auth->createPermission('updateEmployeeFunction');
+        $updateEmployeeFunction->description = "Atualizar função do trabalhador";
+        $auth->add($updateEmployeeFunction);
+
+        $viewEmployeeFunction = $auth->createPermission('viewEmployeeFunction');
+        $viewEmployeeFunction->description = "Visualizar função do trabalhador";
+        $auth->add($viewEmployeeFunction);
 
         /*
             ServerLog Permissions
@@ -439,12 +454,6 @@ class m221115_155756_init_rbac extends Migration
             Own Profile Permissions
         */
 
-        $viewOwnProfile = $auth->createPermission("viewOwnProfile");
-        $viewOwnProfile->description = "Visualizar perfil";
-        $viewOwnProfile->ruleName = $clientRule->name;
-        $auth->add($viewOwnProfile);
-        $auth->addChild($viewOwnProfile, $viewClient);
-
         $updateOwnProfile = $auth->createPermission("updateOwnProfile");
         $updateOwnProfile->description = "Atualizar perfil";
         $updateOwnProfile->ruleName = $clientRule->name;
@@ -461,7 +470,6 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($client, $createMessage);
         $auth->addChild($client, $deleteOwnTicket);
         $auth->addChild($client, $updateOwnTicket);
-        $auth->addChild($client, $viewOwnProfile);
         $auth->addChild($client, $updateOwnProfile);
         $auth->addChild($client, $updateOwnSupportTicket);
         $auth->addChild($client, $viewOwnSupportTicket);
@@ -533,7 +541,11 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin, $viewEmployee);
         $auth->addChild($admin, $updateEmployee);
         $auth->addChild($admin, $deleteEmployee);
+        $auth->addChild($admin, $createEmployeeFunction);
+        $auth->addChild($admin, $viewEmployeeFunction);
+        $auth->addChild($admin, $updateEmployeeFunction);
         $auth->addChild($admin, $viewServerLog);
+
 
 
         /*

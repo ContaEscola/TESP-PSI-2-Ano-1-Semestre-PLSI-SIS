@@ -85,21 +85,20 @@ $this->registerJsFile('@web/js/flight-tickets.js', [
             </section>
         </dialog>
 
-        <ul role="list" class="flow" data-flow-space="medium">
-            <?= ListView::widget([
-                'dataProvider' => $dataProvider,
-                'summary' => '',
-                'options' => [
-                    'tag' => 'ul',
-                    'class' => 'flow',
-                    'role' => 'list',
-                    'data-flow-space' => 'medium'
 
-                ],
-                'emptyText' => "<p class='fw-medium text-align-center'> Você ainda não comprou nenhum bilhete!</p>",
-                'itemView' => '_ticket',
-            ]); ?>
-        </ul>
+        <?= ListView::widget([
+            'dataProvider' => $dataProvider,
+            'summary' => '',
+            'options' => [
+                'tag' => 'ul',
+                'class' => 'flow',
+                'role' => 'list',
+                'data-flow-space' => 'medium'
+
+            ],
+            'emptyText' => "<p class='fw-medium text-align-center'> Você ainda não comprou nenhum bilhete!</p>",
+            'itemView' => '_ticket',
+        ]); ?>
+
     </div>
-
 </section>

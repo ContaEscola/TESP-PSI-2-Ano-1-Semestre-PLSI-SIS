@@ -2,10 +2,11 @@
 
 namespace backend\controllers;
 
-use backend\models\ClientForm;
+use common\models\ClientForm;
 use common\models\Client;
 use common\models\ClientSearch;
 use common\models\User;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -97,6 +98,10 @@ class ClientController extends Controller
         $model = new ClientForm($validClient->client_id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->update()) {
+
+            //Criar logs
+            Yii::info("Editar cliente", 'client');
+
             return $this->redirect(['view', 'client_id' => $model->client_id]);
         }
 

@@ -51,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Avião',
                 'value' => $model->airplane->name,
             ],
+            'passengers_left',
         ],
     ]) ?>
 
