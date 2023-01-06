@@ -11,12 +11,13 @@ class TicketItemTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(TicketItem::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(TicketItem::class, [
             'lost_item_id' => 4,
             'support_ticket_id' => 1
         ]);
-        $this->tester->seeRecord(TicketItem::class,[
+        $this->tester->seeRecord(TicketItem::class, [
             'lost_item_id' => 4,
             'support_ticket_id' => 1
         ]);
@@ -24,7 +25,7 @@ class TicketItemTest extends \Codeception\Test\Unit
 
     public function testRead()
     {
-        $this->tester->seeRecord(TicketItem::class,[
+        $this->tester->seeRecord(TicketItem::class, [
             'lost_item_id' => 1,
             'support_ticket_id' => 2
         ]);
@@ -32,12 +33,12 @@ class TicketItemTest extends \Codeception\Test\Unit
 
     public function testDelete()
     {
-        $ticket = TicketItem::find()->where([
+        $ticketItem = $this->tester->grabRecord(TicketItem::class, [
             'lost_item_id' => 1,
             'support_ticket_id' => 2
-        ])->one();
-        $ticket->delete();
-        $this->tester->dontSeeRecord(TicketItem::class,[
+        ]);
+        $ticketItem->delete();
+        $this->tester->dontSeeRecord(TicketItem::class, [
             'lost_item_id' => 1,
             'support_ticket_id' => 2
         ]);

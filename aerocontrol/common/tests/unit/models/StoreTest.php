@@ -11,8 +11,9 @@ class StoreTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(Store::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(Store::class, [
             'name' => 'store_test',
             'description' => 'Loja de roupa',
             'phone' => '919300122',
@@ -21,19 +22,21 @@ class StoreTest extends \Codeception\Test\Unit
             'logo' => 'store_15-12-2022_20-49.png',
             'website' => 'www.store.pt'
         ]);
-        $this->tester->seeRecord(Store::class,['name' => 'store_test']);
+        $this->tester->seeRecord(Store::class, ['name' => 'store_test']);
     }
 
     public function testRead()
     {
-        $this->tester->seeRecord(Store::class,['name' => 'Acium']);
+        $this->tester->seeRecord(Store::class, ['name' => 'Acium']);
     }
 
     public function testUpdate()
     {
-        $store = Store::find()->where(['name' => 'Acium'])->one();
+        $store = $this->tester->grabRecord(Store::class, [
+            'name' => 'Acium'
+        ]);
         $store->name = 'New Store name';
         $this->assertTrue($store->save());
-        $this->assertEquals('New Store name',$store->name);
+        $this->assertEquals('New Store name', $store->name);
     }
 }

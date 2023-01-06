@@ -27,7 +27,9 @@ class PaymentMethodTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $paymentMethod = PaymentMethod::find()->where(['name' => 'MBWay'])->one();
+        $paymentMethod = $this->tester->grabRecord(PaymentMethod::class, [
+            'name' => 'MBWay'
+        ]);
         $paymentMethod->name = 'New method name';
         $this->assertTrue($paymentMethod->save());
         $this->assertEquals('New method name', $paymentMethod->name);

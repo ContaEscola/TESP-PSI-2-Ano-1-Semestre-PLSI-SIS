@@ -11,13 +11,14 @@ class TicketMessageTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testCreate(){
-        $this->tester->haveRecord(TicketMessage::class,[
+    public function testCreate()
+    {
+        $this->tester->haveRecord(TicketMessage::class, [
             'message' => 'message_test',
             'sender_id' => 4,
             'support_ticket_id' => 1
         ]);
-        $this->tester->seeRecord(TicketMessage::class,[
+        $this->tester->seeRecord(TicketMessage::class, [
             'message' => 'message_test',
             'sender_id' => 4,
             'support_ticket_id' => 1
@@ -26,7 +27,7 @@ class TicketMessageTest extends \Codeception\Test\Unit
 
     public function testRead()
     {
-        $this->tester->seeRecord(TicketMessage::class,[
+        $this->tester->seeRecord(TicketMessage::class, [
             'message' => 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.',
             'sender_id' => 4,
             'support_ticket_id' => 1
@@ -35,13 +36,13 @@ class TicketMessageTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $message = TicketMessage::find()->where([
+        $message = $this->tester->grabRecord(TicketMessage::class, [
             'message' => 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.',
             'sender_id' => 4,
             'support_ticket_id' => 1
-        ])->one();
+        ]);
         $message->message = 'New message';
         $this->assertTrue($message->save());
-        $this->assertEquals('New message',$message->message);
+        $this->assertEquals('New message', $message->message);
     }
 }

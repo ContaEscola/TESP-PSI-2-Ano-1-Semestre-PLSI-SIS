@@ -29,7 +29,9 @@ class AirplaneTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $airplane = Airplane::find()->where(['name' => 'Hawker Hurricane'])->one();
+        $airplane = $this->tester->grabRecord(Airplane::class, [
+            'name' => 'Hawker Hurricane'
+        ]);
         $airplane->capacity = 1000;
         $this->assertTrue($airplane->save());
         $this->assertEquals(1000, $airplane->capacity);

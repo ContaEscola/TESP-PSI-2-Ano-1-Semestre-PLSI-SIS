@@ -27,7 +27,9 @@ class CompanyTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $company = Company::find()->where(['name' => 'TAP Portugal'])->one();
+        $company = $this->tester->grabRecord(Company::class, [
+            'name' => 'TAP Portugal'
+        ]);
         $company->name = 'New Company name';
         $this->assertTrue($company->save());
         $this->assertEquals('New Company name', $company->name);

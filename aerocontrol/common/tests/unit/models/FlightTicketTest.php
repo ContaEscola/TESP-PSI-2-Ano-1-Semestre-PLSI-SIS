@@ -42,12 +42,12 @@ class FlightTicketTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $flightTicket = FlightTicket::find()->where([
+        $flightTicket = $this->tester->grabRecord(FlightTicket::class, [
             'checkin' => 0,
             'client_id' => 4,
             'flight_id' => 1,
             'payment_method_id' => 1
-        ])->one();
+        ]);
         $flightTicket->checkin = 1;
         $this->assertTrue($flightTicket->save());
         $this->assertEquals(1, $flightTicket->checkin);
@@ -55,12 +55,12 @@ class FlightTicketTest extends \Codeception\Test\Unit
 
     public function testDelete()
     {
-        $flightTicket = FlightTicket::find()->where([
+        $flightTicket = $this->tester->grabRecord(FlightTicket::class, [
             'checkin' => 0,
             'client_id' => 4,
             'flight_id' => 1,
             'payment_method_id' => 1
-        ])->one();
+        ]);
         $flightTicket->deleteTicket();  // Função costumizada para dar delete a passageiros e após isso ao ticket
         $this->tester->dontSeeRecord(FlightTicket::class, ['flight_ticket_id' => $flightTicket->flight_ticket_id]);
     }

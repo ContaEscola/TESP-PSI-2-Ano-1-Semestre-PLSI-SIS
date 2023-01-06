@@ -29,7 +29,9 @@ class UserTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $user = User::find()->where(['username' => 'rafael'])->one();
+        $user = $this->tester->grabRecord(User::class, [
+            'username' => 'rafael'
+        ]);
         $user->username = "Novo Nome";
         $this->assertTrue($user->save());
         $this->assertEquals('Novo Nome', $user->username);
@@ -38,7 +40,9 @@ class UserTest extends \Codeception\Test\Unit
     public function testCreateAdmin()
     {
         $this->createUser();
-        $user = User::find()->where(['username' => 'test_user'])->one();
+        $user = $this->tester->grabRecord(User::class, [
+            'username' => 'test_user'
+        ]);
         $this->tester->haveRecord(Admin::class, [
             'admin_id' => $user->id,
         ]);
@@ -48,7 +52,9 @@ class UserTest extends \Codeception\Test\Unit
     public function testCreateEmployee()
     {
         $this->createUser();
-        $user = User::find()->where(['username' => 'test_user'])->one();
+        $user = $this->tester->grabRecord(User::class, [
+            'username' => 'test_user'
+        ]);
         $this->tester->haveRecord(Employee::class, [
             'employee_id' => $user->id,
             'tin' => '321421521',
@@ -66,7 +72,9 @@ class UserTest extends \Codeception\Test\Unit
     public function testCreateClient()
     {
         $this->createUser();
-        $user = User::find()->where(['username' => 'test_user'])->one();
+        $user = $this->tester->grabRecord(User::class, [
+            'username' => 'test_user'
+        ]);
         $this->tester->haveRecord(Client::class, [
             'client_id' => $user->id,
         ]);
@@ -79,7 +87,9 @@ class UserTest extends \Codeception\Test\Unit
     public function testCreateManager()
     {
         $this->createUser();
-        $user = User::find()->where(['username' => 'test_user'])->one();
+        $user = $this->tester->grabRecord(User::class, [
+            'username' => 'test_user'
+        ]);
         $this->tester->haveRecord(Manager::class, [
             'manager_id' => $user->id,
             'restaurant_id' => 1

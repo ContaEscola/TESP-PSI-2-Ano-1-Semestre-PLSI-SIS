@@ -59,7 +59,7 @@ class FlightTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $flight = Flight::find()->where([
+        $flight = $this->tester->grabRecord(Flight::class, [
             'terminal' => 'T1',
             'price' => '100',
             'distance' => '279',
@@ -69,7 +69,7 @@ class FlightTest extends \Codeception\Test\Unit
             'origin_airport_id' => 1,
             'arrival_airport_id' => 3,
             'airplane_id' => 1
-        ])->one();
+        ]);
         $flight->terminal = 'T15';
         $this->assertTrue($flight->save());
         $this->assertEquals('T15', $flight->terminal);

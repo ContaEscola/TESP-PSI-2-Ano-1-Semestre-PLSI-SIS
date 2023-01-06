@@ -3,6 +3,7 @@
 
 namespace common\tests\Unit\models;
 
+use common\models\Employee;
 use common\models\EmployeeFunction;
 use common\tests\UnitTester;
 
@@ -26,7 +27,9 @@ class EmployeeFunctionTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $employeeFunction = EmployeeFunction::find()->where(['name' => 'Limpeza'])->one();
+        $employeeFunction = $this->tester->grabRecord(EmployeeFunction::class, [
+            'name' => 'Limpeza'
+        ]);
         $employeeFunction->name = 'New Function name';
         if (!$employeeFunction->save())
             dump($employeeFunction->errors);

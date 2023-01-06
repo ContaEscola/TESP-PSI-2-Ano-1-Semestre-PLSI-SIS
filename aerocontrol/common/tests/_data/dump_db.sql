@@ -3,6 +3,7 @@ USE aerocontrol_tests;
 --
 -- Estrutura da tabela `user`
 --
+
 CREATE TABLE IF NOT EXISTS `user` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `username` VARCHAR(30) NOT NULL,
@@ -30,9 +31,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 -- Estrutura da tabela `admin`
 --
+
 CREATE TABLE IF NOT EXISTS `admin` (
     `admin_id` INT UNSIGNED,
-    `status`   TINYINT UNSIGNED NOT NULL DEFAULT 1,
+    `status` TINYINT UNSIGNED NOT NULL DEFAULT 1,
     CONSTRAINT `pk_admin_id` PRIMARY KEY(`admin_id`),
     CONSTRAINT `fk_admin_admin_id` FOREIGN KEY (`admin_id`) REFERENCES `user`(`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -40,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 -- Estrutura da tabela `client`
 --
+
 CREATE TABLE IF NOT EXISTS `client` (
     `client_id` INT UNSIGNED,
     `status` TINYINT UNSIGNED NOT NULL DEFAULT 1,
@@ -50,9 +53,11 @@ CREATE TABLE IF NOT EXISTS `client` (
 --
 -- Estrutura da tabela `employee_function`
 --
+
 CREATE TABLE IF NOT EXISTS `employee_function` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
+    `state` TINYINT(1) NOT NULL DEFAULT 1,
     CONSTRAINT `pk_employee_function_id` PRIMARY KEY (`id`),
     CONSTRAINT `uk_name` UNIQUE KEY(`name`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -60,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `employee_function` (
 --
 -- Estrutura da tabela `employee`
 --
+
 CREATE TABLE IF NOT EXISTS `employee` (
     `employee_id` INT UNSIGNED,
     `tin` VARCHAR(20) NOT NULL,
@@ -69,15 +75,15 @@ CREATE TABLE IF NOT EXISTS `employee` (
     `zip_code` VARCHAR(20) NOT NULL,
     `iban` CHAR(25) NOT NULL,
     `qualifications` enum(
-     'Até ao 9º ano de escolaridade',
-     'Secundário',
-     'Curso técnico superior profissional',
-     'Diploma de Especialização Tecnológica',
-     'Ensino superior - bacharelato ou equivalente',
-     'Licenciatura Pré-Bolonha',
-     'Licenciatura 1º Ciclo - Pós-Bolonha',
-     'Mestrado',
-     'Doutoramento'
+        'Até ao 9º ano de escolaridade',
+        'Secundário',
+        'Curso técnico superior profissional',
+        'Diploma de Especialização Tecnológica',
+        'Ensino superior - bacharelato ou equivalente',
+        'Licenciatura Pré-Bolonha',
+        'Licenciatura 1º Ciclo - Pós-Bolonha',
+        'Mestrado',
+        'Doutoramento'
     ) NOT NULL,
     `status` TINYINT UNSIGNED NOT NULL DEFAULT 1,
     `function_id` INT(11) UNSIGNED NOT NULL,
@@ -93,6 +99,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 --
 -- Estrutura da tabela `store`
 --
+
 CREATE TABLE IF NOT EXISTS `store` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `name` VARCHAR(75) NOT NULL,
@@ -110,6 +117,7 @@ CREATE TABLE IF NOT EXISTS `store` (
 --
 -- Estrutura da tabela `restaurant`
 --
+
 CREATE TABLE IF NOT EXISTS `restaurant` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `name` VARCHAR(75) NOT NULL,
@@ -127,6 +135,7 @@ CREATE TABLE IF NOT EXISTS `restaurant` (
 --
 -- Estrutura da tabela `restaurant_item`
 --
+
 CREATE TABLE IF NOT EXISTS `restaurant_item` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `item` VARCHAR(100) NOT NULL,
@@ -140,6 +149,7 @@ CREATE TABLE IF NOT EXISTS `restaurant_item` (
 --
 -- Estrutura da tabela `manager`
 --
+
 CREATE TABLE IF NOT EXISTS `manager` (
     `manager_id` INT UNSIGNED,
     `restaurant_id` INT(11) UNSIGNED NOT NULL,
@@ -152,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `manager` (
 --
 -- Estrutura da tabela `airport`
 --
+
 CREATE TABLE IF NOT EXISTS `airport` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `country` VARCHAR(50) NOT NULL,
@@ -166,6 +177,7 @@ CREATE TABLE IF NOT EXISTS `airport` (
 --
 -- Estrutura da tabela `company`
 --
+
 CREATE TABLE IF NOT EXISTS `company` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `name` VARCHAR(50) NOT NULL,
@@ -177,6 +189,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 -- Estrutura da tabela `airplane`
 --
+
 CREATE TABLE IF NOT EXISTS `airplane` (
     `id` INT UNSIGNED AUTO_INCREMENT,
     `name` VARCHAR(75) NOT NULL,
@@ -203,25 +216,25 @@ CREATE TABLE IF NOT EXISTS `payment_method` (
 -- Estrutura da tabela `flight`
 --
 
-CREATE TABLE IF NOT EXISTS flight (
-    id INT UNSIGNED AUTO_INCREMENT,
-    terminal VARCHAR(30) NOT NULL,
-    estimated_departure_date DATETIME NOT NULL,
-    estimated_arrival_date DATETIME NOT NULL,
-    departure_date DATETIME NULL,
-    arrival_date DATETIME NULL,
-    price DOUBLE NOT NULL,
-    distance FLOAT NOT NULL,
-    state ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL DEFAULT 'Previsto',
-    discount_percentage TINYINT(4) NOT NULL,
-    passengers_left INT UNSIGNED NOT NULL,
-    origin_airport_id INT UNSIGNED NOT NULL,
-    arrival_airport_id INT UNSIGNED NOT NULL,
-    airplane_id INT UNSIGNED NOT NULL,
-    CONSTRAINT pk_flight_id PRIMARY KEY(id),
-    CONSTRAINT fk_flight_origin_airport_id FOREIGN KEY(origin_airport_id) REFERENCES airport(id),
-    CONSTRAINT fk_flight_arrival_airport_id FOREIGN KEY(arrival_airport_id) REFERENCES airport(id),
-    CONSTRAINT fk_flight_airplane_id FOREIGN KEY(airplane_id) REFERENCES airplane(id)
+CREATE TABLE IF NOT EXISTS `flight` (
+    `id` INT UNSIGNED AUTO_INCREMENT,
+    `terminal` VARCHAR(30) NOT NULL,
+    `estimated_departure_date` DATETIME NOT NULL,
+    `estimated_arrival_date` DATETIME NOT NULL,
+    `departure_date` DATETIME NULL,
+    `arrival_date` DATETIME NULL,
+    `price` DOUBLE NOT NULL,
+    `distance` FLOAT NOT NULL,
+    `state` ENUM('Previsto','Chegou','Partiu','Cancelado','Embarque','Ultima Chamada') NOT NULL DEFAULT 'Previsto',
+    `discount_percentage` TINYINT(4) NOT NULL,
+    `passengers_left` INT UNSIGNED NOT NULL,
+    `origin_airport_id` INT UNSIGNED NOT NULL,
+    `arrival_airport_id` INT UNSIGNED NOT NULL,
+    `airplane_id` INT UNSIGNED NOT NULL,
+    CONSTRAINT `pk_flight_id` PRIMARY KEY(`id`),
+    CONSTRAINT `fk_flight_origin_airport_id` FOREIGN KEY(`origin_airport_id`) REFERENCES `airport`(`id`),
+    CONSTRAINT `fk_flight_arrival_airport_id` FOREIGN KEY(`arrival_airport_id`) REFERENCES `airport`(`id`),
+    CONSTRAINT `fk_flight_airplane_id` FOREIGN KEY(`airplane_id`) REFERENCES `airplane`(`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -251,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `passenger` (
     `name` VARCHAR(50) NOT NULL,
     `gender` ENUM('Masculino','Feminino','Outro') NOT NULL,
     `extra_baggage` TINYINT(1) NOT NULL,
-    `seat` VARCHAR (3) NOT NULL,
+    `seat` VARCHAR(3) NOT NULL,
     `flight_ticket_id` INT(11) UNSIGNED NOT NULL,
     CONSTRAINT `pk_passenger_id` PRIMARY KEY (`id`),
     CONSTRAINT `fk_passenger_flight_ticket_id` FOREIGN KEY(`flight_ticket_id`) REFERENCES `flight_ticket`(`flight_ticket_id`)
@@ -275,13 +288,13 @@ CREATE TABLE IF NOT EXISTS `lost_item` (
 --
 
 CREATE TABLE IF NOT EXISTS `support_ticket` (
-    `id` INT UNSIGNED AUTO_INCREMENT,
-    `title` VARCHAR(20) NOT NULL,
-    `state` ENUM('Por Rever','Em Progresso','Concluido') NOT NULL DEFAULT 'Por Rever',
-    `client_id` INT(11) UNSIGNED NOT NULL,
-    CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
-    CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id` INT UNSIGNED AUTO_INCREMENT,
+  `title` VARCHAR(20) NOT NULL,
+  `state` ENUM('Por Rever','Em Progresso','Concluido') NOT NULL DEFAULT 'Por Rever',
+  `client_id` INT(11) UNSIGNED NOT NULL,
+  CONSTRAINT `pk_support_ticket_id` PRIMARY KEY (`id`),
+  CONSTRAINT `fk_support_ticket_client_id` FOREIGN KEY (`client_id`) REFERENCES `client`(`client_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Estrutura da tabela `ticket_item`

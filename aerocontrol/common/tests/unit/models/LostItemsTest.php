@@ -28,7 +28,9 @@ class LostItemsTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $lostItem = LostItem::find()->where(['description' => 'Camisa vermelha, marca BOSS.'])->one();
+        $lostItem = $this->tester->grabRecord(LostItem::class, [
+            'description' => 'Camisa vermelha, marca BOSS.'
+        ]);
         $lostItem->description = 'New description';
         $this->assertTrue($lostItem->save());
         $this->assertEquals('New description', $lostItem->description);

@@ -28,7 +28,9 @@ class SupportTicketTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $ticket = SupportTicket::find()->where(['title' => 'Casisola Perdida'])->one();
+        $ticket = $this->tester->grabRecord(SupportTicket::class, [
+            'title' => 'Camisola Perdida'
+        ]);
         $ticket->title = 'New ticket name';
         $this->assertTrue($ticket->save());
         $this->assertEquals('New ticket name', $ticket->title);

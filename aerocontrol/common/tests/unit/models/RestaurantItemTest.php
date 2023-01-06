@@ -29,7 +29,9 @@ class RestaurantItemTest extends \Codeception\Test\Unit
 
     public function testUpdate()
     {
-        $item = RestaurantItem::find()->where(['item' => 'Big Mac'])->one();
+        $item = $this->tester->grabRecord(RestaurantItem::class, [
+            'item' => 'Big Mac'
+        ]);
         $item->item = 'New Item name';
         $this->assertTrue($item->save());
         $this->assertEquals('New Item name', $item->item);
