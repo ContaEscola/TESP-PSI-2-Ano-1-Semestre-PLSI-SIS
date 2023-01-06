@@ -67,6 +67,13 @@ use yii\helpers\Url;
                                                     </span>', ['flight-ticket/index'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                     </li>
                                     <li class="dropdown-menu__item">
+                                        <?= Html::a('Meus Tickets Suporte' . '<span aria-hidden="true">
+                                                        <svg class="icon dropdown-link__icon">
+                                                            <use xlink:href="' . Url::to('@web/images/flight-ticket.svg#flight-ticket') . '"></use>
+                                                        </svg>
+                                                    </span>', ['support-ticket/index'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                    </li>
+                                    <li class="dropdown-menu__item">
                                         <?= Html::a(
                                             'Logout' . '<span aria-hidden="true">
                                                         <svg class="icon dropdown-link__icon">
