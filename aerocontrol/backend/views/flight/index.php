@@ -45,31 +45,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'terminal',
             [
                 'attribute' => 'departure_date',
-                // 'filter' => DateTimePicker::widget([
-                //     'model' => $searchModel,
-                //     'attribute' => 'departure_date',
-                //     'options' => [
-                //         'class' => 'form-control'
-                //     ],
-                //     'pluginOptions' => [
-                //         'autoclose' => true,
-                //         'format' => 'dd-mm-yyyy hh:ii'
-                //     ],
-                // ]),
+                'filter' => false
             ],
             [
                 'attribute' => 'arrival_date',
-                // 'filter' => DateTimePicker::widget([
-                //     'model' => $searchModel,
-                //     'attribute' => 'arrival_date',
-                //     'options' => [
-                //         'class' => 'form-control'
-                //     ],
-                //     'pluginOptions' => [
-                //         'autoclose' => true,
-                //         'format' => 'dd-mm-yyyy hh:ii'
-                //     ],
-                // ]),
+                'filter' => false
             ],
             [
                 'label' => 'Avião',
