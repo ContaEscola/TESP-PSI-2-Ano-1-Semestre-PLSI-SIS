@@ -42,8 +42,9 @@ class Passenger extends \yii\db\ActiveRecord
             ], 'strict' => true],
 
             ['extra_baggage', 'boolean', 'message' => 'Selecione um dos estados.'],
-            [['seat', 'flight_ticket_id'], 'integer'],
             ['flight_ticket_id', 'integer'],
+            ['flight_ticket_id', 'integer'],
+            ['seat', 'string', 'max' => 3],
             ['name', 'string', 'max' => 50],
             ['flight_ticket_id', 'exist', 'skipOnError' => true, 'targetClass' => FlightTicket::class, 'targetAttribute' => ['flight_ticket_id' => 'flight_ticket_id']],
         ];

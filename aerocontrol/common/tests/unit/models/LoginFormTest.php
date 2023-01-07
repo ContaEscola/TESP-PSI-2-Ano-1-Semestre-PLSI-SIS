@@ -2,6 +2,7 @@
 
 namespace common\tests\unit\models;
 
+use common\models\User;
 use Yii;
 use common\models\LoginForm;
 use common\fixtures\UserFixture;
@@ -15,20 +16,6 @@ class LoginFormTest extends \Codeception\Test\Unit
      * @var \common\tests\UnitTester
      */
     protected $tester;
-
-
-    /**
-     * @return array
-     */
-    public function _fixtures()
-    {
-        return [
-            'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
-            ]
-        ];
-    }
 
     public function testLoginNoUser()
     {
@@ -44,20 +31,20 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function testLoginWrongPassword()
     {
         $model = new LoginForm([
-            'username' => 'bayer.hudson',
+            'username' => 'rafael',
             'password' => 'wrong_password',
         ]);
 
         verify($model->login())->false();
-        verify( $model->errors)->arrayHasKey('password');
+        verify($model->errors)->arrayHasKey('password');
         verify(Yii::$app->user->isGuest)->true();
     }
 
     public function testLoginCorrect()
     {
         $model = new LoginForm([
-            'username' => 'bayer.hudson',
-            'password' => 'password_0',
+            'username' => 'rafael',
+            'password' => '12345678',
         ]);
 
         verify($model->login())->true();
