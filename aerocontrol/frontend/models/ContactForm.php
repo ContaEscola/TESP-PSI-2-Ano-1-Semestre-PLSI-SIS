@@ -21,8 +21,10 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['email', 'body', 'name'], 'trim'],
-            [['email', 'body', 'name'], 'required', 'message' => 'O {attribute} não pode ser vazio.'],
+            [['email', 'name'], 'trim'],
+            ['body', 'required', 'message' => 'A mensagem não pode ser vazia.'],
+            ['name', 'required', 'message' => 'O nome não pode ser vazio.'],
+            ['email', 'required', 'message' => 'O email não pode ser vazio.'],
             ['name', 'string'],
             // email has to be a valid email address
             ['email', 'email', 'message' => 'O email tem de ser válido.'],
