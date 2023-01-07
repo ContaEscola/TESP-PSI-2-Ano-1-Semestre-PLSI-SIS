@@ -52,7 +52,6 @@ class SignupForm extends UserForm
 
 
         return true;
-        //return $this->sendEmail($user);
     }
 
     /**
@@ -60,7 +59,7 @@ class SignupForm extends UserForm
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
-    /*protected function sendEmail($user)
+    protected function sendEmail($user)
     {
         return Yii::$app
             ->mailer
@@ -68,9 +67,9 @@ class SignupForm extends UserForm
                 ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' support'])
             ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->setSubject('Registo de conta ' . Yii::$app->name)
             ->send();
-    }*/
+    }
 }
