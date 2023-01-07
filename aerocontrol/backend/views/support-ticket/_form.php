@@ -2,11 +2,14 @@
 
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
+use yii\widgets\ListView;
 
 /** @var yii\web\View $this */
 /** @var common\models\SupportTicket $model */
 /** @var yii\widgets\ActiveForm $form */
 /** @var int $ticket_id */
+/** @var int $client_id */
+/** @var yii\data\ActiveDataProvider $dataProvider */
 
 ?>
 
@@ -18,10 +21,31 @@ use yii\bootstrap5\ActiveForm;
         'validationDelay' => 500,
     ]);?>
 
-    <?= $form->field($model, 'message')->textArea() ?>
+    <div class="card">
+        <div class="card-body overflow-auto" data-mdb-perfect-scrollbar="true" style="position: relative; height: 450px">
 
-    <div class="form-group">
-        <?= Html::submitButton('Enviar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
+            <?= ListView::widget([
+                'dataProvider' => $dataProvider,
+                'viewParams' => ['client_id' => $client_id],
+                'summary' => '',
+                'emptyText' => "<p class='fw-medium text-align-center'>Esta chat ainda não tem mensagens!</p>",
+                'itemView' => '_message',
+            ]); ?>
+
+
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+
+            <?= $form->field($model, 'message',[
+                'options' => [
+                        'class' => 'w-100 mr-2'
+                ]
+            ])->textInput([
+                'class' => 'form-control'
+            ])->label(false)?>
+            <?= Html::submitButton('Enviar', ['class' => 'btn btn-primary align-self-start']) ?>
+
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

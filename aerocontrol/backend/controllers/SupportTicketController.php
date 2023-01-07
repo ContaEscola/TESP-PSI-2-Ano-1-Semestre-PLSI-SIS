@@ -73,11 +73,14 @@ class SupportTicketController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->create()) {
-                $model = new SupportTicketForm();
+                $this->refresh();
             }
         }
 
+        $ticket = SupportTicket::findOne($ticket_id);
+
         return $this->render('view', [
+            'client_id' => $ticket->client_id,
             'ticket_id' => $ticket_id,
             'dataProvider' => $dataProvider,
             'model' => $model,
