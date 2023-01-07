@@ -69,8 +69,9 @@ $this->title = 'Login';
         </div>
 
         <div class="d-flex gap-1 flex-flow-column-sm justify-content-space-between-md">
-            <a href="#" class="fs-200 letter-spacing-2">Esqueceu da password?</a>
-            <a href="#" class="fs-200 letter-spacing-2">Não tem conta?</a>
+            <?= Html::a('Esqueceu-se da password?', ['site/request-password-reset'], ['class' => 'fs-200 letter-spacing-2']) ?>
+            <?= Html::a('Não possui uma conta?', ['site/signup'], ['class' => 'fs-200 letter-spacing-2']) ?>
+
         </div>
 
         <?= Html::submitButton('Login', [
