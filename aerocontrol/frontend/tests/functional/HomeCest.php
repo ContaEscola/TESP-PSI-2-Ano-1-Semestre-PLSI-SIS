@@ -9,7 +9,7 @@ class HomeCest
 {
     public function checkOpen(FunctionalTester $I)
     {
-        $I->amOnRoute(Yii::$app->homeUrl);
+        $I->amOnRoute('site/index');
         $I->see('Home');
         $I->see('Voos');
         $I->see('Restaurantes');

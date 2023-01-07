@@ -2,11 +2,13 @@
 
 namespace frontend\tests\functional;
 
+use common\models\User;
+use frontend\models\SignupForm;
 use frontend\tests\FunctionalTester;
 
 class SignupCest
 {
-    protected $formId = '#form-signup';
+    protected $formId = '#signup-form';
 
 
     public function _before(FunctionalTester $I)
@@ -16,12 +18,20 @@ class SignupCest
 
     public function signupWithEmptyFields(FunctionalTester $I)
     {
-        $I->see('Signup', 'h1');
-        $I->see('Please fill out the following fields to signup:');
+        $I->see('Criar Conta', 'h1');
+        $I->see('Crie a sua conta para começar a reservar voos e muito mais.');
         $I->submitForm($this->formId, []);
-        $I->seeValidationError('Username cannot be blank.');
-        $I->seeValidationError('Email cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
+        $I->seeValidationError('É necessário um username.');
+        $I->seeValidationError('É necessário uma password.');
+        $I->seeValidationError('É necessário o primeiro nome.');
+        $I->seeValidationError('É necessário o último nome.');
+        $I->seeValidationError('É necessário o género.');
+        $I->seeValidationError('É necessária a data de nascimento.');
+        $I->seeValidationError('É necessário o país.');
+        $I->seeValidationError('É necessário a cidade.');
+        $I->seeValidationError('É necessário um email.');
+        $I->seeValidationError('É necessário o indicativo do nº de telemóvel.');
+        $I->seeValidationError('É necessário o nº de telemóvel.');
 
     }
 
@@ -31,29 +41,55 @@ class SignupCest
             $this->formId, [
             'SignupForm[username]'  => 'tester',
             'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
+            'SignupForm[password_hash]'  => '12345678',
+            'SignupForm[first_name]'  => 'tester',
+            'SignupForm[last_name]'  => 'user',
+            'SignupForm[gender]'  => 'Masculino',
+            'SignupForm[birthdate]'  => '15/03/2000',
+            'SignupForm[country]'  => 'Portugal',
+            'SignupForm[city]'  => 'Lisboa',
+            'SignupForm[phone]'  => '912345678',
+            'SignupForm[phone_country_code]'  => '+351',
         ]
         );
-        $I->dontSee('Username cannot be blank.', '.invalid-feedback');
-        $I->dontSee('Password cannot be blank.', '.invalid-feedback');
-        $I->see('Email is not a valid email address.', '.invalid-feedback');
+        $I->dontSeeValidationError('É necessário um username.');
+        $I->dontSeeValidationError('É necessário uma password.');
+        $I->dontSeeValidationError('É necessário o primeiro nome.');
+        $I->dontSeeValidationError('É necessário o último nome.');
+        $I->dontSeeValidationError('É necessário o género.');
+        $I->dontSeeValidationError('É necessária a data de nascimento.');
+        $I->dontSeeValidationError('É necessário o país.');
+        $I->dontSeeValidationError('É necessário a cidade.');
+        $I->dontSeeValidationError('É necessário o indicativo do nº de telemóvel.');
+        $I->dontSeeValidationError('É necessário o nº de telemóvel.');
+        $I->seeValidationError('Email inválido.');
     }
 
     public function signupSuccessfully(FunctionalTester $I)
     {
-        $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'tester',
-            'SignupForm[email]' => 'tester.email@example.com',
-            'SignupForm[password]' => 'tester_password',
-        ]);
+        $I->submitForm(
+            $this->formId, [
+                'SignupForm[username]'  => 'tester',
+                'SignupForm[email]'     => 'tester@gmail.com',
+                'SignupForm[password_hash]'  => '12345678',
+                'SignupForm[first_name]'  => 'tester',
+                'SignupForm[last_name]'  => 'user',
+                'SignupForm[gender]'  => 'Masculino',
+                'SignupForm[birthdate]'  => '2000-03-15',
+                'SignupForm[country]'  => 'Portugal',
+                'SignupForm[city]'  => 'Lisboa',
+                'SignupForm[phone]'  => '912345678',
+                'SignupForm[phone_country_code]'  => '+351',
+            ]
+        );
 
-        $I->seeRecord('common\models\User', [
+        $I->seeRecord(User::class, [
             'username' => 'tester',
-            'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'email' => 'tester@gmail.com',
+
         ]);
 
         $I->seeEmailIsSent();
-        $I->see('Thank you for registration. Please check your inbox for verification email.');
+        $I->see('Registo efetuado. Por favor verifique o seu email para concluir o registo.');
     }
 }

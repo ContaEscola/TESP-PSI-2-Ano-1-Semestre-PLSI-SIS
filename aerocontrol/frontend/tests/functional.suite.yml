@@ -13,4 +13,5 @@ modules:
                 dump:
                     - '../common/tests/_data/dump_db.sql'
                     - '../common/tests/_data/dump_data.sql'
+                    - '../common/tests/_data/dump_migrations.sql'
                 populate: true
