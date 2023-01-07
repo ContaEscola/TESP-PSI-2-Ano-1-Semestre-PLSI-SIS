@@ -11,11 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <title>Register Page</title>
+    <title>Reservar Voo</title>
 
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="flight-reserve.js" defer></script>
 </head>
 
 
@@ -30,7 +31,7 @@
                         <img src="../images/logo-mobile.svg" alt="Logo">
                     </picture>
                 </a>
-                <button class="[ navbar-toggle ] [ d-none-md pussh-to-right ] " aria-controls="primary-navigation"
+                <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
                     aria-expanded="false">
                     <img class="open-icon" src="../images/hamburger-icon.svg" alt="" aria-hidden="true">
                     <img class="close-icon" src="../images/close-icon.svg" alt="" aria-hidden="true">
@@ -60,112 +61,197 @@
     <main>
         <section class="padding-block-700">
             <div class="container" data-type="small-md">
-                <section>
-                    <h1 class="fs-600 fw-bold text-align-center">Informações dos Passageiros</h1>
-                    <div class="padding-300 box-shadow-1 margin-top-400 ">
-                        <p>ola</p>
-                    </div>
-                </section>
-
-                <form action="#" method="POST" novalidate class="[ form ] [ margin-top-600 flow ]"
-                    data-flow-space="large">
-
-                    <div>
-                        <h2 class="fs-500 fw-semi-bold text-align-center-sm">Dados de acesso</h2>
-                        <div class="even-columns gap-2-sm gap-1-md margin-top-200">
-                            <div class="form__group">
-                                <label for="username" class="[ input__label ] [ margin-bottom-50 ]">Username:</label>
-                                <input class="form__input" type="text" name="{TOCHANGE}" id="username" required>
-                                <p class="[ input__error ] [ margin-top-50 ]"></p>
-                            </div>
-                            <div class="form__group">
-                                <label for="password" class="[ input__label ] [ margin-bottom-50 ]">Password:</label>
-                                <input class="form__input" type="password" name="{TOCHANGE}" id="password" required>
-                                <p class="[ input__error ] [ margin-top-50 ]"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h2 class="fs-500 fw-semi-bold text-align-center-sm">Dados pessoais</h2>
-                        <div class="flow margin-top-200">
-                            <div class="even-columns gap-2-sm gap-1-md ">
-                                <div class="form__group">
-                                    <label for="first-name" class="[ input__label ] [ margin-bottom-50 ]">Primeiro
-                                        Nome:</label>
-                                    <input class="form__input" type="text" name="{TOCHANGE}" id="first-name"
-                                        pattern="[a-zA-Z\ ]+" required>
-                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                <form action="#">
+                    <section>
+                        <h1 class="fs-600 fw-bold text-align-center">Informações dos Passageiros</h1>
+                        <ul role="list" class="padding-300 box-shadow-1 margin-top-400 flow ]" data-flow-space="medium">
+                            <li class="[ flight-reserve__passenger-info ] [ d-grid gap-2 ]">
+                                <div class="[ form__group passenger-info__name ] [ d-grid row-gap-0 col-gap-2 ]">
+                                    <p class="fs-350 fw-medium grid-area-title align-self-center">Passageiro
+                                        1</p>
+                                    <label for="name"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 ]">Nome</label>
+                                    <input class="[ form__input ] [ grid-area-input-1 ]" type="text" name="{TOCHANGE}"
+                                        id="name" required>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
                                 </div>
-                                <div class="form__group">
-                                    <label for="last-name" class="[ input__label ] [ margin-bottom-50 ]">Último
-                                        nome:</label>
-                                    <input class="form__input" type="text" name="{TOCHANGE}" id="last-name"
-                                        pattern="[a-zA-Z\ ]+" required>
-                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
-                                </div>
-                                <div class="form__group">
-                                    <label for="gender" class="[ input__label ] [ margin-bottom-50 ]">Género:</label>
-                                    <select class="form__input" name="genders" id="gender" required>
+                                <div
+                                    class="[ form__group passenger-info__gender-baggage ] [ d-grid row-gap-0 grid-area-form-group-1 ]">
+                                    <label for="gender"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 ]">Género</label>
+                                    <select class="[ form__input ] [ grid-area-select-1 ]" name="genders" id="gender"
+                                        required>
                                         <option value="Masculino">Masculino</option>
                                         <option value="Feminino">Feminino</option>
                                         <option value="Outro">Outro</option>
                                     </select>
-                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-flow-column-sm gap-2">
-                                <div class="form__group">
-                                    <label for="birthdate" class="[ input__label ] [ margin-bottom-50 ]">Data de
-                                        Nascimento:</label>
-                                    <input class="form__input" type="date" name="{TOCHANGE}" id="birthdate"
-                                        pattern="[\d]{2}\/[\d]{2}\/[\d]{4}" required>
-                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
-                                </div>
-                                <div class="form__group">
-                                    <label for="country" class="[ input__label ] [ margin-bottom-50 ]">País:</label>
-                                    <input class="form__input min-width-initial " type="text" name="{TOCHANGE}"
-                                        id="country" pattern="[a-zA-Z\ ]+" required>
-                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
-                                </div>
-                                <div class="form__group">
-                                    <label for="city" class="[ input__label ] [ margin-bottom-50 ]">Cidade:</label>
-                                    <input class="form__input" type="text" name="{TOCHANGE}" id="city"
-                                        pattern="[a-zA-Z\ ]+" required>
-                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
 
-                    <div>
-                        <h2 class="fs-500 fw-semi-bold text-align-center-sm">Contactos</h2>
-                        <div class="d-flex flex-flow-column-sm margin-top-200">
-                            <div class="form__group flex-1">
-                                <label for="email" class="[ input__label ] [ margin-bottom-50 ]">Email:</label>
-                                <input class="form__input" type="email" name="{TOCHANGE}" id="email"
-                                    title="O formato é inválido!" required>
-                                <p class="[ input__error ] [ margin-top-50 ]"></p>
-                            </div>
-                            <div class="form__group flex-1">
-                                <label for="phone-number" class="[ input__label ] [ margin-bottom-50 ]">Contacto
-                                    telefónico:</label>
-                                <div class="d-flex width-100">
-                                    <input class="[ form__input ] [ flex-1 ]" type="text" name="{TOCHANGE}"
-                                        pattern="^[+][\d]{1,5}" placeholder="Indicativo" required>
-                                    <input class=" [ form__input ] [ flex-2 ]" type="text" name="{TOCHANGE}"
-                                        id="phone-number" pattern="[\d]{1,15}" placeholder="Número telefone" required>
+                                    <div class="[ form__group ] [ grid-area-form-group-1 align-items-center ]">
+                                        <label for="extra-baggage" class="[ input__label ] [ margin-bottom-50 ]">Bagagem
+                                            Extra</label>
+                                        <div class="d-flex height-100">
+                                            <input class="[ form__input ] [ justify-self-center ]" type="checkbox"
+                                                name="{TOCHANGE}" id="extra-baggage" required>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="[ input__error ] [ margin-top-50 ]"></p>
-                            </div>
-                        </div>
-                    </div>
+                            </li>
+                            <li class="[ flight-reserve__passenger-info ] [ d-grid gap-2 ]">
+                                <div class="[ form__group passenger-info__name ] [ d-grid row-gap-0 col-gap-2 ]">
+                                    <p class="fs-350 fw-medium grid-area-title align-self-center">Passageiro
+                                        10</p>
+                                    <label for="name"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 visually-hidden-flight-reserve ]">Nome</label>
+                                    <input class="[ form__input ] [ grid-area-input-1 ]" type="text" name="{TOCHANGE}"
+                                        id="name" required>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
+                                </div>
+                                <div
+                                    class="[ form__group passenger-info__gender-baggage ] [ d-grid row-gap-0 grid-area-form-group-1 ]">
+                                    <label for="gender"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 visually-hidden-flight-reserve ]">Género</label>
+                                    <select class="[ form__input ] [ grid-area-select-1 ]" name="genders" id="gender"
+                                        required>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
 
-                    <button type="submit" class="form__submit-button button fill-sm d-block push-to-center-md"
-                        data-size="large-md">Criar conta</button>
+                                    <div class="[ form__group ] [ grid-area-form-group-1 align-items-center ]">
+                                        <label for="extra-baggage"
+                                            class="[ input__label ] [ margin-bottom-50 visually-hidden-flight-reserve ]">Bagagem
+                                            Extra</label>
+                                        <div class="d-flex height-100">
+                                            <input class="[ form__input ] [ justify-self-center ]" type="checkbox"
+                                                name="{TOCHANGE}" id="extra-baggage" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="margin-top-500 flow" data-flow-space="large">
+                        <h2 class="fs-600 fw-bold text-align-center">Pagamento</h2>
+                        <section class="margin-top-400 d-grid grid-auto-fit" data-item-size="small">
+                            <label for="credit_card" class="[ payment-method-button ] [ radio-button button ]"
+                                data-type="secondary-outline" data-active="true" data-target="#credit-card__form">
+                                <input type="radio" id="credit_card" name="flight_payment_method" value="credit_card"
+                                    checked>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#credit-card-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">Cartão de crédito</span>
+
+                            </label>
+                            <label for="debit_card" class="[ payment-method-button ] [ radio-button button ]"
+                                data-type="secondary-outline" data-active="false" data-target="#credit-card__form">
+                                <input type="radio" id="debit_card" name="flight_payment_method" value="debit_card"
+                                    checked>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#debit-card-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">Cartão de débito</span>
+                            </label>
+                            <label for="mbway" class="[ payment-method-button ] [ radio-button button ]"
+                                data-active="false" data-payment-method="mbway" data-target="#common__form">
+                                <input type="radio" id="mbway" name="flight_payment_method" value="mbway" checked>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#mbway-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">MbWay</span>
+                            </label>
+                            <label for="multibanco" class=" [ payment-method-button ] [ radio-button button ]"
+                                data-active="false" data-payment-method="multibanco" data-target="#common__form">
+                                <input type="radio" id="multibanco" name=" flight_payment_method" value="multibanco"
+                                    checked>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#multibanco-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">Multibanco</span>
+                            </label>
+                            <label for="paypal" class=" [ payment-method-button ] [ radio-button button ]"
+                                data-active="false" data-payment-method="paypal" data-target="#common__form">
+                                <input type="radio" id="paypal" name=" flight_payment_method" value="paypal" checked>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#paypal-logo-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">PayPal</span>
+                            </label>
+                        </section>
+                        <div class="divider"></div>
+                        <section id="credit-card__form" class="payment-method__form flow" data-active-form="true">
+                            <div class="even-columns">
+                                <div class="form__group">
+                                    <label for="card_type" class="[ input__label ] [ margin-bottom-50 ]">Tipo de
+                                        cartão</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_type" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+
+                                <div class="form__group">
+                                    <label for="card_name" class="[ input__label ] [ margin-bottom-50 ]">Nome</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_name" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="card_apelido"
+                                        class="[ input__label ] [ margin-bottom-50 ]">Apelido</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_apelido" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-flow-column-sm flex-wrap gap-2">
+                                <div class="form__group">
+                                    <label for="card_num" class="[ input__label ] [ margin-bottom-50 ]">Número do
+                                        cartão</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_num" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="card_security_num" class="[ input__label ] [ margin-bottom-50 ]">Código
+                                        de
+                                        Segurança</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_security_num"
+                                        required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="card_validity" class="[ input__label ] [ margin-bottom-50 ]">Data de
+                                        Validade
+                                        (Mês/Ano)</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_validity"
+                                        required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                            </div>
+
+
+                        </section>
+
+                        <div class="d-flex gap-1 align-items-center margin-top-300 ">
+                            <input type="checkbox" name="{TOCHANGE}" id="agree_conditions">
+                            <label for="agree_conditions" class="fs-200 fw-medium letter-spacing-2">Li e aceito
+                                integralmente
+                                os termos e condições.</label>
+                        </div>
+
+                        <button type="submit" class="form__submit-button button fill-sm d-block push-to-center-md"
+                            data-size="large-md">Confirmar</button>
+                    </section>
                 </form>
             </div>
-            </>
     </main>
 
     <footer>
