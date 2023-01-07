@@ -13,7 +13,6 @@ use Yii;
  * @property int $client_id
  *
  * @property Client $client
- * @property Employee $employee
  * @property TicketItem[] $ticketItems
  * @property TicketMessage[] $ticketMessages
  */
@@ -74,16 +73,6 @@ class SupportTicket extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(Client::class, ['client_id' => 'client_id']);
-    }
-
-    /**
-     * Gets query for [[Employee]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEmployee()
-    {
-        return $this->hasOne(Employee::class, ['employee_id' => 'employee_id']);
     }
 
     /**
