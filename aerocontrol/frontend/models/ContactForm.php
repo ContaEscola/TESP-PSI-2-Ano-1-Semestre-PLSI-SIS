@@ -11,6 +11,7 @@ use yii\base\Model;
 class ContactForm extends Model
 {
     public $email;
+    public $name;
     public $body;
 
     /**
@@ -20,9 +21,11 @@ class ContactForm extends Model
     {
         return [
             // name, email, subject and body are required
-            [['email', 'body'], 'required'],
+            [['email', 'body', 'name'], 'trim'],
+            [['email', 'body', 'name'], 'required', 'message' => 'O {attribute} não pode ser vazio.'],
+            ['name', 'string'],
             // email has to be a valid email address
-            ['email', 'email'],
+            ['email', 'email', 'message' => 'O email tem de ser válido.'],
         ];
     }
 
@@ -34,12 +37,13 @@ class ContactForm extends Model
      */
     public function sendEmail($email)
     {
-        return Yii::$app->mailer->compose()
+        return Yii::$app->mailer->compose(['html' => 'contact-html', 'text' => 'contact-text'],
+            ['form' => $this])
             ->setTo($email)
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setReplyTo([$this->email => $this->name])
-            ->setSubject($this->subject)
-            ->setTextBody($this->body)
+            ->setSubject('Aerocontrol - Suporte')
+            ->setTextBody('Email enviado por: ' . $this->name . ' \n ' . $this->body)
             ->send();
     }
 }

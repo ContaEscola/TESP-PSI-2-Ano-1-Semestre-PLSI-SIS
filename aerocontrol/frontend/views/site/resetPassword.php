@@ -12,7 +12,6 @@ $this->title = 'Repor password';
 <div class="padding-block-700 height-100 d-grid align-items-center">
     <div class="container" data-type="extra-small-md">
         <h1 class="fs-500 fw-bold text-align-center">Repor password</h1>
-        <p class="[ text-warning ] [ fs-200 letter-spacing-1 margin-top-200 fw-semi-bold ]">Esta secção ainda está em construção.</p>
         <?php $form = ActiveForm::begin([
             'errorCssClass' => 'invalid',
             'requiredCssClass' => 'invalid',
@@ -41,10 +40,9 @@ $this->title = 'Repor password';
                     'type' => 'password',
                 ]) ?>
 
-            <?= Html::submitButton('Report', [
-                'class' => 'form__submit-button button fill-sm d-block push-to-center-md disabled',
+            <?= Html::submitButton('Repor', [
+                'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
                 'data-size' => 'large-md',
-                'disabled' => true,
             ]) ?>
 
         </div>
