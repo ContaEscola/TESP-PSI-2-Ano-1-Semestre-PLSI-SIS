@@ -23,7 +23,7 @@ class ContactForm extends Model
             // name, email, subject and body are required
             [['email', 'body', 'name'], 'trim'],
             [['email', 'body', 'name'], 'required', 'message' => 'O {attribute} não pode ser vazio.'],
-            ['name' => 'string'],
+            ['name', 'string'],
             // email has to be a valid email address
             ['email', 'email', 'message' => 'O email tem de ser válido.'],
         ];
