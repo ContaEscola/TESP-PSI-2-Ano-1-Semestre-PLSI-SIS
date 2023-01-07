@@ -45,7 +45,7 @@ class SignupCest
             'SignupForm[first_name]'  => 'tester',
             'SignupForm[last_name]'  => 'user',
             'SignupForm[gender]'  => 'Masculino',
-            'SignupForm[birthdate]'  => '15/03/2000',
+            'SignupForm[birthdate]'  => '2000-03-15',
             'SignupForm[country]'  => 'Portugal',
             'SignupForm[city]'  => 'Lisboa',
             'SignupForm[phone]'  => '912345678',
