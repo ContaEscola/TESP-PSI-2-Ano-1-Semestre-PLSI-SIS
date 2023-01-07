@@ -77,7 +77,7 @@ class SupportTicketController extends Controller
             }
         }
 
-        return $this->render('create', [
+        return $this->render('view', [
             'ticket_id' => $ticket_id,
             'dataProvider' => $dataProvider,
             'model' => $model,
