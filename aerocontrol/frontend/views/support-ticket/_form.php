@@ -9,6 +9,7 @@ use yii\bootstrap5\ActiveForm;
 <div class="support-ticket-form">
 
     <?php $form = ActiveForm::begin([
+        'id' => 'support-ticket',
         'action' => ['create'],
         'errorCssClass' => 'invalid',
         'requiredCssClass' => 'invalid',

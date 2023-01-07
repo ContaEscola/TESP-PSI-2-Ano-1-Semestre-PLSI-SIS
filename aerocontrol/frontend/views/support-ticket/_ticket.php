@@ -19,8 +19,7 @@ use yii\helpers\Url;
                                                                                                                         Url::to($model->ticketItems[0]->lostItem->getImagePathUrl()) ?>>
                     Ver item</button>
             <?php endif ?>
-            <button class="[ button ] [ push-to-right-md ]">Ver mais
-                detalhes</button>
+            <button class="[ button ] [ push-to-right-md ]">Ver mais detalhes</button>
         </div>
     </article>
 </li>
