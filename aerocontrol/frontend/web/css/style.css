@@ -20,6 +20,7 @@
   --clr-secondary-accent-400: hsl(85 37% 50%);
 
   --clr-success: hsl(85 77% 69%);
+  --clr-error-100: hsl(0 28% 57%);
   --clr-error-400: hsl(0 100% 66% / 0.85);
   --clr-error-900: hsl(0 100% 59% / 0.85);
 
@@ -321,6 +322,13 @@ footer {
 .button:where(:hover, :focus-visible) {
   --clr-text: var(--clr-text-on-event);
   --clr-bg: var(--clr-bg-on-event);
+}
+
+.button.disabled {
+  --clr-text: var(--clr-neutral-900);
+  --clr-bg: var(--clr-primary-accent-900);
+  --clr-text-on-event: var(--clr-neutral-900);
+  --clr-bg-on-event: var(--clr-primary-accent-900);
 }
 
 .button[data-type="primary-outline"] {
@@ -1217,6 +1225,15 @@ select.form__input {
   right: 5%;
 
   transform: rotate(90deg);
+}
+
+/* Text warning */
+
+.text-warning {
+  display: inline-flex;
+  padding: 0.25em 0.5em;
+  background-color: var(--clr-error-100);
+  color: var(--clr-white);
 }
 
 /* utility classes */
