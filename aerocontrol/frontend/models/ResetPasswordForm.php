@@ -48,7 +48,7 @@ class ResetPasswordForm extends Model
             ['password', 'required', 'message' => 'A password não pode ser vazia.'],
             ['password', 'string',
                 'min' => Yii::$app->params['user.passwordMinLength'] ,
-                'tooSmall' => 'A password tem de conter no mínimo '. Yii::$app->params['user.passwordMinLength'] . ' caracteres.'],
+                'tooShort' => 'A password tem de conter no mínimo '. Yii::$app->params['user.passwordMinLength'] . ' caracteres.'],
         ];
     }
 
