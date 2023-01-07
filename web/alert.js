@@ -1,33 +1,29 @@
 const alerts = document.querySelectorAll(".alert");
-const ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS = 5;
+const ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS = 10;
 
 alerts.forEach((alert) => {
 
     let alertToggle = alert.querySelector(".alert-toggle-btn");
     let isClosing = false;
 
-    let animDuration = window.getComputedStyle(alert).animationDuration;
-    animDuration = animDuration.replace("s", " ");
-    let delayAfterClosing = animDuration * 1000;
-    let timerToCloseAutomatically = delayAfterClosing + (ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS * 1000);
-    //Adicionar delay para ter a certeza que fez a animação
-    delayAfterClosing += 100;
+
+    alert.addEventListener('animationend', function () {
+        if (isClosing)
+            deleteAlert(alert);
+    });
+
 
     (async function () {
-        await timeout(timerToCloseAutomatically);
-        closeAlert(alert);
+        await timeout(ALERT_CLOSE_AUTOMATICALLY_DELAY_SECONDS * 1000);
         isClosing = true;
-
-        deleteAlert(alert, delayAfterClosing);
+        closeAlert(alert);
     })();
 
 
-
-    alertToggle.addEventListener("click", async () => {
+    alertToggle.addEventListener("click", function () {
         if (isClosing) return;
-
+        isClosing = true;
         closeAlert(alert);
-        deleteAlert(alert, delayAfterClosing);
     });
 })
 
@@ -35,17 +31,8 @@ function closeAlert(alert) {
     alert.setAttribute("data-close", true);
 }
 
-async function waitDelayToCloseAlert(alert, delay) {
-    closeAlert(alert);
-
-}
-
-function deleteAlert(alert, delay) {
-    new Promise(() => {
-        setTimeout(() => {
-            alert.remove();
-        }, delay);
-    });
+function deleteAlert(alert) {
+    alert.remove();
 }
 
 function timeout(ms) {

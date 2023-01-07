@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
-    <script src="form.js" defer></script>
+    <script src="flight-search-form.js" defer></script>
     <script src="flight-search.js" type="module" defer></script>
 
 
@@ -71,11 +71,13 @@
                     <div class="even-columns gap-2">
                         <div class="[ form__group ] [ flex-flow-row gap-2 justify-content-space-between-sm ]">
                             <label for="one_way" class="radio-button-pill button" data-type="primary-outline"
-                                data-active="true">
+                                data-active="true" data-force-close="true"
+                                data-close="#destiny_departure_date__wrapper">
                                 <input type="radio" id="one_way" name="flight_trip_type" value="one_way" checked>
                                 Só Ida
                             </label>
-                            <label class="radio-button-pill button" data-type="primary-outline">
+                            <label class="radio-button-pill button" data-type="primary-outline"
+                                data-open="#destiny_departure_date__wrapper">
                                 <input type="radio" id="round_trip" name="flight_trip_type" value="round_trip">
                                 Ida e Volta
                             </label>
@@ -115,7 +117,7 @@
                             <input type="date" class="form__input" name="departure_date" id="departure_date">
                             <p class="[ input__error ] [ margin-top-50 ]"></p>
                         </div>
-                        <div class="form__group gap-0">
+                        <div id="destiny_departure_date__wrapper" class="form__group gap-0">
                             <label for="arrival_date" class="[ input__label ] [ margin-bottom-50 ]">Data de
                                 Volta:</label>
                             <input type="date" class="form__input" name="arrival_date" id="arrival_date">

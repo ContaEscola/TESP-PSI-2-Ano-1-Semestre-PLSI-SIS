@@ -20,7 +20,7 @@
   --clr-secondary-accent-400: hsl(85 37% 50%);
 
   --clr-success: hsl(85 77% 69%);
-  --clr-error-100: hsl(0, 28%, 57%);
+  --clr-error-100: hsl(0 28% 57%);
   --clr-error-400: hsl(0 100% 66% / 0.85);
   --clr-error-900: hsl(0 100% 59% / 0.85);
 
@@ -451,6 +451,7 @@ footer {
   font-weight: 500;
   letter-spacing: 0.0625em;
   text-decoration: none;
+  text-align: left;
 
   display: grid;
   grid-auto-flow: column;
@@ -1128,7 +1129,7 @@ select.form__input {
 .support-ticket-modal__image-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
@@ -1136,8 +1137,7 @@ select.form__input {
 
 .modal {
   inset: 0 0 0 0;
-  margin-inline: auto;
-  margin-top: 10rem;
+  margin: auto;
   border: none;
   box-shadow: 0 0 0.25em var(--clr-neutral-900);
 }
@@ -1386,6 +1386,10 @@ select.form__input {
   display: block;
 }
 
+.d-none {
+  display: none;
+}
+
 .d-inline-block {
   display: inline-block;
 }
@@ -1628,6 +1632,10 @@ select.form__input {
 
 .margin-top-600 {
   margin-top: var(--size-600);
+}
+
+.margin-top-500 {
+  margin-top: var(--size-500);
 }
 
 .margin-top-400 {
