@@ -8,4 +8,5 @@ return [
             'identityClass' => 'common\models\User',
         ],
     ],
+    'homeUrl'=> 'site/index',
 ];
