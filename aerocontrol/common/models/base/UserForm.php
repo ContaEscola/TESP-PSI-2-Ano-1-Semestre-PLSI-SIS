@@ -169,13 +169,12 @@ class UserForm extends Model
             return null;
 
         $user = new User();
-        $user->setPassword($this->password_hash);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $user->status = $this->statusOnCreate;
 
         $user->setAttributes($this->getUserDetails(), false);
-        if (!$user->save())
+        $user->setPassword($user->password_hash);
+        if (!$user->save() || !$this->sendEmail($user))
             return null;
 
         $this->user_id = $user->id;
