@@ -14,9 +14,6 @@ use yii\bootstrap5\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'action' => ['view','ticket_id' =>$ticket_id],
-        'errorCssClass' => 'invalid',
-        'requiredCssClass' => 'invalid',
-        'successCssClass' => 'valid',
         'validateOnType' => true,
         'validationDelay' => 500,
     ]);?>
