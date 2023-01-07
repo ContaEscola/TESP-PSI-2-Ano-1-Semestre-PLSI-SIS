@@ -22,7 +22,7 @@ use yii\widgets\ListView;
     ]);?>
 
     <div class="card">
-        <div class="card-body overflow-auto" data-mdb-perfect-scrollbar="true" style="position: relative; height: 450px">
+        <div id="chat" class="card-body overflow-auto" data-mdb-perfect-scrollbar="true" style="position: relative; height: 450px">
 
             <?= ListView::widget([
                 'dataProvider' => $dataProvider,

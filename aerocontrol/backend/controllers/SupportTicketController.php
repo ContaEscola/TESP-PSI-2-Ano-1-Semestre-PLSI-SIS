@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\SupportTicketForm;
+use backend\models\TicketMessageForm;
 use common\models\SupportTicketSearch;
 use common\models\SupportTicket;
 use common\models\TicketMessage;
@@ -60,7 +60,7 @@ class SupportTicketController extends Controller
      */
     public function actionView($ticket_id)
     {
-        $model = new SupportTicketForm();
+        $model = new TicketMessageForm();
 
         $user = User::findOne(['id' => Yii::$app->user->getId()]);
 
@@ -71,16 +71,17 @@ class SupportTicketController extends Controller
         $model->sender_id = $user->id;
         $model->support_ticket_id = $ticket_id;
 
+        $ticket = SupportTicket::findOne($ticket_id);
+
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->create()) {
+            if ($model->load($this->request->post()) && $model->create($ticket)) {
                 $this->refresh();
             }
         }
 
-        $ticket = SupportTicket::findOne($ticket_id);
-
         return $this->render('view', [
             'client_id' => $ticket->client_id,
+            'ticket_title' => $ticket->title,
             'ticket_id' => $ticket_id,
             'dataProvider' => $dataProvider,
             'model' => $model,

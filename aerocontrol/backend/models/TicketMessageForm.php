@@ -7,12 +7,13 @@ use common\models\TicketMessage;
 use yii\base\ErrorException;
 use yii\base\Model;
 
-class SupportTicketForm extends Model
+class TicketMessageForm extends Model
 {
     public $message;
 
     public $sender_id;
     public $support_ticket_id;
+
 
     /**
      * {@inheritdoc}
@@ -36,7 +37,7 @@ class SupportTicketForm extends Model
         ];
     }
 
-    public function create(){
+    public function create(SupportTicket $ticket = null){
 
         if (!$this->validate()){
             return false;
@@ -51,6 +52,16 @@ class SupportTicketForm extends Model
             if (!$supportTicketMessage->save()){
                 throw new ErrorException();
             }
+
+            if ($ticket != null){
+                if ($this->sender_id != $ticket->client_id && $ticket->state === SupportTicket::STATE_TO_REVIEW){
+                    $ticket->state = SupportTicket::STATE_IN_PROGRESS;
+                    if (!$ticket->save()){
+                        throw new ErrorException();
+                    }
+                }
+            }
+
 
             $transaction->commit();
         } catch (ErrorException $e) {
