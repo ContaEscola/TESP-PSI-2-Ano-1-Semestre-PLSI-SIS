@@ -10,35 +10,41 @@ use common\fixtures\UserFixture;
  */
 class LoginCest
 {
-    /**
-     * Load fixtures before db transaction begin
-     * Called in _before()
-     * @see \Codeception\Module\Yii2::_before()
-     * @see \Codeception\Module\Yii2::loadFixtures()
-     * @return array
-     */
-    public function _fixtures()
-    {
-        return [
-            'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'login_data.php'
-            ]
-        ];
-    }
     
     /**
      * @param FunctionalTester $I
      */
-    public function loginUser(FunctionalTester $I)
+    public function loginUserAdmin(FunctionalTester $I)
     {
         $I->amOnRoute('/site/login');
-        $I->fillField('Username', 'erau');
-        $I->fillField('Password', 'password_0');
-        $I->click('login-button');
+        $I->submitForm('#login-form', [
+            'LoginForm[username]'  => 'rafael',
+            'LoginForm[password]'  => '12345678',
+        ]);
 
-        $I->see('Logout (erau)', 'form button[type=submit]');
-        $I->dontSeeLink('Login');
-        $I->dontSeeLink('Signup');
+        $I->see('Rafael Bento');
+        $I->see('Aeroporto');
+        $I->see('Utilizadores');
+        $I->see('Perdidos e achados');
+        $I->see('Métodos de pagamento');
+        $I->see('Restaurantes');
+        $I->see('Server log');
+
+    }
+
+    public function loginUserEmployee(FunctionalTester $I)
+    {
+        $I->amOnRoute('/site/login');
+        $I->submitForm('#login-form', [
+            'LoginForm[username]'  => 'pedro',
+            'LoginForm[password]'  => '12345678',
+            ]);
+
+        $I->see('Pedro Norberto');
+        $I->see('Aeroporto');
+        $I->see('Clientes');
+        $I->see('Perdidos e achados');
+        $I->see('Métodos de pagamento');
+
     }
 }
