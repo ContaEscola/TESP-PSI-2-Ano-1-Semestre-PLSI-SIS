@@ -30,6 +30,10 @@ class SignupForm extends UserForm
             if (!parent::create())
                 return null;
 
+            $user = User::find()->where(['id' => $this->user_id])->one();
+            $this->sendEmail($user);
+
+
             // Criar o client
             $client = new Client();
             $client->client_id = $this->user_id;
