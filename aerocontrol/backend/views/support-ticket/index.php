@@ -27,13 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'state',
-            'client_id',
+            [
+                'label' => 'ID/Username do cliente',
+                'attribute' => 'client_name',
+                'value' => function ($model) {
+                    return $model->client_id . "-" . $model->client->user->username;
+                },
+            ],
             [
                 'class' => ActionColumn::className(),
                 'template' => '{view}',
                 'buttons' => [
                     'view' => function ($url, $model){
-                        return Html::a("Responder", ['view', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                        return Html::a("Responder", ['view', 'ticket_id' => $model->id], ['class' => 'btn btn-primary']);
                     },
                 ],
             ],

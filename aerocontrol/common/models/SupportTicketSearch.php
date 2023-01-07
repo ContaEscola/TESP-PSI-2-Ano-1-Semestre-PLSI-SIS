@@ -10,6 +10,9 @@ use yii\data\ActiveDataProvider;
  */
 class SupportTicketSearch extends SupportTicket
 {
+
+    public $client_name;
+
     /**
      * {@inheritdoc}
      */
@@ -18,6 +21,7 @@ class SupportTicketSearch extends SupportTicket
         return [
             [['id', 'client_id'], 'integer'],
             [['title', 'state'], 'safe'],
+            [['client_name'], 'string'],
         ];
     }
 
@@ -41,11 +45,19 @@ class SupportTicketSearch extends SupportTicket
     {
         $query = SupportTicket::find();
 
+        /*$query->joinWith(['client']);*/
+        $query->joinWith(['client.user']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['client_name'] = [
+            'asc' => ['user.username' => SORT_ASC],
+            'desc' => ['user.username' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -62,7 +74,8 @@ class SupportTicketSearch extends SupportTicket
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'state', $this->state]);
+            ->andFilterWhere(['like', 'state', $this->state])
+            ->andFilterWhere(['like', 'user.username', $this->client_name]);
 
         return $dataProvider;
     }

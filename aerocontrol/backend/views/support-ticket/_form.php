@@ -1,25 +1,30 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
 /** @var common\models\SupportTicket $model */
 /** @var yii\widgets\ActiveForm $form */
+/** @var int $ticket_id */
+
 ?>
 
 <div class="support-ticket-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'action' => ['view','ticket_id' =>$ticket_id],
+        'errorCssClass' => 'invalid',
+        'requiredCssClass' => 'invalid',
+        'successCssClass' => 'valid',
+        'validateOnType' => true,
+        'validationDelay' => 500,
+    ]);?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'state')->dropDownList([ 'Por Rever' => 'Por Rever', 'Concluido' => 'Concluido', 'Em Processo' => 'Em Processo', ], ['prompt' => '']) ?>
-
-    <?= $form->field($model, 'client_id')->textInput() ?>
+    <?= $form->field($model, 'message')->textArea() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Enviar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
