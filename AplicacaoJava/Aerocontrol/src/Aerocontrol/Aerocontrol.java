@@ -37,7 +37,7 @@ public class Aerocontrol extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        TF_Messages1 = new javax.swing.JTextArea();
+        TF_Messages_Tickets = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         TF_Sub = new javax.swing.JTextField();
         BT_Sub = new javax.swing.JButton();
@@ -51,10 +51,10 @@ public class Aerocontrol extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
-        TF_Messages1.setColumns(20);
-        TF_Messages1.setRows(5);
-        TF_Messages1.setEnabled(false);
-        jScrollPane2.setViewportView(TF_Messages1);
+        TF_Messages_Tickets.setColumns(20);
+        TF_Messages_Tickets.setRows(5);
+        TF_Messages_Tickets.setEnabled(false);
+        jScrollPane2.setViewportView(TF_Messages_Tickets);
 
         jLabel2.setText("Subscrever");
 
@@ -93,7 +93,7 @@ public class Aerocontrol extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -128,9 +128,9 @@ public class Aerocontrol extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,8 +146,12 @@ public class Aerocontrol extends javax.swing.JDialog {
                      client.setCallback(new MqttCallback() {
                      @Override
                      public void messageArrived(String topic, MqttMessage msg) throws Exception {
-                                 String messageBody = new String(msg.getPayload());
+                            String messageBody = new String(msg.getPayload());
+                            if (topic.equals("tickets")) {
                                  TF_Messages.append(messageBody + "\r\n");
+                            } else{
+                                TF_Messages_Tickets.append(messageBody + "\r\n");
+                            }
                      }
                      @Override
                      public void deliveryComplete(IMqttDeliveryToken token) {
@@ -160,7 +164,6 @@ public class Aerocontrol extends javax.swing.JDialog {
                      });
                      client.connect();
                      TF_Messages.append("Conectado\r\n");
-
              }
              catch(MqttException ex)
              {
@@ -184,9 +187,9 @@ public class Aerocontrol extends javax.swing.JDialog {
             int subQoS= 0;
 
             client.subscribe(topico, subQoS);
-            TF_Messages.append("Subscreveu o canal " + topico + "\r\n");
+            TF_Messages_Tickets.append("Subscreveu o canal " + topico + "\r\n");
         } catch (Exception e) {
-            TF_Messages.append("Impossível Subscrever\r\n");
+            TF_Messages_Tickets.append("Impossível Subscrever\r\n");
         }
     }//GEN-LAST:event_BT_SubActionPerformed
 
@@ -195,9 +198,9 @@ public class Aerocontrol extends javax.swing.JDialog {
             String[] arrTopicos = new String[1];
             arrTopicos[0] = TF_Sub.getText();
             client.unsubscribe(arrTopicos);
-            TF_Messages.append("Removeu subescrição " + arrTopicos[0] + "\r\n");
+            TF_Messages_Tickets.append("Removeu subescrição " + arrTopicos[0] + "\r\n");
         } catch (Exception e) {
-            TF_Messages.append("Impossível remover subscrição\r\n");
+            TF_Messages_Tickets.append("Impossível remover subscrição\r\n");
         }
     }//GEN-LAST:event_BT_RemoveActionPerformed
 
@@ -247,7 +250,7 @@ public class Aerocontrol extends javax.swing.JDialog {
     private javax.swing.JButton BT_Remove;
     private javax.swing.JButton BT_Sub;
     private javax.swing.JTextArea TF_Messages;
-    private javax.swing.JTextArea TF_Messages1;
+    private javax.swing.JTextArea TF_Messages_Tickets;
     private javax.swing.JTextField TF_Sub;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
