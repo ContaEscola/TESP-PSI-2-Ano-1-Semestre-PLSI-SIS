@@ -12,6 +12,7 @@ use kartik\file\FileInput;
 <div class="lost-item-form">
 
     <?php $form = ActiveForm::begin([
+        'id' => 'lost-item-form',
         'validateOnType' => true,
         'validationDelay' => 500,
         'options' => ['enctype' => 'multipart/form-data']
@@ -33,7 +34,7 @@ use kartik\file\FileInput;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
