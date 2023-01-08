@@ -205,8 +205,8 @@ class RestaurantItem extends \yii\db\ActiveRecord
     public function deleteImage()
     {
         if (!is_null($this->image)) {
-            if (file_exists(Yii::getAlias('@uploadLogoRestaurantItems/') . $this->image)) {
-                if (!unlink(Yii::getAlias('@uploadLogoRestaurantItems/') . $this->image))
+            if (file_exists($this->getUploadPath() . '/' . $this->image)) {
+                if (!unlink($this->getUploadPath() . '/' . $this->image))
                     return false;
             }
         }
