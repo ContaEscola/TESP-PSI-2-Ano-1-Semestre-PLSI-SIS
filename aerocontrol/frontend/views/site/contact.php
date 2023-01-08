@@ -18,61 +18,64 @@ $this->title = 'Suporte';
             'successCssClass' => 'valid',
             'validateOnType' => true,
             'validationDelay' => 500,
-            'fieldConfig' => ['radioTemplate' => '{beginLabel}{input}{labelTitle}{endLabel}'],
             'options' => [
                 'class' => 'margin-top-400 flow',
                 'data-flow-space' => 'large',
             ]
         ]) ?>
-            <div class="flow" data-flow-space="small">
+        <div class="flow" data-flow-space="small">
 
-                <?= $form->field($model, 'name', [
-                    'errorOptions' => [
-                        'tag' => 'p',
-                        'class' => 'input__error margin-top-50 '
-                    ],
-                    'options' => ['class' => 'form__group'],
+            <?= $form->field($model, 'name', [
+                'errorOptions' => [
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-50 '
+                ],
+                'options' => ['class' => 'form__group'],
+            ])
+                ->label(null, [
+                    'class' => '[ input__label ] [ margin-bottom-50 ]'
                 ])
-                    ->label('Nome', [
-                        'class' => '[ input__label ] [ margin-bottom-50 ]'
-                    ])
-                    ->textInput([
-                        'class' => 'form__input',
-                    ]) ?>
-                <?= $form->field($model, 'email', [
-                    'errorOptions' => [
-                        'tag' => 'p',
-                        'class' => 'input__error margin-top-50 '
-                    ],
-                    'options' => ['class' => 'form__group'],
+                ->textInput([
+                    'class' => 'form__input',
+                ]) ?>
+
+
+            <?= $form->field($model, 'email', [
+                'errorOptions' => [
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-50 '
+                ],
+                'options' => ['class' => 'form__group'],
+            ])
+                ->label(null, [
+                    'class' => '[ input__label ] [ margin-bottom-50 ]'
                 ])
-                    ->label('Email', [
-                        'class' => '[ input__label ] [ margin-bottom-50 ]'
-                    ])
-                    ->textInput([
-                        'class' => 'form__input',
-                        'type' => 'email'
-                    ]) ?>
-                <?= $form->field($model, 'body', [
-                    'errorOptions' => [
-                        'tag' => 'p',
-                        'class' => 'input__error margin-top-50 '
-                    ],
-                    'options' => ['class' => 'form__group'],
+                ->textInput([
+                    'class' => 'form__input',
+                    'type' => 'email'
+                ]) ?>
+
+
+            <?= $form->field($model, 'body', [
+                'errorOptions' => [
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-50 '
+                ],
+                'options' => ['class' => 'form__group'],
+            ])
+                ->label(null, [
+                    'class' => '[ input__label ] [ margin-bottom-50 ]'
                 ])
-                    ->label('Messagem', [
-                        'class' => '[ input__label ] [ margin-bottom-50 ]'
-                    ])
-                    ->textarea([
-                        'class' => 'form__input resize-none',
-                        'rows' => 12
-                    ]) ?>
-            </div>
+                ->textarea([
+                    'class' => 'form__input resize-none',
+                    'rows' => 12
+                ]) ?>
+        </div>
 
         <?= Html::submitButton('Enviar', [
             'class' => 'form__submit-button button fill-sm d-block push-to-right-md',
             'data-size' => 'large-md',
         ]) ?>
-        <?php ActiveForm::end();?>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>

@@ -31,6 +31,15 @@ class ContactForm extends Model
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'email' => 'Email',
+            'name' => 'Nome',
+            'body' => 'Mensagem'
+        ];
+    }
+
     /**
      * Sends an email to the specified email address using the information collected by this model.
      *
