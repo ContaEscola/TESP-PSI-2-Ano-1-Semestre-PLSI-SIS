@@ -20,12 +20,12 @@ class ContactForm extends Model
     public function rules()
     {
         return [
-            // name, email, subject and body are required
+            // name, email, and body are required
             [['email', 'name'], 'trim'],
             ['body', 'required', 'message' => 'A mensagem não pode ser vazia.'],
             ['name', 'required', 'message' => 'O nome não pode ser vazio.'],
             ['email', 'required', 'message' => 'O email não pode ser vazio.'],
-            ['name', 'string'],
+            [['name', 'body'], 'string'],
             // email has to be a valid email address
             ['email', 'email', 'message' => 'O email tem de ser válido.'],
         ];
@@ -39,8 +39,10 @@ class ContactForm extends Model
      */
     public function sendEmail($email)
     {
-        return Yii::$app->mailer->compose(['html' => 'contact-html', 'text' => 'contact-text'],
-            ['form' => $this])
+        return Yii::$app->mailer->compose(
+            ['html' => 'contact-html', 'text' => 'contact-text'],
+            ['form' => $this]
+        )
             ->setTo($email)
             ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
             ->setReplyTo([$this->email => $this->name])
