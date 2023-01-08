@@ -47,6 +47,7 @@
   --ff-primary: "Montserrat", sans-serif;
 
   --fs-600: 1.375rem;
+  --fs-550: 1.3rem;
   --fs-500: 1.125rem;
   --fs-400: 1rem;
   --fs-350: 0.938rem;
@@ -66,7 +67,8 @@
 
 @media (min-width: 40em) {
   :root {
-    --fs-600: 3rem;
+    --fs-600: 2.75rem;
+    --fs-550: 2.25rem;
     --fs-500: 1.75rem;
     --fs-400: 1.125rem;
     --fs-350: 1.063rem;
@@ -154,6 +156,29 @@ svg {
 }
 
 /* general styling */
+
+/* Custom scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--clr-neutral-400);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--clr-neutral-900);
+  border-radius: 0.2em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-black-200);
+}
 
 body {
   background-color: var(--clr-primary);
@@ -1030,6 +1055,32 @@ select.form__input {
   display: block;
 }
 
+/* Ticket chat */
+
+.chat-messages-wrapper {
+  height: 35rem;
+  overflow-y: scroll;
+}
+
+.chat-message {
+  max-width: 100%;
+}
+
+@media (min-width: 40em) {
+  .chat-message {
+    max-width: 70%;
+  }
+}
+
+.chat-footer {
+  border-top: 0.01rem solid var(--clr-neutral-900);
+}
+
+.chat-footer [type="submit"] {
+  padding-block: 0.7em;
+  padding-inline: 1.6em;
+}
+
 /* radio button pill */
 
 .radio-button input {
@@ -1499,6 +1550,10 @@ select.form__input {
   font-size: var(--fs-600);
   line-height: 1.1;
 }
+.fs-550 {
+  font-size: var(--fs-550);
+  line-height: 1.1;
+}
 .fs-500 {
   font-size: var(--fs-500);
   line-height: 1.1;
@@ -1577,6 +1632,10 @@ select.form__input {
 
 .bg-neutral-400 {
   background-color: var(--clr-neutral-400);
+}
+
+.bg-primary-accent-400 {
+  background-color: var(--clr-primary-accent-400);
 }
 
 .letter-spacing-3 {
@@ -1692,6 +1751,10 @@ select.form__input {
   flex-wrap: wrap;
 }
 
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
 @media (min-width: 40em) {
   .d-flex-md {
     display: flex;
@@ -1780,6 +1843,10 @@ select.form__input {
 
 .justify-content-center {
   justify-content: center;
+}
+
+.justify-content-end {
+  justify-content: end;
 }
 
 .justify-self-center {
@@ -1881,6 +1948,22 @@ select.form__input {
 }
 .padding-block-100 {
   padding-block: var(--size-100);
+}
+
+.padding-inline-300 {
+  padding-inline: var(--size-300);
+}
+
+.padding-inline-200 {
+  padding-inline: var(--size-200);
+}
+
+.padding-top-300 {
+  padding-top: var(--size-300);
+}
+
+.padding-bottom-700 {
+  padding-bottom: var(--size-700);
 }
 
 .padding-300 {
@@ -1988,6 +2071,10 @@ select.form__input {
   width: 70%;
 }
 
+.max-width-35ch {
+  max-width: 35ch;
+}
+
 .min-width-initial {
   min-width: initial;
 }
@@ -2001,7 +2088,7 @@ select.form__input {
 .icon {
   min-width: 1rem;
   aspect-ratio: 1 / 1;
-  fill: var(--clr-icon);
+  fill: var(--clr-icon, var(--clr-black-200));
   transition: fill 250ms ease-in-out;
 }
 
@@ -2016,6 +2103,22 @@ select.form__input {
 
 .border-radius-1 {
   border-radius: 0.3125rem;
+}
+.border-top-radius-0 {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.border-bottom-right-radius-0 {
+  border-bottom-right-radius: 0;
+}
+
+.border-bottom-left-radius-0 {
+  border-bottom-left-radius: 0;
+}
+
+.border-none {
+  border: none;
 }
 
 .resize-none {

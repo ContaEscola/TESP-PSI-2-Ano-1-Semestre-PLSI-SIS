@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href=" ../images/logo-url-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Reservar Voo</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script>
+    <script src="chat.js" defer></script>
+</head>
+
+
+<body class="body-grid">
+
+    <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#">
+                    <picture>
+                        <source srcset="../images/logo-pc.svg" media="(min-width: 40em)">
+                        <img src="../images/logo-mobile.svg" alt="Logo">
+                    </picture>
+                </a>
+                <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
+                    aria-expanded="false">
+                    <img class="open-icon" src="../images/hamburger-icon.svg" alt="" aria-hidden="true">
+                    <img class="close-icon" src="../images/close-icon.svg" alt="" aria-hidden="true">
+                    <span class="visually-hidden">Menu</span>
+                </button>
+                <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                    <ul role="list" class="navigation-list">
+                        <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
+                        <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
+                        <li class="primary-navigation__item"><a href="#" class="button" data-type="primary-outline">Sign
+                                Up</a>
+                        </li>
+                        <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="padding-block-700">
+            <div class="container" data-type="small-md">
+                <h1 class="fs-550 fw-bold text-break max-width-35ch">Ticket nº1 - <span class="fw-medium">
+                        tttttttasdasdad</span>
+                </h1>
+                <div class="d-flex justify-content-space-between margin-top-300">
+                    <p class="fw-medium letter-spacing-1">Estado: <span class="italic">Por Rever</span></p>
+                    <a href="#" class="button" data-type="error">Fechar ticket</a>
+                </div>
+
+                <section class="margin-top-500 border-radius-1 box-shadow-1">
+                    <ul role="list" id="chat-messages"
+                        class="[ chat-messages-wrapper ]  [ padding-inline-300 padding-block-300 flow ]"
+                        data-flow-space="large">
+                        <li class="d-flex">
+                            <div class="chat-message">
+                                <p class="fw-light italic">Rafael Bento</p>
+                                <div
+                                    class="border-radius-1 bg-neutral-800 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                                    <p>O seu item está a ser procuradoasdasdasdasdasdaasdasdasdasdasdasdasdasdasdsa</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-end">
+                            <div class="chat-message">
+                                <p class="fw-light italic text-align-right">Eu</p>
+                                <div
+                                    class="text-white border-radius-1 bg-primary-accent-400 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                                    <p>O seu item está a ser procuradoasdasdasdasdasdaasdasdasdasdasdasdasdasdasdsa</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="chat-message">
+                                <p class="fw-light italic">Rafael Bento</p>
+                                <div
+                                    class="border-radius-1 bg-neutral-800 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                                    <p>O seu item está a ser procuradoasdasdasdasdasdaasdasdasdasdasdasdasdasdasdsa</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-end">
+                            <div class="chat-message">
+                                <p class="fw-light italic text-align-right">Eu</p>
+                                <div
+                                    class="text-white border-radius-1 bg-primary-accent-400 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                                    <p>O seu item está a ser procuradoasdasdasdasdasdaasdasdasdasdasdasdasdasdasdsa</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class=" chat-message">
+                                <p class="fw-light italic">Rafael Bento</p>
+                                <div
+                                    class="border-radius-1 bg-neutral-800 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                                    <p>O seu item está a ser procuradoasdasdasdasdasdaasdasdasdasdasdasdasdasdasdsa</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-end">
+                            <div class="chat-message">
+                                <p class="fw-light italic text-align-right">Eu</p>
+                                <div
+                                    class="text-white border-radius-1 bg-primary-accent-400 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                                    <p>O seu item está a ser procuradoasdasdasdasdasdaasdasdasdasdasdasdasdasdasdsa</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="chat-footer">
+                        <form action="#" class="d-flex gap-0">
+                            <div class="form__group flex-grow-1">
+                                <label for="city" class="[ input__label ] [ margin-bottom-50 visually-hidden ]">Mensagem
+                                    para enviar:</label>
+                                <input
+                                    class="[ form__input ] [ height-100 border-none border-top-radius-0 border-bottom-right-radius-0 ]"
+                                    type="text" name="{TOCHANGE}" id="city" pattern="[a-zA-Z\d]+" required
+                                    placeholder="Insira aqui a sua mensagem">
+                            </div>
+
+                            <button type="submit"
+                                class="[ button ] [ border-top-radius-0  border-bottom-left-radius-0 ] ">
+                                <span class="visually-hidden">Enviar mensagem</span>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/send-message-icon.svg#send-message-icon"></use>
+                                    </svg>
+                                </span></button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+    </main>
+
+    <footer>
+        <div class="[ footer-wrapper ] [ container text-align-center ]">
+            <nav aria-label="Footer">
+                <ul role="list" class="footer-list">
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Termos e Condições</a></li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a>
+                    </li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Contactar Suporte</a></li>
+                </ul>
+            </nav>
+            <p class="fs-100 fw-light letter-spacing-2 ">@ 2022 AeroControl. Todos os direitos
+                reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
