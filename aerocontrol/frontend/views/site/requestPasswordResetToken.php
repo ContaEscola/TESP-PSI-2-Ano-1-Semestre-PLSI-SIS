@@ -19,12 +19,12 @@ $this->title = 'Resetar Password';
             'successCssClass' => 'valid',
             'validateOnType' => true,
             'validationDelay' => 500,
-            'fieldConfig' => ['radioTemplate' => '{beginLabel}{input}{labelTitle}{endLabel}'],
             'options' => [
-                'class' => 'margin-top-100',
+                'class' => 'margin-top-600 flow',
+                'data-flow-space' => 'large',
             ]
         ]) ?>
-            <div class="flow" data-flow-space="large">
+        <div class="flow">
             <?= $form->field($model, 'email', [
                 'errorOptions' => [
                     'tag' => 'p',
@@ -40,13 +40,13 @@ $this->title = 'Resetar Password';
                     'type' => 'email',
                 ]) ?>
 
-            <?= Html::submitButton('Repor', [
-                'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
-                'data-size' => 'large-md',
-            ]) ?>
 
-            </div>
 
+        </div>
+        <?= Html::submitButton('Repor', [
+            'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
+            'data-size' => 'large-md',
+        ]) ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
