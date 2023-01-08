@@ -163,7 +163,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
-                    'linkUrl' => Url::to(["/supportticket/index"])
+                    'linkUrl' => Url::to(["/support-ticket/index"])
                 ]) ?>
             </div>
         </div>

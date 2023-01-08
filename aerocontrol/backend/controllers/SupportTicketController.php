@@ -88,8 +88,6 @@ class SupportTicketController extends Controller
         ]);
     }
 
-
-
     /**
      * Deletes an existing SupportTicket model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -97,11 +95,13 @@ class SupportTicketController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionFinish($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        $model = SupportTicket::findOne($id);
+        $model->state = SupportTicket::STATE_DONE;
+        if ($model->save()){
+            return $this->redirect(['index']);
+        }
     }
 
     /**

@@ -15,6 +15,10 @@ use yii\widgets\ListView;
 
 <div class="support-ticket-form">
 
+    <p>
+        <?= Html::a('Concluir Ticket', ['finish', 'id' => $ticket_id], ['class' => 'btn btn-primary']) ?>
+    </p>
+
     <?php $form = ActiveForm::begin([
         'action' => ['view','ticket_id' =>$ticket_id],
         'validateOnType' => true,
