@@ -6,6 +6,7 @@ use common\models\Airplane;
 use common\models\AirplaneSearch;
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -65,6 +66,8 @@ class AirplaneController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewAirplane')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new AirplaneSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -82,6 +85,8 @@ class AirplaneController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewAirplane')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -94,6 +99,8 @@ class AirplaneController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createAirplane')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new Airplane();
 
         if ($this->request->isPost) {
@@ -123,6 +130,8 @@ class AirplaneController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateAirplane')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

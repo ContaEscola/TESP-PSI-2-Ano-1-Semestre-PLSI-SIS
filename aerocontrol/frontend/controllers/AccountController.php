@@ -10,6 +10,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 class AccountController extends Controller
@@ -40,7 +41,9 @@ class AccountController extends Controller
         );
     }
 
-    public function actionProfile($id){
+    public function actionProfile($id)
+    {
+        if (!Yii::$app->user->can('updateClient', ['user' => User::findOne(['id' => Yii::$app->request->get('id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
 
         $validUser = $this->findModel($id);
         $model = new ClientForm($validUser->client_id);

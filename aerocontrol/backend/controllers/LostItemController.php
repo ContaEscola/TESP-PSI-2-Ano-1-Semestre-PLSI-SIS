@@ -7,6 +7,7 @@ use common\models\LostItemSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -75,6 +76,8 @@ class LostItemController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewLostItem')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new LostItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -92,6 +95,8 @@ class LostItemController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewLostItem')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -104,6 +109,8 @@ class LostItemController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createLostItem')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new LostItem();
 
         if ($this->request->isPost) {
@@ -132,6 +139,8 @@ class LostItemController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateLostItem')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -156,6 +165,8 @@ class LostItemController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!Yii::$app->user->can('deleteLostItem')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $this->findModel($id)->delete();
 
         //Criar logs
@@ -167,6 +178,8 @@ class LostItemController extends Controller
     //remover imagem do lost item
     public function actionDeleteLogo($id)
     {
+        if (!Yii::$app->user->can('deleteLostItemLogo')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
         if ($model->deleteImage())
             $model->image = null;

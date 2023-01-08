@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 
 /**
  * SupportTicketController implements the CRUD actions for SupportTicket model.
@@ -72,6 +73,9 @@ class SupportTicketController extends Controller
 
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createSupportTicket')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
+
         $model = new SupportTicketForm();
 
         $client = Client::findOne(['client_id' => Yii::$app->user->getId()]);

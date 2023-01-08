@@ -7,6 +7,7 @@ use common\models\Admin;
 use common\models\AdminSearch;
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -72,6 +73,8 @@ class AdminController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewAdmin')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new AdminSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -89,6 +92,8 @@ class AdminController extends Controller
      */
     public function actionView($admin_id)
     {
+        if (!Yii::$app->user->can('viewAdmin')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($admin_id),
         ]);
@@ -101,6 +106,8 @@ class AdminController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createAdmin')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new AdminForm();
 
         if ($this->request->isPost) {
@@ -129,6 +136,8 @@ class AdminController extends Controller
      */
     public function actionUpdate($admin_id)
     {
+        if (!Yii::$app->user->can('updateAdmin')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $validAdmin = $this->findModel($admin_id);
         $model = new AdminForm($validAdmin->admin_id);
 
@@ -154,6 +163,8 @@ class AdminController extends Controller
      */
     public function actionDelete($admin_id)
     {
+        if (!Yii::$app->user->can('deleteAdmin')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $this->findModel($admin_id)->delete();
 
         //Criar logs
