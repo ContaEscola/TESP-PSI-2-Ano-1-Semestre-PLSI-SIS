@@ -1,6 +1,6 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
+    'adminEmail' => 'aerocontrol.acc@gmail.com',
 
 
     'bsVersion' => '5.x'
