@@ -146,6 +146,11 @@ class m221115_155756_init_rbac extends Migration
         /*
             PaymentMethod Permissions
         */
+
+        $viewPaymentMethod = $auth->createPermission('viewPaymentMethod');
+        $viewPaymentMethod->description = "Visualizar método de pagamento";
+        $auth->add($viewPaymentMethod);
+
         $updatePaymentMethod = $auth->createPermission('updatePaymentMethod');
         $updatePaymentMethod->description = "Atualizar método de pagamento";
         $auth->add($updatePaymentMethod);
@@ -481,6 +486,7 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee, $createAirport);
         $auth->addChild($employee, $updateAirport);
         $auth->addChild($employee, $viewAirport);
+        $auth->addChild($employee, $viewPaymentMethod);
         $auth->addChild($employee, $updatePaymentMethod);
         $auth->addChild($employee, $updateClient);
         $auth->addChild($employee, $viewClient);
