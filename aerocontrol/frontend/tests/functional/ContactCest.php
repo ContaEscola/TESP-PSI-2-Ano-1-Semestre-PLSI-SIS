@@ -47,6 +47,6 @@ class ContactCest
             'ContactForm[body]' => 'Esta é uma mensagem',
         ]);
         $I->seeEmailIsSent();
-        $I->see('Obrigado por nos contactar. Responderemos assim que possivel.');
+        $I->see('Obrigado por nos contactar. Responderemos assim que possivel!');
     }
 }

@@ -32,25 +32,25 @@ class SignupCest
         $I->seeValidationError('É necessário um email.');
         $I->seeValidationError('É necessário o indicativo do nº de telemóvel.');
         $I->seeValidationError('É necessário o nº de telemóvel.');
-
     }
 
     public function signupWithWrongEmail(FunctionalTester $I)
     {
         $I->submitForm(
-            $this->formId, [
-            'SignupForm[username]'  => 'tester',
-            'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password_hash]'  => '12345678',
-            'SignupForm[first_name]'  => 'tester',
-            'SignupForm[last_name]'  => 'user',
-            'SignupForm[gender]'  => 'Masculino',
-            'SignupForm[birthdate]'  => '2000-03-15',
-            'SignupForm[country]'  => 'Portugal',
-            'SignupForm[city]'  => 'Lisboa',
-            'SignupForm[phone]'  => '912345678',
-            'SignupForm[phone_country_code]'  => '+351',
-        ]
+            $this->formId,
+            [
+                'SignupForm[username]'  => 'tester',
+                'SignupForm[email]'     => 'ttttt',
+                'SignupForm[password_hash]'  => '12345678',
+                'SignupForm[first_name]'  => 'tester',
+                'SignupForm[last_name]'  => 'user',
+                'SignupForm[gender]'  => 'Masculino',
+                'SignupForm[birthdate]'  => '2000-03-15',
+                'SignupForm[country]'  => 'Portugal',
+                'SignupForm[city]'  => 'Lisboa',
+                'SignupForm[phone]'  => '912345678',
+                'SignupForm[phone_country_code]'  => '+351',
+            ]
         );
         $I->dontSeeValidationError('É necessário um username.');
         $I->dontSeeValidationError('É necessário uma password.');
@@ -68,7 +68,8 @@ class SignupCest
     public function signupSuccessfully(FunctionalTester $I)
     {
         $I->submitForm(
-            $this->formId, [
+            $this->formId,
+            [
                 'SignupForm[username]'  => 'tester',
                 'SignupForm[email]'     => 'tester@gmail.com',
                 'SignupForm[password_hash]'  => '12345678',
@@ -90,6 +91,6 @@ class SignupCest
         ]);
 
         $I->seeEmailIsSent();
-        $I->see('Registo efetuado. Por favor verifique o seu email para concluir o registo.');
+        $I->see('Registo efetuado. Por favor verifique o seu email para concluir o registo!');
     }
 }

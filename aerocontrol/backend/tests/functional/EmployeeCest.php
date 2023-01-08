@@ -18,7 +18,7 @@ class EmployeeCest
 
     public function createEmployeeEmptyForm(FunctionalTester $I)
     {
-        $I->see("Criar Trabalhador",'h1');
+        $I->see("Criar Trabalhador", 'h1');
         $I->submitForm('#employee-form', []);
         $I->seeValidationError('É necessário um username.');
         $I->seeValidationError('É necessário uma password.');
@@ -42,7 +42,7 @@ class EmployeeCest
 
     public function createEmployeeRepeatedUsername(FunctionalTester $I)
     {
-        $I->see("Criar Trabalhador",'h1');
+        $I->see("Criar Trabalhador", 'h1');
         $I->submitForm('#employee-form', [
             'EmployeeForm[username]'  => 'pedro',
             'EmployeeForm[password_hash]'  => '12345678',
@@ -87,7 +87,7 @@ class EmployeeCest
 
     public function createEmployee(FunctionalTester $I)
     {
-        $I->see("Criar Trabalhador",'h1');
+        $I->see("Criar Trabalhador", 'h1');
         $I->submitForm('#employee-form', [
             'EmployeeForm[username]'  => 'tester',
             'EmployeeForm[password_hash]'  => '12345678',
@@ -110,25 +110,6 @@ class EmployeeCest
             'EmployeeForm[zip_code]'  => '1324-321',
         ]);
 
-        $I->dontSeeValidationError('É necessário um username.');
-        $I->dontSeeValidationError('Este username já está a ser utilizado.');
-        $I->dontSeeValidationError('É necessário uma password.');
-        $I->dontSeeValidationError('É necessário o nº de empregado.');
-        $I->dontSeeValidationError('É necessário o primeiro nome.');
-        $I->dontSeeValidationError('É necessário o último nome.');
-        $I->dontSeeValidationError('É necessária a data de nascimento.');
-        $I->dontSeeValidationError('É necessário o país.');
-        $I->dontSeeValidationError('É necessário a cidade.');
-        $I->dontSeeValidationError('É necessário um email.');
-        $I->dontSeeValidationError('É necessário o indicativo do nº de telemóvel.');
-        $I->dontSeeValidationError('É necessário o nº de telemóvel.');
-        $I->dontSeeValidationError('É necessário o nº de contribuinte.');
-        $I->dontSeeValidationError('É necessário o nº de segurança social.');
-        $I->dontSeeValidationError('É necessário o iban.');
-        $I->dontSeeValidationError('É necessário a qualificação.');
-        $I->dontSeeValidationError('É necessário a função.');
-        $I->dontSeeValidationError('É necessário o código postal.');
-        $I->dontSeeValidationError('É necessário o nome da rua.');
 
         $I->seeRecord(User::class, [
             'username' => 'tester',

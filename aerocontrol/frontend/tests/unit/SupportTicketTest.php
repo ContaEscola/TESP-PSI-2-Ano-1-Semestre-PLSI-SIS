@@ -13,7 +13,7 @@ class SupportTicketTest extends \Codeception\Test\Unit
 
     protected UnitTester $tester;
 
-    public function testSupportTicket()
+    public function testCreateSupportTicket()
     {
         $sup = new SupportTicketForm();
         $sup->client_id = 4;
@@ -22,7 +22,7 @@ class SupportTicketTest extends \Codeception\Test\Unit
 
         $this->assertTrue($sup->create());
 
-        $this->tester->seeRecord(SupportTicket::class,[
+        $this->tester->seeRecord(SupportTicket::class, [
             'title' => 'NovoTicket_123312123'
         ]);
 

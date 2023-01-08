@@ -17,7 +17,7 @@ class AdminCest
 
     public function createAdminEmptyForm(FunctionalTester $I)
     {
-        $I->see("Criar Administrador",'h1');
+        $I->see("Criar Administrador", 'h1');
         $I->submitForm('#admin-form', []);
         $I->seeValidationError('É necessário um username.');
         $I->seeValidationError('É necessário uma password.');
@@ -31,9 +31,9 @@ class AdminCest
         $I->seeValidationError('É necessário o nº de telemóvel.');
     }
 
-    public function createAdminReapeatedUsername(FunctionalTester $I)
+    public function createAdminRepeatedUsername(FunctionalTester $I)
     {
-        $I->see("Criar Administrador",'h1');
+        $I->see("Criar Administrador", 'h1');
         $I->submitForm('#admin-form', [
             'AdminForm[username]' => 'rafael',
             'AdminForm[password_hash]' => '12345678',
@@ -53,7 +53,7 @@ class AdminCest
 
     public function createAdmin(FunctionalTester $I)
     {
-        $I->see("Criar Administrador",'h1');
+        $I->see("Criar Administrador", 'h1');
         $I->submitForm('#admin-form', [
             'AdminForm[username]'  => 'tester',
             'AdminForm[password_hash]' => '12345678',
