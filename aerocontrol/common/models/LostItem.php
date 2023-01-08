@@ -79,8 +79,8 @@ class LostItem extends \yii\db\ActiveRecord
             ], 'strict' => true],
             ['image', 'default', 'value' => null],
             ['state', 'default', 'value' => 'Por entregar'],
-            ['description', 'string', 'max' => 100, 'tooLong' => 'O {attribute} e não pode exceder os 100 caracteres.'],
-            ['image', 'string', 'max' => 75, 'tooLong' => 'O {attribute} e não pode exceder os 75 caracteres.'],
+            ['description', 'string', 'max' => 100, 'tooLong' => 'A descrição e não pode exceder os 100 caracteres.'],
+            ['image', 'string', 'max' => 75, 'tooLong' => 'A imagem e não pode exceder os 75 caracteres.'],
             ['image', 'unique', 'message' => "Esta imagem já está a ser utilizada."],
             [
                 'imageFile', 'image', 'notImage' => '{file} não é uma imagem.'

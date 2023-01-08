@@ -24,7 +24,7 @@ class SupportTicketForm extends Model
         return [
             ['title', 'required', 'message' => "Titulo não pode ser vazio."],
             [ 'message', 'required', 'message' => "Mensagem não pode ser vazio."],
-            ['title', 'string', 'max' => 20, 'message' => '{attribute} não pode exceder os 20 caracteres.'],
+            ['title', 'string', 'max' => 20, 'tooLong' => '{attribute} não pode exceder os 20 caracteres.'],
             [
                 'message',
                 'string', 'message' => 'A mensagem tem de conter apenas caracteres.',

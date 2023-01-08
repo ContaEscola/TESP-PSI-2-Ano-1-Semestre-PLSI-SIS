@@ -31,7 +31,7 @@ $this->registerJsFile('@web/js/support-tickets.js', [
         </section>
     </dialog>
 
-    <button class=" [ button ] [ d-block margin-top-400 push-to-right ]" data-type="primary-outline" data-toggle="modal" data-target="#newSupportTicketModal" data-force-toggle-open="false">
+    <button class=" [ button ] [ d-block margin-top-400 push-to-right ]" data-type="primary-outline" data-toggle="modal" data-target="#newSupportTicketModal" data-force-toggle-open="false" id="newSupportTicket">
         Novo Ticket
     </button>
 

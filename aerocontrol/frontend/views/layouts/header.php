@@ -57,7 +57,7 @@ use yii\helpers\Url;
                                                         <svg class="icon">
                                                             <use xlink:href="' . Url::to('@web/images/perfil-icon.svg#perfil-icon') . '"></use>
                                                         </svg>
-                                                    </span>', ['account/profile'], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
+                                                    </span>', ['account/profile', 'id' => Yii::$app->user->id], ['class' => '[ dropdown-menu__link ] [ text-primary-accent-400 ]']) ?>
                                     </li>
                                     <li class="dropdown-menu__item">
                                         <?= Html::a('Meus Bilhetes' . '<span aria-hidden="true" class="dropdown-link__icon">

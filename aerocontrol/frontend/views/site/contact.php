@@ -13,6 +13,7 @@ $this->title = 'Suporte';
     <div class="container" data-type="small-md">
         <h1 class="fs-600 fw-bold text-align-center">Contactar Suporte</h1>
         <?php $form = ActiveForm::begin([
+            'id' => 'contact-form',
             'errorCssClass' => 'invalid',
             'requiredCssClass' => 'invalid',
             'successCssClass' => 'valid',
@@ -28,7 +29,7 @@ $this->title = 'Suporte';
             <?= $form->field($model, 'name', [
                 'errorOptions' => [
                     'tag' => 'p',
-                    'class' => 'input__error margin-top-50 '
+                    'class' => 'input__error margin-top-50'
                 ],
                 'options' => ['class' => 'form__group'],
             ])

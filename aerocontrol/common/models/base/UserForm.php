@@ -63,7 +63,7 @@ class UserForm extends Model
                     else
                         $query->where(['=', 'username', $this->username]);
                 },
-                'message' => 'Esta username já está a ser utilizada.'
+                'message' => 'Este username já está a ser utilizado.'
             ],
 
             ['email', 'trim'],
@@ -169,7 +169,7 @@ class UserForm extends Model
         $user->generateEmailVerificationToken();
         $user->setAttributes($this->getUserDetails(), false);
         $user->setPassword($user->password_hash);
-        if (!$user->save() || !$this->sendEmail($user))
+        if (!$user->save())
             return null;
 
         $this->user_id = $user->id;
