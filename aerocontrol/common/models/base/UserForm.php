@@ -27,8 +27,6 @@ class UserForm extends Model
     public $phone;
     public $phone_country_code;
 
-    protected $statusOnCreate = User::STATUS_ACTIVE;
-
     protected $_user;       // Variável que recebe os dados do user da BD
 
     public function __construct($user_id = null, $config = [])
@@ -193,7 +191,7 @@ class UserForm extends Model
         $user = $this->getUser();
         $user->setAttributes($this->getUserDetails(), false);
 
-        if($this->_user->password_hash !== $user->password_hash) {
+        if ($this->_user->password_hash !== $user->password_hash) {
             $user->setPassword($this->password_hash);
         }
 
@@ -226,7 +224,7 @@ class UserForm extends Model
         if ($this->_user === null) {
             $this->_user = User::findOne($this->user_id);
         }
-        return clone($this->_user);
+        return clone ($this->_user);
     }
 
     /**
