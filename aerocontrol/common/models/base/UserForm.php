@@ -5,8 +5,6 @@ namespace common\models\base;
 use common\models\User;
 use yii\base\Model;
 use Yii;
-use yii\db\Exception;
-use yii\web\NotFoundHttpException;
 
 class UserForm extends Model
 {
@@ -169,7 +167,6 @@ class UserForm extends Model
         $user = new User();
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-
         $user->setAttributes($this->getUserDetails(), false);
         $user->setPassword($user->password_hash);
         if (!$user->save() || !$this->sendEmail($user))
