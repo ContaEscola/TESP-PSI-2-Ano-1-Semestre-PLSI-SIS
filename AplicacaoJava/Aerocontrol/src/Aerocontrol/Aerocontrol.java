@@ -4,11 +4,17 @@
  */
 package Aerocontrol;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttTopic;
 
 /**
  *
@@ -17,6 +23,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class Aerocontrol extends javax.swing.JDialog {
 
     MqttClient client;
+    ArrayList<String> subscribedTopics;
     /**
      * Creates new form Aerocontrol
      */
@@ -25,6 +32,7 @@ public class Aerocontrol extends javax.swing.JDialog {
         initComponents();
         initConnection();
         subscribeDefaultChannel();
+        subscribedTopics = new ArrayList<String>();
     }
 
     /**
@@ -89,52 +97,52 @@ public class Aerocontrol extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TF_Sub, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BT_Remove, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BT_Sub, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TF_Sub, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(BT_Sub, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BT_Remove, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel4))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                        .addComponent(jLabel4))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(BT_Remove))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(TF_Sub, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BT_Sub))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(BT_Remove))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(TF_Sub, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BT_Sub))
+                                .addGap(9, 9, 9)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,10 +155,13 @@ public class Aerocontrol extends javax.swing.JDialog {
                      @Override
                      public void messageArrived(String topic, MqttMessage msg) throws Exception {
                             String messageBody = new String(msg.getPayload());
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                            Date date = new Date();
                             if (topic.equals("tickets")) {
-                                 TF_Messages.append(messageBody + "\r\n");
+                                    TF_Messages.append(dateFormat.format(date) + " - " + messageBody + "\r\n");
                             } else{
-                                TF_Messages_Tickets.append(messageBody + "\r\n");
+                                    
+                                    TF_Messages_Tickets.append(dateFormat.format(date) +  " (" + topic + ") - Nova mensagem" + "\r\n");
                             }
                      }
                      @Override
@@ -172,22 +183,51 @@ public class Aerocontrol extends javax.swing.JDialog {
     }
 
     private void subscribeDefaultChannel() {
-        try {
-            int subQoS= 0;
-
-            client.subscribe("tickets", subQoS);
-        } catch (Exception e) {
-            TF_Messages.append("Impossível Subscrever  o canal de tickets.\r\n");
-        }
+            try {
+                    int subQoS= 0;
+                    client.subscribe("tickets", subQoS);
+            } catch (Exception e) {
+                    TF_Messages.append("Impossível Subscrever  o canal de tickets.\r\n");
+            }
     }
     
     private void BT_SubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_SubActionPerformed
+        
         try {
-            String topico = TF_Sub.getText();
-            int subQoS= 0;
+                String topico = TF_Sub.getText().trim();
+                
+                // Verifica se o tópico já se encontra subscrito
+                
+                for(String topic: subscribedTopics){
+                        if (topic.equals(topico)){
+                                JOptionPane.showMessageDialog(null, "O ticket já se encontra subscrito.","Subscrição de tickets",JOptionPane.ERROR_MESSAGE);
+                                return;
+                        }
+                }
+                
+                subscribedTopics.add(topico);
+                
+                int subQoS= 0;
 
-            client.subscribe(topico, subQoS);
-            TF_Messages_Tickets.append("Subscreveu o canal " + topico + "\r\n");
+                client.subscribe(topico, subQoS);
+                TF_Messages_Tickets.append("Subscreveu o canal " + topico + "\r\n");
+
+                // Envia uma mensagem a dizer que um funcionário subscreveu o topico
+
+                MqttTopic mqttTopic= client.getTopic("tickets");
+
+                String pubMsg = "Um funcionário acabou de subscrever o tópico " + topico;
+                int pubQoS= 0;
+
+                MqttMessage message = new MqttMessage(pubMsg.getBytes());
+
+                message.setQos(pubQoS);
+                message.setRetained(true);
+                
+                mqttTopic.publish(message);     // Envia para os outros
+                
+                TF_Sub.setText("");
+            
         } catch (Exception e) {
             TF_Messages_Tickets.append("Impossível Subscrever\r\n");
         }
@@ -195,10 +235,19 @@ public class Aerocontrol extends javax.swing.JDialog {
 
     private void BT_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_RemoveActionPerformed
         try {
-            String[] arrTopicos = new String[1];
-            arrTopicos[0] = TF_Sub.getText();
-            client.unsubscribe(arrTopicos);
-            TF_Messages_Tickets.append("Removeu subescrição " + arrTopicos[0] + "\r\n");
+            //String[] arrTopicos = new String[1];
+            String topico = TF_Sub.getText().trim();
+            for(int i = 0; i < subscribedTopics.size(); i++) {
+                    if (subscribedTopics.get(i).equals(topico)){
+                        client.unsubscribe(topico);
+                        subscribedTopics.remove(i);
+                        TF_Messages_Tickets.append("Removeu subscrição " + topico + "\r\n");
+                        TF_Sub.setText("");
+                        return;
+                    }
+            }
+            JOptionPane.showMessageDialog(null, "Não está subscrito nesse tópico.","Subscrição de tickets",JOptionPane.ERROR_MESSAGE);
+            TF_Sub.setText("");
         } catch (Exception e) {
             TF_Messages_Tickets.append("Impossível remover subscrição\r\n");
         }
