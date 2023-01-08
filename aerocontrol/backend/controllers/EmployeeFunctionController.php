@@ -4,8 +4,10 @@ namespace backend\controllers;
 
 use common\models\EmployeeFunction;
 use common\models\EmployeeFunctionSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -64,6 +66,8 @@ class EmployeeFunctionController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewEmployeeFunction')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new EmployeeFunctionSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -81,6 +85,8 @@ class EmployeeFunctionController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewEmployeeFunction')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -93,6 +99,8 @@ class EmployeeFunctionController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createEmployeeFunction')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new EmployeeFunction();
 
         if ($this->request->isPost) {
@@ -121,6 +129,8 @@ class EmployeeFunctionController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateEmployeeFunction')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {

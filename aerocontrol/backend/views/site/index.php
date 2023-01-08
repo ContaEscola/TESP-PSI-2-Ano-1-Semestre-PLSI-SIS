@@ -65,7 +65,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
-                    'linkUrl' => Url::to(["/lostitem/index"])
+                    'linkUrl' => Url::to(["/lost-item/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -73,7 +73,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
-                    'linkUrl' => Url::to(["/supportticket/index"])
+                    'linkUrl' => Url::to(["/support-ticket/index"])
                 ]) ?>
             </div>
         </div>
@@ -84,7 +84,7 @@ $this->title = 'Dashboard';
                     'text' => 'Métodos de pagamento',
 
                     'icon' => 'fas fa-solid fa-credit-card',
-                    'linkUrl' => Url::to(["/paymentmethod/index"])
+                    'linkUrl' => Url::to(["/payment-method/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -155,7 +155,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
-                    'linkUrl' => Url::to(["/lostitem/index"])
+                    'linkUrl' => Url::to(["/lost-item/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -163,7 +163,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
-                    'linkUrl' => Url::to(["/supportticket/index"])
+                    'linkUrl' => Url::to(["/support-ticket/index"])
                 ]) ?>
             </div>
         </div>
@@ -174,7 +174,7 @@ $this->title = 'Dashboard';
                     'text' => 'Métodos de pagamento',
 
                     'icon' => 'fas fa-solid fa-credit-card',
-                    'linkUrl' => Url::to(["/paymentmethod/index"])
+                    'linkUrl' => Url::to(["/payment-method/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -202,7 +202,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Ementa',
                     'icon' => 'fas fa-utensils',
-                    'linkUrl' => Url::to(["/restaurantitem/index?restaurant_id=" . $manager->restaurant_id])
+                    'linkUrl' => Url::to(["/restaurant-item/index?restaurant_id=" . $manager->restaurant_id])
                 ]) ?>
             </div>
         </div>
