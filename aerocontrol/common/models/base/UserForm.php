@@ -5,8 +5,6 @@ namespace common\models\base;
 use common\models\User;
 use yii\base\Model;
 use Yii;
-use yii\db\Exception;
-use yii\web\NotFoundHttpException;
 
 class UserForm extends Model
 {
@@ -26,8 +24,6 @@ class UserForm extends Model
     public $birthdate;
     public $phone;
     public $phone_country_code;
-
-    protected $statusOnCreate = User::STATUS_ACTIVE;
 
     protected $_user;       // Variável que recebe os dados do user da BD
 
@@ -169,13 +165,11 @@ class UserForm extends Model
             return null;
 
         $user = new User();
-        $user->setPassword($this->password_hash);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-        $user->status = $this->statusOnCreate;
-
         $user->setAttributes($this->getUserDetails(), false);
-        if (!$user->save())
+        $user->setPassword($user->password_hash);
+        if (!$user->save() || !$this->sendEmail($user))
             return null;
 
         $this->user_id = $user->id;
@@ -194,7 +188,7 @@ class UserForm extends Model
         $user = $this->getUser();
         $user->setAttributes($this->getUserDetails(), false);
 
-        if($this->_user->password_hash !== $user->password_hash) {
+        if ($this->_user->password_hash !== $user->password_hash) {
             $user->setPassword($this->password_hash);
         }
 
@@ -227,7 +221,7 @@ class UserForm extends Model
         if ($this->_user === null) {
             $this->_user = User::findOne($this->user_id);
         }
-        return clone($this->_user);
+        return clone ($this->_user);
     }
 
     /**
