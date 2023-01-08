@@ -1,10 +1,29 @@
+const elementsThatWantToolTip = document.querySelectorAll('[data-toggle="tooltip"]');
+
+elementsThatWantToolTip.forEach((element) => {
+    addTooltip(element, element.getAttribute('data-tooltip-title'));
+
+    element.addEventListener('click', function () {
+        this.focus();
+    })
+
+    // Quando ganha o focus no mobile entao amostra o tooltip
+    element.addEventListener('focus', function () {
+        setForceOpenToolTip(element, true);
+    })
+    // Quando perde o focus no mobile entao esconde o tooltip
+    element.addEventListener('blur', function () {
+        setForceOpenToolTip(element, false);
+    })
+})
+
 
 function getToolTipTemplate(title) {
     let toolTip = document.createElement('div');
     toolTip.classList.add('tooltip');
 
     let toolTipContent = document.createElement('div');
-    toolTipContent.classList.add('tooltip-content', 'border-radius-1', 'text-white', 'text-align-center');
+    toolTipContent.classList.add('tooltip-content', 'border-radius-1', 'text-white', 'text-align-center', 'text-break');
 
     let toolTipText = document.createElement('p');
     toolTipText.textContent = title;
