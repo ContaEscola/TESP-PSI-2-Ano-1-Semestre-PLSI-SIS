@@ -238,14 +238,18 @@ class Restaurant extends \yii\db\ActiveRecord
     public function beforeDelete()
     {
 
+        if (!parent::beforeDelete())
+            return false;
+
         $transaction = Restaurant::getDb()->beginTransaction();
         try {
-            foreach ($this->restaurantItems as $item){
+            foreach ($this->restaurantItems as $item) {
                 if (!$item->delete())
                     throw new ErrorException();
             }
 
-            foreach ($this->managers as $manager){
+            foreach ($this->managers as $manager) {
+                // Passar o manager para cliente
                 $client = new Client();
                 $client->client_id = $manager->user->id;
                 if (!$client->save())
@@ -254,9 +258,7 @@ class Restaurant extends \yii\db\ActiveRecord
                     throw new ErrorException();
             }
 
-            if (!parent::beforeDelete()) {
-                return false;
-            }
+
             $transaction->commit();
         } catch (ErrorException $e) {
             $transaction->rollBack();
