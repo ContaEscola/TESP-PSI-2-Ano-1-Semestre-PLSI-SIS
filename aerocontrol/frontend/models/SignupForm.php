@@ -19,7 +19,12 @@ class SignupForm extends ClientForm
      */
     public function signup()
     {
-        return parent::create();
+        if (!parent::create())
+            return false;
+
+        $this->sendEmail($this->getUser());
+
+        return true;
     }
 
     /**
