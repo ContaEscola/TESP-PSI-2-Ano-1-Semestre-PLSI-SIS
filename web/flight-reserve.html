@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="navbar.js" defer></script>
+    <script src="toolTip.js" type="module" defer></script>
     <script src="flight-reserve.js" defer></script>
 </head>
 
@@ -147,10 +148,12 @@
                                 <span class="fw-semi-bold">Cartão de crédito</span>
 
                             </label>
-                            <label for="debit_card" class="[ payment-method-button ] [ radio-button button ]"
-                                data-type="secondary-outline" data-active="false" data-target="#credit-card__form">
+                            <label for="debit_card" class="[ payment-method-button ] [ radio-button button disabled ]"
+                                data-type="secondary-outline" data-active="false" data-target="#credit-card__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
                                 <input type="radio" id="debit_card" name="flight_payment_method" value="debit_card"
-                                    checked>
+                                    checked disabled>
                                 <span aria-hidden="true">
                                     <svg class="icon">
                                         <use xlink:href="../images/payment-methods-icon.svg#debit-card-icon"></use>
@@ -158,9 +161,12 @@
                                 </span>
                                 <span class="fw-semi-bold">Cartão de débito</span>
                             </label>
-                            <label for="mbway" class="[ payment-method-button ] [ radio-button button ]"
-                                data-active="false" data-payment-method="mbway" data-target="#common__form">
-                                <input type="radio" id="mbway" name="flight_payment_method" value="mbway" checked>
+                            <label for="mbway" class="[ payment-method-button ] [ radio-button button disabled ]"
+                                data-active="false" data-payment-method="mbway" data-target="#common__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
+                                <input type="radio" id="mbway" name="flight_payment_method" value="mbway" checked
+                                    disabled>
                                 <span aria-hidden="true">
                                     <svg class="icon">
                                         <use xlink:href="../images/payment-methods-icon.svg#mbway-icon"></use>
@@ -168,10 +174,12 @@
                                 </span>
                                 <span class="fw-semi-bold">MbWay</span>
                             </label>
-                            <label for="multibanco" class=" [ payment-method-button ] [ radio-button button ]"
-                                data-active="false" data-payment-method="multibanco" data-target="#common__form">
+                            <label for="multibanco" class=" [ payment-method-button ] [ radio-button button disabled ]"
+                                data-active="false" data-payment-method="multibanco" data-target="#common__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
                                 <input type="radio" id="multibanco" name=" flight_payment_method" value="multibanco"
-                                    checked>
+                                    checked disabled>
                                 <span aria-hidden="true">
                                     <svg class="icon">
                                         <use xlink:href="../images/payment-methods-icon.svg#multibanco-icon"></use>
@@ -179,9 +187,12 @@
                                 </span>
                                 <span class="fw-semi-bold">Multibanco</span>
                             </label>
-                            <label for="paypal" class=" [ payment-method-button ] [ radio-button button ]"
-                                data-active="false" data-payment-method="paypal" data-target="#common__form">
-                                <input type="radio" id="paypal" name=" flight_payment_method" value="paypal" checked>
+                            <label for="paypal" class=" [ payment-method-button ] [ radio-button button disabled ]"
+                                data-active="false" data-payment-method="paypal" data-target="#common__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
+                                <input type="radio" id="paypal" name=" flight_payment_method" value="paypal" checked
+                                    disabled>
                                 <span aria-hidden="true">
                                     <svg class="icon">
                                         <use xlink:href="../images/payment-methods-icon.svg#paypal-logo-icon"></use>

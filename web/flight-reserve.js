@@ -4,6 +4,8 @@ let currentActiveBtn = document.querySelector('.payment-method-button[data-activ
 let currentActiveForm = document.querySelector('[data-active-form="true"]');
 
 paymentMethodsBtns.forEach((btn) => {
+    if (btn.classList.contains('disabled')) return;
+
     btn.addEventListener('click', function () {
         if (btn === currentActiveBtn) return;
 
