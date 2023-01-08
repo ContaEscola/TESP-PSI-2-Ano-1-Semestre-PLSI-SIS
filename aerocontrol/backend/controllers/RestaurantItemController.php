@@ -10,6 +10,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -96,6 +97,8 @@ class RestaurantItemController extends Controller
      */
     public function actionIndex($restaurant_id)
     {
+        if (!Yii::$app->user->can('viewRestaurantItem', ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $restaurant = $this->findRestaurant($restaurant_id);
 
         $searchModel = new RestaurantItemSearch();
@@ -116,6 +119,8 @@ class RestaurantItemController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewRestaurantItem', ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -128,6 +133,8 @@ class RestaurantItemController extends Controller
      */
     public function actionCreate($restaurant_id)
     {
+        if (!Yii::$app->user->can('createRestaurantItem', ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('restaurant_id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new RestaurantItem();
 
         $model->restaurant_id = $restaurant_id;
@@ -158,6 +165,8 @@ class RestaurantItemController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateRestaurantItem', ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -182,6 +191,8 @@ class RestaurantItemController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!Yii::$app->user->can('deleteRestaurantItem', ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
         $restaurant_id = $model->restaurant_id;
         $model->delete();
@@ -195,6 +206,8 @@ class RestaurantItemController extends Controller
     //remover imagem do item do restaurante
     public function actionDeleteLogo($id)
     {
+        if (!Yii::$app->user->can('deleteRestaurantItemLogo', ['restaurant' => RestaurantItem::findOne(['id' => Yii::$app->request->get('id')])->restaurant])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
         if ($model->deleteImage())
             $model->image = null;

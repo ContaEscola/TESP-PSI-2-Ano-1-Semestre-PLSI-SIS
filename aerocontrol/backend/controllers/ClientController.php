@@ -9,6 +9,7 @@ use common\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -62,6 +63,8 @@ class ClientController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewClient')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new ClientSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -79,6 +82,8 @@ class ClientController extends Controller
      */
     public function actionView($client_id)
     {
+        if (!Yii::$app->user->can('viewClient')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($client_id),
         ]);
@@ -94,6 +99,8 @@ class ClientController extends Controller
      */
     public function actionUpdate($client_id)
     {
+        if (!Yii::$app->user->can('updateClient')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $validClient = $this->findModel($client_id);
         $model = new ClientForm($validClient->client_id);
 

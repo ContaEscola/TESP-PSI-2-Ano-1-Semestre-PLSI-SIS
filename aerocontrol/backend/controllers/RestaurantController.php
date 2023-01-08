@@ -7,6 +7,7 @@ use common\models\RestaurantSearch;
 use yii\filters\AccessControl;
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -86,6 +87,8 @@ class RestaurantController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewRestaurant')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new RestaurantSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -104,6 +107,8 @@ class RestaurantController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewRestaurant', ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -116,6 +121,8 @@ class RestaurantController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createRestaurant')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new Restaurant();
 
         if ($this->request->isPost) {
@@ -146,6 +153,8 @@ class RestaurantController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateRestaurant', ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -170,10 +179,13 @@ class RestaurantController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!Yii::$app->user->can('deleteRestaurant')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $this->findModel($id)->delete();
 
         //Criar logs
         Yii::info("Eliminar restaurante", 'restaurant');
+
 
         return $this->redirect(['index']);
     }
@@ -182,6 +194,8 @@ class RestaurantController extends Controller
     //remover logo do restaurante
     public function actionDeleteLogo($id)
     {
+        if (!Yii::$app->user->can('deleteRestaurantLogo', ['restaurant' => Restaurant::findOne(['id' => Yii::$app->request->get('id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
         if ($model->deleteLogo())
             $model->logo = null;

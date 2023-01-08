@@ -7,6 +7,7 @@ use common\models\StoreSearch;
 use yii\filters\AccessControl;
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -77,6 +78,8 @@ class StoreController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewStore')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new StoreSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -95,6 +98,8 @@ class StoreController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewStore')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -107,6 +112,8 @@ class StoreController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createStore')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new Store();
 
         if ($this->request->isPost) {
@@ -137,6 +144,8 @@ class StoreController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateStore')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -161,6 +170,8 @@ class StoreController extends Controller
      */
     public function actionDelete($id)
     {
+        if (!Yii::$app->user->can('deleteStore')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $this->findModel($id)->delete();
 
         //Criar logs
@@ -173,6 +184,8 @@ class StoreController extends Controller
     //remover logo da loja
     public function actionDeleteLogo($id)
     {
+        if (!Yii::$app->user->can('deleteStoreLogo')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
         if ($model->deleteLogo())
             $model->logo = null;

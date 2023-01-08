@@ -8,6 +8,7 @@ use common\models\EmployeeSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -53,11 +54,6 @@ class EmployeeController extends Controller
                             'actions' => ['update'],
                             'roles' => ['updateEmployee'],
                         ],
-                        [
-                            'allow' => true,
-                            'actions' => ['delete'],
-                            'roles' => ['deleteEmployee'],
-                        ],
                     ],
                 ],
             ]
@@ -71,6 +67,8 @@ class EmployeeController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewEmployee')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new EmployeeSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -88,6 +86,8 @@ class EmployeeController extends Controller
      */
     public function actionView(int $employee_id)
     {
+        if (!Yii::$app->user->can('viewEmployee')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($employee_id),
         ]);
@@ -100,6 +100,8 @@ class EmployeeController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createEmployee')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new EmployeeForm();
 
         if ($this->request->isPost && $model->load(Yii::$app->request->post()) && $model->create()) {
@@ -126,6 +128,8 @@ class EmployeeController extends Controller
      */
     public function actionUpdate($employee_id)
     {
+        if (!Yii::$app->user->can('updateEmployee')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $validEmployee = $this->findModel($employee_id);
         $model = new EmployeeForm($validEmployee->employee_id);
 
@@ -140,23 +144,6 @@ class EmployeeController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Deletes an existing Employee model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $employee_id Employee ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionDelete(int $employee_id)
-    {
-        $this->findModel($employee_id)->delete();
-
-        //Criar logs
-        Yii::info("Eliminar empregado", 'employee');
-
-        return $this->redirect(['index']);
     }
 
     /**

@@ -7,6 +7,7 @@ use common\models\AirportSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -65,6 +66,8 @@ class AirportController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewAirport')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new AirportSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -82,6 +85,8 @@ class AirportController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewAirport')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -94,6 +99,8 @@ class AirportController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createAirport')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new Airport();
 
         if ($this->request->isPost) {
@@ -122,6 +129,8 @@ class AirportController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateAirport')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
