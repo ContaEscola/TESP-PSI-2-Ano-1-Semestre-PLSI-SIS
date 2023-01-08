@@ -19,7 +19,6 @@ $this->registerJsFile('@web/js/flight-search-form.js');
     'validateOnType' => true,
     'validationDelay' => 500,
     'method' => 'get',
-    'fieldConfig' => ['radioTemplate' => '{beginLabel}{input}{labelTitle}{endLabel}'],
     'options' => [
         'class' => '[ flight-search-form ] [ box-shadow-1  flow border-radius-1 ]',
         'data-flow-space' => 'small',

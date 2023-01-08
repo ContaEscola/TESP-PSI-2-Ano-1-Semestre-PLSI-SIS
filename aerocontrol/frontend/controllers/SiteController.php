@@ -95,7 +95,7 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
             // Valida os dados para depois confirmar se é cliente
             if ($model->validate()) {
                 if (!$model->isClient()) {
@@ -133,7 +133,7 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Obrigado por nos contactar. Responderemos assim que possivel.');
+                Yii::$app->session->setFlash('success', 'Obrigado por nos contactar. Responderemos assim que possivel!');
             } else {
                 Yii::$app->session->setFlash('error', 'Ocorreu um erro ao enviar a sua mensagem.');
             }
@@ -164,7 +164,7 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Registo efetuado. Por favor verifique o seu email para concluir o registo.');
+            Yii::$app->session->setFlash('success', 'Registo efetuado. Por favor verifique o seu email para concluir o registo!');
             return $this->goHome();
         } else {
             $model->resetAttributesOnInvalid();
@@ -213,7 +213,7 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'Nova palavra passe guardada');
+            Yii::$app->session->setFlash('success', 'Nova palavra passe guardada!');
 
             return $this->goHome();
         }
@@ -238,7 +238,7 @@ class SiteController extends Controller
             throw new BadRequestHttpException('Pedimos desculpa, mas não foi possível verificar a sua conta com este token.');
         }
         if (($user = $model->verifyEmail()) && Yii::$app->user->login($user)) {
-            Yii::$app->session->setFlash('success', 'O seu email foi confirmado');
+            Yii::$app->session->setFlash('success', 'O seu email foi confirmado!');
             return $this->goHome();
         }
 

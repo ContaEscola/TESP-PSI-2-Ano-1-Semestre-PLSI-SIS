@@ -2,21 +2,15 @@
 
 namespace frontend\models;
 
-use common\models\base\UserForm;
-use common\models\Client;
+use common\models\ClientForm;
 use Yii;
 use common\models\User;
-use yii\base\ErrorException;
 
 /**
  * Signup form
  */
-class SignupForm extends UserForm
+class SignupForm extends ClientForm
 {
-    // Para quando tivermos os emails, muda o defaultState;
-    //protected $statusOnCreate = User::STATUS_INACTIVE;
-
-
 
     /**
      * Signs user up.
@@ -25,37 +19,7 @@ class SignupForm extends UserForm
      */
     public function signup()
     {
-        $transaction = Client::getDb()->beginTransaction();
-        try {
-            if (!parent::create())
-                return null;
-
-            $user = User::find()->where(['id' => $this->user_id])->one();
-            $this->sendEmail($user);
-
-
-            // Criar o client
-            $client = new Client();
-            $client->client_id = $this->user_id;
-            if (!$client->save())
-                throw new ErrorException();
-
-
-            $auth = Yii::$app->authManager;
-            $clientRole = $auth->getRole('client');
-            $auth->assign($clientRole, $client->client_id);
-
-            $transaction->commit();
-        } catch (ErrorException $e) {
-            $transaction->rollBack();
-            return null;
-        } catch (\Throwable $e) {
-            $transaction->rollBack();
-            throw $e;
-        }
-
-
-        return true;
+        return parent::create();
     }
 
     /**

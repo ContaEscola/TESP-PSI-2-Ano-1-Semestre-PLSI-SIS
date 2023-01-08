@@ -18,19 +18,19 @@ $this->title = 'Repor password';
             'successCssClass' => 'valid',
             'validateOnType' => true,
             'validationDelay' => 500,
-            'fieldConfig' => ['radioTemplate' => '{beginLabel}{input}{labelTitle}{endLabel}'],
             'options' => [
-                'class' => 'margin-top-100',
+                'class' => 'margin-top-600 flow',
+                'data-flow-space' => 'large',
             ]
         ]) ?>
-        <div class="flow" data-flow-space="large">
 
-            <?= $form->field($model, 'password', [
+        <div class="flow">
+            <?= $form->field($model, 'new_password', [
                 'errorOptions' => [
                     'tag' => 'p',
                     'class' => 'input__error margin-top-100 '
                 ],
-                'options' => ['class' => 'form__group gap-0'],
+                'options' => ['class' => 'form__group'],
             ])
                 ->label(null, [
                     'class' => '[ input__label ] [ margin-bottom-50 ]'
@@ -40,12 +40,28 @@ $this->title = 'Repor password';
                     'type' => 'password',
                 ]) ?>
 
-            <?= Html::submitButton('Repor', [
-                'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
-                'data-size' => 'large-md',
-            ]) ?>
-
+            <?= $form->field($model, 'new_password_repeat', [
+                'errorOptions' => [
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-100 '
+                ],
+                'options' => ['class' => 'form__group'],
+            ])
+                ->label(null, [
+                    'class' => '[ input__label ] [ margin-bottom-50 ]'
+                ])
+                ->textInput([
+                    'class' => 'form__input',
+                    'type' => 'password',
+                ]) ?>
         </div>
+
+        <?= Html::submitButton('Repor', [
+            'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
+            'data-size' => 'large-md',
+        ]) ?>
+
+
         <?php ActiveForm::end(); ?>
     </div>
 </div>

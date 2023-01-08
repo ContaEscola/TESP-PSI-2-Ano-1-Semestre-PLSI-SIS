@@ -1373,7 +1373,7 @@ select.form__input {
   }
 
   .container[data-type="extra-small-md"] {
-    --max-width: 25rem;
+    --max-width: 27rem;
   }
 }
 
