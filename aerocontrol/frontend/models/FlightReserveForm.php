@@ -40,17 +40,31 @@ class FlightReserveForm extends Model
     {
         return [
             ['read_terms', 'required', 'message' => "Para prosseguir tem de aceitar os termos e condições."],
-            ['name','each', 'rule' => [ 'required', 'message' => "O nome não pode ser vazio."]],
+
+            [
+                'name', 'each', 'rule' => [
+                    'required', 'message' => "O nome não pode ser vazio."
+                ]
+            ],
+            [
+                'name', 'each', 'rule' => [
+                    'string',
+                    'max' => 50, 'tooLong' => 'O nome não pode exceder os 50 caracteres, escreva apenas o primeiro e o último.'
+                ],
+            ],
+            [
+                'gender', 'each', 'rule' => [
+                    'required', 'message' => "O género não pode ser vazio."
+                ]
+            ],
+            [
+                'gender', 'each', 'rule' => [
+                    'in', 'range' => self::POSSIBLE_GENDERS,
+                ],
+            ],
+
+            ['extra_baggage', 'each', 'rule' => ['boolean']],
             ['payment_method', 'safe'],
-            [
-                'gender', 'in', 'range' => self::POSSIBLE_GENDERS,
-                'strict' => true
-            ],
-            [
-                'name','each', 'rule' => [ 'string',
-                'max' => 50, 'tooLong' => 'O nome não pode exceder os 50 caracteres, escreva apenas o primeiro e o último.'],
-            ],
-            ['extra_baggage','each', 'rule' => [ 'boolean']],
         ];
     }
 
@@ -106,7 +120,7 @@ class FlightReserveForm extends Model
             if (!$flightTicketGo->save() || !$flightTicketGo->flight->save())
                 throw new ErrorException();
 
-            if ($flightBack != null){ // Verifica se o cliente também comprou um bilhete de volta
+            if ($flightBack != null) { // Verifica se o cliente também comprou um bilhete de volta
                 $flightBack = $this->getFlightTicket($flightBack);
                 $flightBack->flight->passengers_left -= $numPassengers;
                 if (!$flightBack->save() || !$flightBack->flight->save())
@@ -126,7 +140,7 @@ class FlightReserveForm extends Model
 
     private function getPaymentMethod(): ?PaymentMethod
     {
-        switch ($this->payment_method){
+        switch ($this->payment_method) {
             case self::CREDIT_CARD:
                 return PaymentMethod::findOne(1);
                 break;
@@ -157,5 +171,4 @@ class FlightReserveForm extends Model
         $flightTicket->payment_method_id = $this->getPaymentMethod()->id;
         return $flightTicket;
     }
-
 }
