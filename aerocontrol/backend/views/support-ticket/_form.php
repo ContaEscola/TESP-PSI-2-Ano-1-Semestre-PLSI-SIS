@@ -1,5 +1,6 @@
 <?php
 
+use common\models\TicketItem;
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\widgets\ListView;
@@ -15,10 +16,18 @@ use yii\widgets\ListView;
 
 <div class="support-ticket-form">
 
-    <p>
-        <?= Html::a('Concluir Ticket', ['finish', 'ticket_id' => $ticket_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Associar Item', ['item', 'ticket_id' => $ticket_id], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="d-flex mb-3 gap-2">
+        <?= Html::a('Concluir ticket', ['finish', 'ticket_id' => $ticket_id], ['class' => 'btn btn-primary']) ?>
+        <?php
+        if (TicketItem::findOne(['support_ticket_id' => $ticket_id])){
+            $buttonText = "Ver item";
+        }else{
+            $buttonText = "Associar item";
+        }
+        echo Html::a($buttonText, ['item', 'ticket_id' => $ticket_id], ['class' => 'btn btn-success']);
+        ?>
+
+    </div>
 
     <?php $form = ActiveForm::begin([
         'action' => ['view','ticket_id' =>$ticket_id],

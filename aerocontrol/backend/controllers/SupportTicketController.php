@@ -102,6 +102,17 @@ class SupportTicketController extends Controller
     {
         $model = SupportTicket::findOne($ticket_id);
         $model->state = SupportTicket::STATE_DONE;
+
+        $ticketItem = TicketItem::findOne($ticket_id);
+
+        if ($ticketItem != null){
+
+            $itemLost = LostItem::findOne($ticketItem->lost_item_id);
+            $itemLost->state = LostItem::STATE_DELIVERED;
+            $itemLost->save();
+
+        }
+
         if ($model->save()){
             return $this->redirect(['index']);
         }
@@ -111,14 +122,20 @@ class SupportTicketController extends Controller
 
         $searchModel = new LostItemSearch();
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProviderShowItem = new ActiveDataProvider([
             'query' => LostItem::find()->where(['state' => LostItem::STATE_LOST]),
+        ]);
+
+        $ticketItem = TicketItem::findOne($ticket_id);
+        $dataProviderShowMyItem = new ActiveDataProvider([
+            'query' => LostItem::find()->where(['id' => $ticketItem]),
         ]);
 
         return $this->render('item', [
             'ticket_id' => $ticket_id,
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProviderShowItem' => $dataProviderShowItem,
+            'dataProviderShowMyItem' => $dataProviderShowMyItem,
         ]);
 
     }
@@ -130,8 +147,33 @@ class SupportTicketController extends Controller
         $model->lost_item_id = $lost_item_id;
         $model->support_ticket_id = $ticket_id;
 
-        if ($model->save()) {
+        $itemLost = LostItem::findOne($lost_item_id);
+        $itemLost->state = LostItem::STATE_FOR_DELIVERING;
+
+        if ($model->save() && $itemLost->save()) {
             return $this->redirect(['index']);
+        }
+    }
+
+    public function actionRemoveItemToTicket($ticket_id, $lost_item_id){
+
+        $ticketItem = TicketItem::findOne($ticket_id);
+        $ticketItem->delete();
+
+        $itemLost = LostItem::findOne($lost_item_id);
+        $itemLost->state = LostItem::STATE_LOST;
+
+        $searchModel = new LostItemSearch();
+        $dataProviderShowItem = new ActiveDataProvider([
+            'query' => LostItem::find()->where(['state' => LostItem::STATE_LOST]),
+        ]);
+
+        if ($itemLost->save()) {
+            return $this->render('item',[
+                'ticket_id' => $ticket_id,
+                'dataProviderShowItem' => $dataProviderShowItem,
+                'searchModel' => $searchModel,
+            ]);
         }
     }
 
