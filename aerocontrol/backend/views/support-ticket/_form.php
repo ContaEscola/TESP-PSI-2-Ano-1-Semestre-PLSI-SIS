@@ -16,7 +16,8 @@ use yii\widgets\ListView;
 <div class="support-ticket-form">
 
     <p>
-        <?= Html::a('Concluir Ticket', ['finish', 'id' => $ticket_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Concluir Ticket', ['finish', 'ticket_id' => $ticket_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Associar Item', ['item', 'ticket_id' => $ticket_id], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php $form = ActiveForm::begin([

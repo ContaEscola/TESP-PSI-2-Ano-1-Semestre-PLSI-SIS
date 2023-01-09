@@ -3,8 +3,11 @@
 namespace backend\controllers;
 
 use backend\models\TicketMessageForm;
+use common\models\LostItem;
+use common\models\LostItemSearch;
 use common\models\SupportTicketSearch;
 use common\models\SupportTicket;
+use common\models\TicketItem;
 use common\models\TicketMessage;
 use common\models\User;
 use Yii;
@@ -95,11 +98,39 @@ class SupportTicketController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionFinish($id)
+    public function actionFinish($ticket_id)
     {
-        $model = SupportTicket::findOne($id);
+        $model = SupportTicket::findOne($ticket_id);
         $model->state = SupportTicket::STATE_DONE;
         if ($model->save()){
+            return $this->redirect(['index']);
+        }
+    }
+
+    public function actionItem($ticket_id){
+
+        $searchModel = new LostItemSearch();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => LostItem::find()->where(['state' => LostItem::STATE_LOST]),
+        ]);
+
+        return $this->render('item', [
+            'ticket_id' => $ticket_id,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    }
+
+    public function actionAddItemToTicket($ticket_id, $lost_item_id){
+
+        $model = new TicketItem();
+
+        $model->lost_item_id = $lost_item_id;
+        $model->support_ticket_id = $ticket_id;
+
+        if ($model->save()) {
             return $this->redirect(['index']);
         }
     }

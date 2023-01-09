@@ -1,6 +1,7 @@
 <?php
 
 use common\models\SupportTicket;
+use common\models\TicketItem;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -39,12 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{view}',
                 'buttons' => [
                     'view' => function ($url, $model){
-                        return Html::a("Responder", ['view', 'ticket_id' => $model->id], ['class' => 'btn btn-primary']);
+                        if ($model->state != SupportTicket::STATE_DONE){
+                            return Html::a("Responder", ['view', 'ticket_id' => $model->id], ['class' => 'btn btn-primary']);
+                        }
                     },
                 ],
             ],
         ],
-    ]); ?>
+    ]);?>
     <?php \yii\widgets\Pjax::end(); ?>
 
 
