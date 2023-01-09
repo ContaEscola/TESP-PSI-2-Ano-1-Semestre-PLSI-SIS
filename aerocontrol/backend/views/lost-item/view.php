@@ -7,18 +7,18 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\LostItem $model */
 
-$this->title = "Perdidos e achados";
+$this->title = 'Item Nº ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Perdidos e achados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="lost-item-view">
 
-    <p>
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
         <?= Html::a('Apagar imagem', ['delete-logo', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-outline-danger ml-auto',
             'data' => [
                 'confirm' => 'Tem a certeza que quer eliminar a imagem?',
                 'method' => 'post',
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
