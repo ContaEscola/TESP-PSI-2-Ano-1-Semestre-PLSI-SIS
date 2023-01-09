@@ -90,7 +90,7 @@ $this->title = 'Dashboard';
             <div class="col">
                 <?= SmallBox::widget([
                     'title' => '150',
-                    'text' => 'Restaurante',
+                    'text' => 'Restaurantes',
                     'icon' => 'fas fa-utensils',
                     'linkUrl' => Url::to(["/restaurant/index"])
                 ]) ?>
@@ -187,7 +187,7 @@ $this->title = 'Dashboard';
     <?php endif; ?>
 
     <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) :
-        $manager = Manager::find()->where(['manager_id'=>Yii::$app->user->getId()])->one();?>
+        $manager = Manager::find()->where(['manager_id' => Yii::$app->user->getId()])->one(); ?>
         <div class="row">
             <div class="col">
                 <?= SmallBox::widget([
