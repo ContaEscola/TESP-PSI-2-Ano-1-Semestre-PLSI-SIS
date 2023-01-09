@@ -3,9 +3,11 @@
 namespace frontend\controllers;
 
 use common\models\Client;
-use common\models\FlightTicket;
 use common\models\SupportTicket;
+use common\models\TicketMessage;
+use common\models\User;
 use frontend\models\SupportTicketForm;
+use frontend\models\TicketMessageForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -43,6 +45,11 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['create'],
+                            'roles' => ['createSupportTicket'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
                             'roles' => ['createSupportTicket'],
                         ],
                     ],
@@ -95,6 +102,36 @@ class SupportTicketController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'model' => $model
+        ]);
+    }
+
+    public function actionView($ticket_id){
+        $model = new TicketMessageForm();
+
+        $user = User::findOne(['id' => Yii::$app->user->getId()]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => TicketMessage::find()->where(['support_ticket_id' => $ticket_id])->orderBy('id ASC'),
+        ]);
+
+        $model->sender_id = $user->id;
+        $model->support_ticket_id = $ticket_id;
+
+        $ticket = SupportTicket::findOne($ticket_id);
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->create($ticket)) {
+                $this->refresh();
+            }
+        }
+
+        return $this->render('view', [
+            'client_id' => $ticket->client_id,
+            'ticket_title' => $ticket->title,
+            'ticket_state' => $ticket->state,
+            'ticket_id' => $ticket_id,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 }

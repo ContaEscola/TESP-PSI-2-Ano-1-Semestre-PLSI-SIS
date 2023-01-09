@@ -1,60 +1,52 @@
 <?php
-/** @var \frontend\models\SupportTicketForm $model */
 
+/** @var \common\models\TicketMessage $model */
+/** @var int $client_id */
+
+use common\models\SupportTicket;
+use common\models\User;
 use yii\helpers\Html;
-use yii\bootstrap5\ActiveForm;
+use yii\helpers\Url;
 
 ?>
 
-<div class="support-ticket-form">
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'support-ticket',
-        'action' => ['create'],
-        'errorCssClass' => 'invalid',
-        'requiredCssClass' => 'invalid',
-        'successCssClass' => 'valid',
-        'validateOnType' => true,
-        'validationDelay' => 500,
-    ]); ?>
-
-    <p class="fs-400 fw-medium ">Criar um novo ticket!</p>
-
-    <div class="flow margin-top-300" data-flow-space="small">
-
-        <?= $form->field($model, 'title', [
-            'errorOptions' => [
-                'tag' => 'p',
-                'class' => 'input__error margin-top-50'
-            ],
-            'options' => ['class' => 'form__group'],
-        ])
-            ->label(null, [
-                'class' => '[ input__label ] [ fw-light margin-bottom-50 ]'
-            ])
-            ->textInput([
-                    'class' => 'form__input'
-            ]) ?>
-
-        <?= $form->field($model, 'message', [
-            'errorOptions' => [
-                'tag' => 'p',
-                'class' => 'input__error margin-top-50'
-            ],
-            'options' => ['class' => 'form__group'],
-        ])
-            ->label(null, [
-                'class' => '[ input__label ] [ fw-light margin-bottom-50 ]'
-            ])
-            ->textArea([
-                'class' => 'form__input resize-none',
-                'rows' => 7
-            ]) ?>
-
-    </div>
-    <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
-    </div>
-
-    <?php ActiveForm::end();?>
-</div>
+            <?php
+            if ($client_id != $model->sender_id){
+            ?>
+                <li class="d-flex">
+                    <div class="chat-message">
+                        <p class="fw-light italic">
+                            <?php
+                            $user = User::findOne(['id' => $model->sender_id]);
+                            ?>
+                            <?= Html::encode($user->username) ?>
+                        </p>
+                        <div class="border-radius-1 bg-neutral-800 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                            <p>
+                                <?= Html::encode($model->message) ?>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            <?php
+            }else{
+            ?>
+                <li class="d-flex justify-content-end">
+                    <div class="chat-message">
+                        <p class="fw-light italic text-align-right">
+                            <?php
+                            $user = User::findOne(['id' => $model->sender_id]);
+                            ?>
+                            <?= Html::encode($user->username) ?>
+                        </p>
+                        <div class="text-white border-radius-1 bg-primary-accent-400 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                            <p>
+                                <?= Html::encode($model->message) ?>
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            <?php
+            }
+            ?>
