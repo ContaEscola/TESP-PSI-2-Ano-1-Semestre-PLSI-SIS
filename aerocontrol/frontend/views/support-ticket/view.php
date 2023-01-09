@@ -72,7 +72,7 @@ $this->title = "Meus Tickets Support";
                                 'class' => 'form__input height-100 border-none border-top-radius-0 border-bottom-right-radius-0'
                         ]) ?>
 
-                        <?= Html::a('Enviar', ['support-ticket/add-message', 'ticket_id' => $ticket_id], ['data-method' => 'post', 'class' => 'button border-top-radius-0  border-bottom-left-radius-0']);?>
+                        <?= Html::a('Enviar', ['support-ticket/view', 'ticket_id' => $ticket_id], ['data-method' => 'post', 'class' => 'button border-top-radius-0  border-bottom-left-radius-0']);?>
 
                     <?php ActiveForm::end(); ?>
                 </div>
