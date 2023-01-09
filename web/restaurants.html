@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href=" ../images/logo-url-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Restaurantes</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script>
+</head>
+
+
+<body class="body-grid">
+
+    <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#">
+                    <picture>
+                        <source srcset="../images/logo-pc.svg" media="(min-width: 40em)">
+                        <img src="../images/logo-mobile.svg" alt="Logo">
+                    </picture>
+                </a>
+                <button class="[ navbar-toggle ] [ d-none-md pussh-to-right ] " aria-controls="primary-navigation"
+                    aria-expanded="false">
+                    <img class="open-icon" src="../images/hamburger-icon.svg" alt="" aria-hidden="true">
+                    <img class="close-icon" src="../images/close-icon.svg" alt="" aria-hidden="true">
+                    <span class="visually-hidden">Menu</span>
+                </button>
+                <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                    <ul role="list" class="navigation-list">
+                        <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
+                        <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
+                        <li class="primary-navigation__item"><a href="#" class="button" data-type="primary-outline">Sign
+                                Up</a>
+                        </li>
+                        <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="padding-block-700">
+            <div class="container">
+                <h1 class="fs-600 fw-bold text-align-center">Restaurantes</h1>
+                <ul role="list" class="margin-top-500 d-grid grid-auto-fit" data-item-size="medium">
+                    <li>
+                        <a href="#" class="[ card ]  [ d-block stacked-grid text-decoration-none ]">
+                            <img class="card__img" src="../images/Burger King_15-12-2022_20-49.png"
+                                alt="Restaurant logo">
+                            <div class="card-body__wrapper  d-flex flex-flow-row align-items-end">
+                                <div class="[ card__body ] [ text-white width-100 padding-100 ]">
+                                    <p class="fs-300 fw-bold text-break">Burger King</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="[ card ]  [ d-block stacked-grid text-decoration-none ]">
+                            <img class="card__img" src="../images/Delta_15-12-2022_20-50.png" alt="Restaurant logo">
+                            <div class="card-body__wrapper  d-flex flex-flow-row align-items-end">
+                                <div class="[ card__body ] [ text-white width-100 padding-100 ]">
+                                    <p class="fs-300 fw-bold text-break">Delta</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="[ card ]  [ d-block stacked-grid text-decoration-none ]">
+                            <img class="card__img" src="../images/KFC_15-12-2022_20-52.png" alt="Restaurant logo">
+                            <div class="card-body__wrapper  d-flex flex-flow-row align-items-end">
+                                <div class="[ card__body ] [ text-white width-100 padding-100 ]">
+                                    <p class="fs-300 fw-bold text-break">KFC</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="[ card ]  [ d-block stacked-grid text-decoration-none ]">
+                            <img class="card__img" src="../images/McDonalds_15-12-2022_20-53.png" alt="Restaurant logo">
+                            <div class="card-body__wrapper  d-flex flex-flow-row align-items-end">
+                                <div class="[ card__body ] [ text-white width-100 padding-100 ]">
+                                    <p class="fs-300 fw-bold text-break">McDonalds</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="[ card ]  [ d-block stacked-grid text-decoration-none ]">
+                            <img class="card__img" src="../images/Starbucks_15-12-2022_20-55.png" alt="Restaurant logo">
+                            <div class="card-body__wrapper  d-flex flex-flow-row align-items-end">
+                                <div class="[ card__body ] [ text-white width-100 padding-100 ]">
+                                    <p class="fs-300 fw-bold text-break">Startbucks</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="[ footer-wrapper ] [ container text-align-center ]">
+            <nav aria-label="Footer">
+                <ul role="list" class="footer-list">
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Termos e Condições</a></li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a>
+                    </li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Contactar Suporte</a></li>
+                </ul>
+            </nav>
+            <p class="fs-100 fw-light letter-spacing-2 ">@ 2022 AeroControl. Todos os direitos
+                reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
