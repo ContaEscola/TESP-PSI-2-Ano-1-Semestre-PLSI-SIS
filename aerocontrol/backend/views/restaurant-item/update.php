@@ -5,8 +5,9 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\RestaurantItem $model */
 
-$this->title = 'Atualizar item: ' . $model->item;
+$this->title = 'Atualizar Item: ' . $model->item;
 
+// Se estiver a ser visualizado por um admin então o breadcrumbs é diferente
 if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
     $this->params['breadcrumbs'][] = [
         'label' => 'Restaurantes',
