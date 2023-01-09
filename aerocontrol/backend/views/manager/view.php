@@ -13,16 +13,16 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="manager-view">
 
-    <p>
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'manager_id' => $model->manager_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Apagar', ['delete', 'manager_id' => $model->manager_id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger ml-auto',
             'data' => [
                 'confirm' => 'Tem a certeza que pretende apagar?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,

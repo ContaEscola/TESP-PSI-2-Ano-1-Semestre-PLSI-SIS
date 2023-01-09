@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?= Html::a('Criar Restaurante', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar restaurante', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>

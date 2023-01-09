@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /** @var common\models\EmployeeFunction $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Funções de trabalhador', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Funções de Trabalhador', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

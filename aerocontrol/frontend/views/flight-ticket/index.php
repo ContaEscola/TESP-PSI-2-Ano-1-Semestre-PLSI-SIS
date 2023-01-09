@@ -16,7 +16,7 @@ $this->registerJsFile('@web/js/flight-tickets.js', [
     <h1 class="fs-600 fw-bold text-align-center">Meus Bilhetes</h1>
     <div class="margin-top-400">
 
-        <dialog id="flight-ticket-modal" class="[ flight-ticket-modal ] [ padding-300 text-black-400 ]" data-modal>
+        <dialog id="flight-ticket-modal" class="[ flight-ticket-modal modal ] [ padding-300 text-black-400 ]" data-modal>
             <button class="[ modal__close-btn ] [ d-block push-to-right ]" data-close-modal>
                 <span class="visually-hidden">Fechar modal</span>
                 <img src="<?= Url::to('@web/images/close-icon.svg') ?>" alt="" aria-hidden="true"></button>

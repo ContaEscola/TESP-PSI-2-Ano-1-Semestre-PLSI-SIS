@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-index">
     <p>
-        <?= Html::a('Criar novo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar trabalhador', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => 'Telefone',
                 'attribute' => 'user_phone',
                 'value' => function ($model) {
-                    return $model->user->phone_country_code. " " .$model->user->phone;
+                    return $model->user->phone_country_code . " " . $model->user->phone;
                 }
             ],
             [

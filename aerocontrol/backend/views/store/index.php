@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="store-index">
 
     <p>
-        <?= Html::a('Criar Loja', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar loja', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>

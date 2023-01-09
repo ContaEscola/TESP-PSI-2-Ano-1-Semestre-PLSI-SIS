@@ -9,6 +9,7 @@ use yii\widgets\DetailView;
 
 $this->title = $model->item;
 
+// Se estiver a ser visualizado por um admin então o breadcrumbs é diferente
 if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
     $this->params['breadcrumbs'][] = [
         'label' => 'Restaurantes',
@@ -26,18 +27,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="restaurant-item-view">
 
-    <p>
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
         <?= Html::a('Apagar imagem', ['delete-logo', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-outline-danger ml-auto',
             'data' => [
                 'confirm' => 'Tem a certeza que quer eliminar a imagem?',
                 'method' => 'post',
             ],
         ]) ?>
 
-        <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
+        <?= Html::a('Apagar item', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Tem a certeza que pretende eliminar o item do menu?',
@@ -45,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,

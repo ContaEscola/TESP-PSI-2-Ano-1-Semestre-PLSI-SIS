@@ -14,25 +14,25 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="store-view">
 
-    <p>
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
-        <?= Html::a('Apagar Logo', ['delete-logo', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a('Apagar logo', ['delete-logo', 'id' => $model->id], [
+            'class' => 'btn btn-outline-danger ml-auto',
             'data' => [
                 'confirm' => 'Tem a certeza que quer eliminar o logo?',
                 'method' => 'post',
             ],
         ]) ?>
 
-        <?= Html::a('Apagar Loja', ['delete', 'id' => $model->id], [
+        <?= Html::a('Apagar loja', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Tem a certeza que quer eliminar a loja?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
