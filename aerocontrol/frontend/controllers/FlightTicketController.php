@@ -8,6 +8,8 @@ use common\models\FlightTicket;
 use common\models\User;
 use frontend\models\FlightReserveForm;
 use Yii;
+use yii\helpers\Url;
+use yii\base\ErrorException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -92,16 +94,25 @@ class FlightTicketController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($numPassengers, $flightGoId, $flightBackId = null)
+    public function actionCreate($flightGoId, $flightBackId = null)
     {
+
+        // Vai buscar o número de passageiros através da queryParams
+        try {
+            $numPassengers = Yii::$app->request->queryParams['FlightForm']['passengers'];
+        } catch (ErrorException $e) {
+            throw new ForbiddenHttpException("Ocorreu um erro, tente novamente mais tarde!");
+        }
+
+
         $flightGo = Flight::findOne($flightGoId);
-        if ($flightGo && $flightGo->passengers_left < $numPassengers){
+        if ($flightGo && $flightGo->passengers_left < $numPassengers) {
             throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de ida!");
         }
 
-        if ($flightBackId){
+        if ($flightBackId) {
             $flightBack = Flight::findOne($flightBackId);
-            if ($flightBack && $flightBack->passengers_left < $numPassengers){
+            if ($flightBack && $flightBack->passengers_left < $numPassengers) {
                 throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de volta!");
             }
         }
@@ -109,12 +120,12 @@ class FlightTicketController extends Controller
         $model = new FlightReserveForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->validate()){ //&& $model->save()) {
+            if ($model->load($this->request->post()) && $model->validate()) { //&& $model->save()) {
                 if ($model->create($numPassengers, $flightGo, $flightBack)) {
-                    Yii::$app->session->setFlash("success","Comprou o bilhete com sucesso. O pagamento vai  ser processado!");
+                    Yii::$app->session->setFlash("success", "Comprou o bilhete com sucesso. O pagamento vai  ser processado!");
                     return $this->redirect(['index']);
                 } else {
-                    Yii::$app->session->setFlash("error","Ocorreu um erro ao comprar o bilhete.");
+                    Yii::$app->session->setFlash("error", "Ocorreu um erro ao comprar o bilhete.");
                 }
             }
         } else {
