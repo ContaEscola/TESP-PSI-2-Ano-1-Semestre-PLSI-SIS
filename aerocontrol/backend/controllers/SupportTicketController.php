@@ -12,6 +12,7 @@ use common\models\TicketMessage;
 use common\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,6 +34,41 @@ class SupportTicketController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+                'access' => [
+                    'class' => AccessControl::class,
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions' => ['index'],
+                            'roles' => ['viewTicket'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewMessage'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['createMessage'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['item'],
+                            'roles' => ['viewTicketItem'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['add-item-to-ticket'],
+                            'roles' => ['addTicketItem'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['remove-item-to-ticket'],
+                            'roles' => ['deleteTicketItem'],
+                        ],
                     ],
                 ],
             ]
