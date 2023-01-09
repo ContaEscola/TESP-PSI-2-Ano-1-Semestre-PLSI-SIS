@@ -1,19 +1,15 @@
 import * as screenUtils from './screenUtils.js';
 
-let screenWidth = innerWidth;
-
 const myTickets = document.querySelectorAll("[flight-ticket]");
 
 const modal = document.querySelector("#flight-ticket-modal");
 const modalPassengerList = document.querySelector("[flight-ticket-modal-passengers-list]");
 const modalPassengerItemTemplate = document.getElementById("flight-ticket-modal-passenger-item-template");
 
-window.addEventListener('resize', () => {
-
-    screenWidth = window.innerWidth;
+window.addEventListener('resize', function () {
 
     // Verifica se já existe algum ticket aberto, se existir entao muda para o modal
-    if (screenWidth < screenUtils.MEDIUM_MEDIA_QUERY) {
+    if (screenUtils.screenWidth < screenUtils.MEDIUM_MEDIA_QUERY) {
         let openTicket = document.querySelector("[flight-ticket][aria-expanded='true']");
 
         if (openTicket != null) {
@@ -34,12 +30,10 @@ window.addEventListener('resize', () => {
 myTickets.forEach((ticket) => {
     let buttonToggler = ticket.querySelector('.flight-ticket__see-more-details');
 
-    buttonToggler.addEventListener('click', () => {
-
-        console.log(screenWidth);
+    buttonToggler.addEventListener('click', function () {
 
         // Para o modal
-        if (screenWidth < screenUtils.MEDIUM_MEDIA_QUERY) {
+        if (screenUtils.screenWidth < screenUtils.MEDIUM_MEDIA_QUERY) {
             prepareFlightTicketModal(ticket);
             return modal.showModal();
         }
