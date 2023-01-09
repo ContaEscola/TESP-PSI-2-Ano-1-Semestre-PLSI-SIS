@@ -3,8 +3,10 @@
 namespace frontend\controllers;
 
 use common\models\Client;
+use common\models\Flight;
 use common\models\FlightTicket;
 use common\models\User;
+use frontend\models\FlightReserveForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -90,19 +92,41 @@ class FlightTicketController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($numPassengers, $flightGoId, $flightBackId = null)
     {
-        $model = new FlightTicket();
+        $flightGo = Flight::findOne($flightGoId);
+        if ($flightGo && $flightGo->passengers_left < $numPassengers){
+            throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de ida!");
+        }
+
+        if ($flightBackId){
+            $flightBack = Flight::findOne($flightBackId);
+            if ($flightBack && $flightBack->passengers_left < $numPassengers){
+                throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de volta!");
+            }
+        }
+
+        $model = new FlightReserveForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'flight_ticket_id' => $model->flight_ticket_id, 'client_id' => $model->client_id, 'flight_id' => $model->flight_id]);
+            if ($model->load($this->request->post()) && $model->validate()){ //&& $model->save()) {
+                if ($model->create($numPassengers, $flightGo, $flightBack)) {
+                    Yii::$app->session->setFlash("success","Comprou o bilhete com sucesso. O pagamento vai  ser processado!");
+                    return $this->redirect(['index']);
+                } else {
+                    Yii::$app->session->setFlash("error","Ocorreu um erro ao comprar o bilhete.");
+                }
             }
         } else {
             $model->loadDefaultValues();
+            if ($model->payment_method == null)
+                throw new ServerErrorHttpException("Não existem métodos de pagamento desponivel, tenta mais tarde!");
         }
 
-        return $this->render('create', [
+        return $this->render('flight-reserve', [
+            'flightGoId' => $flightGoId,
+            'flightBackId' => $flightBackId,
+            'numPassengers' => $numPassengers,
             'model' => $model,
         ]);
     }

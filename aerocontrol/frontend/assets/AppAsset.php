@@ -18,6 +18,10 @@ class AppAsset extends AssetBundle
         'js/navbar.js',
         'js/dropdown.js',
         'js/modal.js',
+        [
+            'js/toolTip.js',
+            'type' => 'module',
+        ],
     ];
     public $depends = [
         'yii\web\YiiAsset',
