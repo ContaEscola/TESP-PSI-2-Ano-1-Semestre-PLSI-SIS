@@ -11,7 +11,6 @@ function prepareSupportTicketModal(supportTicketItemImg) {
 }
 
 function supportTicketSeeItem() {
-    let supportTicketItemImg = this.closest('[data-support-ticket]').querySelector(('[data-support-ticket-item-img]'));
-    prepareSupportTicketModal(supportTicketItemImg.getAttribute('data-image-path'));
+    prepareSupportTicketModal(this.getAttribute('data-image-path'));
     supportTicketModal.showModal();
 }
