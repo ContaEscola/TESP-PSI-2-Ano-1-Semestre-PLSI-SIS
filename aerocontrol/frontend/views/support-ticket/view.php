@@ -8,6 +8,7 @@
 /** @var string $ticket_state */
 /** @var int $client_id */
 
+use common\models\SupportTicket;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -25,7 +26,12 @@ $this->title = "Meus Tickets Support";
                 <p class="fw-medium letter-spacing-1">
                     Estado: <span class="italic"><?php echo Html::encode($ticket_state);?></span>
                 </p>
-                <a href="#" class="button" data-type="error">Fechar ticket</a>
+                <?php
+                if ($ticket_state != SupportTicket::STATE_DONE) {
+                    echo Html::a('Fechar ticket', ['support-ticket/finish', 'ticket_id' => $ticket_id], ['data-method' => 'post', 'class' => 'button ', 'data-type' => 'error']);
+                }
+                ?>
+
             </div>
             <section class="margin-top-500 border-radius-1 box-shadow-1">
                 <ul role="list" id="chat-messages" class="[ chat-messages-wrapper ]  [ padding-inline-300 padding-block-300 flow ]" data-flow-space="large">

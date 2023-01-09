@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Client;
 use common\models\SupportTicket;
+use common\models\TicketItem;
 use common\models\TicketMessage;
 use common\models\User;
 use frontend\models\SupportTicketForm;
@@ -50,6 +51,11 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
+                            'roles' => ['createSupportTicket'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['finish'],
                             'roles' => ['createSupportTicket'],
                         ],
                     ],
@@ -133,5 +139,25 @@ class SupportTicketController extends Controller
             'dataProvider' => $dataProvider,
             'model' => $model,
         ]);
+    }
+
+    public function actionFinish($ticket_id)
+    {
+        $model = SupportTicket::findOne($ticket_id);
+        $model->state = SupportTicket::STATE_DONE;
+
+        $ticketItem = TicketItem::findOne($ticket_id);
+
+        if ($ticketItem != null){
+
+            $itemLost = LostItem::findOne($ticketItem->lost_item_id);
+            $itemLost->state = LostItem::STATE_DELIVERED;
+            $itemLost->save();
+
+        }
+
+        if ($model->save()){
+            return $this->redirect(['index']);
+        }
     }
 }
