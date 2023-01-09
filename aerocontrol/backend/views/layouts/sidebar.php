@@ -60,7 +60,7 @@ use hail812\adminlte\widgets\Menu;
                             ['label' => 'Administradores', 'url' => ['/admin/index'], 'iconStyle' => 'far'],
                             ['label' => 'Trabalhadores', 'url' => ['/employee/index'], 'iconStyle' => 'far'],
                             ['label' => 'Clientes', 'url' => ['/client/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Funções do trabalhador', 'url' => ['/employee-function/index'], 'iconStyle' => 'far']
+                            ['label' => 'Funções de Trabalhador', 'url' => ['/employee-function/index'], 'iconStyle' => 'far']
                         ]
                     ],
                     [

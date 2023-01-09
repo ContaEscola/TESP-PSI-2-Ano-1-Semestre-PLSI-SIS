@@ -10,13 +10,13 @@ use yii\grid\GridView;
 /** @var common\models\LostItemSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Perdidos e achados';
+$this->title = 'Perdidos e Achados';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lost-item-index">
 
     <p>
-        <?= Html::a('Criar Item', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar item', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

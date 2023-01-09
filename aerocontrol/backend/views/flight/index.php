@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="flight-index">
 
     <p>
-        <?= Html::a('Criar Voo', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar voo', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php \yii\widgets\Pjax::begin(); ?>

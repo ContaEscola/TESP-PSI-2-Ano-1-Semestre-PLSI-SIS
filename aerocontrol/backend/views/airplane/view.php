@@ -13,10 +13,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="airplane-view">
 
-    <p>
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
 
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,

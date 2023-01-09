@@ -6,22 +6,23 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Employee $model */
 
-$this->title = $model->user->first_name . " " . $model->user->last_name;
+$this->title = $model->user->getFullName();
 $this->params['breadcrumbs'][] = ['label' => 'Trabalhadores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="employee-view">
-    <p>
+
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'employee_id' => $model->employee_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Apagar', ['delete', 'employee_id' => $model->employee_id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger ml-auto',
             'data' => [
                 'confirm' => 'Tem a certeza que quer eliminar o trabalhador?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
