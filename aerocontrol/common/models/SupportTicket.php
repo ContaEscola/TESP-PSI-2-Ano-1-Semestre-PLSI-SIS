@@ -2,7 +2,9 @@
 
 namespace common\models;
 
+use Throwable;
 use Yii;
+use yii\base\ErrorException;
 
 /**
  * This is the model class for table "support_ticket".
@@ -65,6 +67,65 @@ class SupportTicket extends \yii\db\ActiveRecord
             'client_id' => 'ID do Cliente',
         ];
     }
+
+    /**
+     * @param int $ticket_id ID do support ticket
+     * @param LostItem $lostItem Lost Item a adicionar
+     * @return bool|null
+     * @throws ErrorException
+     * @throws Throwable
+     * @throws \yii\db\Exception
+     */
+    static public function addItemtoSupportTicket(int $ticket_id, LostItem $lostItem){
+        $transaction = SupportTicket::getDb()->beginTransaction();
+
+        try {
+            $ticket = SupportTicket::findOne($ticket_id);
+            if ($ticket->ticketItems)
+                throw new ErrorException();
+            $ticketItem = new TicketItem();
+            $ticketItem->lost_item_id = $lostItem->id;
+            $ticketItem->support_ticket_id = $ticket_id;
+
+            $lostItem->state = LostItem::STATE_FOR_DELIVERING;
+
+            if (!$lostItem->save())
+                throw new ErrorException();
+            if (!$ticketItem->save())
+                throw new ErrorException();
+            $transaction->commit();
+        } catch (ErrorException $e) {
+            $transaction->rollBack();
+            return null;
+        } catch (Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+        return true;
+    }
+
+    static public function removeItemtoSupportTicket(TicketItem $ticketItem, LostItem $lostItem){
+        $transaction = SupportTicket::getDb()->beginTransaction();
+
+        try {
+            if (!$ticketItem->delete())
+                throw new ErrorException();
+
+            $lostItem->state = LostItem::STATE_LOST;
+            if (!$lostItem->save())
+                throw new ErrorException();
+
+            $transaction->commit();
+        } catch (ErrorException $e) {
+            $transaction->rollBack();
+            return null;
+        } catch (Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+        return true;
+    }
+
 
     /**
      * Gets query for [[Client]].

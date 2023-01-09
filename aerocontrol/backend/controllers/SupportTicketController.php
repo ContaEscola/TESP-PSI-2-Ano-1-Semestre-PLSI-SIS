@@ -93,7 +93,7 @@ class SupportTicketController extends Controller
 
     /**
      * Displays a single SupportTicket model.
-     * @param int $id ID
+     * @param int $ticket_id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -127,13 +127,6 @@ class SupportTicketController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing SupportTicket model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionFinish($ticket_id)
     {
         $model = SupportTicket::findOne($ticket_id);
@@ -142,75 +135,62 @@ class SupportTicketController extends Controller
         $ticketItem = TicketItem::findOne($ticket_id);
 
         if ($ticketItem != null){
-
             $itemLost = LostItem::findOne($ticketItem->lost_item_id);
             $itemLost->state = LostItem::STATE_DELIVERED;
             $itemLost->save();
-
         }
 
         if ($model->save()){
             return $this->redirect(['index']);
-        }
+        } else Yii::$app->session->setFlash("error","Não foi possivel alterar o estado para concluido, tente novamente mais tarde.");
+
+        return $this->redirect(['view','ticket_id' => $ticket_id]);
     }
 
     public function actionItem($ticket_id){
 
         $searchModel = new LostItemSearch();
 
-        $dataProviderShowItem = new ActiveDataProvider([
-            'query' => LostItem::find()->where(['state' => LostItem::STATE_LOST]),
-        ]);
+        $ticket = SupportTicket::findOne($ticket_id);
 
-        $ticketItem = TicketItem::findOne($ticket_id);
-        $dataProviderShowMyItem = new ActiveDataProvider([
-            'query' => LostItem::find()->where(['id' => $ticketItem]),
+        if ($ticket->ticketItems)                           //  Se o ticket tiver item
+            $query = LostItem::find()
+                ->select('lost_item.*')
+                ->leftJoin("ticket_item", '`ticket_item`.`lost_item_id` = `lost_item`.`id`')
+                ->where(['support_ticket_id' => $ticket_id]);
+        else $query = LostItem::find()->where(['state' => LostItem::STATE_LOST]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
         ]);
 
         return $this->render('item', [
-            'ticket_id' => $ticket_id,
+            'ticket' => $ticket,
             'searchModel' => $searchModel,
-            'dataProviderShowItem' => $dataProviderShowItem,
-            'dataProviderShowMyItem' => $dataProviderShowMyItem,
+            'dataProvider' => $dataProvider,
         ]);
-
     }
 
     public function actionAddItemToTicket($ticket_id, $lost_item_id){
-
-        $model = new TicketItem();
-
-        $model->lost_item_id = $lost_item_id;
-        $model->support_ticket_id = $ticket_id;
-
         $itemLost = LostItem::findOne($lost_item_id);
-        $itemLost->state = LostItem::STATE_FOR_DELIVERING;
 
-        if ($model->save() && $itemLost->save()) {
-            return $this->redirect(['index']);
-        }
+        if (SupportTicket::addItemtoSupportTicket($ticket_id,$itemLost)) {
+            Yii::$app->session->setFlash("success","O item foi adicionado ao ticket de suporte!");
+        } else Yii::$app->session->setFlash("error","Ocorreu um erro e o item não foi adicionado!");
+
+        return $this->redirect(['view','ticket_id' => $ticket_id]);
     }
 
     public function actionRemoveItemToTicket($ticket_id, $lost_item_id){
 
-        $ticketItem = TicketItem::findOne($ticket_id);
-        $ticketItem->delete();
-
+        $ticketItem = TicketItem::findOne(['lost_item_id' => $lost_item_id]);
         $itemLost = LostItem::findOne($lost_item_id);
-        $itemLost->state = LostItem::STATE_LOST;
 
-        $searchModel = new LostItemSearch();
-        $dataProviderShowItem = new ActiveDataProvider([
-            'query' => LostItem::find()->where(['state' => LostItem::STATE_LOST]),
-        ]);
+        if (SupportTicket::removeItemtoSupportTicket($ticketItem,$itemLost)) {
+            Yii::$app->session->setFlash("success","Item removido com sucesso!");
+        } else Yii::$app->session->setFlash("error","Ocorreu um erro e o item não foi removido!");
 
-        if ($itemLost->save()) {
-            return $this->render('item',[
-                'ticket_id' => $ticket_id,
-                'dataProviderShowItem' => $dataProviderShowItem,
-                'searchModel' => $searchModel,
-            ]);
-        }
+        return $this->redirect(['view','ticket_id' => $ticket_id]);
     }
 
     /**

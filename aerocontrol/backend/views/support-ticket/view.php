@@ -1,5 +1,6 @@
 <?php
 
+use common\models\TicketItem;
 use yii\helpers\Html;
 
 /** @var yii\web\View $this */
@@ -16,6 +17,19 @@ $this->params['breadcrumbs'][] = ['label' => 'Tickets de Suporte', 'url' => ['in
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="support-ticket-create">
+
+    <div class="d-flex mb-3 gap-2">
+        <?= Html::a('Concluir ticket', ['finish', 'ticket_id' => $ticket_id], ['class' => 'btn btn-primary']) ?>
+        <?php
+        if (TicketItem::findOne(['support_ticket_id' => $ticket_id])){
+            $buttonText = "Ver item";
+        }else{
+            $buttonText = "Associar item";
+        }
+        echo Html::a($buttonText, ['item', 'ticket_id' => $ticket_id], ['class' => 'btn btn-success']);
+        ?>
+
+    </div>
 
     <?= $this->render('_form', [
         'client_id' => $client_id,

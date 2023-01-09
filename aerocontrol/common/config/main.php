@@ -11,6 +11,24 @@ return [
             // uncomment if you want to cache RBAC items hierarchy
             // 'cache' => 'cache',
         ],
+        'db' => [
+            'class' => \yii\db\Connection::class,
+            'dsn' => 'mysql:host=localhost;dbname=aerocontrol',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ],
+        'mailer' => [
+            'class' => \yii\symfonymailer\Mailer::class,
+            'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'encryption' => 'tls',
+                'dsn' => 'smtp://aerocontrol.acc@gmail.com:nqctnysxdzqhzbyz@smtp.gmail.com:25',
+
+            ],
+        ],
         'cache' => [
             'class' => \yii\caching\FileCache::class,
         ],
