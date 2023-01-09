@@ -1030,11 +1030,9 @@ select.form__input {
 
 #path2 {
   fill: var(--clr-icon-2);
-  transition: fill 250ms ease-in-out;
 }
 #path3 {
   fill: var(--clr-icon-3);
-  transition: fill 250ms ease-in-out;
 }
 
 .payment-method-button .icon {
@@ -2147,6 +2145,9 @@ select.form__input {
   min-width: 1rem;
   aspect-ratio: 1 / 1;
   fill: var(--clr-icon, var(--clr-black-200));
+}
+
+.icon path {
   transition: fill 250ms ease-in-out;
 }
 
