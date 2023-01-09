@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href=" ../images/logo-url-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Reservar Voo</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script>
+    <script src="toolTip.js" type="module" defer></script>
+    <script src="flight-reserve.js" defer></script>
+</head>
+
+
+<body class="body-grid">
+
+    <header class="[ primary-header ] [ padding-block-100 bg-neutral-400 ]">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#">
+                    <picture>
+                        <source srcset="../images/logo-pc.svg" media="(min-width: 40em)">
+                        <img src="../images/logo-mobile.svg" alt="Logo">
+                    </picture>
+                </a>
+                <button class="[ navbar-toggle ] [ d-none-md push-to-right ] " aria-controls="primary-navigation"
+                    aria-expanded="false">
+                    <img class="open-icon" src="../images/hamburger-icon.svg" alt="" aria-hidden="true">
+                    <img class="close-icon" src="../images/close-icon.svg" alt="" aria-hidden="true">
+                    <span class="visually-hidden">Menu</span>
+                </button>
+                <nav aria-label="Primary" class="primary-navigation" id="primary-navigation">
+                    <ul role="list" class="navigation-list">
+                        <li class="[ primary-navigation__item ] [ push-to-right ]" data-type="active"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Home</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Voos</a></li>
+                        <li class="primary-navigation__item"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Restaurantes</a></li>
+                        <li class="[ primary-navigation__item ] [ push-to-left ]"><a href="#"
+                                class="[ primary-navigation__link ] [ fs-300 ]">Lojas</a></li>
+                        <li class="primary-navigation__item"><a href="#" class="button" data-type="primary-outline">Sign
+                                Up</a>
+                        </li>
+                        <li class="primary-navigation__item"><a href="#" class="button">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <section class="padding-block-700">
+            <div class="container" data-type="small-md">
+                <form action="#">
+                    <section>
+                        <h1 class="fs-600 fw-bold text-align-center">Informações dos Passageiros</h1>
+                        <ul role="list" class="padding-300 box-shadow-1 margin-top-400 flow ]" data-flow-space="medium">
+                            <li class="[ flight-reserve__passenger-info ] [ d-grid gap-2 ]">
+                                <div class="[ form__group passenger-info__name ] [ d-grid row-gap-0 col-gap-2 ]">
+                                    <p class="fs-350 fw-medium grid-area-title align-self-center">Passageiro
+                                        1</p>
+                                    <label for="name"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 ]">Nome</label>
+                                    <input class="[ form__input ] [ grid-area-input-1 ]" type="text" name="{TOCHANGE}"
+                                        id="name" required>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
+                                </div>
+                                <div
+                                    class="[ form__group passenger-info__gender-baggage ] [ d-grid row-gap-0 grid-area-form-group-1 ]">
+                                    <label for="gender"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 ]">Género</label>
+                                    <select class="[ form__input ] [ grid-area-select-1 ]" name="genders" id="gender"
+                                        required>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
+
+                                    <div class="[ form__group ] [ grid-area-form-group-1 align-items-center ]">
+                                        <label for="extra-baggage" class="[ input__label ] [ margin-bottom-50 ]">Bagagem
+                                            Extra</label>
+                                        <div class="d-flex height-100">
+                                            <input class="[ form__input ] [ justify-self-center ]" type="checkbox"
+                                                name="{TOCHANGE}" id="extra-baggage" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="[ flight-reserve__passenger-info ] [ d-grid gap-2 ]">
+                                <div class="[ form__group passenger-info__name ] [ d-grid row-gap-0 col-gap-2 ]">
+                                    <p class="fs-350 fw-medium grid-area-title align-self-center">Passageiro
+                                        10</p>
+                                    <label for="name"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 visually-hidden-flight-reserve ]">Nome</label>
+                                    <input class="[ form__input ] [ grid-area-input-1 ]" type="text" name="{TOCHANGE}"
+                                        id="name" required>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
+                                </div>
+                                <div
+                                    class="[ form__group passenger-info__gender-baggage ] [ d-grid row-gap-0 grid-area-form-group-1 ]">
+                                    <label for="gender"
+                                        class="[ input__label ] [ grid-area-label-1 margin-bottom-50 visually-hidden-flight-reserve ]">Género</label>
+                                    <select class="[ form__input ] [ grid-area-select-1 ]" name="genders" id="gender"
+                                        required>
+                                        <option value="Masculino">Masculino</option>
+                                        <option value="Feminino">Feminino</option>
+                                        <option value="Outro">Outro</option>
+                                    </select>
+                                    <p class="[ input__error ] [ grid-area-error-1 margin-top-50 text-break ]"></p>
+
+                                    <div class="[ form__group ] [ grid-area-form-group-1 align-items-center ]">
+                                        <label for="extra-baggage"
+                                            class="[ input__label ] [ margin-bottom-50 visually-hidden-flight-reserve ]">Bagagem
+                                            Extra</label>
+                                        <div class="d-flex height-100">
+                                            <input class="[ form__input ] [ justify-self-center ]" type="checkbox"
+                                                name="{TOCHANGE}" id="extra-baggage" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </section>
+                    <section class="margin-top-500 flow" data-flow-space="large">
+                        <h2 class="fs-600 fw-bold text-align-center">Pagamento</h2>
+                        <section class="margin-top-400 d-grid grid-auto-fit" data-item-size="small">
+                            <label for="credit_card" class="[ payment-method-button ] [ radio-button button ]"
+                                data-type="secondary-outline" data-active="true" data-target="#credit-card__form">
+                                <input type="radio" id="credit_card" name="flight_payment_method" value="credit_card"
+                                    checked>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#credit-card-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">Cartão de crédito</span>
+
+                            </label>
+                            <label for="debit_card" class="[ payment-method-button ] [ radio-button button disabled ]"
+                                data-type="secondary-outline" data-active="false" data-target="#credit-card__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
+                                <input type="radio" id="debit_card" name="flight_payment_method" value="debit_card"
+                                    checked disabled>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#debit-card-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">Cartão de débito</span>
+                            </label>
+                            <label for="mbway" class="[ payment-method-button ] [ radio-button button disabled ]"
+                                data-active="false" data-payment-method="mbway" data-target="#common__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
+                                <input type="radio" id="mbway" name="flight_payment_method" value="mbway" checked
+                                    disabled>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#mbway-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">MbWay</span>
+                            </label>
+                            <label for="multibanco" class=" [ payment-method-button ] [ radio-button button disabled ]"
+                                data-active="false" data-payment-method="multibanco" data-target="#common__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
+                                <input type="radio" id="multibanco" name=" flight_payment_method" value="multibanco"
+                                    checked disabled>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#multibanco-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">Multibanco</span>
+                            </label>
+                            <label for="paypal" class=" [ payment-method-button ] [ radio-button button disabled ]"
+                                data-active="false" data-payment-method="paypal" data-target="#common__form"
+                                data-toggle="tooltip" data-tooltip-title="Este método de pagamento não está disponível"
+                                tabindex="0">
+                                <input type="radio" id="paypal" name=" flight_payment_method" value="paypal" checked
+                                    disabled>
+                                <span aria-hidden="true">
+                                    <svg class="icon">
+                                        <use xlink:href="../images/payment-methods-icon.svg#paypal-logo-icon"></use>
+                                    </svg>
+                                </span>
+                                <span class="fw-semi-bold">PayPal</span>
+                            </label>
+                        </section>
+                        <div class="divider"></div>
+                        <section id="credit-card__form" class="payment-method__form flow" data-active-form="true">
+                            <div class="even-columns">
+                                <div class="form__group">
+                                    <label for="card_type" class="[ input__label ] [ margin-bottom-50 ]">Tipo de
+                                        cartão</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_type" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+
+                                <div class="form__group">
+                                    <label for="card_name" class="[ input__label ] [ margin-bottom-50 ]">Nome</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_name" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="card_apelido"
+                                        class="[ input__label ] [ margin-bottom-50 ]">Apelido</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_apelido" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-flow-column-sm flex-wrap gap-2">
+                                <div class="form__group">
+                                    <label for="card_num" class="[ input__label ] [ margin-bottom-50 ]">Número do
+                                        cartão</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_num" required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="card_security_num" class="[ input__label ] [ margin-bottom-50 ]">Código
+                                        de
+                                        Segurança</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_security_num"
+                                        required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                                <div class="form__group">
+                                    <label for="card_validity" class="[ input__label ] [ margin-bottom-50 ]">Data de
+                                        Validade
+                                        (Mês/Ano)</label>
+                                    <input class="form__input" type="text" name="{TOCHANGE}" id="card_validity"
+                                        required>
+                                    <p class="[ input__error ] [ margin-top-50 ]"></p>
+                                </div>
+                            </div>
+
+
+                        </section>
+
+                        <div class="d-flex gap-1 align-items-center margin-top-300 ">
+                            <input type="checkbox" name="{TOCHANGE}" id="agree_conditions">
+                            <label for="agree_conditions" class="fs-200 fw-medium letter-spacing-2">Li e aceito
+                                integralmente
+                                os termos e condições.</label>
+                        </div>
+
+                        <button type="submit" class="form__submit-button button fill-sm d-block push-to-center-md"
+                            data-size="large-md">Confirmar</button>
+                    </section>
+                </form>
+            </div>
+    </main>
+
+    <footer>
+        <div class="[ footer-wrapper ] [ container text-align-center ]">
+            <nav aria-label="Footer">
+                <ul role="list" class="footer-list">
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Termos e Condições</a></li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Política de privacidade</a>
+                    </li>
+                    <li class="footer-list__item"><a href="#"
+                            class="[ footer__link ] [ fs-350 letter-spacing-2 ]">Contactar Suporte</a></li>
+                </ul>
+            </nav>
+            <p class="fs-100 fw-light letter-spacing-2 ">@ 2022 AeroControl. Todos os direitos
+                reservados.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
