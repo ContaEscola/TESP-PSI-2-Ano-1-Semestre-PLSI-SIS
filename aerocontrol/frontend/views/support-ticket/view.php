@@ -8,7 +8,7 @@
 /** @var string $ticket_state */
 /** @var int $client_id */
 
-use kartik\form\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\helpers\Html;
@@ -44,26 +44,37 @@ $this->title = "Meus Tickets Support";
                     ]); ?>
                 </ul>
                 <div class="chat-footer">
-                    <form action="add-message" class="d-flex gap-0">
-                        <div class="form__group flex-grow-1">
-                            <label for="city" class="[ input__label ] [ margin-bottom-50 visually-hidden ]">
-                                Mensagem para enviar:
-                            </label>
-                            <input class="[ form__input ] [ height-100 border-none border-top-radius-0 border-bottom-right-radius-0 ]"
-                               type="text" name="{message}" pattern="[a-zA-Z\d]+" required
-                               placeholder="Insira aqui a sua mensagem">
-                        </div>
-                        <button type="submit" class="[ button ] [ border-top-radius-0  border-bottom-left-radius-0 ] ">
-                            <span class="visually-hidden">
-                                Enviar mensagem
-                            </span>
-                            <span aria-hidden="true">
-                                <svg class="icon">
-                                    <use xlink:href="../images/send-message-icon.svg#send-message-icon"></use>
-                                </svg>
-                            </span>
-                        </button>
-                    </form>
+                    <?php $form = ActiveForm::begin([
+                        'id' => 'support-ticket',
+                        'action' => ['view','ticket_id' =>$ticket_id],
+                        'errorCssClass' => 'invalid',
+                        'requiredCssClass' => 'invalid',
+                        'successCssClass' => 'valid',
+                        'validateOnType' => true,
+                        'validationDelay' => 500,
+                        'options' =>[
+                        'class' => 'd-flex gap-0',
+                            ]
+                    ]); ?>
+
+                        <?= $form->field($model, 'message', [
+                            'errorOptions' => [
+                                'tag' => 'p',
+                                'class' => 'input__error margin-top-50'
+                            ],
+                            'options' => ['class' => 'form__group flex-grow-1'],
+                        ])
+                            ->label(false, [
+                                'class' => '[ input__label ] [ margin-bottom-50 visually-hidden ]'
+                            ])
+                            ->textInput([
+                                'placeholder' => 'Insira aqui a sua mensagem',
+                                'class' => 'form__input height-100 border-none border-top-radius-0 border-bottom-right-radius-0'
+                        ]) ?>
+
+                        <?= Html::a('Enviar', ['support-ticket/add-message', 'ticket_id' => $ticket_id], ['data-method' => 'post', 'class' => 'button border-top-radius-0  border-bottom-left-radius-0']);?>
+
+                    <?php ActiveForm::end(); ?>
                 </div>
             </section>
         </div>
