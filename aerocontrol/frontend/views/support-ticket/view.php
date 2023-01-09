@@ -40,17 +40,17 @@ $this->title = "Meus Tickets Support";
                             'data-flow-space' => 'medium'
                         ],
                         'emptyText' => "<p class='fw-medium text-align-center'> Você ainda não tem mensagens!</p>",
-                        'itemView' => '_form',
+                        'itemView' => '_message',
                     ]); ?>
                 </ul>
                 <div class="chat-footer">
-                    <form action="#" class="d-flex gap-0">
+                    <form action="add-message" class="d-flex gap-0">
                         <div class="form__group flex-grow-1">
                             <label for="city" class="[ input__label ] [ margin-bottom-50 visually-hidden ]">
-                                Mensagempara enviar:
+                                Mensagem para enviar:
                             </label>
                             <input class="[ form__input ] [ height-100 border-none border-top-radius-0 border-bottom-right-radius-0 ]"
-                               type="text" name="{TOCHANGE}" id="city" pattern="[a-zA-Z\d]+" required
+                               type="text" name="{message}" pattern="[a-zA-Z\d]+" required
                                placeholder="Insira aqui a sua mensagem">
                         </div>
                         <button type="submit" class="[ button ] [ border-top-radius-0  border-bottom-left-radius-0 ] ">
