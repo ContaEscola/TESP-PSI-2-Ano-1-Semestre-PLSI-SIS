@@ -21,7 +21,7 @@ class TicketMessageForm extends Model
     public function rules()
     {
         return [
-            [ 'message', 'required', 'message' => "Mensagem não pode ser vazio."],
+            ['message', 'required', 'message' => "A mensagem não pode ser vazia."],
             [
                 'message',
                 'string', 'message' => 'A mensagem tem de conter apenas caracteres.',
@@ -37,9 +37,16 @@ class TicketMessageForm extends Model
         ];
     }
 
-    public function create(SupportTicket $ticket = null){
+    /**
+     * Cria um ticketMessage 
+     *
+     * @param SupportTicket|null $ticket
+     * @return void
+     */
+    public function create(SupportTicket $ticket = null)
+    {
 
-        if (!$this->validate()){
+        if (!$this->validate()) {
             return false;
         }
         $transaction = TicketMessage::getDb()->beginTransaction();
@@ -49,14 +56,16 @@ class TicketMessageForm extends Model
             $supportTicketMessage->sender_id = $this->sender_id;
             $supportTicketMessage->support_ticket_id = $this->support_ticket_id;
 
-            if (!$supportTicketMessage->save()){
+            if (!$supportTicketMessage->save()) {
                 throw new ErrorException();
             }
 
-            if ($ticket != null){
-                if ($this->sender_id != $ticket->client_id && $ticket->state === SupportTicket::STATE_TO_REVIEW){
+            if ($ticket != null) {
+                // Verifica se não é um cliente a enviar a mensagem e se o estado do ticket ainda está "Em Review"
+                // case isto seja verdadde então passa o o estado do ticket para "Em Progresso"
+                if ($this->sender_id != $ticket->client_id && $ticket->state === SupportTicket::STATE_TO_REVIEW) {
                     $ticket->state = SupportTicket::STATE_IN_PROGRESS;
-                    if (!$ticket->save()){
+                    if (!$ticket->save()) {
                         throw new ErrorException();
                     }
                 }

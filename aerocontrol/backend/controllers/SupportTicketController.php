@@ -47,12 +47,7 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewMessage'],
-                        ],
-                        [
-                            'allow' => true,
-                            'actions' => ['view'],
-                            'roles' => ['createMessage'],
+                            'roles' => ['viewMessage', 'createMessage'],
                         ],
                         [
                             'allow' => true,
@@ -66,9 +61,14 @@ class SupportTicketController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['remove-item-to-ticket'],
+                            'actions' => ['remove-item-from-ticket'],
                             'roles' => ['deleteTicketItem'],
                         ],
+                        [
+                            'allow' => true,
+                            'actions' => ['conclude-ticket'],
+                            'roles' => ['updateSuportTicket'],
+                        ]
                     ],
                 ],
             ]
@@ -101,16 +101,14 @@ class SupportTicketController extends Controller
     {
         $model = new TicketMessageForm();
 
-        $user = User::findOne(['id' => Yii::$app->user->getId()]);
-
         $dataProvider = new ActiveDataProvider([
             'query' => TicketMessage::find()->where(['support_ticket_id' => $this->findModel($ticket_id)])->orderBy('id ASC'),
         ]);
 
-        $model->sender_id = $user->id;
+        $model->sender_id = Yii::$app->user->getId();
         $model->support_ticket_id = $ticket_id;
 
-        $ticket = SupportTicket::findOne($ticket_id);
+        $ticket = $this->findModel($ticket_id);
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->create($ticket)) {
@@ -119,41 +117,34 @@ class SupportTicketController extends Controller
         }
 
         return $this->render('view', [
-            'client_id' => $ticket->client_id,
-            'ticket_title' => $ticket->title,
-            'ticket_id' => $ticket_id,
+            'supportTicket' => $ticket,
             'dataProvider' => $dataProvider,
             'model' => $model,
         ]);
     }
 
-    public function actionFinish($ticket_id)
+    public function actionConcludeTicket($ticket_id)
     {
-        $model = SupportTicket::findOne($ticket_id);
-        $model->state = SupportTicket::STATE_DONE;
+        $model = $this->findModel($ticket_id);
 
-        $ticketItem = TicketItem::findOne($ticket_id);
-
-        if ($ticketItem != null){
-            $itemLost = LostItem::findOne($ticketItem->lost_item_id);
-            $itemLost->state = LostItem::STATE_DELIVERED;
-            $itemLost->save();
-        }
-
-        if ($model->save()){
+        if ($model->concludeSupportTicket())
             return $this->redirect(['index']);
-        } else Yii::$app->session->setFlash("error","Não foi possivel alterar o estado para concluido, tente novamente mais tarde.");
+        else
+            Yii::$app->session->setFlash("error", "Não foi possivel concluir o ticket de suporte, tente novamente mais tarde.");
 
-        return $this->redirect(['view','ticket_id' => $ticket_id]);
+        return $this->redirect(['view', 'ticket_id' => $ticket_id]);
     }
 
-    public function actionItem($ticket_id){
+    public function actionItem($ticket_id)
+    {
 
         $searchModel = new LostItemSearch();
 
-        $ticket = SupportTicket::findOne($ticket_id);
+        $ticket = $this->findModel($ticket_id);
 
-        if ($ticket->ticketItems)                           //  Se o ticket tiver item
+        //  Se o ticket tiver item
+        //  senão procura todos os LostItems com estado "Perdidos"
+        if ($ticket->ticketItems)
             $query = LostItem::find()
                 ->select('lost_item.*')
                 ->leftJoin("ticket_item", '`ticket_item`.`lost_item_id` = `lost_item`.`id`')
@@ -171,26 +162,28 @@ class SupportTicketController extends Controller
         ]);
     }
 
-    public function actionAddItemToTicket($ticket_id, $lost_item_id){
+    public function actionAddItemToTicket($ticket_id, $lost_item_id)
+    {
         $itemLost = LostItem::findOne($lost_item_id);
 
-        if (SupportTicket::addItemtoSupportTicket($ticket_id,$itemLost)) {
-            Yii::$app->session->setFlash("success","O item foi adicionado ao ticket de suporte!");
-        } else Yii::$app->session->setFlash("error","Ocorreu um erro e o item não foi adicionado!");
+        if (SupportTicket::addItemToSupportTicket($ticket_id, $itemLost)) {
+            Yii::$app->session->setFlash("success", "O item foi adicionado ao ticket de suporte!");
+        } else Yii::$app->session->setFlash("error", "Ocorreu um erro e o item não foi adicionado!");
 
-        return $this->redirect(['view','ticket_id' => $ticket_id]);
+        return $this->redirect(['view', 'ticket_id' => $ticket_id]);
     }
 
-    public function actionRemoveItemToTicket($ticket_id, $lost_item_id){
+    public function actionRemoveItemFromTicket($ticket_id, $lost_item_id)
+    {
 
         $ticketItem = TicketItem::findOne(['lost_item_id' => $lost_item_id]);
         $itemLost = LostItem::findOne($lost_item_id);
 
-        if (SupportTicket::removeItemtoSupportTicket($ticketItem,$itemLost)) {
-            Yii::$app->session->setFlash("success","Item removido com sucesso!");
-        } else Yii::$app->session->setFlash("error","Ocorreu um erro e o item não foi removido!");
+        if (SupportTicket::removeItemFromSupportTicket($ticketItem, $itemLost)) {
+            Yii::$app->session->setFlash("success", "Item removido com sucesso!");
+        } else Yii::$app->session->setFlash("error", "Ocorreu um erro e o item não foi removido!");
 
-        return $this->redirect(['view','ticket_id' => $ticket_id]);
+        return $this->redirect(['view', 'ticket_id' => $ticket_id]);
     }
 
     /**

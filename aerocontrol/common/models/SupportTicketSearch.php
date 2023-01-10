@@ -45,7 +45,6 @@ class SupportTicketSearch extends SupportTicket
     {
         $query = SupportTicket::find();
 
-        /*$query->joinWith(['client']);*/
         $query->joinWith(['client.user']);
 
         // add conditions that should always apply here

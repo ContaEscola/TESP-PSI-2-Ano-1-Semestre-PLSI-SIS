@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use Error;
+use ErrorException as GlobalErrorException;
 use Throwable;
 use Yii;
 use yii\base\ErrorException;
@@ -69,6 +71,8 @@ class SupportTicket extends \yii\db\ActiveRecord
     }
 
     /**
+     * Adiciona um item ao support ticket
+     * Nota: se existir já um item atribuido então dá [@throw ErrorException]
      * @param int $ticket_id ID do support ticket
      * @param LostItem $lostItem Lost Item a adicionar
      * @return bool|null
@@ -76,13 +80,15 @@ class SupportTicket extends \yii\db\ActiveRecord
      * @throws Throwable
      * @throws \yii\db\Exception
      */
-    static public function addItemtoSupportTicket(int $ticket_id, LostItem $lostItem){
+    static public function addItemToSupportTicket(int $ticket_id, LostItem $lostItem)
+    {
         $transaction = SupportTicket::getDb()->beginTransaction();
 
         try {
             $ticket = SupportTicket::findOne($ticket_id);
             if ($ticket->ticketItems)
                 throw new ErrorException();
+
             $ticketItem = new TicketItem();
             $ticketItem->lost_item_id = $lostItem->id;
             $ticketItem->support_ticket_id = $ticket_id;
@@ -104,7 +110,17 @@ class SupportTicket extends \yii\db\ActiveRecord
         return true;
     }
 
-    static public function removeItemtoSupportTicket(TicketItem $ticketItem, LostItem $lostItem){
+
+
+    /**
+     * Remove um item do support ticket
+     *
+     * @param TicketItem $ticketItem
+     * @param LostItem $lostItem
+     * @return void
+     */
+    static public function removeItemFromSupportTicket(TicketItem $ticketItem, LostItem $lostItem)
+    {
         $transaction = SupportTicket::getDb()->beginTransaction();
 
         try {
@@ -126,6 +142,43 @@ class SupportTicket extends \yii\db\ActiveRecord
         return true;
     }
 
+    /**
+     * Conclui o support ticket
+     * @return bool|null
+     * @throws ErrorException
+     * @throws Throwable
+     */
+    public function concludeSupportTicket()
+    {
+        $transaction = SupportTicket::getDb()->beginTransaction();
+
+        try {
+            $this->state = self::STATE_DONE;
+
+            // Para cada ticket item, associado a este ticket, muda o estado dos mesmos para [[LostItem::STATE_DELIVERED]]
+            foreach ($this->ticketItems as $ticketItem) {
+                $correspondingLostItem = LostItem::findOne($ticketItem->lost_item_id);
+
+                if ($correspondingLostItem !== null) {
+                    $correspondingLostItem->state = LostItem::STATE_DELIVERED;
+                    if (!$correspondingLostItem->save())
+                        throw new ErrorException();
+                }
+            }
+
+            if (!$this->save())
+                throw new ErrorException();
+
+            $transaction->commit();
+        } catch (ErrorException $e) {
+            $transaction->rollBack();
+            return null;
+        } catch (Throwable $e) {
+            $transaction->rollBack();
+            throw $e;
+        }
+        return true;
+    }
 
     /**
      * Gets query for [[Client]].

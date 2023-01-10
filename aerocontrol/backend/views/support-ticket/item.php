@@ -17,7 +17,7 @@ $this->registerJsFile('@web/js/scrolldown_chat.js');
 
 if ($ticket->ticketItems) {
     $this->title = "Ver Item";
-}else{
+} else {
     $this->title = "Associar Item";
 }
 $this->params['breadcrumbs'][] = ['label' => 'Tickets de Suporte', 'url' => ['index']];
@@ -44,9 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'template' => '{view}',
                 'buttons' => [
-                    'view' => function ($url, $model) use($ticket){
+                    'view' => function ($url, $model) use ($ticket) {
                         if ($ticket->ticketItems)
-                            return Html::a("Remover", ['remove-item-to-ticket', 'ticket_id' => $ticket->id, 'lost_item_id' => $model->id], ['class' => 'btn btn-danger']);
+                            return Html::a("Remover", ['remove-item-from-ticket', 'ticket_id' => $ticket->id, 'lost_item_id' => $model->id], ['class' => 'btn btn-danger']);
                         else return Html::a("Associar", ['add-item-to-ticket', 'ticket_id' => $ticket->id, 'lost_item_id' => $model->id], ['class' => 'btn btn-primary']);
                     },
                 ],
