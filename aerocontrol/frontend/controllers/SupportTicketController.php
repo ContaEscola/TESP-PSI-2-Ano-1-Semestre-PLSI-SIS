@@ -66,6 +66,14 @@ class SupportTicketController extends Controller
                                 return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
                             },
                         ],
+                        [
+                            'allow' => true,
+                            'actions' => ['conclude-ticket'],
+                            'roles' => ['updateSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
+                        ]
                     ],
                 ]
             ]
@@ -148,13 +156,13 @@ class SupportTicketController extends Controller
         ]);
     }
 
-    public function actionFinish($ticket_id)
+    public function actionConcludeTicket($ticket_id)
     {
         $model = SupportTicket::findOne($ticket_id);
-        $model->state = SupportTicket::STATE_DONE;
 
-        if ($model->save()) {
+        if ($model->concludeSupportTicket())
             return $this->redirect(['index']);
-        }
+        else
+            Yii::$app->session->setFlash("error", "Não foi possivel concluir o ticket de suporte, tente novamente mais tarde.");
     }
 }

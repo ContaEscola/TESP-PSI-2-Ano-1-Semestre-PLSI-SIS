@@ -1,10 +1,7 @@
 <?php
 
 namespace common\models;
-
-use Error;
-use ErrorException as GlobalErrorException;
-use Throwable;
+use common\components\Mosquitto;
 use Yii;
 use yii\base\ErrorException;
 
@@ -178,6 +175,18 @@ class SupportTicket extends \yii\db\ActiveRecord
         }
         return true;
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert){
+            $mosquitto = new Mosquitto();
+            $mosquitto->FazPublishNoMosquitto("tickets", 'Novo ticket criado subscreva com "ticket-' . $this->id . '"');
+        }
+
+    }
+
+
 
     /**
      * Gets query for [[Client]].
