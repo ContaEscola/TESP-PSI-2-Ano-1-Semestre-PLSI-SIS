@@ -1,4 +1,5 @@
 <?php
+
 /** @var \frontend\models\SupportTicketForm $model */
 
 use yii\helpers\Html;
@@ -52,9 +53,7 @@ use yii\bootstrap5\ActiveForm;
             ]) ?>
 
     </div>
-    <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
-    </div>
+    <?= Html::submitButton('Guardar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
 
-    <?php ActiveForm::end();?>
+    <?php ActiveForm::end(); ?>
 </div>
