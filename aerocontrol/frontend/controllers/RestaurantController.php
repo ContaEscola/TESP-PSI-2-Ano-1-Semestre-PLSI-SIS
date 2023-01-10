@@ -2,34 +2,29 @@
 
 namespace frontend\controllers;
 
-use common\models\Airport;
 use common\models\Restaurant;
-use frontend\models\FlightForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
-/**
- * RestauntController implements the CRUD actions for Restaurant model.
- */
+
 class RestaurantController extends Controller
 {
 
+
     /**
-     * Lists all Flight models.
+     * Lists all Restaurants
      *
      * @return string
      */
     public function actionIndex()
     {
-        $model = new FlightForm();
-        $airports = Airport::find()->all();
-        $model->loadDefaultValues();
+$dataProvider = new ActiveDataProvider([
+            'query' => Restaurant::find()->orderBy('name DESC'),
+        ]);
 
         return $this->render('index', [
-            'airports' => $airports,
-            'model' => $model,
-        ]);
+            'dataProvider' => $dataProvider,
     }
 
     public function actionView($id){
