@@ -3,9 +3,13 @@
 namespace frontend\controllers;
 
 use common\models\Client;
+use common\models\Flight;
 use common\models\FlightTicket;
 use common\models\User;
+use frontend\models\FlightReserveForm;
 use Yii;
+use yii\helpers\Url;
+use yii\base\ErrorException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -90,19 +94,55 @@ class FlightTicketController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($flightGoId, $flightBackId = null)
     {
-        $model = new FlightTicket();
+
+        // Vai buscar o número de passageiros através da queryParams
+        try {
+            $numPassengers = Yii::$app->request->queryParams['FlightForm']['passengers'];
+        } catch (ErrorException $e) {
+            throw new ForbiddenHttpException("Ocorreu um erro, tente novamente mais tarde!");
+        }
+
+
+        $flightGo = Flight::findOne($flightGoId);
+        if ($flightGo && $flightGo->passengers_left < $numPassengers) {
+            throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de ida!");
+        }
+
+        if ($flightBackId) {
+            $flightBack = Flight::findOne($flightBackId);
+            if ($flightBack && $flightBack->passengers_left < $numPassengers) {
+                throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de volta!");
+            }
+        } else $flightBack = null;
+
+        $model = new FlightReserveForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'flight_ticket_id' => $model->flight_ticket_id, 'client_id' => $model->client_id, 'flight_id' => $model->flight_id]);
+            if ($model->load($this->request->post()) && $model->validate()) {
+                if ($model->create($numPassengers, $flightGo, $flightBack)) {
+                    Yii::$app->session->setFlash("success", "Comprou o bilhete com sucesso. O pagamento vai ser processado!");
+                    $userLogged = User::findOne(Yii::$app->user->id);
+                    $model->sendEmail($userLogged, true);
+                    if ($flightBack)
+                        $model->sendEmail($userLogged, false);
+                    return $this->redirect(['index']);
+                } else {
+                    Yii::$app->session->setFlash("error", "Ocorreu um erro ao comprar o bilhete.");
+                }
             }
         } else {
             $model->loadDefaultValues();
+            // var_dump($model->payment_method);
+            if ($model->payment_method == null)
+                throw new ServerErrorHttpException("Não existem métodos de pagamento disponivel, tente mais tarde!");
         }
 
-        return $this->render('create', [
+        return $this->render('flight-reserve', [
+            'flightGoId' => $flightGoId,
+            'flightBackId' => $flightBackId,
+            'numPassengers' => $numPassengers,
             'model' => $model,
         ]);
     }
