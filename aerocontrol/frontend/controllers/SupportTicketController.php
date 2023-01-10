@@ -3,9 +3,11 @@
 namespace frontend\controllers;
 
 use common\models\Client;
-use common\models\FlightTicket;
 use common\models\SupportTicket;
+use common\models\TicketMessage;
+use common\models\User;
 use frontend\models\SupportTicketForm;
+use common\models\TicketMessageForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -38,12 +40,31 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['@'],
+                            'roles' => ['viewSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
                             'roles' => ['createSupportTicket'],
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['finish'],
+                            'roles' => ['updateSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
                         ],
                     ],
                 ]
@@ -96,5 +117,44 @@ class SupportTicketController extends Controller
             'dataProvider' => $dataProvider,
             'model' => $model
         ]);
+    }
+
+    public function actionView($ticket_id)
+    {
+        $model = new TicketMessageForm();
+
+        $user = User::findOne(['id' => Yii::$app->user->getId()]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => TicketMessage::find()->where(['support_ticket_id' => $ticket_id])->orderBy('id ASC'),
+        ]);
+
+        $model->sender_id = $user->id;
+        $model->support_ticket_id = $ticket_id;
+
+        $ticket = SupportTicket::findOne($ticket_id);
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->create($ticket)) {
+                $this->refresh();
+            }
+        }
+
+        return $this->render('view', [
+            'ticket' => $ticket,
+            'client_id' => $ticket->client_id,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+    }
+
+    public function actionFinish($ticket_id)
+    {
+        $model = SupportTicket::findOne($ticket_id);
+        $model->state = SupportTicket::STATE_DONE;
+
+        if ($model->save()) {
+            return $this->redirect(['index']);
+        }
     }
 }

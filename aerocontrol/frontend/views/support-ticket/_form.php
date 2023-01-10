@@ -1,4 +1,5 @@
 <?php
+
 /** @var \frontend\models\SupportTicketForm $model */
 
 use yii\helpers\Html;
@@ -33,7 +34,7 @@ use yii\bootstrap5\ActiveForm;
                 'class' => '[ input__label ] [ fw-light margin-bottom-50 ]'
             ])
             ->textInput([
-                    'class' => 'form__input'
+                'class' => 'form__input'
             ]) ?>
 
         <?= $form->field($model, 'message', [
@@ -52,9 +53,7 @@ use yii\bootstrap5\ActiveForm;
             ]) ?>
 
     </div>
-    <div class="form-group">
-        <?= Html::submitButton('Guardar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
-    </div>
+    <?= Html::submitButton('Guardar', ['class' => '[ button ] [ d-block fill-sm margin-top-300 push-to-right-md ]']) ?>
 
-    <?php ActiveForm::end();?>
+    <?php ActiveForm::end(); ?>
 </div>

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var backend\models\TicketMessageForm $model */
+/** @var common\models\TicketMessageForm $model */
 /** @var yii\widgets\ActiveForm $form */
 /** @var int $ticket_id */
 
