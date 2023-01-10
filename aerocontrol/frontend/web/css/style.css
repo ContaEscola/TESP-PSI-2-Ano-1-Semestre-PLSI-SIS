@@ -1030,11 +1030,9 @@ select.form__input {
 
 #path2 {
   fill: var(--clr-icon-2);
-  transition: fill 250ms ease-in-out;
 }
 #path3 {
   fill: var(--clr-icon-3);
-  transition: fill 250ms ease-in-out;
 }
 
 .payment-method-button .icon {
@@ -1079,6 +1077,45 @@ select.form__input {
 .chat-footer [type="submit"] {
   padding-block: 0.7em;
   padding-inline: 1.6em;
+}
+
+/* Restaurantes */
+
+.card {
+  height: 10rem;
+  max-height: 10rem;
+}
+
+.card__img {
+  width: 100%;
+  max-height: 10rem;
+  object-fit: contain;
+}
+
+.card-body__wrapper {
+  overflow: hidden;
+}
+
+.card__body {
+  background-color: var(--clr-black-400);
+}
+
+@media (hover: hover) {
+  .card:hover .card__body:not([data-animation="none"]) {
+    transform: translateY(0%);
+  }
+
+  .card__body:not([data-animation="none"]) {
+    transform: translateY(100%);
+    transition: transform 250ms ease-in-out;
+  }
+}
+
+.card__body > p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* radio button pill */
@@ -1598,6 +1635,10 @@ select.form__input {
   text-transform: uppercase;
 }
 
+.text-decoration-none {
+  text-decoration: none;
+}
+
 .text-white {
   color: var(--clr-white);
 }
@@ -1707,8 +1748,18 @@ select.form__input {
   gap: var(--gap-size, 1rem);
 }
 
+@media (max-width: 69.99em) {
+  .order-first-lg {
+    order: -1;
+  }
+}
+
 .grid-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+.grid-auto-fit[data-item-size="medium"] {
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
 }
 
 .grid-auto-fit[data-item-size="small"] {
@@ -1783,10 +1834,18 @@ select.form__input {
   }
 }
 
+@media (max-width: 69.99em) {
+  .flex-flow-column-md {
+    flex-flow: column;
+  }
+}
+
 .gap-5 {
   gap: var(--size-500);
 }
-
+.gap-4 {
+  gap: var(--size-400);
+}
 .gap-2 {
   gap: var(--size-200);
 }
@@ -1821,6 +1880,10 @@ select.form__input {
 
 .align-items-center {
   align-items: center;
+}
+
+.align-items-end {
+  align-items: end;
 }
 
 .align-self-center {
@@ -1949,6 +2012,9 @@ select.form__input {
 .padding-block-100 {
   padding-block: var(--size-100);
 }
+.padding-block-50 {
+  padding-block: var(--size-50);
+}
 
 .padding-inline-300 {
   padding-inline: var(--size-300);
@@ -1956,6 +2022,10 @@ select.form__input {
 
 .padding-inline-200 {
   padding-inline: var(--size-200);
+}
+
+.padding-inline-50 {
+  padding-inline: var(--size-50);
 }
 
 .padding-top-300 {
@@ -2075,6 +2145,10 @@ select.form__input {
   max-width: 35ch;
 }
 
+.max-width-75ch {
+  max-width: 75ch;
+}
+
 .min-width-initial {
   min-width: initial;
 }
@@ -2089,6 +2163,9 @@ select.form__input {
   min-width: 1rem;
   aspect-ratio: 1 / 1;
   fill: var(--clr-icon, var(--clr-black-200));
+}
+
+.icon path {
   transition: fill 250ms ease-in-out;
 }
 
