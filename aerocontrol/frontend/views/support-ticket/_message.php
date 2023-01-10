@@ -9,8 +9,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 ?>
-
-
             <?php
             if ($client_id != $model->sender_id){
             ?>
@@ -40,7 +38,7 @@ use yii\helpers\Url;
                             ?>
                             <?= Html::encode($user->username) ?>
                         </p>
-                        <div class="text-white border-radius-1 bg-primary-accent-400 margin-top-50 padding-inline-200 padding-block-100 text-break">
+                        <div class="text-white border-radius-1 bg-primary-accent-400 margin-top-50 padding-inline-200 padding-block-50 text-break">
                             <p>
                                 <?= Html::encode($model->message) ?>
                             </p>

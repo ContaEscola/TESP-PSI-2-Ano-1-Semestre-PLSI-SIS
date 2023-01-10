@@ -48,15 +48,26 @@ class SupportTicketController extends Controller
                             'actions' => ['create'],
                             'roles' => ['createSupportTicket'],
                         ],
+                        /*[
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['createMessage'],
+                        ],*/
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['createSupportTicket'],
+                            'roles' => ['viewSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['finish'],
-                            'roles' => ['createSupportTicket'],
+                            'roles' => ['updateSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
                         ],
                     ],
                 ]
@@ -145,16 +156,6 @@ class SupportTicketController extends Controller
     {
         $model = SupportTicket::findOne($ticket_id);
         $model->state = SupportTicket::STATE_DONE;
-
-        $ticketItem = TicketItem::findOne($ticket_id);
-
-        if ($ticketItem != null){
-
-            $itemLost = LostItem::findOne($ticketItem->lost_item_id);
-            $itemLost->state = LostItem::STATE_DELIVERED;
-            $itemLost->save();
-
-        }
 
         if ($model->save()){
             return $this->redirect(['index']);

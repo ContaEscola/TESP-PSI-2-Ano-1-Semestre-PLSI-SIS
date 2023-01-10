@@ -14,6 +14,8 @@ use yii\helpers\Url;
 use yii\widgets\ListView;
 use yii\helpers\Html;
 
+$this->registerJsFile('@web/js/scrolldown_chat.js');
+
 $this->title = "Meus Tickets Support";
 ?>
 
@@ -34,7 +36,7 @@ $this->title = "Meus Tickets Support";
 
             </div>
             <section class="margin-top-500 border-radius-1 box-shadow-1">
-                <ul role="list" id="chat-messages" class="[ chat-messages-wrapper ]  [ padding-inline-300 padding-block-300 flow ]" data-flow-space="large">
+                <ul role="list" id="chat" class="[ chat-messages-wrapper ]  [ padding-inline-300 padding-block-300 flow ]" data-flow-space="large">
                     <?= ListView::widget([
                         'dataProvider' => $dataProvider,
                         'viewParams' => ['client_id' => $client_id],
