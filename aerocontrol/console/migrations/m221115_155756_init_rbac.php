@@ -114,6 +114,25 @@ class m221115_155756_init_rbac extends Migration
         $auth->add($deleteMessage);
 
         /*
+            TicketItem Permissions
+        */
+        $addTicketItem = $auth->createPermission('addTicketItem');
+        $addTicketItem->description = "Adicionar Ticket-Item";
+        $auth->add($addTicketItem);
+
+        $viewTicketItem = $auth->createPermission('viewTicketItem');
+        $viewTicketItem->description = "Visualizar Ticket-Item";
+        $auth->add($viewTicketItem);
+
+        $updateTicketItem = $auth->createPermission('updateTicketItem');
+        $updateTicketItem->description = "Atualizar Ticket-Item";
+        $auth->add($updateTicketItem);
+
+        $deleteTicketItem = $auth->createPermission('deleteTicketItem');
+        $deleteTicketItem->description = "Eliminar Ticket-Item";
+        $auth->add($deleteTicketItem);
+
+        /*
             Airplane Permissions
         */
         $createAirplane = $auth->createPermission('createAirplane');
@@ -337,11 +356,11 @@ class m221115_155756_init_rbac extends Migration
         $createSupportTicket->description = "Criar Suport Ticket";
         $auth->add($createSupportTicket);
 
-        $updateSupportTicket = $auth->createPermission('updateSuportTicket');
+        $updateSupportTicket = $auth->createPermission('updateSupportTicket');
         $updateSupportTicket->description = "Atualizar Suport Ticket";
         $auth->add($updateSupportTicket);
 
-        $viewSupportTicket = $auth->createPermission('viewSuportTicket');
+        $viewSupportTicket = $auth->createPermission('viewSupportTicket');
         $viewSupportTicket->description = "Visualizar Suport Ticket";
         $auth->add($viewSupportTicket);
 
@@ -494,6 +513,12 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee, $updateTicket);
         $auth->addChild($employee, $updateSupportTicket);
         $auth->addChild($employee, $viewSupportTicket);
+        $auth->addChild($employee, $viewMessage);
+        $auth->addChild($employee, $addTicketItem);
+        $auth->addChild($employee, $updateTicketItem);
+        $auth->addChild($employee, $deleteTicketItem);
+        $auth->addChild($employee, $viewTicketItem);
+        $auth->addChild($employee, $createMessage);
 
         //Manager Permissions
         $auth->addChild($manager, $createOwnRestaurantItem);

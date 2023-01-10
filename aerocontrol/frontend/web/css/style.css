@@ -1083,12 +1083,12 @@ select.form__input {
 
 .card {
   height: 10rem;
-  /* position: relative; */
+  max-height: 10rem;
 }
 
 .card__img {
   width: 100%;
-  max-height: 100%;
+  max-height: 10rem;
   object-fit: contain;
 }
 
@@ -1101,11 +1101,11 @@ select.form__input {
 }
 
 @media (hover: hover) {
-  .card:hover .card__body {
+  .card:hover .card__body:not([data-animation="none"]) {
     transform: translateY(0%);
   }
 
-  .card__body {
+  .card__body:not([data-animation="none"]) {
     transform: translateY(100%);
     transition: transform 250ms ease-in-out;
   }
@@ -1748,6 +1748,12 @@ select.form__input {
   gap: var(--gap-size, 1rem);
 }
 
+@media (max-width: 69.99em) {
+  .order-first-lg {
+    order: -1;
+  }
+}
+
 .grid-auto-fit {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
 }
@@ -1828,10 +1834,18 @@ select.form__input {
   }
 }
 
+@media (max-width: 69.99em) {
+  .flex-flow-column-md {
+    flex-flow: column;
+  }
+}
+
 .gap-5 {
   gap: var(--size-500);
 }
-
+.gap-4 {
+  gap: var(--size-400);
+}
 .gap-2 {
   gap: var(--size-200);
 }
@@ -2129,6 +2143,10 @@ select.form__input {
 
 .max-width-35ch {
   max-width: 35ch;
+}
+
+.max-width-75ch {
+  max-width: 75ch;
 }
 
 .min-width-initial {
