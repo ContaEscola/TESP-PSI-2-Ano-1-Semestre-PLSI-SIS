@@ -2,47 +2,36 @@
 
 namespace frontend\controllers;
 
-use common\models\Airport;
-use common\models\Restaurant;
 use common\models\Store;
-use frontend\models\FlightForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
- * RestauntController implements the CRUD actions for Restaurant model.
+ * StoreController implements the CRUD actions for Store model.
  */
 class StoreController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-        );
-    }
+
 
     /**
-     * Lists all Flight models.
+     * Lists all Stores.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $model = new FlightForm();
-        $airports = Airport::find()->all();
-        $model->loadDefaultValues();
+        $dataProvider = new ActiveDataProvider([
+            'query' => Store::find()->orderBy('name DESC'),
+        ]);
 
         return $this->render('index', [
-            'airports' => $airports,
-            'model' => $model,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
-    public function actionView($id){
+    public function actionView($id)
+    {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -50,7 +39,7 @@ class StoreController extends Controller
 
 
     /**
-     * Finds the Restaurant model based on its primary key value.
+     * Finds the Store model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
      * @return Store the loaded model
