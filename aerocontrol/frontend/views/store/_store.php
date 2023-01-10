@@ -3,6 +3,7 @@
 /** @var \common\models\Store $model */
 
 use yii\helpers\Url;
+use yii\helpers\Html;
 ?>
 
 <li>
@@ -10,7 +11,7 @@ use yii\helpers\Url;
         <img class="card__img" src="<?= Url::to($model->getLogoPathUrl()) ?>" alt="Store logo">
         <div class="card-body__wrapper  d-flex flex-flow-row align-items-end">
             <div class="[ card__body ] [ text-white width-100 padding-100 ]">
-                <p class="fs-300 fw-bold text-break"><?= $model->name ?></p>
+                <p class="fs-300 fw-bold text-break"><?= Html::encode($model->name) ?></p>
             </div>
         </div>
     </a>

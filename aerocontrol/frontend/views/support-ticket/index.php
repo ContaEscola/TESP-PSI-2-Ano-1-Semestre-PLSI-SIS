@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-/** @var \frontend\models\SupportTicketForm $model */
+/** @var \common\models\SupportTicketForm $model */
 
 use yii\helpers\Url;
 use yii\widgets\ListView;
@@ -41,7 +41,7 @@ $this->registerJsFile('@web/js/support-tickets.js', [
                     modal</span>
                 <img src="<?= Url::to('@web/images/close-icon.svg') ?>" alt="" aria-hidden="true"></button>
             <section class="[ support-ticket-modal__image-item ] [ margin-top-400 margin-inline-auto ]">
-                <img src=" alt=" Imagem do item do support ticket">
+                <img src="" alt="Imagem do item do support ticket">
             </section>
         </dialog>
         <?= ListView::widget([

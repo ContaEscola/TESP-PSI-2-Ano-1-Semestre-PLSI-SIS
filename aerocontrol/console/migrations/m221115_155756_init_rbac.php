@@ -356,11 +356,11 @@ class m221115_155756_init_rbac extends Migration
         $createSupportTicket->description = "Criar Suport Ticket";
         $auth->add($createSupportTicket);
 
-        $updateSupportTicket = $auth->createPermission('updateSuportTicket');
+        $updateSupportTicket = $auth->createPermission('updateSupportTicket');
         $updateSupportTicket->description = "Atualizar Suport Ticket";
         $auth->add($updateSupportTicket);
 
-        $viewSupportTicket = $auth->createPermission('viewSuportTicket');
+        $viewSupportTicket = $auth->createPermission('viewSupportTicket');
         $viewSupportTicket->description = "Visualizar Suport Ticket";
         $auth->add($viewSupportTicket);
 
