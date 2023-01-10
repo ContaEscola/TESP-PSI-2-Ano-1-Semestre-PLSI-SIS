@@ -28,9 +28,9 @@ use yii\helpers\Url;
                         <?= Html::a('Voos', ['flight/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
                     <li class="primary-navigation__item" <?= Yii::$app->controller->id == "restaurant" ? 'data-type="active"' : '' ?>>
-                        <?= Html::a('Restaurants', ['restaurant/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
+                        <?= Html::a('Restaurantes', ['restaurant/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
-                    <li class="[ primary-navigation__item ] [ push-to-left ]" <?= Yii::$app->controller->id == "stores" ? 'data-type="active"' : '' ?>>
+                    <li class="[ primary-navigation__item ] [ push-to-left ]" <?= Yii::$app->controller->id == "store" ? 'data-type="active"' : '' ?>>
                         <?= Html::a('Lojas', ['store/index'], ['class' => '[ primary-navigation__link ] [ fs-300 ]']) ?>
                     </li>
                     <?php if (Yii::$app->user->isGuest) : ?>

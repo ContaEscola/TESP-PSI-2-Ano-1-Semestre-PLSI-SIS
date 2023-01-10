@@ -25,6 +25,10 @@ class LostItem extends \yii\db\ActiveRecord
     // Nome do ficheiro do placeholder caso o item dos perdidos e achados tenha imagem, mas seja possível carregar
     public $imagePlaceholderOnError = 'logo-placeholder-on-error.svg';
 
+    const STATE_DELIVERED = "Entregue";
+    const STATE_FOR_DELIVERING = "Por entregar";
+    const STATE_LOST = "Perdido";
+
     public $POSSIBLE_STATES_FOR_DROPDOWN = [
 
         'Entregue' => 'Entregue',
