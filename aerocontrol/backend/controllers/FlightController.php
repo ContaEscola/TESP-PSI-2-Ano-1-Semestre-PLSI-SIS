@@ -110,8 +110,7 @@ class FlightController extends Controller
                 Yii::info("Criar voo", 'flight');
 
                 return $this->redirect(['view', 'id' => $model->id]);
-            } else
-                return var_dump($model->getAttributes());
+            }
         } else {
             $model->loadDefaultValues();
         }

@@ -1,13 +1,13 @@
 import * as toolTip from './toolTip.js';
 
-const flightFormTwoWay = document.querySelector('.flight-search-form');
-
 // Seleciona todos os butões do flight tickets para ida
 const flightTicketsGo = document.querySelectorAll('[data-flight-trip-go] [data-flight-ticket-reserve]');
 
 // Seleciona todos os butões do flight tickets para volta
 const flightTicketsBack = document.querySelectorAll('[data-flight-trip-back] [data-flight-ticket-reserve]');
 
+const CURRENT_CONTROLLER_ACTION = "flight/search";
+const CONTROLLER_ACTION_REDIRECT = "flight-ticket/create";
 const RESERVE_BTN_GO = "RESERVE_BTN_GO";
 const RESERVE_BTN_BACK = "RESERVE_BTN_BACK";
 
@@ -18,22 +18,58 @@ function SelectedBtns() {
 
 const selectedBtns = new SelectedBtns();
 
-function getUrlOnSuccess() {
+
+function getUrlOnSuccess(customHolder = null) {
+    console.log(customHolder);
     let url = location.href;
-    url += `&flightGoId=${selectedBtns.RESERVE_BTN_GO.getAttribute('data-flight-id')}`;
-    url += `&flightBackId=${selectedBtns.RESERVE_BTN_BACK.getAttribute('data-flight-id')}`;
+    let flightGoId = customHolder === null ? selectedBtns.RESERVE_BTN_GO.getAttribute('data-flight-id') : customHolder.getAttribute('data-flight-id');
+    url = url.replace(CURRENT_CONTROLLER_ACTION, CONTROLLER_ACTION_REDIRECT);
+
+    // Se o url já incluir um GET[flightGoId] então dá replace com o novo valor
+    // senão, adiciona a variável no GET
+    if (url.includes('flightGoId')) {
+        if (url.includes('flightGoId='))
+            url = url.replace('flightGoId=', `flightGoId=${flightGoId}`);
+        else
+            url = url.replace('flightGoId', `flightGoId=${flightGoId}`);
+    }
+    else
+        url += `&flightGoId=${flightGoId}`;
+
+    // Se estiver em Ida e Volta então adiciona o flightBackId
+    if (flightTicketsBack.length !== 0) {
+        let flightBackId = selectedBtns.RESERVE_BTN_BACK.getAttribute('data-flight-id');
+
+        // Se o url já incluir um GET[flightBackId] então dá replace com o novo valor
+        // senão, adiciona a variável no GET
+        if (url.includes('flightBackId')) {
+            if (url.includes('flightBackId='))
+                url = url.replace('flightBackId=', `flightBackId=${flightBackId}`);
+            else
+                url = url.replace('flightBackId', `flightBackId=${flightBackId}`);
+        }
+        else
+            url += `&flightBackId=${flightBackId}`;
+    }
+
     return url;
 }
 
+
+
 flightTicketsGo.forEach((btn) => {
 
-    btn.removeAttribute("href");
-
     btn.addEventListener('click', function (e) {
-        e.target.focus();
-        if (btn.getAttribute('data-status') != 'locked')
-            selectFlightBookBtn(this, RESERVE_BTN_GO);
+        e.preventDefault();
+        // Significa que está só ida
+        if (flightTicketsBack.length === 0) {
 
+            location.href = getUrlOnSuccess(this);
+        } else {
+            e.target.focus();
+            if (btn.getAttribute('data-status') != 'locked')
+                selectFlightBookBtn(this, RESERVE_BTN_GO);
+        }
     })
 
 
@@ -49,10 +85,8 @@ flightTicketsGo.forEach((btn) => {
 
 flightTicketsBack.forEach((btn) => {
 
-    btn.removeAttribute("href");
-
     btn.addEventListener('click', function (e) {
-
+        e.preventDefault();
         e.target.focus();
         if (btn.getAttribute('data-status') != 'locked')
             selectFlightBookBtn(this, RESERVE_BTN_BACK);
