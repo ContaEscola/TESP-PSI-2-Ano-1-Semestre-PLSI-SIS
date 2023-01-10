@@ -2,14 +2,13 @@
 
 namespace backend\controllers;
 
-use backend\models\TicketMessageForm;
+use common\models\TicketMessageForm;
 use common\models\LostItem;
 use common\models\LostItemSearch;
 use common\models\SupportTicketSearch;
 use common\models\SupportTicket;
 use common\models\TicketItem;
 use common\models\TicketMessage;
-use common\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -67,7 +66,7 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['conclude-ticket'],
-                            'roles' => ['updateSuportTicket'],
+                            'roles' => ['updateSupportTicket'],
                         ]
                     ],
                 ],

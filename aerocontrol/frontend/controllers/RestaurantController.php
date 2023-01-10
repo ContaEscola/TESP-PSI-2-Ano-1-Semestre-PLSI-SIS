@@ -28,7 +28,8 @@ class RestaurantController extends Controller
         ]);
     }
 
-    public function actionView($id){
+    public function actionView($id)
+    {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);

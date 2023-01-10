@@ -3,7 +3,7 @@
 use common\models\User;
 use yii\helpers\Html;
 
-/** @var backend\models\TicketMessageForm $model */
+/** @var common\models\TicketMessageForm $model */
 /** @var int $client_id */
 
 
