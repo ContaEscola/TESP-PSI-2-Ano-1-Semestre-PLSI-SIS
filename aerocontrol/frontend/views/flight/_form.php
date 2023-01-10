@@ -12,6 +12,7 @@ $this->registerJsFile('@web/js/flight-search-form.js');
 ?>
 
 <?php $form = ActiveForm::begin([
+    'id' => 'flight-search',
     'action' => ['search'],
     'errorCssClass' => 'invalid',
     'requiredCssClass' => 'invalid',

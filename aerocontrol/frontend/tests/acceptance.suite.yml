@@ -1,0 +1,28 @@
+suite_namespace: frontend\tests\acceptance
+actor: AcceptanceTester
+modules:
+    enabled:
+        - WebDriver:
+              browser: chrome
+              url: 'http://localhost/projetofinal/aerocontrol/frontend/web'
+              window_size: 2000x1000
+              port: 9515
+              capabilities:
+                  chromeOptions:
+                      args: ["--headless", "--disable-gpu"] # Run Chrome in headless mode
+                      prefs:
+                          download.default_directory: "..."
+        - Yii2:
+            part: [ orm, fixtures ] # allow to use AR methods
+            cleanup: false # don't wrap test in transaction
+
+        - Db:
+            dsn: 'mysql:host=localhost;dbname=aerocontrol_tests'
+            user: 'root'
+            password: ''
+            cleanup: true
+            dump:
+              - '../common/tests/_data/dump_db.sql'
+              - '../common/tests/_data/dump_data.sql'
+              - '../common/tests/_data/dump_migrations.sql'
+            populate: true
