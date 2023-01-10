@@ -6,23 +6,23 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Admin $model */
 
-$this->title = $model->user->first_name . " " . $model->user->last_name;
+$this->title = $model->user->getFullName();
 $this->params['breadcrumbs'][] = ['label' => 'Administradores', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="admin-view">
 
-    <p>
+    <div class="d-flex mb-3">
         <?= Html::a('Atualizar', ['update', 'admin_id' => $model->admin_id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Apagar', ['delete', 'admin_id' => $model->admin_id], [
-            'class' => 'btn btn-danger',
+            'class' => 'btn btn-danger ml-auto',
             'data' => [
                 'confirm' => 'Tem a certeza que pretende apagar?',
                 'method' => 'post',
             ],
         ]) ?>
-    </p>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,

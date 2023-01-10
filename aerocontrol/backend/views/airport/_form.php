@@ -11,8 +11,8 @@ use yii\bootstrap5\ActiveForm;
 <div class="airport-form">
 
     <?php $form = ActiveForm::begin([
-            'validateOnType' => true,
-            'validationDelay' => 500,
+        'validateOnType' => true,
+        'validationDelay' => 500,
     ]); ?>
 
     <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
@@ -24,7 +24,7 @@ use yii\bootstrap5\ActiveForm;
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

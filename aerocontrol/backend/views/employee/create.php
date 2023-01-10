@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var common\models\Employee $model */
 
 $this->title = 'Criar Trabalhador';
-$this->params['breadcrumbs'][] = ['label' => 'Trabalhadores', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Empregados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-create">

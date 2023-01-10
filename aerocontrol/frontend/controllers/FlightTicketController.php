@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Client;
 use common\models\FlightTicket;
+use common\models\User;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -115,6 +116,8 @@ class FlightTicketController extends Controller
      */
     public function actionCheckin($flight_ticket_id)
     {
+        if (!Yii::$app->user->can('updateTicket', ['ticket' => FlightTicket::findOne(['flight_ticket_id' => Yii::$app->request->get('flight_ticket_id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($flight_ticket_id);
         $model->checkin = true;
         if ($this->request->isPost && $model->save()) {
@@ -137,6 +140,8 @@ class FlightTicketController extends Controller
      */
     public function actionDelete($flight_ticket_id)
     {
+        if (!Yii::$app->user->can('deleteTicket', ['ticket' => FlightTicket::findOne(['flight_ticket_id' => Yii::$app->request->get('flight_ticket_id')])])) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $flightTicket = $this->findModel($flight_ticket_id);
 
 

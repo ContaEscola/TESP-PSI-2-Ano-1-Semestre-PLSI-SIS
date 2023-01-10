@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var common\models\EmployeeFunctionSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Funções de Trabalhadores';
+$this->title = 'Funções de Trabalhador';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="employee-function-index">

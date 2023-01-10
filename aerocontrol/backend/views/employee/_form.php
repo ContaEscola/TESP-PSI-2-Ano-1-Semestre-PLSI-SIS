@@ -11,6 +11,7 @@ use yii\bootstrap5\ActiveForm;
 <div class="employee-form">
 
     <?php $form = ActiveForm::begin([
+        'id' => 'employee-form',
         'validateOnType' => true,
         'validationDelay' => 500,
     ]); ?>

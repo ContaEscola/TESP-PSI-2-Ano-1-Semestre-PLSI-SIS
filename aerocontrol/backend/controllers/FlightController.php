@@ -4,8 +4,10 @@ namespace backend\controllers;
 
 use common\models\Flight;
 use common\models\FlightSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -64,6 +66,8 @@ class FlightController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewFlight')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new FlightSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -81,6 +85,8 @@ class FlightController extends Controller
      */
     public function actionView($id)
     {
+        if (!Yii::$app->user->can('viewFlight')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -93,6 +99,8 @@ class FlightController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createFlight')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new Flight();
 
         if ($this->request->isPost) {
@@ -122,6 +130,8 @@ class FlightController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updateFlight')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
         $model->scenario = Flight::SCENARIO_ON_UPDATE;
 

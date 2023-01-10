@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\LostItem $model */
 
-$this->title = 'Criar item perdido e achado';
-$this->params['breadcrumbs'][] = ['label' => 'Perdidos e achados', 'url' => ['index']];
+$this->title = 'Criar Item';
+$this->params['breadcrumbs'][] = ['label' => 'Perdidos e Achados', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lost-item-create">

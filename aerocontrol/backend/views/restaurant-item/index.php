@@ -12,6 +12,8 @@ use yii\grid\GridView;
 /** @var common\models\Restaurant $restaurant */
 
 $this->title = 'Menu';
+
+// Se estiver a ser visualizado por um admin então o breadcrumbs é diferente
 if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['admin'])) {
     $this->params['breadcrumbs'][] = [
         'label' => 'Restaurantes',

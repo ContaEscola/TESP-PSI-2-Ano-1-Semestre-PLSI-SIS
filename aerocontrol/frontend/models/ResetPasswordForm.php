@@ -12,7 +12,8 @@ use common\models\User;
  */
 class ResetPasswordForm extends Model
 {
-    public $password;
+    public $new_password;
+    public $new_password_repeat;
 
     /**
      * @var \common\models\User
@@ -45,10 +46,25 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
-            ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+            [['new_password', 'new_password_repeat'], 'trim'],
+            [['new_password', 'new_password_repeat'], 'required', 'message' => 'A password não pode ser vazia.'],
+            [
+                'new_password', 'string',
+                'min' => Yii::$app->params['user.passwordMinLength'],
+                'tooShort' => 'A password tem de conter no mínimo ' . Yii::$app->params['user.passwordMinLength'] . ' caracteres.'
+            ],
+            ['new_password_repeat', 'compare', 'compareAttribute' => 'new_password', 'message' => 'Esta password não é igual à inserida anteriormente.']
         ];
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'new_password' => 'Nova Password',
+            'new_password_repeat' => 'Confirmar Password'
+        ];
+    }
+
 
     /**
      * Resets password.
@@ -58,7 +74,7 @@ class ResetPasswordForm extends Model
     public function resetPassword()
     {
         $user = $this->_user;
-        $user->setPassword($this->password);
+        $user->setPassword($this->new_password);
         $user->removePasswordResetToken();
         $user->generateAuthKey();
 

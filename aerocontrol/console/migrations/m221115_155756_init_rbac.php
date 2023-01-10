@@ -146,13 +146,14 @@ class m221115_155756_init_rbac extends Migration
         /*
             PaymentMethod Permissions
         */
-        $updatePaymentMethod = $auth->createPermission('updatePaymentMethod');
-        $updatePaymentMethod->description = "Atualizar método de pagamento";
-        $auth->add($updatePaymentMethod);
 
         $viewPaymentMethod = $auth->createPermission('viewPaymentMethod');
         $viewPaymentMethod->description = "Visualizar método de pagamento";
         $auth->add($viewPaymentMethod);
+
+        $updatePaymentMethod = $auth->createPermission('updatePaymentMethod');
+        $updatePaymentMethod->description = "Atualizar método de pagamento";
+        $auth->add($updatePaymentMethod);
 
         /*
             Client Permissions
@@ -307,10 +308,6 @@ class m221115_155756_init_rbac extends Migration
         $viewEmployee->description = "Visualizar trabalhador";
         $auth->add($viewEmployee);
 
-        $deleteEmployee = $auth->createPermission('deleteEmployee');
-        $deleteEmployee->description = "Apagar trabalhador";
-        $auth->add($deleteEmployee);
-
         /*
             Employee Function Permissions
         */
@@ -340,11 +337,11 @@ class m221115_155756_init_rbac extends Migration
         $createSupportTicket->description = "Criar Suport Ticket";
         $auth->add($createSupportTicket);
 
-        $updateSupportTicket = $auth->createPermission('updateSuportTicket');
+        $updateSupportTicket = $auth->createPermission('updateSupportTicket');
         $updateSupportTicket->description = "Atualizar Suport Ticket";
         $auth->add($updateSupportTicket);
 
-        $viewSupportTicket = $auth->createPermission('viewSuportTicket');
+        $viewSupportTicket = $auth->createPermission('viewSupportTicket');
         $viewSupportTicket->description = "Visualizar Suport Ticket";
         $auth->add($viewSupportTicket);
 
@@ -489,8 +486,8 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($employee, $createAirport);
         $auth->addChild($employee, $updateAirport);
         $auth->addChild($employee, $viewAirport);
-        $auth->addChild($employee, $updatePaymentMethod);
         $auth->addChild($employee, $viewPaymentMethod);
+        $auth->addChild($employee, $updatePaymentMethod);
         $auth->addChild($employee, $updateClient);
         $auth->addChild($employee, $viewClient);
         $auth->addChild($employee, $viewTicket);
@@ -540,7 +537,6 @@ class m221115_155756_init_rbac extends Migration
         $auth->addChild($admin, $createEmployee);
         $auth->addChild($admin, $viewEmployee);
         $auth->addChild($admin, $updateEmployee);
-        $auth->addChild($admin, $deleteEmployee);
         $auth->addChild($admin, $createEmployeeFunction);
         $auth->addChild($admin, $viewEmployeeFunction);
         $auth->addChild($admin, $updateEmployeeFunction);

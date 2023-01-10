@@ -65,7 +65,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
-                    'linkUrl' => Url::to(["/lostitem/index"])
+                    'linkUrl' => Url::to(["/lost-item/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -73,7 +73,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
-                    'linkUrl' => Url::to(["/supportticket/index"])
+                    'linkUrl' => Url::to(["/support-ticket/index"])
                 ]) ?>
             </div>
         </div>
@@ -84,13 +84,13 @@ $this->title = 'Dashboard';
                     'text' => 'Métodos de pagamento',
 
                     'icon' => 'fas fa-solid fa-credit-card',
-                    'linkUrl' => Url::to(["/paymentmethod/index"])
+                    'linkUrl' => Url::to(["/payment-method/index"])
                 ]) ?>
             </div>
             <div class="col">
                 <?= SmallBox::widget([
                     'title' => '150',
-                    'text' => 'Restaurante',
+                    'text' => 'Restaurantes',
                     'icon' => 'fas fa-utensils',
                     'linkUrl' => Url::to(["/restaurant/index"])
                 ]) ?>
@@ -155,7 +155,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Perdidos e achados',
                     'icon' => 'fas fa-suitcase-rolling',
-                    'linkUrl' => Url::to(["/lostitem/index"])
+                    'linkUrl' => Url::to(["/lost-item/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -163,7 +163,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Suporte ao cliente',
                     'icon' => 'fas fa-envelope',
-                    'linkUrl' => Url::to(["/supportticket/index"])
+                    'linkUrl' => Url::to(["/support-ticket/index"])
                 ]) ?>
             </div>
         </div>
@@ -174,7 +174,7 @@ $this->title = 'Dashboard';
                     'text' => 'Métodos de pagamento',
 
                     'icon' => 'fas fa-solid fa-credit-card',
-                    'linkUrl' => Url::to(["/paymentmethod/index"])
+                    'linkUrl' => Url::to(["/payment-method/index"])
                 ]) ?>
             </div>
             <div class="col">
@@ -187,7 +187,7 @@ $this->title = 'Dashboard';
     <?php endif; ?>
 
     <?php if (isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) :
-        $manager = Manager::find()->where(['manager_id'=>Yii::$app->user->getId()])->one();?>
+        $manager = Manager::find()->where(['manager_id' => Yii::$app->user->getId()])->one(); ?>
         <div class="row">
             <div class="col">
                 <?= SmallBox::widget([
@@ -202,7 +202,7 @@ $this->title = 'Dashboard';
                     'title' => '150',
                     'text' => 'Ementa',
                     'icon' => 'fas fa-utensils',
-                    'linkUrl' => Url::to(["/restaurantitem/index?restaurant_id=" . $manager->restaurant_id])
+                    'linkUrl' => Url::to(["/restaurant-item/index?restaurant_id=" . $manager->restaurant_id])
                 ]) ?>
             </div>
         </div>

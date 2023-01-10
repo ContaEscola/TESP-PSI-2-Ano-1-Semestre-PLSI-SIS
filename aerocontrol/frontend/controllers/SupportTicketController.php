@@ -3,14 +3,18 @@
 namespace frontend\controllers;
 
 use common\models\Client;
-use common\models\FlightTicket;
 use common\models\SupportTicket;
+use common\models\TicketItem;
+use common\models\TicketMessage;
+use common\models\User;
 use frontend\models\SupportTicketForm;
+use frontend\models\TicketMessageForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 
 /**
  * SupportTicketController implements the CRUD actions for SupportTicket model.
@@ -44,6 +48,27 @@ class SupportTicketController extends Controller
                             'actions' => ['create'],
                             'roles' => ['createSupportTicket'],
                         ],
+                        /*[
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['createMessage'],
+                        ],*/
+                        [
+                            'allow' => true,
+                            'actions' => ['view'],
+                            'roles' => ['viewSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
+                        ],
+                        [
+                            'allow' => true,
+                            'actions' => ['finish'],
+                            'roles' => ['updateSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
+                        ],
                     ],
                 ]
             ]
@@ -72,6 +97,9 @@ class SupportTicketController extends Controller
 
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createSupportTicket')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
+
         $model = new SupportTicketForm();
 
         $client = Client::findOne(['client_id' => Yii::$app->user->getId()]);
@@ -92,5 +120,45 @@ class SupportTicketController extends Controller
             'dataProvider' => $dataProvider,
             'model' => $model
         ]);
+    }
+
+    public function actionView($ticket_id){
+        $model = new TicketMessageForm();
+
+        $user = User::findOne(['id' => Yii::$app->user->getId()]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => TicketMessage::find()->where(['support_ticket_id' => $ticket_id])->orderBy('id ASC'),
+        ]);
+
+        $model->sender_id = $user->id;
+        $model->support_ticket_id = $ticket_id;
+
+        $ticket = SupportTicket::findOne($ticket_id);
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->create($ticket)) {
+                $this->refresh();
+            }
+        }
+
+        return $this->render('view', [
+            'client_id' => $ticket->client_id,
+            'ticket_title' => $ticket->title,
+            'ticket_state' => $ticket->state,
+            'ticket_id' => $ticket_id,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
+    }
+
+    public function actionFinish($ticket_id)
+    {
+        $model = SupportTicket::findOne($ticket_id);
+        $model->state = SupportTicket::STATE_DONE;
+
+        if ($model->save()){
+            return $this->redirect(['index']);
+        }
     }
 }

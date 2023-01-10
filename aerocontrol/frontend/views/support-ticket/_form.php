@@ -9,6 +9,7 @@ use yii\bootstrap5\ActiveForm;
 <div class="support-ticket-form">
 
     <?php $form = ActiveForm::begin([
+        'id' => 'support-ticket',
         'action' => ['create'],
         'errorCssClass' => 'invalid',
         'requiredCssClass' => 'invalid',
@@ -32,7 +33,7 @@ use yii\bootstrap5\ActiveForm;
                 'class' => '[ input__label ] [ fw-light margin-bottom-50 ]'
             ])
             ->textInput([
-                    'class' => 'form__input'
+                'class' => 'form__input'
             ]) ?>
 
         <?= $form->field($model, 'message', [

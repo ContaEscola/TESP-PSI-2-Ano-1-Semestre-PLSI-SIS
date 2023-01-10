@@ -42,9 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update}',
                 'buttons' => [
                     'update' => function ($url, $model) {
-                        if ($model->state == PaymentMethod::STATE_ACTIVE) $text = 'Desativar';
-                        else $text = 'Ativar';
-                        return Html::a($text, ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                        if ($model->state == PaymentMethod::STATE_ACTIVE)
+                            return Html::a('Desativar', ['update', 'id' => $model->id], ['class' => 'btn btn-danger']);
+                        else
+                            return Html::a('Ativar', ['update', 'id' => $model->id], ['class' => 'btn btn-success']);
                     },
                 ],
             ],

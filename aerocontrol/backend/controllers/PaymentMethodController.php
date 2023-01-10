@@ -7,6 +7,7 @@ use common\models\PaymentMethodSearch;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -39,11 +40,6 @@ class PaymentMethodController extends Controller
                         ],
                         [
                             'allow' => true,
-                            'actions' => ['view'],
-                            'roles' => ['viewPaymentMethod'],
-                        ],
-                        [
-                            'allow' => true,
                             'actions' => ['update'],
                             'roles' => ['updatePaymentMethod'],
                         ],
@@ -60,25 +56,14 @@ class PaymentMethodController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewPaymentMethod')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new PaymentMethodSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single PaymentMethod model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -91,6 +76,8 @@ class PaymentMethodController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->user->can('updatePaymentMethod')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = $this->findModel($id);
 
         if ($model->state == PaymentMethod::STATE_ACTIVE) $model->state = PaymentMethod::STATE_INACTIVE;

@@ -5,8 +5,10 @@ namespace backend\controllers;
 use backend\models\ManagerForm;
 use common\models\Manager;
 use common\models\ManagerSearch;
+use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -70,6 +72,8 @@ class ManagerController extends Controller
      */
     public function actionIndex()
     {
+        if (!Yii::$app->user->can('viewManager')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $searchModel = new ManagerSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -87,6 +91,8 @@ class ManagerController extends Controller
      */
     public function actionView($manager_id)
     {
+        if (!Yii::$app->user->can('viewManager')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         return $this->render('view', [
             'model' => $this->findModel($manager_id),
         ]);
@@ -99,6 +105,8 @@ class ManagerController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->user->can('createManager')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $model = new ManagerForm();
 
         if ($this->request->isPost) {
@@ -127,6 +135,8 @@ class ManagerController extends Controller
      */
     public function actionUpdate($manager_id)
     {
+        if (!Yii::$app->user->can('updateManager')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $validManager = $this->findModel($manager_id);
         $model = new ManagerForm($validManager->manager_id);
 
@@ -152,6 +162,8 @@ class ManagerController extends Controller
      */
     public function actionDelete($manager_id)
     {
+        if (!Yii::$app->user->can('deleteManager')) new ForbiddenHttpException("Não tem acesso a esta página.");
+
         $this->findModel($manager_id)->delete();
 
         //Criar logs

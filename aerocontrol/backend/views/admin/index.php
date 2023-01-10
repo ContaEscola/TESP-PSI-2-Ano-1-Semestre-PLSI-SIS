@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="admin-index">
 
     <p>
-        <?= Html::a('Criar Administrador', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Criar administrador', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); 

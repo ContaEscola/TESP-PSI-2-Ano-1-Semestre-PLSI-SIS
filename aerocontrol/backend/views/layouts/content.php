@@ -3,7 +3,7 @@
 
 use yii\bootstrap4\Breadcrumbs;
 ?>
-<div class="content-wrapper">
+<div class="content-wrapper px-3">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">

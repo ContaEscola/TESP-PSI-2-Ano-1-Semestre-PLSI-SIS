@@ -20,7 +20,6 @@ closeModalBtns.forEach((btn) => {
 })
 
 function closeModal() {
-    console.log(this);
     let modal = this.closest('[data-modal]');
     modal.classList.add('hide');
     modal.addEventListener('animationend', function () {
