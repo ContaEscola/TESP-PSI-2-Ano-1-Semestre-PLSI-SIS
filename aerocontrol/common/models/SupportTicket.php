@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models;
-use common\models\phpMQTT;
+use common\components\Mosquitto;
 use Yii;
 
 /**
@@ -69,24 +69,13 @@ class SupportTicket extends \yii\db\ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
         if ($insert){
-            $this->FazPublishNoMosquitto("tickets",'Novo ticket criado subscreva com "ticket-' . $this->id . '"');
+            $mosquitto = new Mosquitto();
+            $mosquitto->FazPublishNoMosquitto("tickets", 'Novo ticket criado subscreva com "ticket-' . $this->id . '"');
         }
 
     }
 
-    public function FazPublishNoMosquitto($canal,$msg)
-    {
-        $server = "localhost";
-        $port = 1883;
-        $username = ""; // set your username
-        $password = ""; // set your password
-        $client_id = "phpMQTT-publisher"; // unique!
-        $mqtt = new phpMQTT($server, $port, $client_id);
-        if ($mqtt->connect(true, NULL, $username, $password)) {
-            $mqtt->publish($canal, $msg, 0);
-            $mqtt->close();
-        }
-}
+
 
     /**
      * Gets query for [[Client]].
