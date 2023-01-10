@@ -59,19 +59,19 @@ INSERT INTO `client` (client_id) VALUES
 (15);
 
 INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
-(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Acium_16-12-2022_12-27.jpg', 'https://acium.pt'),
-(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Benfica Official Store_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
-(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
-(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
-(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
+(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Logo_16-12-2022_12-27.jpg', 'https://acium.pt'),
+(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Logo_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
+(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Logo_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
+(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Logo_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
+(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Logo_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
 
 
 INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
-(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Burger King_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
-(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Delta_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
-(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'KFC_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
-(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
-(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
+(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Logo_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
+(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Logo_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
+(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'Logo_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
+(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'Logo_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
+(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Logo_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
 
 INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
 (1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
@@ -90,13 +90,6 @@ INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) 
 
 INSERT INTO `manager`(`manager_id`,`restaurant_id`) VALUES
 (16,1);
-
-
-
-
-
-
-
 
 INSERT INTO `company` (`id`, `name`, `state`) VALUES
 (1, 'TAP Portugal', 1),
@@ -129,25 +122,25 @@ INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
 
 INSERT INTO `payment_method` (`id`,`name`,`state`) VALUES
 (1,'Cartão de crédito',1),
-(2,'Cartão de débito',0),
-(3,'MBWay',1),
+(2,'Cartão de débito',1),
+(3,'MBWay',0),
 (4,'Multibanco',1),
-(5,'Paypal',1);
+(5,'Paypal',0);
 
 
 INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
-(1, 'Camisa às riscas azul e branca.', 'Perdido', '19-12-2022_20-03-20.jpg'),
-(2, 'Camisa vermelha, marca BOSS.', 'Por entregar', '19-12-2022_20-04-20.jpg'),
-(3, 'Casaco azul de inverno para mulher.', 'Entregue', '19-12-2022_20-06-34.jpg'),
-(4, 'Casaco cinzento da Lacoste.', 'Entregue', '19-12-2022_20-09-46.jpg'),
+(1, 'Camisa às riscas azul e branca.', 'Entregue', '19-12-2022_20-03-20.jpg'),
+(2, 'Camisa vermelha, marca BOSS.', 'Perdido', '19-12-2022_20-04-20.jpg'),
+(3, 'Casaco azul de inverno para mulher.', 'Perdido', '19-12-2022_20-06-34.jpg'),
+(4, 'Casaco cinzento da Lacoste.', 'Perdido', '19-12-2022_20-09-46.jpg'),
 (5, 'Casaco preto da carhatt de inverno.', 'Perdido', '19-12-2022_20-10-56.jpg'),
 (6, 'Mala de viagem cinzenta com 20kg.', 'Perdido', '19-12-2022_20-11-37.jfif'),
 (7, 'Mala de viagem preta 20kg', 'Perdido', '19-12-2022_20-12-20.jpg'),
 (8, 'Mala de viagem verde da PepeJeans de 10kg', 'Perdido', '19-12-2022_20-12-56.jpg'),
 (9, 'Mala de viagem vermelha com código na parte lateral de 20kg', 'Perdido', '19-12-2022_20-13-29.jpg'),
-(10, 'Mala de viagem azul da ITACA de 20kg', 'Por entregar', '19-12-2022_20-14-19.jpeg'),
-(11, 'Mochila de escola da Nike azul.', 'Entregue', '19-12-2022_20-15-13.jpg'),
-(12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
+(10, 'Mala de viagem azul da ITACA de 20kg', 'Perdido', '19-12-2022_20-14-19.jpeg'),
+(11, 'Mochila de escola da Nike azul.', 'Perdido', '19-12-2022_20-15-13.jpg'),
+(12, 'Mochila de escola da Nike cor-de-rosa.', 'Perdido', '19-12-2022_20-15-48.png');
 
 INSERT INTO `flight`
 (`id`, `terminal`, `estimated_departure_date`, `estimated_arrival_date`, `departure_date`, `arrival_date`, `price`, `distance`, `state`,`passengers_left`, `discount_percentage`, `origin_airport_id`, `arrival_airport_id`, `airplane_id`)
@@ -168,11 +161,15 @@ VALUES
 (2, 'Manuel Santos', 'Masculino', 0, 'A2', 1);
 
 INSERT INTO `support_ticket` (`id`,`title`,`state`,`client_id`) VALUES
-    (1, 'Camisola Perdida', 'Em Progresso', 4),
-    (2, 'Mala de Viagem' , 'Concluido', 5);
+(1, 'Camisola Perdida', 'Concluido', 4),
+(2, 'Mala Perdida', 'Por Rever', 4),
+(3, 'Mala de Viagem' , 'Por Rever', 5);
 
 INSERT INTO `ticket_item` (`lost_item_id`,`support_ticket_id`) VALUES
-    (1,2);
+(1,1);
 
 INSERT INTO `ticket_message` (`id`, `message`, `sender_id`, `support_ticket_id`) VALUES
-    (1, 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.', 4,1);
+(1, 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de janeiro.', 4,1),
+(2, 'Olá, a sua camisola é uma camisola às riscas azul e branca?',2,1),
+(3, 'Sim!',4,1),
+(4, 'Confira se é a camisola indicada na sua lista de bilhetes, em caso de ser o indicado conclua o ticket, obrigado.',2,1);

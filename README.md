@@ -50,6 +50,3 @@ password: 12345678
 
 >username: santos
 password: 12345678
-
->username: Alexandre
-password: 12345678
