@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Airport;
 use common\models\Restaurant;
+use common\models\Store;
 use frontend\models\FlightForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -12,8 +13,17 @@ use yii\filters\VerbFilter;
 /**
  * RestauntController implements the CRUD actions for Restaurant model.
  */
-class RestaurantController extends Controller
+class StoreController extends Controller
 {
+    /**
+     * @inheritDoc
+     */
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+        );
+    }
 
     /**
      * Lists all Flight models.
@@ -43,12 +53,12 @@ class RestaurantController extends Controller
      * Finds the Restaurant model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Restaurant the loaded model
+     * @return Store the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Restaurant::findOne(['id' => $id])) !== null) {
+        if (($model = Store::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
