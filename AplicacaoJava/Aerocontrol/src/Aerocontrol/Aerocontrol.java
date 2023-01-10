@@ -24,6 +24,24 @@ public class Aerocontrol extends javax.swing.JDialog {
 
     MqttClient client;
     ArrayList<String> subscribedTopics;
+    
+    private int getTopicIndex(String topicToSearch) {
+        
+        for(int i = 0; i < subscribedTopics.size(); i++) {
+            if (subscribedTopics.get(i).equals(topicToSearch))
+                return i;
+        }
+        return -1;
+    }
+    
+    private boolean isValidTopic(String topicToSearch) {
+        for(String subscribedTopic : subscribedTopics) {
+            if(subscribedTopic.equals(topicToSearch)) 
+                return true;
+        }
+        return false;
+    }
+    
     /**
      * Creates new form Aerocontrol
      */
@@ -35,6 +53,7 @@ public class Aerocontrol extends javax.swing.JDialog {
         subscribedTopics = new ArrayList<String>();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -198,13 +217,12 @@ public class Aerocontrol extends javax.swing.JDialog {
                 
                 // Verifica se o tópico já se encontra subscrito
                 
-                for(String topic: subscribedTopics){
-                        if (topic.equals(topico)){
-                                JOptionPane.showMessageDialog(null, "O ticket já se encontra subscrito.","Subscrição de tickets",JOptionPane.ERROR_MESSAGE);
-                                return;
-                        }
+                if(isValidTopic(topico)) {
+                    JOptionPane.showMessageDialog(null, "O ticket já se encontra subscrito.","Subscrição de tickets",JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
                 
+
                 subscribedTopics.add(topico);
                 
                 int subQoS= 0;
@@ -235,17 +253,20 @@ public class Aerocontrol extends javax.swing.JDialog {
 
     private void BT_RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BT_RemoveActionPerformed
         try {
-            //String[] arrTopicos = new String[1];
             String topico = TF_Sub.getText().trim();
-            for(int i = 0; i < subscribedTopics.size(); i++) {
-                    if (subscribedTopics.get(i).equals(topico)){
-                        client.unsubscribe(topico);
-                        subscribedTopics.remove(i);
-                        TF_Messages_Tickets.append("Removeu subscrição " + topico + "\r\n");
-                        TF_Sub.setText("");
-                        return;
-                    }
+            
+            if(isValidTopic(topico)) {
+                int topicIndex = getTopicIndex(topico);
+                if(topicIndex != -1) {
+                    client.unsubscribe(topico);
+                    subscribedTopics.remove(topicIndex);
+                    TF_Messages_Tickets.append("Removeu subscrição " + topico + "\r\n");
+                    TF_Sub.setText("");
+                    return;
+                }
+        
             }
+
             JOptionPane.showMessageDialog(null, "Não está subscrito nesse tópico.","Subscrição de tickets",JOptionPane.ERROR_MESSAGE);
             TF_Sub.setText("");
         } catch (Exception e) {
