@@ -39,8 +39,8 @@ $this->registerJsFile('@web/js/flight-search-form.js');
             [
                 'item' => function ($index, $label, $name, $checked, $value) {
 
-                    $return = '<label class="radio-button-pill button" data-type="primary-outline" data-active="' . ($checked ? "true" : "false") . '">';
-                    $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : "") . ' ';
+                    $return = '<label class="radio-button radio-button-pill button" data-type="primary-outline" data-active="' . ($checked ? "true" : "false") . '">';
+                    $return .= '<input type="radio" class="visually-hidden" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : "") . ' ';
                     switch ($index) {
                             // Será o radio de 'Só Ida'
                         case 0:

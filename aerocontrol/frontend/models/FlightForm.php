@@ -9,6 +9,9 @@ use yii\data\ActiveDataProvider;
 
 class FlightForm extends Model
 {
+    public const FLIGHT_TYPE_GO = "FLIGHT_GO";
+    public const FLIGHT_TYPE_BACK = "FLIGHT_TYPE_BACK";
+
     public $origin;
     public $destiny;
     public $origin_departure_date;

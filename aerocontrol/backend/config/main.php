@@ -29,6 +29,7 @@ return [
     ],
     'components' => [
         'request' => [
+            'cookieValidationKey' => 'lacpIbbXbVwTw-hPp6sfTC1DPr1u1uPz',
             'csrfParam' => '_csrf-backend',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',

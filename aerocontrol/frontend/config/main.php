@@ -14,6 +14,7 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'cookieValidationKey' => 'wmPXE_sLG_-goorJUMGMUMQIpjlYZbj_',
         ],
         'user' => [
             'identityClass' => 'common\models\User',

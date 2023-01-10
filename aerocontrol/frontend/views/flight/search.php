@@ -7,15 +7,14 @@
 /** @var \common\models\Airport[] $airports */
 /** @var bool $tryAgain */
 
-use yii\helpers\Url;
+use frontend\models\FlightForm;
 use yii\widgets\ListView;
 
 $this->title = "Voos";
-if ($model->two_way_trip) {
-    $this->registerJsFile('@web/js/flight-search.js', [
-        'type' => 'module',
-    ]);
-}
+
+$this->registerJsFile('@web/js/flight-search.js', [
+    'type' => 'module',
+]);
 ?>
 
 <div class="container" data-type="small-md">
@@ -63,6 +62,7 @@ if ($model->two_way_trip) {
                     ],
                     'emptyText' => "",
                     'itemView' => '_flight',
+                    'viewParams' => ['flightType' => FlightForm::FLIGHT_TYPE_GO]
                 ]);
                 ?>
             </div>
@@ -86,6 +86,7 @@ if ($model->two_way_trip) {
                     ],
                     'emptyText' => "",
                     'itemView' => '_flight',
+                    'viewParams' => ['flightType' => FlightForm::FLIGHT_TYPE_BACK]
                 ]);
             }
         } ?>
