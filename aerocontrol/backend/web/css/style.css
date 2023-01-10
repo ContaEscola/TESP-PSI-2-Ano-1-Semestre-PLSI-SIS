@@ -65,7 +65,7 @@
 }
 
 /* Css Reset
-https://piccalil.li/blog/a-modern-css-reset/ */
+  https://piccalil.li/blog/a-modern-css-reset/ */
 
 /* Box sizing rules */
 *,
@@ -730,4 +730,7 @@ form:valid .form__submit-button {
   .fill-sm {
     width: 100%;
   }
+}
+.mw-50 {
+  max-width: 50%;
 }
