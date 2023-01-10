@@ -28,7 +28,7 @@ $this->title = "Meus Tickets Suporte";
             </p>
             <?php
             if ($ticket->state != SupportTicket::STATE_DONE) {
-                echo Html::a('Fechar ticket', ['support-ticket/finish', 'ticket_id' => $ticket->id], ['data-method' => 'post', 'class' => 'button ', 'data-type' => 'error']);
+                echo Html::a('Fechar ticket', ['support-ticket/conclude-ticket', 'ticket_id' => $ticket->id], ['data-method' => 'post', 'class' => 'button ', 'data-type' => 'error']);
             }
             ?>
 
