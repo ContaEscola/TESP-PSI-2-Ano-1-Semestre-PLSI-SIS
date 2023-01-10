@@ -13,18 +13,23 @@ class RestaurantController extends Controller
 
 
     /**
-     * Lists all Restaurant  models.
+     * Lists all Restaurants
      *
      * @return string
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
+$dataProvider = new ActiveDataProvider([
             'query' => Restaurant::find()->orderBy('name DESC'),
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+    }
+
+    public function actionView($id){
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 
