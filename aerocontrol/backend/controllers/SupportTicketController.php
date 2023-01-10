@@ -42,12 +42,12 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewTicket'],
+                            'roles' => ['viewSupportTicket'],
                         ],
                         [
                             'allow' => true,
                             'actions' => ['view'],
-                            'roles' => ['viewMessage', 'createMessage'],
+                            'roles' => ['viewMessage', 'createMessage', 'viewSupportTicket'],
                         ],
                         [
                             'allow' => true,
