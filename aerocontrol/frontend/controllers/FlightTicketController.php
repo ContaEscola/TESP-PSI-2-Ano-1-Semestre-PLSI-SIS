@@ -115,7 +115,7 @@ class FlightTicketController extends Controller
             if ($flightBack && $flightBack->passengers_left < $numPassengers) {
                 throw new ForbiddenHttpException("O número de passageiros é superior aos passageiros restantes do voo de volta!");
             }
-        }
+        } else $flightBack = null;
 
         $model = new FlightReserveForm();
 

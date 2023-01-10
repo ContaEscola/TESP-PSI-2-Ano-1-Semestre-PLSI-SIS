@@ -4,7 +4,9 @@ namespace frontend\models;
 
 use common\models\Flight;
 use common\models\FlightTicket;
+use common\models\Passenger;
 use common\models\PaymentMethod;
+use Exception;
 use Yii;
 use yii\base\ErrorException;
 use yii\base\Model;
@@ -17,6 +19,37 @@ class FlightReserveForm extends Model
     public const MULTIBANCO = "multibanco";
     public const PAYPAL = "paypal";
 
+    public const ROW_MAX_SEATS = 6;
+
+    const LETTERS = [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+    ];
+
     const POSSIBLE_GENDERS = [
         'Masculino',
         'Feminino',
@@ -28,6 +61,8 @@ class FlightReserveForm extends Model
         'Feminino' => 'Feminino',
         'Outro' => 'Outro'
     ];
+
+    public $seats_available = array();
 
     public $read_terms;
     public $payment_method;
@@ -114,18 +149,36 @@ class FlightReserveForm extends Model
     {
         $transaction = FlightTicket::getDb()->beginTransaction();
         try {
+            $this->setSeats($flightGo);
+            $flightTicketGo = $this->getNewFlightTicket($flightGo);
+            $flightGo->passengers_left -= $numPassengers;           // Altera os passageiros restantes que podem comprar bilhete no voo
 
-            $flightTicketGo = $this->getFlightTicket($flightGo);
-            $flightTicketGo->flight->passengers_left -= $numPassengers;
             if (!$flightTicketGo->save() || !$flightTicketGo->flight->save())
                 throw new ErrorException();
+            else {
+                for ($i= 0; $i < $numPassengers; $i++){     // Adiciona os passageiros à tabela passengers
+                    $passenger = $this->getNewPassenger($i,$flightTicketGo->flight_ticket_id);
+                    if (!$passenger || !$passenger->save())
+                        throw new ErrorException();
+                }
+            }
 
             if ($flightBack != null) { // Verifica se o cliente também comprou um bilhete de volta
-                $flightBack = $this->getFlightTicket($flightBack);
-                $flightBack->flight->passengers_left -= $numPassengers;
-                if (!$flightBack->save() || !$flightBack->flight->save())
+                $this->setSeats($flightBack);
+                $flightTicketBack = $this->getNewFlightTicket($flightBack);
+                $flightBack->passengers_left -= $numPassengers;   // Altera os passageiros restantes que podem comprar bilhete no voo
+
+                if (!$flightTicketBack->save() || !$flightBack->save())
                     throw new ErrorException();
+                else {
+                    for ($i= 0; $i < $numPassengers; $i++){     // Adiciona os passageiros à tabela passengers
+                        $passenger = $this->getNewPassenger($i,$flightTicketBack->flight_ticket_id);
+                        if (!$passenger || $passenger->save())
+                            throw new ErrorException();
+                    }
+                }
             }
+
             $transaction->commit();
         } catch (ErrorException $e) {
             $transaction->rollBack();
@@ -143,24 +196,19 @@ class FlightReserveForm extends Model
         switch ($this->payment_method) {
             case self::CREDIT_CARD:
                 return PaymentMethod::findOne(1);
-                break;
             case self::DEBIT_CARD:
                 return PaymentMethod::findOne(2);
-                break;
             case self::MBWAY:
                 return PaymentMethod::findOne(3);
-                break;
             case self::MULTIBANCO:
                 return PaymentMethod::findOne(4);
-                break;
             case self::PAYPAL:
                 return PaymentMethod::findOne(5);
-                break;
         }
         return null;
     }
 
-    private function getFlightTicket(Flight $flight): ?FlightTicket
+    private function getNewFlightTicket(Flight $flight): ?FlightTicket
     {
         $flightTicket = new FlightTicket();
         $flightTicket->price = $flight->price - ($flight->discount_percentage / 100 * $flight->price);
@@ -170,5 +218,74 @@ class FlightReserveForm extends Model
         $flightTicket->flight_id = $flight->id;
         $flightTicket->payment_method_id = $this->getPaymentMethod()->id;
         return $flightTicket;
+    }
+
+    private function getNewPassenger(int $i, int $flightTicket_id): ?Passenger
+    {
+        $passenger = new Passenger();
+        $passenger->name = $this->name[$i];
+        $passenger->gender = $this->gender[$i];
+        $seat = $this->getRandomSeat($flightTicket_id);
+        if ($seat == null) return null;
+        $passenger->seat = $seat;
+        $passenger->extra_baggage = $this->extra_baggage[$i];
+        $passenger->flight_ticket_id = $flightTicket_id;
+        return $passenger;
+    }
+
+    public function setSeats(Flight $flight){
+        // intdiv = Divisao Inteira  // resultado = nºfilas do avião totalmente preenchidas(LETRAS)
+        $this->seats_available = null;
+        $numberOfRows = intdiv($flight->airplane->capacity, self::ROW_MAX_SEATS);
+
+        // $lastSeats = Resto da divisão  // Lugares extra (Não ocupa Row inteira)
+        $lastSeats = (float)($flight->airplane->capacity / self::ROW_MAX_SEATS);
+        $lastSeats = ($lastSeats - (int)$lastSeats)*self::ROW_MAX_SEATS;
+
+        $j = 0;
+        $letra = $this->getLetter($j);
+        for ($i= 0; $i < $numberOfRows; $i++) {     // Cria as filas de lugares
+            for ($k = 0;$k < self::ROW_MAX_SEATS;$k++){
+                $this->seats_available[] = $letra . ($k+1);
+            }
+
+            $j++;
+            $letra = $this->getLetter($j);
+        }
+
+        for ($i = 0; $i < $lastSeats;$i++)      //  Cria os ultimos lugares (os que não são uma fila completa)
+            $this->seats_available[] = $letra . ($i+1);
+    }
+
+    private function getLetter($j)       //  Algoritmo  para gerar seat (A1,A2...A6,AA1...AB1...AC1, etc) de acordo com a capacidade do avião
+    {
+        $remainder = (float)($j / 26);
+        $remainder = ($remainder - (int)$remainder) * 26;   // Primeira Letra do Seat
+        $intDivision = intdiv($j, 26);                // Segunda Letra do Seat
+
+        $letter = "";
+        if($intDivision != 0) $letter.= self::LETTERS[$intDivision-1];
+        $letter.= self::LETTERS[$remainder];
+        return $letter;
+    }
+
+    private function getRandomSeat($flight_ticket_id){
+        $canLeave = false;
+        $seat = null;
+        while (!$canLeave){
+            try {
+                $randomNumber = random_int(0, sizeof($this->seats_available)) - 1;
+                $seat = $this->seats_available[$randomNumber];
+                $passenger = Passenger::findOne(['flight_ticket_id' => $flight_ticket_id, 'seat' => $seat]);
+                if (!$passenger) {
+                    $canLeave  = true;
+                } else array_splice($this->seats_available,$randomNumber,1);    //Remove seat já utilizado do array
+
+                if (sizeof($this->seats_available) == 0) return null;
+            } catch (Exception $e) {
+                return null;
+            }
+        }
+        return $seat;
     }
 }
