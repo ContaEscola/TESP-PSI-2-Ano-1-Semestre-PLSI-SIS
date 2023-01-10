@@ -2,6 +2,8 @@
 
 /** @var yii\web\View $this */
 
+use yii\helpers\Html;
+
 $this->title = 'AeroControl';
 ?>
 <section class="even-columns text-white gap-0">
@@ -11,7 +13,7 @@ $this->title = 'AeroControl';
                 <h2 class="fs-500 fw-bold">Restaurantes</h2>
                 <p class="fw-medium">Conheça todos os restaurantes disponíveis no aeroporto!</p>
             </div>
-            <a href="#" class="button" data-type="secondary">Saber mais</a>
+            <?= Html::a('Saber mais', ['restaurant/index'], ['class' => 'button', 'data-type' => 'secondary']) ?>
         </div>
     </div>
     <div class="card-landing-page" data-type="store">
@@ -20,7 +22,7 @@ $this->title = 'AeroControl';
                 <h2 class="fs-500 fw-bold">Lojas</h2>
                 <p class="fw-medium">Conheça todas as lojas disponíveis no aeroporto!</p>
             </div>
-            <a href="#" class="button" data-type="secondary">Saber mais</a>
+            <?= Html::a('Saber mais', ['store/index'], ['class' => 'button', 'data-type' => 'secondary']) ?>
         </div>
     </div>
 </section>

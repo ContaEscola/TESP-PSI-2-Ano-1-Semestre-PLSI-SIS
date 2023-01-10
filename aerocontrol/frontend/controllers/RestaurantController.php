@@ -13,7 +13,7 @@ class RestaurantController extends Controller
 
 
     /**
-     * Lists all Flight models.
+     * Lists all Restaurant  models.
      *
      * @return string
      */

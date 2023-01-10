@@ -2,7 +2,6 @@
 
 /** @var \common\models\Restaurant $model */
 
-use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
