@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\Mosquitto;
 use Yii;
 
 /**
@@ -49,6 +50,15 @@ class TicketMessage extends \yii\db\ActiveRecord
             'sender_id' => 'ID do Emissor',
             'support_ticket_id' => 'ID do Ticket de Suporte',
         ];
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+        if ($insert){
+            $mosquitto = new Mosquitto();
+            $mosquitto->FazPublishNoMosquitto("ticket-".$this->supportTicket->id, 'Nova mensagem no ticket-' . $this->id . '"');
+        }
     }
 
     /**

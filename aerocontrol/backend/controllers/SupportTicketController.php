@@ -66,7 +66,7 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['conclude-ticket'],
-                            'roles' => ['updateSuportTicket'],
+                            'roles' => ['updateSupportTicket'],
                         ]
                     ],
                 ],
