@@ -4,11 +4,10 @@ namespace frontend\controllers;
 
 use common\models\Client;
 use common\models\SupportTicket;
-use common\models\TicketItem;
 use common\models\TicketMessage;
 use common\models\User;
 use frontend\models\SupportTicketForm;
-use frontend\models\TicketMessageForm;
+use common\models\TicketMessageForm;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
@@ -41,18 +40,16 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['@'],
+                            'roles' => ['viewSupportTicket'],
+                            'roleParams' => function () {
+                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
+                            },
                         ],
                         [
                             'allow' => true,
                             'actions' => ['create'],
                             'roles' => ['createSupportTicket'],
                         ],
-                        /*[
-                            'allow' => true,
-                            'actions' => ['view'],
-                            'roles' => ['createMessage'],
-                        ],*/
                         [
                             'allow' => true,
                             'actions' => ['view'],
@@ -122,7 +119,8 @@ class SupportTicketController extends Controller
         ]);
     }
 
-    public function actionView($ticket_id){
+    public function actionView($ticket_id)
+    {
         $model = new TicketMessageForm();
 
         $user = User::findOne(['id' => Yii::$app->user->getId()]);
@@ -143,10 +141,8 @@ class SupportTicketController extends Controller
         }
 
         return $this->render('view', [
+            'ticket' => $ticket,
             'client_id' => $ticket->client_id,
-            'ticket_title' => $ticket->title,
-            'ticket_state' => $ticket->state,
-            'ticket_id' => $ticket_id,
             'dataProvider' => $dataProvider,
             'model' => $model,
         ]);
@@ -157,7 +153,7 @@ class SupportTicketController extends Controller
         $model = SupportTicket::findOne($ticket_id);
         $model->state = SupportTicket::STATE_DONE;
 
-        if ($model->save()){
+        if ($model->save()) {
             return $this->redirect(['index']);
         }
     }
