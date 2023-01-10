@@ -120,9 +120,9 @@ class FlightTicketController extends Controller
         $model = new FlightReserveForm();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->validate()) { //&& $model->save()) {
+            if ($model->load($this->request->post()) && $model->validate()) {
                 if ($model->create($numPassengers, $flightGo, $flightBack)) {
-                    Yii::$app->session->setFlash("success", "Comprou o bilhete com sucesso. O pagamento vai  ser processado!");
+                    Yii::$app->session->setFlash("success", "Comprou o bilhete com sucesso. O pagamento vai ser processado!");
                     $userLogged = User::findOne(Yii::$app->user->id);
                     $model->sendEmail($userLogged, true);
                     if ($flightBack)
@@ -134,8 +134,9 @@ class FlightTicketController extends Controller
             }
         } else {
             $model->loadDefaultValues();
+            // var_dump($model->payment_method);
             if ($model->payment_method == null)
-                throw new ServerErrorHttpException("Não existem métodos de pagamento desponivel, tenta mais tarde!");
+                throw new ServerErrorHttpException("Não existem métodos de pagamento disponivel, tente mais tarde!");
         }
 
         return $this->render('flight-reserve', [

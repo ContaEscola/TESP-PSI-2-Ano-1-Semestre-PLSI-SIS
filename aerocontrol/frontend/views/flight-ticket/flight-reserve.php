@@ -11,7 +11,6 @@ use common\models\PaymentMethod;
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ListView;
 
 $this->title = "Reservar Voo";
 $this->registerJsFile('@web/js/flight-reserve.js');
@@ -132,7 +131,7 @@ $this->registerJsFile('@web/js/flight-reserve.js');
                                     $image = Url::to('@web/images/payment-methods-icon.svg#paypal-logo-icon');
                                     break;
                             }
-                            $return .= '">';
+                            $return .= '>';
 
                             $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" ' . ($checked ? 'checked' : "") . (!$paymentMethod->state ? 'disabled ' : '') . ' >';
                             $return .= '<span aria-hidden="true">';
@@ -185,19 +184,25 @@ $this->registerJsFile('@web/js/flight-reserve.js');
 
             <div class="divider"></div>
             <?= $form->field($model, 'read_terms', [
-                'options' => [
-                    'class' => 'd-flex gap-1 align-items-center margin-top-300',
-                ],
                 'errorOptions' => [
-                    'tag' => false,
+                    'tag' => 'p',
+                    'class' => 'input__error margin-top-50'
                 ]
-            ])->checkbox([
-                'template' => '<div class="d-flex gap-1 align-items-center margin-top-300">
-                            {input}{beginLabel}
-                                <label class="fs-200 fw-medium letter-spacing-2">{label}</label>
-                            {endLabel}{error}{hint}</div>',
-                'class' => 'fs-200 fw-medium letter-spacing-2',
-            ]) ?>
+            ])
+                ->label(null, [
+                    'class' => 'fs-200 fw-medium letter-spacing-2',
+                ])
+                ->checkbox([
+                    'template' => '<div class="d-flex gap-1 align-items-center margin-top-300">
+                                        {input}
+                                        {beginLabel}
+                                            {labelTitle}
+                                        {endLabel}
+                                    </div>
+                                    {error}
+                                    ',
+                    'class' => 'fs-200 fw-medium letter-spacing-2',
+                ]) ?>
             <?= Html::submitButton('Confirmar', [
                 'class' => 'form__submit-button button fill-sm d-block push-to-center-md',
                 'data-size' => 'large-md',
