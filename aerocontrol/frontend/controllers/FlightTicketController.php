@@ -123,6 +123,10 @@ class FlightTicketController extends Controller
             if ($model->load($this->request->post()) && $model->validate()) { //&& $model->save()) {
                 if ($model->create($numPassengers, $flightGo, $flightBack)) {
                     Yii::$app->session->setFlash("success", "Comprou o bilhete com sucesso. O pagamento vai  ser processado!");
+                    $userLogged = User::findOne(Yii::$app->user->id);
+                    $model->sendEmail($userLogged, true);
+                    if ($flightBack)
+                        $model->sendEmail($userLogged, false);
                     return $this->redirect(['index']);
                 } else {
                     Yii::$app->session->setFlash("error", "Ocorreu um erro ao comprar o bilhete.");

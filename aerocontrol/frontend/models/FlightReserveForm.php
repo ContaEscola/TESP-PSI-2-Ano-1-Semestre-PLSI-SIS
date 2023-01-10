@@ -6,6 +6,7 @@ use common\models\Flight;
 use common\models\FlightTicket;
 use common\models\Passenger;
 use common\models\PaymentMethod;
+use common\models\User;
 use Exception;
 use Yii;
 use yii\base\ErrorException;
@@ -63,6 +64,9 @@ class FlightReserveForm extends Model
     ];
 
     public $seats_available = array();
+
+    public $flightTicketGo;
+    public $flightTicketBack;
 
     public $read_terms;
     public $payment_method;
@@ -153,12 +157,13 @@ class FlightReserveForm extends Model
             $flightTicketGo = $this->getNewFlightTicket($flightGo);
             $flightGo->passengers_left -= $numPassengers;           // Altera os passageiros restantes que podem comprar bilhete no voo
 
-            if (!$flightTicketGo->save() || !$flightTicketGo->flight->save())
+            if (!$flightTicketGo->save() || !$flightGo->save())
                 throw new ErrorException();
             else {
+                $this->flightTicketGo = $flightTicketGo;
                 for ($i= 0; $i < $numPassengers; $i++){     // Adiciona os passageiros à tabela passengers
                     $passenger = $this->getNewPassenger($i,$flightTicketGo->flight_ticket_id);
-                    if (!$passenger || !$passenger->save())
+                    if ($passenger === null || !$passenger->save())
                         throw new ErrorException();
                 }
             }
@@ -171,9 +176,10 @@ class FlightReserveForm extends Model
                 if (!$flightTicketBack->save() || !$flightBack->save())
                     throw new ErrorException();
                 else {
+                    $this->flightTicketBack = $flightTicketBack;
                     for ($i= 0; $i < $numPassengers; $i++){     // Adiciona os passageiros à tabela passengers
                         $passenger = $this->getNewPassenger($i,$flightTicketBack->flight_ticket_id);
-                        if (!$passenger || $passenger->save())
+                        if ($passenger === null || !$passenger->save())
                             throw new ErrorException();
                     }
                 }
@@ -212,7 +218,7 @@ class FlightReserveForm extends Model
     {
         $flightTicket = new FlightTicket();
         $flightTicket->price = $flight->price - ($flight->discount_percentage / 100 * $flight->price);
-        $flightTicket->purchase_date = date('Y-m-d h:i:s');
+        $flightTicket->purchase_date = date('Y-m-d H:i:s');
         $flightTicket->checkin = false;
         $flightTicket->client_id = Yii::$app->user->id;
         $flightTicket->flight_id = $flight->id;
@@ -230,7 +236,7 @@ class FlightReserveForm extends Model
         $passenger->seat = $seat;
         $passenger->extra_baggage = $this->extra_baggage[$i];
         $passenger->flight_ticket_id = $flightTicket_id;
-        return $passenger;
+        return clone($passenger);
     }
 
     public function setSeats(Flight $flight){
@@ -287,5 +293,19 @@ class FlightReserveForm extends Model
             }
         }
         return $seat;
+    }
+
+    public function sendEmail(User $user, bool $flightGo = null)
+    {
+        return Yii::$app->mailer->compose(
+            ['html' => 'ticketBought-html', 'text' => 'ticketBought-text'],
+            ['user' => $user, 'flightTicket' => $flightGo ? $this->flightTicketGo : $this->flightTicketBack],
+        )
+            ->setTo($user->email)
+            ->setFrom([Yii::$app->params['senderEmail'] => Yii::$app->params['senderName']])
+            ->setSubject('Aerocontrol - '. ($flightGo ?
+                    $this->flightTicketGo->flight->originAirport->city . " - "  . $this->flightTicketGo->flight->arrivalAirport->city :
+                    $this->flightTicketBack->flight->originAirport->city . " - "  . $this->flightTicketBack->flight->arrivalAirport->city))
+            ->send();
     }
 }

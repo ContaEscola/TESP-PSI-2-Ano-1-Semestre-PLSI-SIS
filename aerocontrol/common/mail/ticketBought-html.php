@@ -42,5 +42,7 @@ use yii\helpers\Html;
         <?php endforeach; ?>
     </p>
 
-    <p>Caso queira efetuar o checkin ou cancelar o bilhete, pode fazê-lo através do nosso site ou da nossa aplicação! Aerocontrol!</p>
+    <p>
+        Caso queira efetuar o checkin ou cancelar o bilhete, pode fazê-lo através do nosso site ou da nossa aplicação! Aerocontrol!
+    </p>
 </div>
