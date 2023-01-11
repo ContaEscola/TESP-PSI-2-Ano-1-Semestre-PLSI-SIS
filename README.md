@@ -13,7 +13,7 @@ Grupo B
 5. Executar o comando ".\yii migrate" no terminal
 
 ## Instruções para execução dos testes
-Este projeto já vem por defeito com o 'php init 0' para conseguir testar cada teste.
+Este projeto já vem por defeito com o 'php init 0'(development environment) para conseguir testar cada teste.
 
 ### Teste Unitários
 >php vendor/bin/codecept run unit -c common
