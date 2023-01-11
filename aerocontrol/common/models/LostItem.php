@@ -124,14 +124,14 @@ class LostItem extends \yii\db\ActiveRecord
         // Se estivermos num update
         if (!$insert) {
             // Se existir uma nova imagem então dá delete da antiga, é dá upload da nova
-            if (!is_null($this->imageFile)) {
+            if ($this->imageFile !== null) {
                 $this->deleteImage();
                 if (!$this->upload())
                     return false;
             }
         } else {
             // Se o [[$this->imageFile]] não for null, ou seja, não escolheu uma imagem, então não é preciso fazer o upload
-            if (!is_null($this->imageFile)) {
+            if ($this->imageFile !== null) {
                 if (!$this->upload())
                     return false;
             }

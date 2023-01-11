@@ -16,14 +16,14 @@ class LostItemCest
 
     public function createLostItemEmptyForm(FunctionalTester $I)
     {
-        $I->see("Criar item perdido e achado", 'h1');
+        $I->see("Criar item", 'h1');
         $I->submitForm('#lost-item-form', []);
         $I->seeValidationError("Descrição não pode ser vazio.");
     }
 
     public function createLostItem(FunctionalTester $I)
     {
-        $I->see("Criar item perdido e achado", 'h1');
+        $I->see("Criar item", 'h1');
         $I->submitForm('#lost-item-form', [
             'LostItem[description]' => 'Item novo',
             'LostItem[state]' => 'Por entregar',

@@ -27,13 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
 
-        <?= Html::a('Apagar restaurante', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Tem a certeza que quer eliminar o restaurante?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php if(!isset(Yii::$app->authManager->getRolesByUser(Yii::$app->user->getId())['manager'])) {
+            echo Html::a('Apagar restaurante', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Tem a certeza que quer eliminar o restaurante?',
+                    'method' => 'post',
+                ],
+            ]);
+        }?>
     </div>
 
     <?= DetailView::widget([

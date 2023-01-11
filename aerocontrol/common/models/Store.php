@@ -165,15 +165,17 @@ class Store extends \yii\db\ActiveRecord
 
         // Se estivermos num update
         if (!$insert) {
+            $store = Store::findOne($this->id);
+            $store->changeUploadDirName($this->getUploadPath());
             // Se existir um novo logo então dá delete do antigo, é dá upload do novo
-            if (!is_null($this->logoFile)) {
+            if ($this->logoFile !== null) {
                 $this->deleteLogo();
                 if (!$this->upload())
                     return false;
             }
         } else {
             // Se o [[$this->logoFile]] não for null, ou seja, não escolheu um logo, então não é preciso fazer o upload
-            if (!is_null($this->logoFile)) {
+            if ($this->logoFile !== null) {
                 if (!$this->upload())
                     return false;
             }
@@ -207,7 +209,7 @@ class Store extends \yii\db\ActiveRecord
         if (!FileHelper::createDirectory($this->getUploadPath()))
             return false;
 
-        $image_name =  $this->name . '_' . date("d-m-Y_H-i") . '.' . $this->logoFile->extension;
+        $image_name = "Logo_" . date("d-m-Y_H-i") . '.' . $this->logoFile->extension;
         $image_path = $this->getUploadPath() . '/'  . $image_name;
 
         if ($this->logoFile->saveAs($image_path)) {
@@ -216,6 +218,10 @@ class Store extends \yii\db\ActiveRecord
         }
 
         return false;
+    }
+
+    private function changeUploadDirName($store_new_name){
+        return rename($this->getUploadPath(),$store_new_name);
     }
 
     /**
