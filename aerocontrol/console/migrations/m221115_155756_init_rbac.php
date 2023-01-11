@@ -98,38 +98,38 @@ class m221115_155756_init_rbac extends Migration
             SupportTicket Messages Permissions
         */
         $createMessage = $auth->createPermission('createMessage');
-        $createMessage->description = "Criar Messagem";
+        $createMessage->description = "Criar mensangem";
         $auth->add($createMessage);
 
         $updateMessage = $auth->createPermission('updateMessage');
-        $updateMessage->description = "Atualizar Messagem";
+        $updateMessage->description = "Atualizar mensangem";
         $auth->add($updateMessage);
 
         $viewMessage = $auth->createPermission('viewMessage');
-        $viewMessage->description = "Visualizar Messagem";
+        $viewMessage->description = "Visualizar mensangem";
         $auth->add($viewMessage);
 
         $deleteMessage = $auth->createPermission('deleteMessage');
-        $deleteMessage->description = "Apagar Mensagem";
+        $deleteMessage->description = "Apagar mensangem";
         $auth->add($deleteMessage);
 
         /*
             TicketItem Permissions
         */
         $addTicketItem = $auth->createPermission('addTicketItem');
-        $addTicketItem->description = "Adicionar Ticket-Item";
+        $addTicketItem->description = "Adicionar ticket item";
         $auth->add($addTicketItem);
 
         $viewTicketItem = $auth->createPermission('viewTicketItem');
-        $viewTicketItem->description = "Visualizar Ticket-Item";
+        $viewTicketItem->description = "Visualizar ticket item";
         $auth->add($viewTicketItem);
 
         $updateTicketItem = $auth->createPermission('updateTicketItem');
-        $updateTicketItem->description = "Atualizar Ticket-Item";
+        $updateTicketItem->description = "Atualizar ticket item";
         $auth->add($updateTicketItem);
 
         $deleteTicketItem = $auth->createPermission('deleteTicketItem');
-        $deleteTicketItem->description = "Eliminar Ticket-Item";
+        $deleteTicketItem->description = "Eliminar ticket item";
         $auth->add($deleteTicketItem);
 
         /*
@@ -353,15 +353,15 @@ class m221115_155756_init_rbac extends Migration
             SupportTicket Permissions
         */
         $createSupportTicket = $auth->createPermission('createSupportTicket');
-        $createSupportTicket->description = "Criar Suport Ticket";
+        $createSupportTicket->description = "Criar suporte ticket";
         $auth->add($createSupportTicket);
 
         $updateSupportTicket = $auth->createPermission('updateSupportTicket');
-        $updateSupportTicket->description = "Atualizar Suport Ticket";
+        $updateSupportTicket->description = "Atualizar suporte ticket";
         $auth->add($updateSupportTicket);
 
         $viewSupportTicket = $auth->createPermission('viewSupportTicket');
-        $viewSupportTicket->description = "Visualizar Suport Ticket";
+        $viewSupportTicket->description = "Visualizar suporte ticket";
         $auth->add($viewSupportTicket);
 
         /*
@@ -442,7 +442,7 @@ class m221115_155756_init_rbac extends Migration
         $deleteOwnTicket->description = "Apagar bilhete";
         $deleteOwnTicket->ruleName = $clientRule->name;
         $auth->add($deleteOwnTicket);
-        $auth->addChild($deleteOwnTicket,$deleteTicket);
+        $auth->addChild($deleteOwnTicket, $deleteTicket);
 
         $updateOwnTicket = $auth->createPermission("updateOwnTicket");
         $updateOwnTicket->description = "Atualizar bilhete";
@@ -455,13 +455,13 @@ class m221115_155756_init_rbac extends Migration
         */
 
         $viewOwnSupportTicket = $auth->createPermission("viewOwnSupportTicket");
-        $viewOwnSupportTicket->description = "Visualizar Support Ticket";
+        $viewOwnSupportTicket->description = "Visualizar Suporte Ticket";
         $viewOwnSupportTicket->ruleName = $clientRule->name;
         $auth->add($viewOwnSupportTicket);
         $auth->addChild($viewOwnSupportTicket, $viewSupportTicket);
 
         $updateOwnSupportTicket = $auth->createPermission("updateOwnSupportTicket");
-        $updateOwnSupportTicket->description = "Atualizar Support Ticket";
+        $updateOwnSupportTicket->description = "Atualizar Suporte Ticket";
         $updateOwnSupportTicket->ruleName = $clientRule->name;
         $auth->add($updateOwnSupportTicket);
         $auth->addChild($updateOwnSupportTicket, $updateSupportTicket);
