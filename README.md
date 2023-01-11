@@ -53,4 +53,4 @@ password: 12345678
 >username: santos
 password: 12345678
 
-*Existem mais funcionários e clientes como é possivel ver na BD, para efeutar o login com qualquer um dos funcionários ou clientes a password é "12345678"*
+*Existem mais funcionários e clientes como é possivel ver na BD, para efetuar o login com qualquer um dos funcionários ou clientes a password é "12345678"*
