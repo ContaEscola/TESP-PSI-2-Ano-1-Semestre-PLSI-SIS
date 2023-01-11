@@ -205,7 +205,8 @@ class FlightReserveForm extends Model
     private function getNewFlightTicket(Flight $flight): ?FlightTicket
     {
         $flightTicket = new FlightTicket();
-        $flightTicket->price = $flight->price - ($flight->discount_percentage / 100 * $flight->price);
+        $price = $flight->price - ($flight->discount_percentage / 100 * $flight->price);
+        $flightTicket->price = $price * sizeof($this->name);
         $flightTicket->purchase_date = date('Y-m-d H:i:s');
         $flightTicket->checkin = false;
         $flightTicket->client_id = Yii::$app->user->id;

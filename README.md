@@ -8,18 +8,22 @@ Grupo B
 ## Instruções 
 1. Executar o script SQL "aerocontrol/db/tabelas.sql" (Em caso de erro, ir às definções do MySQL e alterar o "innodb-default-row-format" para "dynamic").
 2. Executar o script SQL "aerocontrol/db/registos.sql"
-3. Abrir o terminal e executar o "composer install" na base do projeto;
-4. Executar o comando "php init" e selecionar a opção 1, no terminal.
-5. Abrir o ficheiro common/config/main-local.php e alterar o dsn, substituir:
+3. Abrir o projeto, abrir o terminal e executar o "composer install" na base do projeto (pasta aerocontrol);
+4. Executar o comando ".\yii migrate --migrationPath=@yii/rbac/migrations" no terminal.
+5. Executar o comando ".\yii migrate" no terminal
 
->'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
- 
- por:
- 
->'dsn' => 'mysql:host=localhost;dbname=aerocontrol',
+## Instruções para execução dos testes
+### Teste Unitários
+>php vendor/bin/codecept run unit -c common
 
-6. Executar o comando ".\yii migrate --migrationPath=@yii/rbac/migrations" no terminal.
-7. Executar o comando ".\yii migrate" no terminal
+>php vendor/bin/codecept run unit -c frontend
+
+### Teste Funcionais
+>php vendor/bin/codecept run functional -c backend
+
+>php vendor/bin/codecept run functional -c frontend
+
+
 
 ## Credenciais
 
@@ -38,18 +42,15 @@ password: 12345678
 
 ### Cliente
 
->username: Antonio
+>username: antonio
 password: 12345678
 
->username: Joaquim
+>username: joaquim
 password: 12345678
 
 ### Gerente
 
->username: Santos
+>username: santos
 password: 12345678
 
-
-# Known Issues
-
-- Na gestão de restaurantes (backend), ao atualizar um restaurante quando remove o logo do file input, se existir já um na DB, este não atualiza a DB para ficar null.
+*Existem mais funcionários e clientes como é possivel ver na BD, para efeutar o login com qualquer um dos funcionários ou clientes a password é "12345678"*

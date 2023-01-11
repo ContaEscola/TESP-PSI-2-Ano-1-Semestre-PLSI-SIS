@@ -40,10 +40,7 @@ class SupportTicketController extends Controller
                         [
                             'allow' => true,
                             'actions' => ['index'],
-                            'roles' => ['viewSupportTicket'],
-                            'roleParams' => function () {
-                                return ['supportTicket' => SupportTicket::findOne(['client_id' => Yii::$app->user->id])];
-                            },
+                            'roles' => ['@'],
                         ],
                         [
                             'allow' => true,

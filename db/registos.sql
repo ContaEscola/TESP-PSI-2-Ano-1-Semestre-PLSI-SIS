@@ -10,7 +10,7 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (1, 'rafael', '3LCUGMKxZPpzr34KJQqnRHerxvb9H-GD', '$2y$13$siIFsVQTb.Xw.SCmxCkkeOpP/jUmewhYu8kYaxdeH5XPFHyK1FCe6', NULL, 'Rafael', 'Bento', 'Masculino', 'Portugal', 'Lisboa', '2002-08-07', 'rafael@email.pt', '912345678', '+351', 10, 1667385991, 1667392931, 'iBlapCIFv2HLg6_itfyyr-xsERf_b287_1667385991'),
 (2, 'pedro', 'JO3nV-1f2xjjEfqBrOw-EhJDGgAgFBvT', '$2y$13$t0EbTzLBtr2jKt5SteKVReIEyizI4lBopTTFJggFMjgj1odid.HpG', NULL, 'Pedro', 'Norberto', 'Masculino', 'Portugal', 'Lisboa', '2002-11-13', 'pedro@email.pt', '913412581', '+351', 10, 1667390821, 1667392906, 'fd73elasjLW11GrxlDenw2dcPfzWBA6h_1667390821'),
 (3, 'manuel', 'E3JGSTaNM8D7MbTdd7VyXWKn2nMPN6kO', '$2y$13$WYKf.WWmQEb4Hd2FpvUsGer/Lq7bTQFaVm6WerOJjNmCBMBzXn.Yy', NULL, 'Manuel', 'Henriques', 'Masculino', 'Portugal', 'Lisboa', '2002-11-08', 'pedrohenriques@gmail.pt', '998877665', '+351', 10, 1667394488, 1667394488, 'aQ1CM8RK8jZVZo27pg8KI_EZXNCFCspR_1667394488'),
-(4,'antonio', 'sOAZ_ou8A8ZImJjZ8C5R9mYrnSn3MjdR', '$2y$13$yRY3c2CeOV5472uQQQbyq.EXV3j1QZs9nZwg4ulAGMnHK/PhiKykC', NULL, 'Antonio', 'Alberto', 'Masculino', 'Portugal', 'Torres Vedras', '2002-10-30', 'antonio.alberto@live.com', '911111111', '+351', 10, 1668529982, 1668529982, 'ny7bgoj7mvW732Kv1pBHzTF7A2cu3l66_1668529982'),
+(4,'antonio', 'sOAZ_ou8A8ZImJjZ8C5R9mYrnSn3MjdR', '$2y$13$yRY3c2CeOV5472uQQQbyq.EXV3j1QZs9nZwg4ulAGMnHK/PhiKykC', NULL, 'António', 'Alberto', 'Masculino', 'Portugal', 'Torres Vedras', '2002-10-30', 'antonio.alberto@live.com', '911111111', '+351', 10, 1668529982, 1668529982, 'ny7bgoj7mvW732Kv1pBHzTF7A2cu3l66_1668529982'),
 (5,'joaquim', 'SsqujPrZXyG1tLKUwF8XP0YfJWmmSh6n', '$2y$13$sq4r3qgKLBhjAuwehOnwju4f8RGh9kL04/Vzn0ntzq3KDY9kmbx1O', NULL, 'Joaquim', 'Antunes', 'Masculino', 'Portugal', 'Torres Vedras', '2022-11-13', 'joaquim.antunes@live.com', '911111111', '+351', 10, 1668530463, 1668531494, '62ZbfYy0ohnj5WoQjEYaUbNYaCnuBOi0_1668530463'),
 (6, 'Joao', 'ONt0Widq05eyWiqSTSV5WxrS59J3zTFw', '$2y$13$ADCs0vpkBh1WWHHtG2kouuulmhZi7cRETBfL2Ig4yl4m.mGweo3RW', NULL, 'João', 'Pedro', 'Masculino', 'Portugal', 'Lisba', '2006-01-30', 'pedro@gmail.pt', '9132122321', '+351', 10, 1668591776, 1668591776, 'NOxk0W2NbArDSVrzGPpNAU9pQUb4b34H_1668591776'),
 (7, 'Sandra', 'IfJ1kqp0kLeDSiGvqHv9_s-sYlpAhvRN', '$2y$13$Lw45a9c0AdueKewROmVT7.4aQqy/L7vemGMXyaGNzy1mLvkML4LCa', NULL, 'Sandra', 'Maria', 'Feminino', 'Portugal', 'Porto', '2000-10-22', 'sanda@gmail.pt', '912315860', '+351', 10, 1669143539, 1669143539, 'nz-hwMd3VkJkbciwqRuHC0uodlRRr8Vp_1669143539'),
@@ -59,19 +59,19 @@ INSERT INTO `client` (client_id) VALUES
 (15);
 
 INSERT INTO `store` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
-(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Acium_16-12-2022_12-27.jpg', 'https://acium.pt'),
-(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Benfica Official Store_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
-(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Hugo boss_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
-(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Lacoste_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
-(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Fnac_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
+(1, 'Acium', 'A Acium apresenta uma proposta única no segmento de joias, refletindo a sua energia criativa e moderna, e um estilo de vida em que o minimalismo e simplicidade são fortemente marcados pelas cores universais preto e branco.', '912965258', '08:00:00', '20:00:00', 'Logo_16-12-2022_12-27.jpg', 'https://acium.pt'),
+(2, 'Benfica Official Store', 'Para os amantes de vermelho e branco visitar esta loja é obrigatório. Equipe-se com as cores do seu clube do coração.', '986542687', '06:00:00', '23:30:00', 'Logo_16-12-2022_12-30.jpg', 'https://www.slbenfica.pt/pt-pt/loja'),
+(3, 'Hugo boss', 'Hugo Boss é sinónimo de moda. As suas coleções dinâmicas e cosmopolitas variam entre os visuais desportivos e jovens, e os estilos mais requintados e luxuosos', '984256325', '06:00:00', '22:00:00', 'Logo_16-12-2022_12-32.jpg', 'https://www.hugoboss.com/pt/pt/home'),
+(4, 'Lacoste', 'Originalmente criada como marca desportiva, Lacoste continua a inovar no mundo da moda e acessórios, sendo um símbolo de elegância intemporal desde 1933.', '9856321456', '06:00:00', '22:00:00', 'Logo_16-12-2022_12-35.png', 'https://www.lacoste.com/pt/'),
+(5, 'Fnac', 'Para quem procura o melhor entretenimento para a sua viagem, esta é uma paragem obrigatória - literatura, música, videojogos, gadgets e, ainda, uma divertida área dedicada aos mais novos, a Fnac Kids.', '965124369', '07:00:00', '09:00:00', 'Logo_16-12-2022_12-38.jpg', 'https://www.fnac.pt');
 
 
 INSERT INTO `restaurant` (`id`, `name`, `description`, `phone`, `open_time`, `close_time`, `logo`, `website`) VALUES
-(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Burger King_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
-(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Delta_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
-(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'KFC_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
-(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'McDonalds_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
-(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Starbucks_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
+(1, 'Burger King', 'Restaurante de hamburguers', '911111111', '05:00:00', '23:59:00', 'Logo_15-12-2022_20-49.png', 'https://www.burgerking.pt/home'),
+(2, 'Delta', 'Café', '912222222', NULL, NULL, 'Logo_15-12-2022_20-50.png', 'https://www.deltacafes.pt/'),
+(3, 'KFC', 'Restaurante de carne', '913333333', '08:00:00', '23:59:00', 'Logo_15-12-2022_20-52.png', 'https://www.kfc.pt/'),
+(4, 'McDonalds', 'Restaurante de hamburguers', '914444444', '08:00:00', '02:00:00', 'Logo_15-12-2022_20-53.png', 'https://www.mcdonalds.pt/'),
+(5, 'Starbucks', 'Café e pastelaria', '915555555', '09:00:00', '22:00:00', 'Logo_15-12-2022_20-55.png', 'https://www.starbucks.pt/');
 
 INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) VALUES
 (1, 'Big Mac', 'Big Mac_15-12-2022_20-49.png', 1, 4),
@@ -90,13 +90,6 @@ INSERT INTO `restaurant_item` (`id`, `item`, `image`, `state`, `restaurant_id`) 
 
 INSERT INTO `manager`(`manager_id`,`restaurant_id`) VALUES
 (16,1);
-
-
-
-
-
-
-
 
 INSERT INTO `company` (`id`, `name`, `state`) VALUES
 (1, 'TAP Portugal', 1),
@@ -129,50 +122,77 @@ INSERT INTO `airport` (`id`, `country`, `city`, `name`, `website`) VALUES
 
 INSERT INTO `payment_method` (`id`,`name`,`state`) VALUES
 (1,'Cartão de crédito',1),
-(2,'Cartão de débito',0),
-(3,'MBWay',1),
+(2,'Cartão de débito',1),
+(3,'MBWay',0),
 (4,'Multibanco',1),
-(5,'Paypal',1);
+(5,'Paypal',0);
 
 
 INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
-(1, 'Camisa às riscas azul e branca.', 'Perdido', '19-12-2022_20-03-20.jpg'),
-(2, 'Camisa vermelha, marca BOSS.', 'Por entregar', '19-12-2022_20-04-20.jpg'),
-(3, 'Casaco azul de inverno para mulher.', 'Entregue', '19-12-2022_20-06-34.jpg'),
-(4, 'Casaco cinzento da Lacoste.', 'Entregue', '19-12-2022_20-09-46.jpg'),
+(1, 'Camisa às riscas azul e branca.', 'Entregue', '19-12-2022_20-03-20.jpg'),
+(2, 'Camisa vermelha, marca BOSS.', 'Perdido', '19-12-2022_20-04-20.jpg'),
+(3, 'Casaco azul de inverno para mulher.', 'Perdido', '19-12-2022_20-06-34.jpg'),
+(4, 'Casaco cinzento da Lacoste.', 'Perdido', '19-12-2022_20-09-46.jpg'),
 (5, 'Casaco preto da carhatt de inverno.', 'Perdido', '19-12-2022_20-10-56.jpg'),
 (6, 'Mala de viagem cinzenta com 20kg.', 'Perdido', '19-12-2022_20-11-37.jfif'),
 (7, 'Mala de viagem preta 20kg', 'Perdido', '19-12-2022_20-12-20.jpg'),
 (8, 'Mala de viagem verde da PepeJeans de 10kg', 'Perdido', '19-12-2022_20-12-56.jpg'),
 (9, 'Mala de viagem vermelha com código na parte lateral de 20kg', 'Perdido', '19-12-2022_20-13-29.jpg'),
-(10, 'Mala de viagem azul da ITACA de 20kg', 'Por entregar', '19-12-2022_20-14-19.jpeg'),
-(11, 'Mochila de escola da Nike azul.', 'Entregue', '19-12-2022_20-15-13.jpg'),
-(12, 'Mochila de escola da Nike cor-de-rosa.', 'Por entregar', '19-12-2022_20-15-48.png');
+(10, 'Mala de viagem azul da ITACA de 20kg', 'Perdido', '19-12-2022_20-14-19.jpeg'),
+(11, 'Mochila de escola da Nike azul.', 'Perdido', '19-12-2022_20-15-13.jpg'),
+(12, 'Mochila de escola da Nike cor-de-rosa.', 'Perdido', '19-12-2022_20-15-48.png');
 
 INSERT INTO `flight`
 (`id`, `terminal`, `estimated_departure_date`, `estimated_arrival_date`, `departure_date`, `arrival_date`, `price`, `distance`, `state`,`passengers_left`, `discount_percentage`, `origin_airport_id`, `arrival_airport_id`, `airplane_id`)
 VALUES
-(1, 'T1', '2023-05-07 13:30:00', '2023-05-07 22:30:00', '2023-05-07 13:30:00', '2023-05-07 22:30:00', 100, 279, 'Previsto', 120, 10, 1, 3, 1),
-(2, 'T2', '2023-05-15 08:00:00', '2023-05-16 00:25:00', '2023-05-15 08:00:00', '2023-05-16 00:25:00', 130, 1109, 'Previsto', 100, 5, 6, 7, 2),
-(3, 'T3', '2023-05-30 09:45:00', '2023-05-30 23:45:00', '2023-05-30 09:45:00', '2023-05-30 23:45:00', 200, 1223, 'Previsto', 120, 0, 4, 9, 1);
+(1, 'T1', '2023-01-28 13:30:00', '2023-01-28 15:00:00', '2023-01-28 13:30:00', '2023-01-28 15:00:00', 100, 300, 'Previsto', 120, 0, 1, 3, 1),
+(2, 'T2', '2023-01-28 08:00:00', '2023-01-28 09:30:00', '2023-01-28 08:00:00', '2023-01-28 09:30:00', 130, 300, 'Previsto', 100, 5, 1, 3, 2),
+(3, 'T3', '2023-01-30 08:00:00', '2023-01-30 09:30:00', '2023-01-30 08:00:00', '2023-01-30 09:30:00', 100, 300, 'Previsto', 135, 0, 3, 1, 3),
+(4, 'T2', '2023-01-31 11:00:00', '2023-01-31 12:30:00', '2023-01-31 11:00:00', '2023-01-31 12:30:00', 130, 300, 'Previsto', 12, 0, 3, 1, 8),
+(5, 'T1', '2023-02-26 12:00:00', '2023-02-26 14:30:00', '2023-02-26 12:00:00', '2023-02-26 14:30:00', 100, 279, 'Previsto', 80, 0, 3, 1, 5),
+(6, 'T3', '2023-03-15 21:00:00', '2023-03-16 23:25:00', '2023-03-15 21:00:00', '2023-03-16 23:25:00', 130, 1109, 'Previsto', 60, 5, 6, 7, 6),
+(7, 'T1', '2023-03-07 16:30:00', '2023-03-07 17:30:00', '2023-03-07 16:30:00', '2023-03-07 17:30:00', 100, 279, 'Previsto', 12, 0, 1, 3, 7),
+(8, 'T1', '2023-03-15 07:00:00', '2023-03-16 10:25:00', '2023-03-15 07:00:00', '2023-03-16 10:25:00', 130, 1109, 'Previsto', 120, 5, 6, 7, 1),
+(9, 'T3', '2023-04-07 13:30:00', '2023-04-07 15:30:00', '2023-04-07 13:30:00', '2023-04-07 15:30:00', 100, 279, 'Previsto', 100, 0, 1, 3, 2),
+(10, 'T2', '2023-04-15 09:00:00', '2023-04-16 10:25:00', '2023-04-15 09:00:00', '2023-04-16 10:25:00', 130, 1109, 'Previsto', 135, 5, 6, 7, 3),
+(11, 'T3', '2023-04-07 13:30:00', '2023-04-07 22:30:00', '2023-04-07 13:30:00', '2023-04-07 22:30:00', 100, 279, 'Previsto', 200, 0, 1, 3, 4),
+(12, 'T2', '2023-04-15 17:00:00', '2023-04-16 18:25:00', '2023-04-15 17:00:00', '2023-04-16 18:25:00', 130, 1109, 'Previsto', 60, 5, 6, 7, 6),
+(13, 'T1', '2023-04-07 13:30:00', '2023-04-07 22:30:00', '2023-04-07 13:30:00', '2023-04-07 22:30:00', 100, 279, 'Previsto', 80, 0, 1, 3, 5),
+(14, 'T2', '2023-05-15 08:00:00', '2023-05-16 12:25:00', '2023-05-15 08:00:00', '2023-05-16 12:25:00', 130, 1109, 'Previsto', 12, 5, 6, 7, 8),
+(15, 'T1', '2023-05-07 21:30:00', '2023-05-07 22:30:00', '2023-05-07 21:30:00', '2023-05-07 22:30:00', 100, 279, 'Previsto', 120, 0, 1, 3, 1),
+(16, 'T2', '2023-05-15 03:00:00', '2023-05-16 04:25:00', '2023-05-15 03:00:00', '2023-05-16 04:25:00', 130, 1109, 'Previsto', 100, 0, 6, 7, 2),
+(17, 'T3', '2023-05-30 23:45:00', '2023-05-30 01:45:00', '2023-05-30 23:45:00', '2023-05-30 01:45:00', 200, 1223, 'Previsto', 80, 0, 4, 9, 5);
 
 INSERT INTO `flight_ticket` 
 (`flight_ticket_id`, `price`, `purchase_date`, `checkin`, `client_id`, `flight_id`, `payment_method_id`) 
 VALUES
-(1, 90, '2022-12-25 13:30:00', 0, 4, 1, 1);
+(1, 100, '2022-12-25 13:30:00', 0, 4, 1, 1),
+(2, 100, '2023-01-01 10:45:00', 0, 5, 1, 2),
+(3, 100, '2023-01-03 13:30:00', 0, 4, 3, 4),
+(4, 100, '2022-12-25 13:30:00', 0, 5, 4, 1),
+(5, 100, '2022-12-25 13:30:00', 0, 4, 15, 3),
+(6, 130, '2022-12-25 13:30:00', 0, 4, 17, 1);
 
 INSERT INTO `passenger`
 (`id`, `name`, `gender`, `extra_baggage`, `seat`, `flight_ticket_id`)
 VALUES
 (1, 'António Alberto', 'Masculino', 0, 'A1', 1),
-(2, 'Manuel Santos', 'Masculino', 0, 'A2', 1);
+(2, 'Joaquim Antunes', 'Masculino', 0, 'B6', 2),
+(3, 'António Alberto', 'Masculino', 0, 'C1', 3),
+(4, 'Joaquim Antunes', 'Masculino', 0, 'R1', 4),
+(5, 'António Alberto', 'Masculino', 0, 'A1', 5),
+(6, 'António Alberto', 'Masculino', 0, 'A2', 6);
 
 INSERT INTO `support_ticket` (`id`,`title`,`state`,`client_id`) VALUES
-    (1, 'Camisola Perdida', 'Em Progresso', 4),
-    (2, 'Mala de Viagem' , 'Concluido', 5);
+(1, 'Camisola Perdida', 'Concluido', 4),
+(2, 'Mala Perdida', 'Por Rever', 4),
+(3, 'Mala de Viagem' , 'Por Rever', 5);
 
 INSERT INTO `ticket_item` (`lost_item_id`,`support_ticket_id`) VALUES
-    (1,2);
+(1,1);
 
 INSERT INTO `ticket_message` (`id`, `message`, `sender_id`, `support_ticket_id`) VALUES
-    (1, 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.', 4,1);
+(1, 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de janeiro.', 4,1),
+(2, 'Olá, a sua camisola é uma camisola às riscas azul e branca?',2,1),
+(3, 'Sim!',4,1),
+(4, 'Confira se é a camisola indicada na sua lista de bilhetes, em caso de ser o indicado conclua o ticket, obrigado.',2,1);
