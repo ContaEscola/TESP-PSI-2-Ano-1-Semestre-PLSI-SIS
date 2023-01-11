@@ -10,7 +10,7 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 (1, 'rafael', '3LCUGMKxZPpzr34KJQqnRHerxvb9H-GD', '$2y$13$siIFsVQTb.Xw.SCmxCkkeOpP/jUmewhYu8kYaxdeH5XPFHyK1FCe6', NULL, 'Rafael', 'Bento', 'Masculino', 'Portugal', 'Lisboa', '2002-08-07', 'rafael@email.pt', '912345678', '+351', 10, 1667385991, 1667392931, 'iBlapCIFv2HLg6_itfyyr-xsERf_b287_1667385991'),
 (2, 'pedro', 'JO3nV-1f2xjjEfqBrOw-EhJDGgAgFBvT', '$2y$13$t0EbTzLBtr2jKt5SteKVReIEyizI4lBopTTFJggFMjgj1odid.HpG', NULL, 'Pedro', 'Norberto', 'Masculino', 'Portugal', 'Lisboa', '2002-11-13', 'pedro@email.pt', '913412581', '+351', 10, 1667390821, 1667392906, 'fd73elasjLW11GrxlDenw2dcPfzWBA6h_1667390821'),
 (3, 'manuel', 'E3JGSTaNM8D7MbTdd7VyXWKn2nMPN6kO', '$2y$13$WYKf.WWmQEb4Hd2FpvUsGer/Lq7bTQFaVm6WerOJjNmCBMBzXn.Yy', NULL, 'Manuel', 'Henriques', 'Masculino', 'Portugal', 'Lisboa', '2002-11-08', 'pedrohenriques@gmail.pt', '998877665', '+351', 10, 1667394488, 1667394488, 'aQ1CM8RK8jZVZo27pg8KI_EZXNCFCspR_1667394488'),
-(4,'antonio', 'sOAZ_ou8A8ZImJjZ8C5R9mYrnSn3MjdR', '$2y$13$yRY3c2CeOV5472uQQQbyq.EXV3j1QZs9nZwg4ulAGMnHK/PhiKykC', NULL, 'Antonio', 'Alberto', 'Masculino', 'Portugal', 'Torres Vedras', '2002-10-30', 'antonio.alberto@live.com', '911111111', '+351', 10, 1668529982, 1668529982, 'ny7bgoj7mvW732Kv1pBHzTF7A2cu3l66_1668529982'),
+(4,'antonio', 'sOAZ_ou8A8ZImJjZ8C5R9mYrnSn3MjdR', '$2y$13$yRY3c2CeOV5472uQQQbyq.EXV3j1QZs9nZwg4ulAGMnHK/PhiKykC', NULL, 'António', 'Alberto', 'Masculino', 'Portugal', 'Torres Vedras', '2002-10-30', 'antonio.alberto@live.com', '911111111', '+351', 10, 1668529982, 1668529982, 'ny7bgoj7mvW732Kv1pBHzTF7A2cu3l66_1668529982'),
 (5,'joaquim', 'SsqujPrZXyG1tLKUwF8XP0YfJWmmSh6n', '$2y$13$sq4r3qgKLBhjAuwehOnwju4f8RGh9kL04/Vzn0ntzq3KDY9kmbx1O', NULL, 'Joaquim', 'Antunes', 'Masculino', 'Portugal', 'Torres Vedras', '2022-11-13', 'joaquim.antunes@live.com', '911111111', '+351', 10, 1668530463, 1668531494, '62ZbfYy0ohnj5WoQjEYaUbNYaCnuBOi0_1668530463'),
 (6, 'Joao', 'ONt0Widq05eyWiqSTSV5WxrS59J3zTFw', '$2y$13$ADCs0vpkBh1WWHHtG2kouuulmhZi7cRETBfL2Ig4yl4m.mGweo3RW', NULL, 'João', 'Pedro', 'Masculino', 'Portugal', 'Lisba', '2006-01-30', 'pedro@gmail.pt', '9132122321', '+351', 10, 1668591776, 1668591776, 'NOxk0W2NbArDSVrzGPpNAU9pQUb4b34H_1668591776'),
 (7, 'Sandra', 'IfJ1kqp0kLeDSiGvqHv9_s-sYlpAhvRN', '$2y$13$Lw45a9c0AdueKewROmVT7.4aQqy/L7vemGMXyaGNzy1mLvkML4LCa', NULL, 'Sandra', 'Maria', 'Feminino', 'Portugal', 'Porto', '2000-10-22', 'sanda@gmail.pt', '912315860', '+351', 10, 1669143539, 1669143539, 'nz-hwMd3VkJkbciwqRuHC0uodlRRr8Vp_1669143539'),
@@ -145,20 +145,43 @@ INSERT INTO `lost_item` (`id`, `description`, `state`, `image`) VALUES
 INSERT INTO `flight`
 (`id`, `terminal`, `estimated_departure_date`, `estimated_arrival_date`, `departure_date`, `arrival_date`, `price`, `distance`, `state`,`passengers_left`, `discount_percentage`, `origin_airport_id`, `arrival_airport_id`, `airplane_id`)
 VALUES
-(1, 'T1', '2023-05-07 13:30:00', '2023-05-07 22:30:00', '2023-05-07 13:30:00', '2023-05-07 22:30:00', 100, 279, 'Previsto', 120, 10, 1, 3, 1),
-(2, 'T2', '2023-05-15 08:00:00', '2023-05-16 00:25:00', '2023-05-15 08:00:00', '2023-05-16 00:25:00', 130, 1109, 'Previsto', 100, 5, 6, 7, 2),
-(3, 'T3', '2023-05-30 09:45:00', '2023-05-30 23:45:00', '2023-05-30 09:45:00', '2023-05-30 23:45:00', 200, 1223, 'Previsto', 120, 0, 4, 9, 1);
+(1, 'T1', '2023-01-28 13:30:00', '2023-01-28 15:00:00', '2023-01-28 13:30:00', '2023-01-28 15:00:00', 100, 300, 'Previsto', 120, 0, 1, 3, 1),
+(2, 'T2', '2023-01-28 08:00:00', '2023-01-28 09:30:00', '2023-01-28 08:00:00', '2023-01-28 09:30:00', 130, 300, 'Previsto', 100, 5, 1, 3, 2),
+(3, 'T3', '2023-01-30 08:00:00', '2023-01-30 09:30:00', '2023-01-30 08:00:00', '2023-01-30 09:30:00', 100, 300, 'Previsto', 135, 0, 3, 1, 3),
+(4, 'T2', '2023-01-31 11:00:00', '2023-01-31 12:30:00', '2023-01-31 11:00:00', '2023-01-31 12:30:00', 130, 300, 'Previsto', 12, 0, 3, 1, 8),
+(5, 'T1', '2023-02-26 12:00:00', '2023-02-26 14:30:00', '2023-02-26 12:00:00', '2023-02-26 14:30:00', 100, 279, 'Previsto', 80, 0, 3, 1, 5),
+(6, 'T3', '2023-03-15 21:00:00', '2023-03-16 23:25:00', '2023-03-15 21:00:00', '2023-03-16 23:25:00', 130, 1109, 'Previsto', 60, 5, 6, 7, 6),
+(7, 'T1', '2023-03-07 16:30:00', '2023-03-07 17:30:00', '2023-03-07 16:30:00', '2023-03-07 17:30:00', 100, 279, 'Previsto', 12, 0, 1, 3, 7),
+(8, 'T1', '2023-03-15 07:00:00', '2023-03-16 10:25:00', '2023-03-15 07:00:00', '2023-03-16 10:25:00', 130, 1109, 'Previsto', 120, 5, 6, 7, 1),
+(9, 'T3', '2023-04-07 13:30:00', '2023-04-07 15:30:00', '2023-04-07 13:30:00', '2023-04-07 15:30:00', 100, 279, 'Previsto', 100, 0, 1, 3, 2),
+(10, 'T2', '2023-04-15 09:00:00', '2023-04-16 10:25:00', '2023-04-15 09:00:00', '2023-04-16 10:25:00', 130, 1109, 'Previsto', 135, 5, 6, 7, 3),
+(11, 'T3', '2023-04-07 13:30:00', '2023-04-07 22:30:00', '2023-04-07 13:30:00', '2023-04-07 22:30:00', 100, 279, 'Previsto', 200, 0, 1, 3, 4),
+(12, 'T2', '2023-04-15 17:00:00', '2023-04-16 18:25:00', '2023-04-15 17:00:00', '2023-04-16 18:25:00', 130, 1109, 'Previsto', 60, 5, 6, 7, 6),
+(13, 'T1', '2023-04-07 13:30:00', '2023-04-07 22:30:00', '2023-04-07 13:30:00', '2023-04-07 22:30:00', 100, 279, 'Previsto', 80, 0, 1, 3, 5),
+(14, 'T2', '2023-05-15 08:00:00', '2023-05-16 12:25:00', '2023-05-15 08:00:00', '2023-05-16 12:25:00', 130, 1109, 'Previsto', 12, 5, 6, 7, 8),
+(15, 'T1', '2023-05-07 21:30:00', '2023-05-07 22:30:00', '2023-05-07 21:30:00', '2023-05-07 22:30:00', 100, 279, 'Previsto', 120, 0, 1, 3, 1),
+(16, 'T2', '2023-05-15 03:00:00', '2023-05-16 04:25:00', '2023-05-15 03:00:00', '2023-05-16 04:25:00', 130, 1109, 'Previsto', 100, 0, 6, 7, 2),
+(17, 'T3', '2023-05-30 23:45:00', '2023-05-30 01:45:00', '2023-05-30 23:45:00', '2023-05-30 01:45:00', 200, 1223, 'Previsto', 80, 0, 4, 9, 5);
 
 INSERT INTO `flight_ticket` 
 (`flight_ticket_id`, `price`, `purchase_date`, `checkin`, `client_id`, `flight_id`, `payment_method_id`) 
 VALUES
-(1, 90, '2022-12-25 13:30:00', 0, 4, 1, 1);
+(1, 100, '2022-12-25 13:30:00', 0, 4, 1, 1),
+(2, 100, '2023-01-01 10:45:00', 0, 5, 1, 2),
+(3, 100, '2023-01-03 13:30:00', 0, 4, 3, 4),
+(4, 100, '2022-12-25 13:30:00', 0, 5, 4, 1),
+(5, 100, '2022-12-25 13:30:00', 0, 4, 15, 3),
+(6, 130, '2022-12-25 13:30:00', 0, 4, 17, 1);
 
 INSERT INTO `passenger`
 (`id`, `name`, `gender`, `extra_baggage`, `seat`, `flight_ticket_id`)
 VALUES
 (1, 'António Alberto', 'Masculino', 0, 'A1', 1),
-(2, 'Manuel Santos', 'Masculino', 0, 'A2', 1);
+(2, 'Joaquim Antunes', 'Masculino', 0, 'B6', 2),
+(3, 'António Alberto', 'Masculino', 0, 'C1', 3),
+(4, 'Joaquim Antunes', 'Masculino', 0, 'R1', 4),
+(5, 'António Alberto', 'Masculino', 0, 'A1', 5),
+(6, 'António Alberto', 'Masculino', 0, 'A2', 6);
 
 INSERT INTO `support_ticket` (`id`,`title`,`state`,`client_id`) VALUES
 (1, 'Camisola Perdida', 'Concluido', 4),
