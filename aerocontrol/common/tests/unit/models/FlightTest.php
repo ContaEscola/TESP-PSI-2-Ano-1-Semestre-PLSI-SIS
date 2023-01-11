@@ -47,9 +47,9 @@ class FlightTest extends \Codeception\Test\Unit
         $this->tester->seeRecord(Flight::class, [
             'terminal' => 'T1',
             'price' => '100',
-            'distance' => '279',
+            'distance' => '300',
             'state' => 'Previsto',
-            'discount_percentage' => 10,
+            'discount_percentage' => 0,
             'passengers_left' => 120,
             'origin_airport_id' => 1,
             'arrival_airport_id' => 3,
@@ -62,9 +62,9 @@ class FlightTest extends \Codeception\Test\Unit
         $flight = $this->tester->grabRecord(Flight::class, [
             'terminal' => 'T1',
             'price' => '100',
-            'distance' => '279',
+            'distance' => '300',
             'state' => 'Previsto',
-            'discount_percentage' => 10,
+            'discount_percentage' => 0,
             'passengers_left' => 120,
             'origin_airport_id' => 1,
             'arrival_airport_id' => 3,

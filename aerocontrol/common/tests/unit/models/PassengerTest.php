@@ -25,13 +25,17 @@ class PassengerTest extends \Codeception\Test\Unit
 
     public function testRead()
     {
-        $this->tester->seeRecord(Passenger::class, ['name' => 'Manuel Santos']);
+        $this->tester->seeRecord(Passenger::class, [
+            'name' => 'Joaquim Antunes',
+            'seat' => 'B6',
+        ]);
     }
 
     public function testUpdate()
     {
         $passenger = $this->tester->grabRecord(Passenger::class, [
-            'name' => 'Manuel Santos'
+            'name' => 'Joaquim Antunes',
+            'seat' => 'B6',
         ]);
         $passenger->name = 'New name';
         $this->assertTrue($passenger->save());

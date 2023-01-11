@@ -4,7 +4,7 @@
 --
 --
 
-use aerocontrol;
+use aerocontrol_tests;
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `first_name`, `last_name`, `gender`, `country`, `city`, `birthdate`, `email`, `phone`, `phone_country_code`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
                                                                                                                                                                                                                                                                         (1, 'rafael', '3LCUGMKxZPpzr34KJQqnRHerxvb9H-GD', '$2y$13$siIFsVQTb.Xw.SCmxCkkeOpP/jUmewhYu8kYaxdeH5XPFHyK1FCe6', NULL, 'Rafael', 'Bento', 'Masculino', 'Portugal', 'Lisboa', '2002-08-07', 'rafael@email.pt', '912345678', '+351', 10, 1667385991, 1667392931, 'iBlapCIFv2HLg6_itfyyr-xsERf_b287_1667385991'),

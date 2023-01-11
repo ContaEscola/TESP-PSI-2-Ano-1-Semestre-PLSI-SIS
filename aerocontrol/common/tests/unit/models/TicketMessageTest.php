@@ -28,7 +28,7 @@ class TicketMessageTest extends \Codeception\Test\Unit
     public function testRead()
     {
         $this->tester->seeRecord(TicketMessage::class, [
-            'message' => 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.',
+            'message' => 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de janeiro.',
             'sender_id' => 4,
             'support_ticket_id' => 1
         ]);
@@ -37,7 +37,7 @@ class TicketMessageTest extends \Codeception\Test\Unit
     public function testUpdate()
     {
         $message = $this->tester->grabRecord(TicketMessage::class, [
-            'message' => 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de fevereiro.',
+            'message' => 'Bom dia, gostava de saber se foi encontrada uma camisola no voo Lisboa Faro no dia 3 de janeiro.',
             'sender_id' => 4,
             'support_ticket_id' => 1
         ]);

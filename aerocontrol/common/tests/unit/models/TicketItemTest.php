@@ -27,7 +27,7 @@ class TicketItemTest extends \Codeception\Test\Unit
     {
         $this->tester->seeRecord(TicketItem::class, [
             'lost_item_id' => 1,
-            'support_ticket_id' => 2
+            'support_ticket_id' => 1
         ]);
     }
 
@@ -35,12 +35,12 @@ class TicketItemTest extends \Codeception\Test\Unit
     {
         $ticketItem = $this->tester->grabRecord(TicketItem::class, [
             'lost_item_id' => 1,
-            'support_ticket_id' => 2
+            'support_ticket_id' => 1
         ]);
         $ticketItem->delete();
         $this->tester->dontSeeRecord(TicketItem::class, [
             'lost_item_id' => 1,
-            'support_ticket_id' => 2
+            'support_ticket_id' => 1
         ]);
     }
 }
