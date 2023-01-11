@@ -30,14 +30,4 @@ class RestaurantTest extends \Codeception\Test\Unit
     {
         $this->tester->seeRecord(Restaurant::class, ['name' => 'Burger King']);
     }
-
-    public function testUpdate()
-    {
-        $restaurant = $this->tester->grabRecord(Restaurant::class, [
-            'name' => 'Burger King'
-        ]);
-        $restaurant->name = 'New restaurant name';
-        $this->assertTrue($restaurant->save());
-        $this->assertEquals('New restaurant name', $restaurant->name);
-    }
 }

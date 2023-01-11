@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS aerocontrol;
 
 CREATE SCHEMA IF NOT EXISTS aerocontrol_tests;
 
-USE aerocontrol;
+USE aerocontrol_tests;
 
 --
 -- Estrutura da tabela `user`

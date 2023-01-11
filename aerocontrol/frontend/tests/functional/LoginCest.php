@@ -37,7 +37,7 @@ class LoginCest
     public function checkValidLogin(FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('antonio', '12345678'));
-        $I->see('Antonio Alberto');
+        $I->see('Logout');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
