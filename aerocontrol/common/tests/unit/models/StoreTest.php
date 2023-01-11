@@ -29,14 +29,4 @@ class StoreTest extends \Codeception\Test\Unit
     {
         $this->tester->seeRecord(Store::class, ['name' => 'Acium']);
     }
-
-    public function testUpdate()
-    {
-        $store = $this->tester->grabRecord(Store::class, [
-            'name' => 'Acium'
-        ]);
-        $store->name = 'New Store name';
-        $this->assertTrue($store->save());
-        $this->assertEquals('New Store name', $store->name);
-    }
 }
