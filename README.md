@@ -15,10 +15,12 @@ Grupo B
 ## Instruções para execução dos testes
 ### Teste Unitários
 >php vendor/bin/codecept run unit -c common
+
 >php vendor/bin/codecept run unit -c frontend
 
 ### Teste Funcionais
 >php vendor/bin/codecept run functional -c backend
+
 >php vendor/bin/codecept run functional -c frontend
 
 
@@ -50,3 +52,5 @@ password: 12345678
 
 >username: santos
 password: 12345678
+
+*Existem mais funcionários e clientes como é possivel ver na BD, para efeutar o login com qualquer um dos funcionários ou clientes a password é "12345678"*
