@@ -66,7 +66,6 @@ class AuthController extends Controller
     }
 
     public function actionSignup(){
-        //return Yii::$app->request->post();
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup())
             return [
