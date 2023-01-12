@@ -33,6 +33,7 @@ class AuthController extends Controller
     {
         return [
             'login' => ['POST'],
+            'signup' => ['POST'],
         ];
     }
 
