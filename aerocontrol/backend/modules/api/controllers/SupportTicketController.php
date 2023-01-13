@@ -77,6 +77,14 @@ class SupportTicketController extends ActiveController
                 $array[$i]['messages'][$j]['sender'] = $userSender->username;
                 $j++;
             }
+            $k = 0;
+            foreach ($supportTicket->ticketItems as $lostItem){
+                $array[$i]['items'][$k]['id'] = $lostItem->lostItem->id;
+                $array[$i]['items'][$k]['description'] = $lostItem->lostItem->description;
+                $array[$i]['items'][$k]['state'] = $lostItem->lostItem->state;
+                $array[$i]['items'][$k]['image'] = $lostItem->lostItem->image;
+                $k++;
+            }
             $i++;
         }
 
