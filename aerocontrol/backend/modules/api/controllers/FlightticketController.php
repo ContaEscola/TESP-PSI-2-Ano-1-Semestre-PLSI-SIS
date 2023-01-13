@@ -93,7 +93,8 @@ class FlightTicketController extends ActiveController
     public function actionMyTickets()
     {
         $user = User::findOne(Yii::$app->params['id']);
-        if (!$user) return;
+        if (!$user)
+            throw new NotFoundHttpException();
 
         $this->checkAccess('my-tickets', $user);
         $i = 0;
