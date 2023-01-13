@@ -4,10 +4,12 @@ namespace backend\modules\api\controllers;
 
 use backend\modules\api\components\CustomQueryAuth;
 use common\models\User;
+use frontend\models\SupportTicketForm;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use yii\web\ServerErrorHttpException;
 
 class SupportTicketController extends ActiveController
 {
@@ -75,6 +77,22 @@ class SupportTicketController extends ActiveController
         }
 
         return $array;
+    }
+
+    public function actionCreate(){
+
+        $user = User::findOne(Yii::$app->params['id']);
+        if (!$user)
+            throw new NotFoundHttpException();
+
+        $model = new SupportTicketForm();
+        $model->client_id = $user->id;
+
+        if ($model->load($this->request->post()) && $model->create()) {
+            return $model;
+        }
+
+        throw new ServerErrorHttpException("Ocorreu um erro ao criar o ticket");
     }
 
 }
