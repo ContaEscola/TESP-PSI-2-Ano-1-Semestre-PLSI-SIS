@@ -84,6 +84,12 @@ return [
                         'GET my-tickets' => 'my-tickets'  // Faz a actionMytickets
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/support-ticket',
+                    'extraPatterns' => [
+                        'GET my-support-tickets' => 'my-support-tickets'  // Faz a actionMytickets
+                    ],
+                ],
             ],
         ],
 
