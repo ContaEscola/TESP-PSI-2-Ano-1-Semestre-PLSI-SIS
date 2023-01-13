@@ -90,6 +90,9 @@ return [
                         'GET my-support-tickets' => 'my-support-tickets'  // Faz a actionMytickets
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/ticket-message',
+                ],
             ],
         ],
 
