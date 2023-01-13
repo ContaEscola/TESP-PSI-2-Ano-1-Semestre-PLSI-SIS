@@ -48,7 +48,7 @@ class TicketMessageController extends ActiveController
     public function checkAccess($action, $model = null, $params = [])
     {
         if ($action === "create") {
-            if (Yii::$app->params['id'] != $params['sender_id'] && Yii::$app->params['id'] != $params['client_id'])
+            if (Yii::$app->params['id'] != $params['sender_id'] || Yii::$app->params['id'] != $params['client_id'])
                 throw new ForbiddenHttpException('Proibido');
         }
     }
