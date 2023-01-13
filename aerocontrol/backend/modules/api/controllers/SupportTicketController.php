@@ -3,6 +3,7 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\components\CustomQueryAuth;
+use common\models\SupportTicket;
 use common\models\User;
 use frontend\models\SupportTicketForm;
 use Yii;
@@ -47,6 +48,9 @@ class SupportTicketController extends ActiveController
     {
         if ($action === "my-support-tickets") {
             if (!isset(Yii::$app->authManager->getRolesByUser($model->id)['client']))
+                throw new ForbiddenHttpException('Proibido');
+        } else if ($action === "update") {
+            if (Yii::$app->params['id'] != $params['user_id'])
                 throw new ForbiddenHttpException('Proibido');
         }
     }
@@ -93,6 +97,18 @@ class SupportTicketController extends ActiveController
         }
 
         throw new ServerErrorHttpException("Ocorreu um erro ao criar o ticket");
+    }
+
+    public function actionUpdate($id){
+        $model = $this->modelClass;
+        $supportTicket = SupportTicket::findOne($id);
+
+        $this->checkAccess('update', $model, ['user_id' => $supportTicket->client_id]);
+
+        if ($supportTicket->concludeSupportTicket())
+            return ['state' => $supportTicket->state];
+
+        throw new ServerErrorHttpException("Algo correu mal ao tentar concluir o ticket");
     }
 
 }
