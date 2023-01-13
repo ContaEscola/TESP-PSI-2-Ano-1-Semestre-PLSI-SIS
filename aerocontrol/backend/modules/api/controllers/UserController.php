@@ -4,6 +4,7 @@ namespace backend\modules\api\controllers;
 
 use backend\modules\api\components\CustomQueryAuth;
 use common\models\ClientForm;
+use common\models\User;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
@@ -46,6 +47,15 @@ class UserController extends ActiveController
         $model = $this->modelClass;
 
         $this->checkAccess('update', $model, ['user_id' => $id]);
+
+        $user = User::findOne($id);
+
+        $confirmPassword = $this->request->post('confirm_password');
+        if (isset($confirmPassword) && !empty($confirmPassword)) {
+            if (!$user->validatePassword($confirmPassword)) {
+                throw new ForbiddenHttpException("Esta password não corresponde à password atual.");
+            }
+        } else throw new ForbiddenHttpException("Tem de confirmar a password.");
 
         $clientForm = new ClientForm();
         $clientForm->user_id = $id;
