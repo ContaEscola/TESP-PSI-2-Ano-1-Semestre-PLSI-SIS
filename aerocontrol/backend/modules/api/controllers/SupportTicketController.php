@@ -95,7 +95,7 @@ class SupportTicketController extends ActiveController
 
         $user = User::findOne(Yii::$app->params['id']);
         if (!$user)
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException("Utilizador não encontrado");
 
         $model = new SupportTicketForm();
         $model->client_id = $user->id;
