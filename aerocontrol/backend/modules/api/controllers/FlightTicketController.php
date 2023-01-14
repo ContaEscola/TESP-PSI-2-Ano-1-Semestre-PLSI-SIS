@@ -5,14 +5,13 @@ namespace backend\modules\api\controllers;
 use backend\modules\api\components\CustomQueryAuth;
 use common\models\Flight;
 use common\models\User;
-use frontend\models\FlightReserveForm;
+use common\models\FlightReserveForm;
 use Yii;
-use yii\base\ErrorException;
 use yii\helpers\Json;
+use yii\web\BadRequestHttpException;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
-
 use yii\web\ServerErrorHttpException;
 use yii\web\UnprocessableEntityHttpException;
 
@@ -136,9 +135,10 @@ class FlightTicketController extends ActiveController
 
     public function actionUpdate($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $model = new $this->modelClass;
         $this->checkAccess('update', $model, ['ticket_id' => $id]);
+
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
 
         $checkIn = Yii::$app->request->post('checkin');
 
@@ -155,7 +155,10 @@ class FlightTicketController extends ActiveController
         } else throw new NotFoundHttpException("Bilhete não encontrado");
     }
 
-    public function actionCreate(){
+    public function actionCreate()
+    {
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
+
         $model = new FlightReserveForm();
         $model->read_terms = 1;
 
@@ -163,7 +166,7 @@ class FlightTicketController extends ActiveController
         $flightBack = Flight::findOne($this->request->post("flightBack_id"));
         $numPassengers = $this->request->post("numPassengers");
 
-        if ($model->load($this->request->post(),'') && $model->validate()){
+        if ($model->load($this->request->post(), '') && $model->validate()) {
             if ($model->create($numPassengers, $flightGo, $flightBack)) {
                 $userLogged = User::findOne(Yii::$app->params['id']);
                 $model->sendEmail($userLogged, true);
@@ -171,6 +174,6 @@ class FlightTicketController extends ActiveController
                     $model->sendEmail($userLogged, false);
                 return ['message' => 'success'];
             } else throw new ServerErrorHttpException("Ocorreu um erro ao comprar o bilhete.");
-        } else return $model->errors;
+        } else throw new UnprocessableEntityHttpException(Json::encode($model->getErrors()));
     }
 }
