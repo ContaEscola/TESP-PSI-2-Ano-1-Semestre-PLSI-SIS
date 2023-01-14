@@ -35,7 +35,7 @@ class FlightController extends ActiveController
 
         $tryAgain = $this->request->post("tryAgain");
 
-        if ($model->load($this->request->post()) && $model->validate()) {
+        if ($model->load($this->request->post(),'') && $model->validate()) {
             $flightGo = $model->getDataProviderGo($tryAgain);
             if ($flightGo == null || $flightGo->totalCount == 0)
             {
