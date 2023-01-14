@@ -6,7 +6,7 @@ use common\models\Client;
 use common\models\Flight;
 use common\models\FlightTicket;
 use common\models\User;
-use frontend\models\FlightReserveForm;
+use common\models\FlightReserveForm;
 use Yii;
 use yii\helpers\Url;
 use yii\base\ErrorException;
@@ -134,7 +134,6 @@ class FlightTicketController extends Controller
             }
         } else {
             $model->loadDefaultValues();
-            // var_dump($model->payment_method);
             if ($model->payment_method == null)
                 throw new ServerErrorHttpException("Não existem métodos de pagamento disponivel, tente mais tarde!");
         }
