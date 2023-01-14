@@ -209,9 +209,7 @@ class FlightReserveForm extends Model
         $flightTicket->price = $price * sizeof($this->name);
         $flightTicket->purchase_date = date('Y-m-d H:i:s');
         $flightTicket->checkin = false;
-        $flightTicket->client_id = Yii::$app->user->id;     //Caso seja o Site
-        if ($flightTicket->client_id === null)
-            if (isset(Yii::$app->params['id'])) $flightTicket->client_id = Yii::$app->params['id']; // Caso seja a API
+        $flightTicket->client_id = Yii::$app->user->id;
         $flightTicket->flight_id = $flight->id;
         $flightTicket->payment_method_id = $this->getPaymentMethod()->id;
         return $flightTicket;

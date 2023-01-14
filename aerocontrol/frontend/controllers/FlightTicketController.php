@@ -134,6 +134,7 @@ class FlightTicketController extends Controller
             }
         } else {
             $model->loadDefaultValues();
+            // var_dump($model->payment_method);
             if ($model->payment_method == null)
                 throw new ServerErrorHttpException("Não existem métodos de pagamento disponivel, tente mais tarde!");
         }
