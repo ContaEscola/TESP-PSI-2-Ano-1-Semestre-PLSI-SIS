@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use common\models\FlightTicket;
 use common\models\SupportTicket;
@@ -23,7 +23,7 @@ class SupportTicketForm extends Model
     {
         return [
             ['title', 'required', 'message' => "Titulo não pode ser vazio."],
-            [ 'message', 'required', 'message' => "Mensagem não pode ser vazio."],
+            ['message', 'required', 'message' => "Mensagem não pode ser vazio."],
             ['title', 'string', 'max' => 20, 'tooLong' => '{attribute} não pode exceder os 20 caracteres.'],
             [
                 'message',
@@ -42,9 +42,10 @@ class SupportTicketForm extends Model
         ];
     }
 
-    public function create(){
+    public function create()
+    {
 
-        if (!$this->validate()){
+        if (!$this->validate()) {
             return false;
         }
         $transaction = SupportTicket::getDb()->beginTransaction();
@@ -53,7 +54,7 @@ class SupportTicketForm extends Model
             $supportTicket->title = $this->title;
             $supportTicket->client_id = $this->client_id;
 
-            if (!$supportTicket->save()){
+            if (!$supportTicket->save()) {
                 throw new ErrorException();
             }
 
@@ -63,7 +64,7 @@ class SupportTicketForm extends Model
 
             $supportTicketFirstMessage->support_ticket_id = $supportTicket->id;
 
-            if (!$supportTicketFirstMessage->save()){
+            if (!$supportTicketFirstMessage->save()) {
                 throw new ErrorException();
             }
 

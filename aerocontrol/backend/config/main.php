@@ -68,6 +68,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/user',
+                    'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST resetPassword' => 'reset-password'  // Faz a actionResetPassword
+                    ],
+                ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/restaurant'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/store'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/user'],
@@ -75,7 +82,8 @@ return [
                     'class' => 'yii\rest\UrlRule', 'controller' => 'api/auth',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'POST login' => 'login'  // Faz a actionLogin
+                        'POST login' => 'login',  // Faz a actionLogin
+                        'POST signup' => 'signup'   // Faz a actionSignup
                     ],
                 ],
                 [
@@ -84,6 +92,13 @@ return [
                         'GET my-tickets' => 'my-tickets'  // Faz a actionMytickets
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/support-ticket',
+                    'extraPatterns' => [
+                        'GET my-support-tickets' => 'my-support-tickets'  // Faz a actionMytickets
+                    ],
+                ],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/ticket-message',],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/airport'],
             ],
         ],
