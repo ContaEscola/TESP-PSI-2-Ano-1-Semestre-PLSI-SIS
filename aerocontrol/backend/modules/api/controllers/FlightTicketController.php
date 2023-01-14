@@ -162,7 +162,7 @@ class FlightTicketController extends ActiveController
         $flightBack = Flight::findOne($this->request->post("flightBack_id"));
         $numPassengers = $this->request->post("numPassengers");
 
-        if ($model->load($this->request->post()) && $model->validate()){
+        if ($model->load($this->request->post(),'') && $model->validate()){
             if ($model->create($numPassengers, $flightGo, $flightBack)) {
                 $userLogged = User::findOne(Yii::$app->params['id']);
                 $model->sendEmail($userLogged, true);
