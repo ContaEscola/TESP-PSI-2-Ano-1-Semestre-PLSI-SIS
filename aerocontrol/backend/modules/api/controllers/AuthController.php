@@ -3,13 +3,15 @@
 namespace backend\modules\api\controllers;
 
 use common\models\User;
-use frontend\models\SignupForm;
+use common\models\SignupForm;
 use Yii;
 use yii\filters\auth\HttpBasicAuth;
-
+use yii\helpers\Json;
 use yii\rest\Controller;
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\ServerErrorHttpException;
+use yii\web\UnprocessableEntityHttpException;
 
 class AuthController extends Controller
 {
@@ -66,12 +68,22 @@ class AuthController extends Controller
         ];
     }
 
-    public function actionSignup(){
+    public function actionSignup()
+    {
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('Tente inserir dados!');
+
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->signup())
-            return [
-                'message' => 'success'
-            ];
-        throw new ServerErrorHttpException("Ocorreu um erro ao dar signup.");
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+            if ($model->signup())
+                return [
+                    'message' => 'success'
+                ];
+            else
+                throw new ServerErrorHttpException("Ocorreu um erro ao dar signup.");
+        } else {
+
+            throw new UnprocessableEntityHttpException(Json::encode($model->getErrors()));
+        }
     }
 }
