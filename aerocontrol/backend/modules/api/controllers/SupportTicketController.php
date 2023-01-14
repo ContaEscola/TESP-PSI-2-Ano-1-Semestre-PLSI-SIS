@@ -100,7 +100,7 @@ class SupportTicketController extends ActiveController
         $model = new SupportTicketForm();
         $model->client_id = $user->id;
 
-        if ($model->load($this->request->post()) && $model->validate()){
+        if ($model->load($this->request->post(), '') && $model->validate()){
             if ($model->create()) {
                 return $model;
             } else throw new ServerErrorHttpException("Ocorreu um erro ao criar o ticket");
