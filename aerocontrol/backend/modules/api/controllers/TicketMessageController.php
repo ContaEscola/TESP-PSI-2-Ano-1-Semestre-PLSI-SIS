@@ -8,10 +8,13 @@ use common\models\TicketMessage;
 use common\models\TicketMessageForm;
 use common\models\User;
 use Yii;
+use yii\helpers\Json;
+use yii\web\BadRequestHttpException;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
+use yii\web\UnprocessableEntityHttpException;
 
 class TicketMessageController extends ActiveController
 {
@@ -55,6 +58,8 @@ class TicketMessageController extends ActiveController
 
     public function actionCreate()
     {
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
+
         $model = new TicketMessageForm();
         $model->sender_id = $this->request->post('sender_id');
         $model->support_ticket_id = $this->request->post('support_ticket_id');
@@ -67,11 +72,10 @@ class TicketMessageController extends ActiveController
             'client_id' => $ticket->client_id,
         ]);
 
-        if ($model->load($this->request->post()) && $model->create(null)){
-            return $model;
-        }
-
-        throw new ServerErrorHttpException("Ocorreu um erro ao enviar a mensagem");
+        if ($model->load($this->request->post(), '') && $model->validate()) {
+            if ($model->create(null)) {
+                return $model;
+            } else throw new ServerErrorHttpException("Não foi possivel enviar a mensagem.");
+        } else throw new UnprocessableEntityHttpException(Json::encode($model->getErrors()));
     }
-
 }
