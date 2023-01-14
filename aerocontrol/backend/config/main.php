@@ -84,6 +84,9 @@ return [
                         'GET my-tickets' => 'my-tickets'  // Faz a actionMytickets
                     ],
                 ],
+                [
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight'
+                ],
             ],
         ],
 
