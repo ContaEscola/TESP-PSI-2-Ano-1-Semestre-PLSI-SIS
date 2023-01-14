@@ -1,6 +1,6 @@
 <?php
 
-/** @var \frontend\models\SupportTicketForm $model */
+/** @var \common\models\SupportTicketForm $model */
 
 use yii\helpers\Html;
 use yii\bootstrap5\ActiveForm;

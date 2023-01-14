@@ -3,11 +3,11 @@
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProviderGo */
 /** @var yii\data\ActiveDataProvider $dataProviderBack */
-/** @var \frontend\models\FlightForm $model */
+/** @var \common\models\FlightForm $model */
 /** @var \common\models\Airport[] $airports */
 /** @var bool $tryAgain */
 
-use frontend\models\FlightForm;
+use common\models\FlightForm;
 use yii\widgets\ListView;
 
 $this->title = "Voos";
