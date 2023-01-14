@@ -7,14 +7,17 @@ use common\models\ClientForm;
 use common\models\User;
 use frontend\models\PasswordResetRequestForm;
 use Yii;
+use yii\helpers\Json;
 use yii\rest\ActiveController;
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\web\ServerErrorHttpException;
+use yii\web\UnprocessableEntityHttpException;
 
 class UserController extends ActiveController
 {
     public $modelClass = 'common\models\User';
-    
+
     public function actions()
     {
         $actions = parent::actions();
@@ -37,6 +40,14 @@ class UserController extends ActiveController
         return $behaviors;
     }
 
+    protected function verbs()
+    {
+        return [
+            'reset-password' => ['POST'],
+        ];
+    }
+
+
     public function checkAccess($action, $model = null, $params = [])
     {
         if ($action === "update") {
@@ -45,10 +56,13 @@ class UserController extends ActiveController
         }
     }
 
-    public function actionUpdate($id){
+    public function actionUpdate($id)
+    {
         $model = $this->modelClass;
 
         $this->checkAccess('update', $model, ['user_id' => $id]);
+
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
 
         $user = User::findOne($id);
 
@@ -59,33 +73,37 @@ class UserController extends ActiveController
             }
         } else throw new ForbiddenHttpException("Tem de confirmar a password.");
 
-        $clientForm = new ClientForm();
-        $clientForm->user_id = $id;
+        $clientForm = new ClientForm($id);
 
-        if($clientForm->load($this->request->post()) && $clientForm->update())
-            return [
-                'username' => $clientForm->username,
-                'first_name' => $clientForm->first_name,
-                'last_name' => $clientForm->last_name,
-                'gender' => $clientForm->gender,
-                'country' => $clientForm->country,
-                'city' => $clientForm->city,
-                'birthdate' => $clientForm->birthdate,
-                'email' => $clientForm->email,
-                'phone' => $clientForm->phone,
-                'phone_country_code' => $clientForm->phone_country_code,
-            ];
-        throw new ServerErrorHttpException("Ocorreu ao efetuar a gravação");
-
+        if ($clientForm->load($this->request->post(), '') && $clientForm->validate()) {
+            if ($clientForm->update())
+                return [
+                    'username' => $clientForm->username,
+                    'first_name' => $clientForm->first_name,
+                    'last_name' => $clientForm->last_name,
+                    'gender' => $clientForm->gender,
+                    'country' => $clientForm->country,
+                    'city' => $clientForm->city,
+                    'birthdate' => $clientForm->birthdate,
+                    'email' => $clientForm->email,
+                    'phone' => $clientForm->phone,
+                    'phone_country_code' => $clientForm->phone_country_code,
+                ];
+            else throw new ServerErrorHttpException("Ocorreu ao efetuar a gravação");
+        } else {
+            throw new UnprocessableEntityHttpException(Json::encode($clientForm->getErrors()));
+        }
     }
 
-    public function actionResetPassword(){
+    public function actionResetPassword()
+    {
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
+
         $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post(), '') && $model->validate()) {
             if ($model->sendEmail()) {
-                return ['message' => 'Email enviado, verifique o email.'];
+                return ['message' => 'Verifique o seu email para mais informações.'];
             } else throw new ServerErrorHttpException("Não foi possivel enviar o email para resetar a password.");
-        } else return $model->errors;
+        } else  throw new UnprocessableEntityHttpException(Json::encode($model->getErrors()));
     }
-
 }

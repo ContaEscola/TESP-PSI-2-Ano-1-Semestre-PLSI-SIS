@@ -82,7 +82,6 @@ class AuthController extends Controller
             else
                 throw new ServerErrorHttpException("Ocorreu um erro ao dar signup.");
         } else {
-
             throw new UnprocessableEntityHttpException(Json::encode($model->getErrors()));
         }
     }
