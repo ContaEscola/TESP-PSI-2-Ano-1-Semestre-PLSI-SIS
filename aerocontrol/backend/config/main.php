@@ -79,7 +79,8 @@ return [
                     'class' => 'yii\rest\UrlRule', 'controller' => 'api/auth',
                     'pluralize' => false,
                     'extraPatterns' => [
-                        'POST login' => 'login'  // Faz a actionLogin
+                        'POST login' => 'login',  // Faz a actionLogin
+                        'POST signup' => 'signup'   // Faz a actionSignup
                     ],
                 ],
                 [

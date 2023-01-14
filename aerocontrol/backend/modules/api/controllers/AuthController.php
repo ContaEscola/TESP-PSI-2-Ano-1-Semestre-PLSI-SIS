@@ -3,10 +3,13 @@
 namespace backend\modules\api\controllers;
 
 use common\models\User;
+use frontend\models\SignupForm;
+use Yii;
 use yii\filters\auth\HttpBasicAuth;
 
 use yii\rest\Controller;
 use yii\web\ForbiddenHttpException;
+use yii\web\ServerErrorHttpException;
 
 class AuthController extends Controller
 {
@@ -20,6 +23,7 @@ class AuthController extends Controller
         $behaviors['authenticator'] = [
             'class' => HttpBasicAuth::class,
             'auth' => [$this, 'auth'],
+            'only' => ['login'], //Apenas para o Login
         ];
 
         return $behaviors;
@@ -29,6 +33,7 @@ class AuthController extends Controller
     {
         return [
             'login' => ['POST'],
+            'signup' => ['POST'],
         ];
     }
 
@@ -59,5 +64,14 @@ class AuthController extends Controller
             'phone' => $this->user->phone,
             'phone_country_code' => $this->user->phone_country_code,
         ];
+    }
+
+    public function actionSignup(){
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post()) && $model->signup())
+            return [
+                'message' => 'success'
+            ];
+        throw new ServerErrorHttpException("Ocorreu um erro ao dar signup.");
     }
 }
