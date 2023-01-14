@@ -3,8 +3,11 @@
 namespace backend\modules\api\controllers;
 
 use backend\modules\api\components\CustomQueryAuth;
+use common\models\Flight;
 use common\models\User;
+use frontend\models\FlightReserveForm;
 use Yii;
+use yii\base\ErrorException;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
@@ -149,5 +152,25 @@ class FlightTicketController extends ActiveController
                 } else throw new ServerErrorHttpException("Ocorreu um erro ao efetuar a gravação");
             } else throw new UnprocessableEntityHttpException($flightTicket->getErrors('checkin')[0]);
         } else throw new NotFoundHttpException("Bilhete não encontrado");
+    }
+
+    public function actionCreate(){
+        $model = new FlightReserveForm();
+        $model->read_terms = 1;
+
+        $flightGo = Flight::findOne($this->request->post("flightGo_id"));
+        $flightBack = Flight::findOne($this->request->post("flightBack_id"));
+        $numPassengers = $this->request->post("numPassengers");
+
+        if ($model->load($this->request->post()) && $model->validate()){
+            if ($model->create($numPassengers, $flightGo, $flightBack)) {
+                $userLogged = User::findOne(Yii::$app->params['id']);
+                $model->sendEmail($userLogged, true);
+                if ($flightBack)
+                    $model->sendEmail($userLogged, false);
+                return ['message' => 'success'];
+            }
+        }
+        throw new ServerErrorHttpException("Ocorreu um erro ao comprar o bilhete.");
     }
 }
