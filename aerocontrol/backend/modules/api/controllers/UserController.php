@@ -5,6 +5,7 @@ namespace backend\modules\api\controllers;
 use backend\modules\api\components\CustomQueryAuth;
 use common\models\ClientForm;
 use common\models\User;
+use frontend\models\PasswordResetRequestForm;
 use Yii;
 use yii\rest\ActiveController;
 use yii\web\ForbiddenHttpException;
@@ -31,6 +32,7 @@ class UserController extends ActiveController
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => CustomQueryAuth::class,
+            'only' => ['update'],
         ];
         return $behaviors;
     }
@@ -75,6 +77,15 @@ class UserController extends ActiveController
             ];
         throw new ServerErrorHttpException("Ocorreu ao efetuar a gravação");
 
+    }
+
+    public function actionResetPassword(){
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                return ['message' => 'Email enviado, verifique o email.'];
+            } else throw new ServerErrorHttpException("Não foi possivel enviar o email para resetar a password.");
+        } else return $model->errors;
     }
 
 }

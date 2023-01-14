@@ -71,6 +71,9 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule', 'controller' => 'api/user',
                     'pluralize' => false,
+                    'extraPatterns' => [
+                        'POST resetPassword' => 'reset-password'  // Faz a actionResetPassword
+                    ],
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/restaurant'],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/store'],
