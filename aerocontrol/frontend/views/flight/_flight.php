@@ -3,7 +3,7 @@
 /** @var \common\models\Flight $model */
 /** @var string $flightType */
 
-use frontend\models\FlightForm;
+use common\models\FlightForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 

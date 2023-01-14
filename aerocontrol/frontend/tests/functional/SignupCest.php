@@ -3,7 +3,7 @@
 namespace frontend\tests\functional;
 
 use common\models\User;
-use frontend\models\SignupForm;
+use common\models\SignupForm;
 use frontend\tests\FunctionalTester;
 
 class SignupCest

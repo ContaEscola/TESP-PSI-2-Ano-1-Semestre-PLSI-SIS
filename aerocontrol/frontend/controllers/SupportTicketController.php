@@ -6,7 +6,7 @@ use common\models\Client;
 use common\models\SupportTicket;
 use common\models\TicketMessage;
 use common\models\User;
-use frontend\models\SupportTicketForm;
+use common\models\SupportTicketForm;
 use common\models\TicketMessageForm;
 use Yii;
 use yii\data\ActiveDataProvider;

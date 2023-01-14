@@ -5,7 +5,7 @@ namespace frontend\tests\Unit;
 
 use common\models\SupportTicket;
 use common\models\TicketMessage;
-use frontend\models\SupportTicketForm;
+use common\models\SupportTicketForm;
 use frontend\tests\UnitTester;
 
 class SupportTicketTest extends \Codeception\Test\Unit

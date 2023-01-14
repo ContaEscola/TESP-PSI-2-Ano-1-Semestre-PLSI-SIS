@@ -1,12 +1,11 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var \frontend\models\FlightForm $model */
+/** @var \common\models\FlightForm $model */
 /** @var \common\models\Airport[] $airports */
 
 use yii\bootstrap5\ActiveForm;
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 $this->registerJsFile('@web/js/flight-search-form.js');
 ?>
