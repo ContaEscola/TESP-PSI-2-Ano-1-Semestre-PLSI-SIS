@@ -11,6 +11,7 @@ Grupo B
 3. Abrir o projeto, abrir o terminal e executar o "composer install" na base do projeto (pasta aerocontrol);
 4. Executar o comando ".\yii migrate --migrationPath=@yii/rbac/migrations" no terminal.
 5. Executar o comando ".\yii migrate" no terminal
+6. Dentro do projeto alterar o ficheiro "main.php" da pasta "common", dentro dos "components", no "UrlManagerFrontEnd" alterar o "baseUrl" para o caminho no qual se encontra o projeto no servidor.
 
 ## Instruções para execução dos testes
 O projeto vai enviado em modo de produção, porém para a execução dos testes é necessário executar o comando "php init" e selecionar o "1- Production" para que os testes possam ser executados.

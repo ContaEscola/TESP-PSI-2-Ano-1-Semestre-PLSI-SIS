@@ -3,10 +3,15 @@
 namespace backend\modules\api\controllers;
 
 use common\models\User;
+use common\models\SignupForm;
+use Yii;
 use yii\filters\auth\HttpBasicAuth;
-
+use yii\helpers\Json;
 use yii\rest\Controller;
+use yii\web\BadRequestHttpException;
 use yii\web\ForbiddenHttpException;
+use yii\web\ServerErrorHttpException;
+use yii\web\UnprocessableEntityHttpException;
 
 class AuthController extends Controller
 {
@@ -20,6 +25,7 @@ class AuthController extends Controller
         $behaviors['authenticator'] = [
             'class' => HttpBasicAuth::class,
             'auth' => [$this, 'auth'],
+            'only' => ['login'], //Apenas para o Login
         ];
 
         return $behaviors;
@@ -29,6 +35,7 @@ class AuthController extends Controller
     {
         return [
             'login' => ['POST'],
+            'signup' => ['POST'],
         ];
     }
 
@@ -59,5 +66,24 @@ class AuthController extends Controller
             'phone' => $this->user->phone,
             'phone_country_code' => $this->user->phone_country_code,
         ];
+    }
+
+    public function actionSignup()
+    {
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
+
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post(), '') && $model->validate()) {
+
+            if ($model->signup())
+                return [
+                    'message' => 'success'
+                ];
+            else
+                throw new ServerErrorHttpException("Ocorreu um erro ao dar signup.");
+        } else {
+
+            throw new UnprocessableEntityHttpException(Json::encode($model->getErrors()));
+        }
     }
 }
