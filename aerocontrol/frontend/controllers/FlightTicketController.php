@@ -6,7 +6,7 @@ use common\models\Client;
 use common\models\Flight;
 use common\models\FlightTicket;
 use common\models\User;
-use frontend\models\FlightReserveForm;
+use common\models\FlightReserveForm;
 use Yii;
 use yii\helpers\Url;
 use yii\base\ErrorException;

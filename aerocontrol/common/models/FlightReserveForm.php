@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
 use common\models\Flight;
 use common\models\FlightTicket;
