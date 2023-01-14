@@ -169,8 +169,7 @@ class FlightTicketController extends ActiveController
                 if ($flightBack)
                     $model->sendEmail($userLogged, false);
                 return ['message' => 'success'];
-            }
-        }
-        throw new ServerErrorHttpException("Ocorreu um erro ao comprar o bilhete.");
+            } else throw new ServerErrorHttpException("Ocorreu um erro ao comprar o bilhete.");
+        } else return $model->errors;
     }
 }
