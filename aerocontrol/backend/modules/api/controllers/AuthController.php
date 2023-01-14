@@ -70,10 +70,10 @@ class AuthController extends Controller
 
     public function actionSignup()
     {
-        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('Tente inserir dados!');
+        if (empty(Yii::$app->request->post())) throw new BadRequestHttpException('O body do request está vazio!');
 
         $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        if ($model->load(Yii::$app->request->post(), '') && $model->validate()) {
 
             if ($model->signup())
                 return [
