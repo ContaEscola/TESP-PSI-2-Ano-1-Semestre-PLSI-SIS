@@ -85,7 +85,10 @@ return [
                     ],
                 ],
                 [
-                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight'
+                    'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight',
+                    'extraPatterns' => [
+                        'GET search' => 'search' // Faz a actionSearch
+                    ]
                 ],
             ],
         ],

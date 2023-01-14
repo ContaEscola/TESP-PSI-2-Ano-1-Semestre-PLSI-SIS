@@ -48,16 +48,13 @@ class FlightController extends ActiveController
                     throw new NotFoundHttpException("Nenhum voo encontrado");
                 }
                 return [
-                    'flightGo' => $flightGo,
-                    'flightBack' => $flightBack
+                    'flightsGo' => $flightGo,
+                    'flightsBack' => $flightBack
                 ];
             }
             return [
-                'flightGo' => $flightGo
+                'flightsGo' => $flightGo
             ];
-        }else $model->errors;
-
-
-
+        }else return $model->errors;
     }
 }
