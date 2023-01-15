@@ -1,9 +1,7 @@
 <?php
 
-namespace frontend\models;
+namespace common\models;
 
-use common\models\Airport;
-use common\models\Flight;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

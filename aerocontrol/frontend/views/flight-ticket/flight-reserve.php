@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-/** @var \frontend\models\FlightReserveForm $model */
+/** @var \common\models\FlightReserveForm $model */
 /** @var int $numPassengers */
 /** @var int $flightBackId */
 /** @var int $flightGoId */

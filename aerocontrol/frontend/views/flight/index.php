@@ -1,11 +1,8 @@
 <?php
 /** @var yii\web\View $this */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-/** @var \frontend\models\FlightForm $model */
+/** @var \common\models\FlightForm $model */
 /** @var \common\models\Airport[] $airports */
-
-use yii\helpers\Url;
-use yii\widgets\ListView;
 
 $this->title = "Voos";
 ?>

@@ -4,11 +4,10 @@ namespace frontend\controllers;
 
 use common\models\Airport;
 use common\models\Flight;
-use frontend\models\FlightForm;
-use yii\data\ActiveDataProvider;
+use common\models\FlightForm;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * FlightController implements the CRUD actions for Flight model.

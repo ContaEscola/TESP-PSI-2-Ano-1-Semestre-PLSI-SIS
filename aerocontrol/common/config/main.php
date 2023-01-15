@@ -12,6 +12,12 @@ return [
             // uncomment if you want to cache RBAC items hierarchy
             // 'cache' => 'cache',
         ],
+        'urlManagerFrontEnd' => [
+            'class' => 'yii\web\urlManager',
+            'baseUrl' => 'localhost/projetofinal/aerocontrol/frontend/web',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
         'db' => [
             'class' => \yii\db\Connection::class,
             'dsn' => 'mysql:host=localhost;dbname=aerocontrol',
