@@ -100,6 +100,7 @@ return [
                 ],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/ticket-message',],
                 ['class' => 'yii\rest\UrlRule', 'controller' => 'api/airport'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'api/payment-method'],
                 [
                     'class' => 'yii\rest\UrlRule', 'controller' => 'api/flight',
                     'extraPatterns' => [
